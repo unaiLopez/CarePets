@@ -1,0 +1,63 @@
+.navbar>div.dropdown>a.profile-image img-circle {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.imagen-perfil {
+  border-radius: 5px;
+  border: solid 2px #ffffff;
+}
+
+a.dropdown-toggle {
+  color: white;
+  margin-right: 25px;
+  font-family: CrimsonText;
+  opacity: 0.9;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+a.dropdown-toggle:hover {
+  color: white;
+  text-decoration: none;
+  font-family: CrimsonText;
+  opacity: 0.9;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.imagen-perfil:hover {
+  width: 70px;
+  height: 70px;
+}
+
+.dropdown-menu {
+  box-shadow: 4px 8px 4px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #ffffff;
+  background-color: rgba(224, 82, 3, 0.5);
+  border: solid 2px #ffffff;
+}
+
+a {
+  color: white;
+}
+
+hr {
+  border: solid 1px #ffffff;
+}
+
+li {
+  margin-left: 15px;
+}
+
+.imagen-perfil {
+  border-radius: 5px;
+  border: solid 2px #ffffff;
+}
+
+.btn-tertiary {
+  border-radius: 10px;
+  border: solid 1px #ffffff;
+  background-color: rgba(224, 82, 3);
+  font-family: CrimsonText;
+}

@@ -1,0 +1,140 @@
+h1 {
+  font-family: CrimsonText;
+  opacity: 0.9;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 40px;
+}
+
+.form-group {
+  width: 350px;
+  height: 30px;
+  margin-bottom: 30px;
+}
+
+.custom-file-input {
+  width: 350px;
+  height: 30px;
+  margin-bottom: 30px;
+}
+
+#avatar {
+  color: #ffffff;
+}
+
+label {
+  font-size: 18px;
+  color: #ffffff;
+  font-family: CrimsonText;
+}
+
+#autocomplete {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.form-control {
+  width: 333px;
+  height: 30px;
+  border-radius: 5px;
+  box-shadow: 4px 8px 4px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #ffffff;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.input-group-addon{
+  color: rgba(70, 70, 70, 0.9);
+  background-color: rgba(200, 200, 200);
+  padding-left: 5px;
+  padding-right: 5px;
+  border: solid 1px #ffffff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.input-group-addon i {
+  margin-left: 3px;
+}
+
+.btn-default {
+  width: 350px;
+  height: 40px;
+  border-radius: 20px;
+  box-shadow: 4px 8px 4px 0 rgba(0, 0, 0, 0.25);
+  border: solid 1px #ffffff;
+  background-color: rgba(224, 82, 3, 0.5);
+  font-size: 18px;
+  color: #ffffff;
+  font-family: CrimsonText;
+  margin-top: 20px;
+}
+
+p {
+  opacity: 0.9;
+  font-family: CrimsonText;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.mx-auto {
+ margin-right: auto !important;
+ margin-left: auto !important;
+}
+
+#compararContraseñas {
+  font-family: CrimsonText;
+  font-size: 18px;
+  color: black;
+}
+
+#autenticacionCorreo {
+  font-family: CrimsonText;
+  font-size: 18px;
+  color: black;
+}
+
+a:hover {
+  color: white;
+}
+
+#ingresar {
+  margin-bottom: 15px;
+}
+
+.modal-content  {
+  -webkit-border-radius: 10px !important;
+  -moz-border-radius: 10px !important;
+  border-radius: 10px !important;
+  background-color: white;
+}
+
+.modal-header, .close {
+  background-color: #EC9664;
+  color:white !important;
+  font-size: 30px;
+  border: solid 1px #ffffff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-body {
+  background-color: #EC9664;
+  border: solid 1px #ffffff;
+}
+
+h4 {
+  text-align: center;
+  font-size: 30px;
+  font-family: CrimsonText;
+  opacity: 0.9;
+  color: #ffffff;
+}
+
+.modal-footer {
+  background-color: #EC9664;
+  border: solid 1px #ffffff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 150px;
+}

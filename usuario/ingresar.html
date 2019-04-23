@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CarePets</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/estiloDifuminado.css"/>
+    <link rel="stylesheet" href="../css/estiloFormularios.css"/>
+    <script src="../js/validar.js"></script>
+  </head>
+  <body>
+    <div id="container-fluid">
+      <!-- Navegación -->
+      <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="../index.html"><p class="letra_nav"><i class="fas fa-home"></i> Inicio</p></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="ayuda.html"><p class="letra_nav"><i class="fas fa-question"></i> Ayuda</p></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="foro.html"><p class="letra_nav"><i class="fas fa-users"></i> Foro</p></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../registro/prerregistro.html"><p class="letra_nav"><i class="fas fa-user-plus"></i> Registrar</p></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="ingresar.html"><p class="letra_nav"><i class="fas fa-sign-in-alt"></i> Ingresar</p></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Formulario Ingreso -->
+      <div id="body">
+        <div class="container-fluid padding">
+          <div class="row">
+            <div class="col-xs-12 mx-auto">
+              <h1 style="margin-top: 65px"><strong>Iniciar Sesión</strong></h1>
+              <form id="formularioIngreso" action="ingresar.php" method="post" onsubmit="return validarDatosInicioSesion($('#pass').val(), $('#mail').val())">
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fas fa-user"></i>
+                      </div>
+                      <input type="email" id="mail" name="mail" class="form-control" id="mail" placeholder="Ingrese su correo electrónico" size="50" onchange="validarCorreo($('#mail').val());" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fas fa-eye-slash"></i>
+                      </div>
+                      <input type="password" id="pass" name="pass" minlength="6" class="form-control" id="pass" placeholder="Ingrese su contraseña" onchange="validarContraseña($('#pass').val(), $('#confirmarpass').val());" required>
+                    </div>
+                    <div id="validacionInicioSesion"></div>
+                </div>
+                <div class="form-group">
+                  <button type="submit" id="ingresar" name="ingresar" class="btn btn-default"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
+                </div>
+                <div class="form-group">
+                  <a data-toggle="modal" href="#myModal"><p>¿Olvidaste tu contraseña?</p></a>
+                  <a href="../registro/prerregistro.html"><p>¿No estás registrado? Regístrate aquí</p></a>
+                </div>
+              </form>
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4>Recuperar Contraseña</h4><span><button type="button" class="close" data-dismiss="modal">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-xs-12 mx-auto">
+                          <form id="formularioRecuperarContraseña" action="recuperarContraseña.php" onsubmit="validarCorreo($('#emailRecuperar').val())" role="form">
+                            <div id="form-modal" class="form-group">
+                                <div class="input-group">
+                                  <div class="input-group-addon">
+                                    <i class="fas fa-user"></i>
+                                  </div>
+                                  <input type="email" class="form-control" name="emailRecuperar" id="emailRecuperar" placeholder="Ingrese su correo electrónico" required>
+                                </div>
+                            </div>
+                            <div id="form-modal" class="form-group">
+                              <button type="submit" name="recuperar" id="recuperar" class="btn btn-default">Recuperar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="col-xs-12 mx-auto">
+                        <div id="form-modal" class="form-group">
+                          <p style="font-size: 15px;text-align:center;">Se te enviará la nueva contraseña a tu correo electrónico</p>
+                          <button class="btn btn-default" data-dismiss="modal"><i class="fas fa-arrow-alt-circle-left"></i> Volver al Inicio de Sesión</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div id="footer">
+        <div class="container-fluid padding">
+          <div class="row text-center padding">
+            <div class="col-lg-12 social padding">
+              <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
+              <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
+              <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

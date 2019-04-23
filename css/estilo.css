@@ -1,0 +1,108 @@
+body {
+  background: url("../iconos/fondo_pantalla/french_bulldogs_wallpapers.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  margin: 0;
+  position: relative;
+}
+
+.iconos_redes_sociales {
+  border-radius: 360px;
+  border: solid 1px #ffffff;
+}
+
+#titulo_carepets {
+  mix-blend-mode: hard-light;
+  font-family: CrimsonText;
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+#logo_carepets {
+  transform: rotate(29deg);
+  filter: contrast(160%);
+  vertical-align: middle;
+}
+
+.letra_nav {
+  opacity: 0.9;
+  text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
+  font-family: CrimsonText;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.letra_nav:hover {
+  font-family: CrimsonText;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-link {
+  text-align: center;
+}
+
+.navbar-toggler {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: solid 2px #ffffff;
+}
+
+.iconos_circulares {
+  border-radius: 360px;
+  border: solid 1px #ffffff;
+  height: 50px;
+}
+
+.navbar-nav li {
+  padding-right: 30px
+}
+
+h6 {
+  font-family: CrimsonText;
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  margin: 10px;
+}
+
+.social a {
+  font-size: 2rem;
+  padding: 1.5rem;
+  color: #d5d5d5;
+  text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
+}
+
+.fa-facebook-square:hover,
+.fa-instagram:hover,
+.fa-twitter:hover {
+  font-size: 2.5rem;
+}
+
+.explicacion {
+  opacity: 0.9;
+  text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
+  font-family: CrimsonText;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+#container {
+  margin: 0 auto;
+}
+
+#body {
+  margin: 0;
+  margin-bottom: 60px;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}

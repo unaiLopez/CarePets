@@ -1,0 +1,25 @@
+.card {
+  background-color: rgba(224, 82, 3, 0);
+  border: solid 1px #ffffff;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.scroll {
+  max-height: 350px;
+  overflow-y: scroll;
+  background-color: rgba(224, 82, 3, 0.6);
+  border-top: solid 1px #ffffff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 100%;
+}
+
+.card-header {
+  background-color: #e05203;
+  width: 100%;
+}
+
+.nav-item {
+  width: 300px;
+}

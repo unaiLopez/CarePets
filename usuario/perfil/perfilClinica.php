@@ -1,5 +1,5 @@
 <?php
-  include '../validaciones/verificarClinica.php';
+  include '../../validaciones/verificarClinica.php';
  ?>
 
 <!DOCTYPE html>
@@ -14,23 +14,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/estilo.css"/>
-    <link rel="stylesheet" href="../css/estiloMenuIngresado.css"/>
+    <link rel="stylesheet" href="../../css/estilo.css"/>
+    <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
   </head>
   <body>
     <div id="container">
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="perfilClinica.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+          <a class="navbar-brand" href="perfilClinica.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
           <div class="dropdown">
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
-              <img src="../iconos/foto_perfil_1.jpg" class="imagen-perfil" height="70" width="70">
+              <img src="../../iconos/foto_perfil_1.jpg" class="imagen-perfil" height="70" width="70">
             </a>
             <ul class="dropdown-menu">
                 <li><a href="perfilClinica.php"><i class="fas fa-user"></i> Perfil</a></li>
                 <hr>
-                <li><a href="editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
+                <li><a href="../editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-envelope"></i> Mensajes</a></li>
                 <hr>
@@ -38,7 +38,7 @@
                 <hr>
                 <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
-                <li><a href="salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
+                <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>
           </div>
         </div>

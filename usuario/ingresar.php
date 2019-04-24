@@ -28,15 +28,15 @@
         if($row[1] == "DuenoCuidador"){
           $_SESSION['verificar'] = "DuenoCuidador";
           //Redireccionar a la página inicial del DueñoCuidador
-          header('Location: perfilDuenoCuidador.php');
+          header('Location: perfil/perfilDuenoCuidador.php');
         }else if($row[1] == "Protectora"){
           $_SESSION['verificar'] = "Protectora";
           //Redireccionar a la página inicial de la Protectora
-          header('Location: perfilProtectora.php');
+          header('Location: perfil/perfilProtectora.php');
         }else if($row[1] == "Clinica"){
           $_SESSION['verificar'] = "Clinica";
           //Redireccionar a la página inicial de la Clínica
-          header('Location: perfilClinica.php');
+          header('Location: perfil/perfilClinica.php');
         }
       }
     }

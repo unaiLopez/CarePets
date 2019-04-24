@@ -42,7 +42,7 @@
       $_SESSION['verificar'] = $tipo;
 
       //Redireccionar al perfil del usuario
-      header('Location: ../usuario/perfilDuenoCuidador.php');
+      header('Location: ../usuario/perfil/perfilDuenoCuidador.php');
 
     }
   }catch(PDOException $e){

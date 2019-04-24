@@ -47,7 +47,7 @@
       $_SESSION['verificar'] = $tipo;
 
       //Redireccionar al perfil del usuario
-      header('Location: ../usuario/perfilClinica.php');
+      header('Location: ../usuario/perfil/perfilClinica.php');
 
     }
   }catch(PDOException $e){

@@ -47,7 +47,7 @@
       $_SESSION['verificar'] = $tipo;
 
       //Redireccionar al perfil del usuario
-      header('Location: ../usuario/perfilProtectora.php');
+      header('Location: ../usuario/perfil/perfilProtectora.php');
 
     }
   }catch(PDOException $e){

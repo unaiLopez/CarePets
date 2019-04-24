@@ -30,7 +30,7 @@
     $sentencia->execute();
     $rows3 = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-    if(!$rows1 && !$rows2 && !$rows3 && strlen((string)$fijo) == 9 || $rows1 && $rows1['mailusuario'] == $correoActual){
+    if(!$rows1 && !$rows2 && !$rows3 && strlen((string)$fijo) == 9 || $rows3 && $rows3['mailusuario'] == $correoActual){
       $resultado = true;
     }
 

@@ -9,8 +9,6 @@
 
     $mailActual = $_SESSION['mail'];
 
-    $experiencia = $_POST['experiencia'];
-    $especialidad = $_POST['especialidad'];
     $horario = $_POST['horario'];
     $descripcion = $_POST['descripcion'];
     $fotoPerfil = $_FILES['avatar']['name'];
@@ -23,20 +21,20 @@
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$destino, $descripcion, $mailActual]);
 
-      $sql = "UPDATE clinica SET experiencia=?, especialidad=?, horario=? WHERE mailusuario=?";
+      $sql = "UPDATE protectora SET horario=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$experiencia, $especialidad, $horario, $mailActual]);
+      $sentencia->execute([$horario, $mailActual]);
     }else{
       $sql = "UPDATE usuario SET descripcion=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$descripcion, $mailActual]);
 
-      $sql = "UPDATE clinica SET experiencia=?, especialidad=?, horario=? WHERE mailusuario=?";
+      $sql = "UPDATE protectora SET horario=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$experiencia, $especialidad, $horario, $mailActual]);
+      $sentencia->execute([$horario, $mailActual]);
     }
 
-    header('Location: editarClinica.php');
+    header('Location: editarProtectora.php');
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();

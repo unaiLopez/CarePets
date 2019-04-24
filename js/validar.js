@@ -147,10 +147,10 @@ function validarTelefonoFijoEditar(fijo){
     async: false,
     success: function(response){
       if(response == true){
-        $("#telefonoMovil").html("El teléfono fijo es correcto.").css("color","green");
+        $("#telefonoFijo").html("El teléfono fijo es correcto.").css("color","green");
         bool = true;
       }else{
-        $("#telefonoMovil").html("El formato del teléfono fijo es incorrecto.").css("color","red");
+        $("#telefonoFijo").html("El formato del teléfono fijo es incorrecto.").css("color","red");
       }
     }
   });

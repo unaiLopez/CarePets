@@ -1,9 +1,9 @@
 <?php
-  include '../validaciones/verificarDuenoCuidador.php';
+  include '../../validaciones/verificarDuenoCuidador.php';
 
   try {
     //Configurar base de datos
-    include 'conectarDB.php';
+    include '../conectarDB.php';
 
     $conn = conectarse();
 
@@ -65,30 +65,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/estiloDifuminadoScrollingFooter.css"/>
-    <link rel="stylesheet" href="../css/estiloMenuIngresado.css"/>
-    <link rel="stylesheet" href="../css/estiloPaneles.css"/>
-    <link rel="stylesheet" href="../css/estiloFormularios.css"/>
-    <script src="../js/validar.js"></script>
+    <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
+    <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
+    <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
+    <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
+    <script src="../../js/validar.js"></script>
   </head>
   <body>
     <div id="container">
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="perfilDuenoCuidador.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+          <a class="navbar-brand" href="../perfilDuenoCuidador.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
           <div class="dropdown">
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
                 if($row1['foto']){
                   echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
                 }else{
-                  echo '<img src="../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
                 }
                ?>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="perfilDuenoCuidador.php"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a href="../perfilDuenoCuidador.php"><i class="fas fa-user"></i> Perfil</a></li>
                 <hr>
                 <li><a href="editarDuenoCuidador.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
@@ -98,7 +98,7 @@
                 <hr>
                 <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
-                <li><a href="salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
+                <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>
           </div>
         </div>
@@ -305,13 +305,13 @@
                                 <label for="tipos">¿De qué tamaños?</label>
                                 <div class="input-group">
                                   <div class="checkbox">
-                                    <label><input type="checkbox" id="pequeno" name="pequeno" value="1" <?php echo ($row2['pequeno']==1) ?  "checked" : "" ;  ?>> <span>Pequeños 1 - 5 kg  &nbsp;&nbsp; <img src="../iconos/miscelanea/icono_perro.png" height="20" with="20"></span></label>
+                                    <label><input type="checkbox" id="pequeno" name="pequeno" value="1" <?php echo ($row2['pequeno']==1) ?  "checked" : "" ;  ?>> <span>Pequeños 1 - 5 kg  &nbsp;&nbsp; <img src="../../iconos/miscelanea/icono_perro.png" height="20" with="20"></span></label>
                                   </div>
                                   <div class="checkbox">
-                                    <label><input type="checkbox" id="mediano" name="mediano" value="1" <?php echo ($row2['mediano']==1) ?  "checked" : "" ;  ?>> <span>Medianos 5 - 15 kg  &nbsp;&nbsp; <img src="../iconos/miscelanea/icono_perro.png" height="25" with="25"></span></label>
+                                    <label><input type="checkbox" id="mediano" name="mediano" value="1" <?php echo ($row2['mediano']==1) ?  "checked" : "" ;  ?>> <span>Medianos 5 - 15 kg  &nbsp;&nbsp; <img src="../../iconos/miscelanea/icono_perro.png" height="25" with="25"></span></label>
                                   </div>
                                   <div class="checkbox">
-                                    <label><input type="checkbox" id="grande" name="grande" value="1" <?php echo ($row2['grande']==1) ?  "checked" : "" ;  ?>> <span>Grandes 15 - 50 kg  &nbsp;&nbsp; <img src="../iconos/miscelanea/icono_perro.png" height="35" with="35"></span></label>
+                                    <label><input type="checkbox" id="grande" name="grande" value="1" <?php echo ($row2['grande']==1) ?  "checked" : "" ;  ?>> <span>Grandes 15 - 50 kg  &nbsp;&nbsp; <img src="../../iconos/miscelanea/icono_perro.png" height="35" with="35"></span></label>
                                   </div>
                                 </div>
                               </div>
@@ -323,6 +323,13 @@
                                 <label for="experiencia">Experiencia :</label>
                                 <div class="input-group">
                                   <input type="number" id="experiencia" name="experiencia" class="form-control" value="<?=$row2['experiencia']; ?>" placeholder="Años de experiencia">
+                                </div>
+                              </div>
+                              <br>
+                              <div class="form-group">
+                                <label for="experiencia">Descripcion</label>
+                                <div class="input-group">
+                                  <input type="text" id="descripcion" name="descripcion" class="form-control" value="<?=$row1['descripcion']; ?>" placeholder="Descripcion de sus habilidades">
                                 </div>
                               </div>
                               <br>

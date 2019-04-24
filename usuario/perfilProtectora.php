@@ -33,7 +33,7 @@
             <ul class="dropdown-menu">
                 <li><a href="perfilProtectora.php"><i class="fas fa-user"></i> Perfil</a></li>
                 <hr>
-                <li><a href="editarProtectora.php"><i class="fas fa-user-edit"></i> Editar</a></li>
+                <li><a href="editar/editarProtectora.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-envelope"></i> Mensajes</a></li>
                 <hr>

@@ -1,9 +1,9 @@
 <?php
-  include '../validaciones/verificarClinica.php';
+  include '../../validaciones/verificarProtectora.php';
 
   try {
     //Configurar base de datos
-    include 'conectarDB.php';
+    include '../conectarDB.php';
 
     $conn = conectarse();
 
@@ -14,7 +14,7 @@
     $sentencia->execute();
     $row1 = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    $sentencia = $conn->prepare("SELECT * FROM clinica WHERE mailusuario=:mailusuario");
+    $sentencia = $conn->prepare("SELECT * FROM protectora WHERE mailusuario=:mailusuario");
     $sentencia->bindParam(':mailusuario', $correo);
     $sentencia->execute();
     $row2 = $sentencia->fetch(PDO::FETCH_BOTH);
@@ -38,31 +38,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTC035_2c7HqTdiIGYdAYtJCLI0ye4coc&libraries=places&callback=autocompletarEditar" async defer></script>
-    <link rel="stylesheet" href="../css/estiloDifuminadoScrollingFooter.css"/>
-    <link rel="stylesheet" href="../css/estiloMenuIngresado.css"/>
-    <link rel="stylesheet" href="../css/estiloPaneles.css"/>
-    <link rel="stylesheet" href="../css/estiloFormularios.css"/>
-    <script src="../js/validar.js"></script>
-    <script src="../js/googleMaps.js"></script>
+    <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
+    <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
+    <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
+    <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
+    <script src="../../js/validar.js"></script>
+    <script src="../../js/googleMaps.js"></script>
   </head>
   <body>
     <div id="container">
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="perfilClinica.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+          <a class="navbar-brand" href="../perfilProtectora.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
           <div class="dropdown">
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
                 if($row1['foto']){
                   echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
                 }else{
-                  echo '<img src="../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
                 }
                ?>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="perfilClinica.php"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a href="../perfilClinica.php"><i class="fas fa-user"></i> Perfil</a></li>
                 <hr>
                 <li><a href="editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
@@ -72,7 +72,7 @@
                 <hr>
                 <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
-                <li><a href="salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
+                <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>
           </div>
         </div>
@@ -143,7 +143,7 @@
                           <div class="row">
                             <div class="col-xs-12 mx-auto">
                               <h1><strong>Obligatoria</strong></h1>
-                              <form name="formularioCambiarInfoObligatoria" id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaClinica.php" method="post" onsubmit="return validarCorreoEditar($('#mail').val()) && validarTelefonoFijoEditar($('#fijo').val()); && validarTelefonoMovilEditar($('#movil').val())">
+                              <form name="formularioCambiarInfoObligatoria" id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaProtectora.php" method="post" onsubmit="return validarCorreoEditar($('#mail').val()) && validarTelefonoFijoEditar($('#fijo').val()) && validarTelefonoMovilEditar($('#movil').val())">
                                 <div class="form-group">
                                     <div class="input-group">
                                       <div class="input-group-addon">
@@ -204,21 +204,7 @@
                           <div class="row">
                             <div class="col-xs-12 mx-auto">
                               <h1><strong>Opcional</strong></h1>
-                              <form id="formularioCambiarInfoOpcional" action="cambiarOpcionalClinica.php" enctype="multipart/form-data" method="post">
-                                <div class="form-group">
-                                  <label for="experiencia">Experiencia</label>
-                                  <div class="input-group">
-                                    <input type="number" id="experiencia" name="experiencia" class="form-control" value="<?=$row2['experiencia']; ?>" placeholder="Años de experiencia">
-                                  </div>
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                  <label for="experiencia">Especialidad</label>
-                                  <div class="input-group">
-                                    <input type="text" id="especialidad" name="especialidad" class="form-control" value="<?=$row2['especialidad']; ?>" placeholder="Especialidad de su clínica">
-                                  </div>
-                                </div>
-                                <br>
+                              <form id="formularioCambiarInfoOpcional" action="cambiarOpcionalProtectora.php" enctype="multipart/form-data" method="post">
                                 <div class="form-group">
                                   <label for="experiencia">Horario</label>
                                   <div class="input-group">
@@ -229,7 +215,7 @@
                                 <div class="form-group">
                                   <label for="experiencia">Descripcion</label>
                                   <div class="input-group">
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control" value="<?=$row1['descripcion']; ?>" placeholder="Descripcion de su clínica y servicios">
+                                    <input type="text" id="descripcion" name="descripcion" class="form-control" value="<?=$row1['descripcion']; ?>" placeholder="Descripcion de protectora">
                                   </div>
                                 </div>
                                 <br>

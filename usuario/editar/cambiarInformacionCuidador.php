@@ -4,13 +4,14 @@
 
   try {
     //Configurar base de datos
-    include 'conectarDB.php';
+    include '../conectarDB.php';
 
     $conn = conectarse();
 
     $mailActual = $_SESSION['mail'];
 
     $escuidador = 1;
+    $descripcion = $_POST['descripcion'];
     $perro = $_POST['perros'];
     $gato = $_POST['gatos'];
     $exotico = $_POST['exoticos'];
@@ -114,6 +115,12 @@
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$preciovisita,$mailActual,$visita]);
     }
+
+    //Cambiar información usuario
+    $sql = "UPDATE usuario SET descripcion=?  WHERE mailusuario=?";
+    $sentencia= $conn->prepare($sql);
+    $sentencia->execute([$descripcion,$mailActual]);
+
     //Cambiar información cuidador
     $sql = "UPDATE duenocuidador SET escuidador=?, pequeno=?, mediano=?, grande=?, perro=?, gato=?, exotico=?, otros=?, experiencia=?  WHERE mailusuario=?";
     $sentencia= $conn->prepare($sql);

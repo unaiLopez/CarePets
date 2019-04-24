@@ -3,7 +3,7 @@
   session_start();
   try {
     //Configurar base de datos
-    include 'conectarDB.php';
+    include '../conectarDB.php';
 
     $conn = conectarse();
 
@@ -15,7 +15,7 @@
     $descripcion = $_POST['descripcion'];
     $fotoPerfil = $_FILES['avatar']['name'];
     $ruta = $_FILES['avatar']['tmp_name'];
-    $destino = "../iconos/fotos/".$fotoPerfil;
+    $destino = "../../iconos/fotos/".$fotoPerfil;
     copy($ruta, $destino);
 
     if(!empty($fotoPerfil)){

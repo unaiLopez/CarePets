@@ -4,7 +4,7 @@
 
   try {
     //Configurar base de datos
-    include 'conectarDB.php';
+    include '../conectarDB.php';
 
     $conn = conectarse();
 
@@ -82,7 +82,7 @@
       $sentencia->execute([$nombre, $movil, $mailActual]);
 
     }
-    
+
     header('Location: editarDuenoCuidador.php');
 
   }catch(PDOException $e){

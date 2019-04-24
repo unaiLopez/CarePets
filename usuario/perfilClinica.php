@@ -22,7 +22,7 @@
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="inicioClinica.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+          <a class="navbar-brand" href="perfilClinica.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
           <div class="dropdown">
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <img src="../iconos/foto_perfil_1.jpg" class="imagen-perfil" height="70" width="70">
@@ -30,7 +30,7 @@
             <ul class="dropdown-menu">
                 <li><a href="perfilClinica.php"><i class="fas fa-user"></i> Perfil</a></li>
                 <hr>
-                <li><a href="editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
+                <li><a href="editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-envelope"></i> Mensajes</a></li>
                 <hr>

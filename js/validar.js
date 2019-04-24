@@ -3,7 +3,7 @@ function validarContraseña(pass, confirmarpass){
   var contraseñas = {"pass" : pass, "confirmarpass" : confirmarpass};
   $.ajax({
     data: contraseñas,
-    url: '../validaciones/validarContraseñas.php',
+    url: '/carepets/validaciones/validarContraseñas.php',
     type: 'post',
     async: false,
     success: function(response){
@@ -23,7 +23,7 @@ function validarContraseñaActual(pass){
   var contraseña = {"pass" : pass};
   $.ajax({
     data: contraseña,
-    url: '../validaciones/validarContraseñaActual.php',
+    url: '/carepets/validaciones/validarContraseñaActual.php',
     type: 'post',
     async: false,
     success: function(response){
@@ -43,7 +43,7 @@ function validarDatosInicioSesion(pass, mail){
   var datos = {"pass" : pass, "mail" : mail};
   $.ajax({
     data: datos,
-    url: '../validaciones/validarDatosInicioSesion.php',
+    url: '/carepets/validaciones/validarDatosInicioSesion.php',
     type: 'post',
     async: false,
     success: function(response){
@@ -62,7 +62,7 @@ function validarCorreo(mail){
   var mail = {"mail" : mail};
   $.ajax({
     data: mail,
-    url: '../validaciones/validarCorreo.php',
+    url: '/carepets/validaciones/validarCorreo.php',
     type: 'post',
     async: false,
     success: function(response){
@@ -82,7 +82,7 @@ function validarCorreoEditar(mail){
   var mail = {"mail" : mail};
   $.ajax({
     data: mail,
-    url: '../validaciones/validarCorreoEditar.php',
+    url: '/carepets/validaciones/validarCorreoEditar.php',
     type: 'post',
     async: false,
     success: function(response){
@@ -102,7 +102,7 @@ function validarTelefonoMovil(movil){
   var movil = {"movil" : movil};
   $.ajax({
     data: movil,
-    url: '../validaciones/validarTelefonoMovil.php',
+    url: '/carepets/validaciones/validarTelefonoMovil.php',
     type: 'post',
     async: false,
     success: function(response){
@@ -122,7 +122,7 @@ function validarTelefonoMovilEditar(movil){
   var movil = {"movil" : movil};
   $.ajax({
     data: movil,
-    url: '../validaciones/validarTelefonoMovilEditar.php',
+    url: '/carepets/validaciones/validarTelefonoMovilEditar.php',
     type: 'post',
     async: false,
     success: function(response){
@@ -142,7 +142,7 @@ function validarTelefonoFijoEditar(fijo){
   var fijo = {"fijo" : fijo};
   $.ajax({
     data: fijo,
-    url: '../validaciones/validarTelefonoFijoEditar.php',
+    url: '/carepets/validaciones/validarTelefonoFijoEditar.php',
     type: 'post',
     async: false,
     success: function(response){
@@ -162,7 +162,7 @@ function validarTelefonoFijo(fijo){
   var fijo = {"fijo" : fijo};
   $.ajax({
     data: fijo,
-    url: '../validaciones/validarTelefonoFijo.php',
+    url: '/carepets/validaciones/validarTelefonoFijo.php',
     type: 'post',
     async: false,
     success: function(response){

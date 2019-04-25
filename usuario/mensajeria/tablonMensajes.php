@@ -1,27 +1,40 @@
 <?php
   include '../../validaciones/verificarClinica.php';
 
-  //Configurar base de datos
-  include '../conectarDB.php';
+  try {
 
-  $conn = conectarse();
+    //Configurar base de datos
+    include '../conectarDB.php';
 
-  //Variables para buscar en la BD
-  $correoActual = $_SESSION['mail'];
-  $tipo = 'Mensaje';
+    $conn = conectarse();
 
-  //Tomar la foto del usuario
-  $sentencia = $conn->prepare("SELECT foto FROM usuario WHERE mailusuario=:mailusuario");
-  $sentencia->bindParam(':mailusuario', $correoActual);
-  $sentencia->execute();
-  $row = $sentencia->fetch(PDO::FETCH_BOTH);
+    //Variables para buscar en la BD
+    $correoActual = $_SESSION['mail'];
+    $noLeido = 0;
+    $tipo = 'Mensaje';
 
-  //Tomar todos los mensajes del usuario
-  $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailusuario=:mailusuario and tipo=:tipo and emisor not in (:mailusuario)");
-  $sentencia->bindParam(':mailusuario', $correoActual);
-  $sentencia->bindParam(':tipo', $tipo);
-  $sentencia->execute();
-  $mensajes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    //Tomar todos los mensajes del usuario y ponerlos en orden de fecha de más reciente a menos reciente
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and emisor not in (:mailusuario) ORDER BY fecha DESC");
+    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia->bindParam(':tipo', $tipo);
+    $sentencia->execute();
+    $mensajes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+    //Mensajes sin leer
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and leido=:no");
+    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia->bindParam(':tipo', $tipo);
+    $sentencia->bindParam(':no', $noLeido);
+    $sentencia->execute();
+    $filas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $notificaciones = count($filas);
+
+    include '../datosUsuario.php';
+
+  }catch(PDOException $e){
+    echo "Error: " . $e->getMessage();
+  }
+  $conn = null;
  ?>
 
 <!DOCTYPE html>
@@ -40,6 +53,7 @@
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
     <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
+    <script src="../../js/mensajeria.js"></script>
   </head>
   <body>
     <div id="container">
@@ -50,8 +64,8 @@
           <div class="dropdown">
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
-                if($row['foto']){
-                  echo '<img src="'.$row['foto'].'" class="imagen-perfil" height="70" width="70">';
+                if($row1['foto']){
+                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
                 }else{
                   echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
                 }
@@ -81,7 +95,7 @@
               <div class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="contraseña" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill">14</span></a>
+                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="contraseña" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
                   </li>
                 </ul>
               </div>
@@ -93,15 +107,14 @@
                           $emisor = $mensaje['emisor'];
                           $asunto = $mensaje['asunto'];
                           $fecha = $mensaje['fecha'];
+                          $id = $mensaje['id'];
                           echo '<ul class="list-group list-group-horizontal">
-
-                              <div class="row">
-                                <li class="list-group-item">'.$emisor.'</li>
-                                <li class="list-group-item">'.$asunto.'</li>
-                                <li class="list-group-item"><a href="borrarMensaje.php"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
-                              </div>
-
-                            </ul>';
+                                  <div class="row">
+                                    <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
+                                    <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
+                                    <li id="'.$id.'" class="list-group-item"><a href="borrarMensaje.php"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
+                                  </div>
+                                </ul>';
                         }
                        ?>
                     </ul>

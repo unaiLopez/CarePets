@@ -7,17 +7,14 @@
 
     $conn = conectarse();
 
-    $correo = $_SESSION['mail'];
-
-    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correo);
-    $sentencia->execute();
-    $row1 = $sentencia->fetch(PDO::FETCH_BOTH);
+    $correoActual = $_SESSION['mail'];
 
     $sentencia = $conn->prepare("SELECT * FROM protectora WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correo);
+    $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->execute();
     $row2 = $sentencia->fetch(PDO::FETCH_BOTH);
+
+    include '../datosUsuario.php';
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();

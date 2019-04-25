@@ -7,45 +7,42 @@
 
     $conn = conectarse();
 
-    $correo = $_SESSION['mail'];
+    $correoActual = $_SESSION['mail'];
     $servicio1 = 'Alojamiento';
     $servicio2 = 'Dia Entero';
     $servicio3 = 'Paseo';
     $servicio4 = 'Visita';
 
-    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correo);
-    $sentencia->execute();
-    $row1 = $sentencia->fetch(PDO::FETCH_BOTH);
-
     $sentencia = $conn->prepare("SELECT * FROM duenocuidador WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correo);
+    $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->execute();
     $row2 = $sentencia->fetch(PDO::FETCH_BOTH);
 
     $sentencia = $conn->prepare("SELECT * FROM servicio WHERE mailusuario=:mailusuario and nombre=:nombre");
-    $sentencia->bindParam(':mailusuario', $correo);
+    $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':nombre', $servicio1);
     $sentencia->execute();
     $row31 = $sentencia->fetch(PDO::FETCH_BOTH);
 
     $sentencia = $conn->prepare("SELECT * FROM servicio WHERE mailusuario=:mailusuario and nombre=:nombre");
-    $sentencia->bindParam(':mailusuario', $correo);
+    $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':nombre', $servicio2);
     $sentencia->execute();
     $row32 = $sentencia->fetch(PDO::FETCH_BOTH);
 
     $sentencia = $conn->prepare("SELECT * FROM servicio WHERE mailusuario=:mailusuario and nombre=:nombre");
-    $sentencia->bindParam(':mailusuario', $correo);
+    $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':nombre', $servicio3);
     $sentencia->execute();
     $row33 = $sentencia->fetch(PDO::FETCH_BOTH);
 
     $sentencia = $conn->prepare("SELECT * FROM servicio WHERE mailusuario=:mailusuario and nombre=:nombre");
-    $sentencia->bindParam(':mailusuario', $correo);
+    $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':nombre', $servicio4);
     $sentencia->execute();
     $row34 = $sentencia->fetch(PDO::FETCH_BOTH);
+
+    include '../datosUsuario.php';
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();

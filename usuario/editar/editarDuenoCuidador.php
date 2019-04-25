@@ -88,11 +88,11 @@
                ?>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="../perfilDuenoCuidador.php"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a href="../perfil/perfilDuenoCuidador.php"><i class="fas fa-user"></i> Perfil</a></li>
                 <hr>
                 <li><a href="editarDuenoCuidador.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="#"><i class="fas fa-envelope"></i> Mensajes</a></li>
+                <li><a href="../mensajeria/tablonMensajesSolicitud.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                 <hr>

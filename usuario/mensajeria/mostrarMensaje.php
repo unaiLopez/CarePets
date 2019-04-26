@@ -14,24 +14,19 @@
     //Tomar mail del usuario
     $correoActual = $_SESSION['mail'];
 
-    //Tomar el valor de la contraseña y del mail
+    //Tomar el los datos del mensaje
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and id=:id");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    //Tomar todos los mensajes del usuario
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and emisor not in (:mailusuario)");
-    $sentencia->bindParam(':mailusuario', $correoActual);
-    $sentencia->bindParam(':tipo', $tipo);
-    $sentencia->execute();
-    $mensajes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-
 		$sql = "UPDATE mensaje SET leido=? WHERE id=?";
 		$sentencia= $conn->prepare($sql);
 		$sentencia->execute([$leido,$id]);
 
+		include "conseguirRespuestas.php?id=$id";
+		include 'mensajesNoLeidos.php';
     include '../datosUsuario.php';
 
   }catch(PDOException $e){
@@ -97,31 +92,86 @@
                <div class="card-header mx-auto">
                  <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                    <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="contraseña" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill">14</span></a>
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="contraseña" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
                    </li>
                  </ul>
                </div>
                <div class="col-lg-12 scroll">
                  <div class="card-body mx-auto">
                    <div class="tab-content" id="myTabContent">
-                       <?php
-                         foreach ($mensajes as $mensaje){
-                           $emisor = $mensaje['emisor'];
-                           $asunto = $mensaje['asunto'];
-                           $fecha = $mensaje['fecha'];
-                           $id = $mensaje['id'];
-                           echo '<ul class="list-group list-group-horizontal">
-                                   <div class="row">
-                                     <li id="'.$id.'" class="list-group-item"><a href="mostrarMensaje.php">a</a>'.$emisor.'</li>
-                                     <li id="'.$id.'" class="list-group-item"><a href="mostrarMensaje.php">a</a>'.$asunto.'</li>
-                                     <li id="'.$id.'" class="list-group-item"><a href="mostrarMensaje.php">a</a><a href="borrarMensaje.php"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
-                                   </div>
-                                 </ul>';
-                         }
-                        ?>
-                     </ul>
+										 <div class="mensaje">
+											 <div class="row">
+												 <div class="col-xs-4 col-lg-4">
+													 <strong>De :</strong> <?php echo $mensaje['emisor']; ?>
+													 <div class="row">
+														 <div class="col-xs-7 col-lg-7">
+														<strong>De :</strong> <?php echo $mensaje['mailemisor']; ?>
+													 	</div>
+													 </div>
+
+	                       </div>
+	 											<div class="col-xs-3 offset-xs-5 col-lg-3 offset-lg-5">
+													<strong>Fecha :</strong> <?php echo $mensaje['fecha']; ?>
+	                       </div>
+											 </div>
+											 <br>
+											 <br>
+											 <div class="row">
+												 <div class="col-xs-10 col-lg-10">
+													 <?php echo $mensaje['contenido']; ?>
+													 <br>
+													 <br>
+												 </div>
+											 </div>
+											 <div class="row">
+												 <div class="col-xs-12 col-lg-12">
+													 <hr>
+												 </div>
+											 </div>
+										 </div>
+										 <?php
+											 foreach ($mensajesRespuesta as $respuesta){
+												 $mailemisor = $respuesta['mailemisor'];
+												 $mailreceptor = $respuesta['mailreceptor'];
+												 $fecha = $respuesta['fecha'];
+												 $contenido = $respuesta['contenido'];
+												 echo '<div class="mensaje">
+																 <div class="row">
+																	<div class="col-xs-4 col-lg-4">
+																		<strong>Para :</strong> echo $mailreceptor;
+																		<div class="row">
+																			<div class="col-xs-7 col-lg-7">
+																			<strong>De :</strong> echo $mailemisor;
+																		 </div>
+																		</div>
+																	</div>
+																 <div class="col-xs-3 offset-xs-5 col-lg-3 offset-lg-5">
+																	 <strong>Fecha :</strong> echo $fecha;
+																	</div>
+																</div>
+																<br>
+																<br>
+																<div class="row">
+																	<div class="col-xs-10 col-lg-10">
+																		echo $contenido;
+																		<br>
+																		<br>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-12 col-lg-12">
+																		<hr>
+																	</div>
+																</div>
+												 			 </div>';
+												}
+											?>
                    </div>
                  </div>
+								 <div class="card-footer">
+									 <div class="btn btn-default">Responder</div>
+									 <div onclick="location.href='tablonMensajes.php';" class="btn btn-default">Volver a mis Mensajes</div>
+								 </div>
                </div>
          </div>
        </div>

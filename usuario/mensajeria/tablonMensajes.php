@@ -20,15 +20,7 @@
     $sentencia->execute();
     $mensajes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-    //Mensajes sin leer
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and leido=:no");
-    $sentencia->bindParam(':mailusuario', $correoActual);
-    $sentencia->bindParam(':tipo', $tipo);
-    $sentencia->bindParam(':no', $noLeido);
-    $sentencia->execute();
-    $filas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-    $notificaciones = count($filas);
-
+    include 'mensajesNoLeidos.php';
     include '../datosUsuario.php';
 
   }catch(PDOException $e){
@@ -102,25 +94,25 @@
               <div class="col-lg-12 scroll">
                 <div class="card-body mx-auto">
                   <div class="tab-content" id="myTabContent">
-                      <?php
-                        foreach ($mensajes as $mensaje){
-                          $emisor = $mensaje['emisor'];
-                          $asunto = $mensaje['asunto'];
-                          $fecha = $mensaje['fecha'];
-                          $id = $mensaje['id'];
-                          echo '<ul class="list-group list-group-horizontal">
-                                  <div class="row">
-                                    <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
-                                    <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
-                                    <li id="'.$id.'" class="list-group-item"><a href="borrarMensaje.php"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
-                                  </div>
-                                </ul>';
-                        }
-                       ?>
-                    </ul>
-                  </div>
+                    <?php
+                      foreach ($mensajes as $mensaje){
+                        $emisor = $mensaje['emisor'];
+                        $asunto = $mensaje['asunto'];
+                        $fecha = $mensaje['fecha'];
+                        $id = $mensaje['id'];
+                        echo '<ul class="list-group list-group-horizontal">
+                                <div class="row">
+                                  <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
+                                  <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
+                                  <li id="'.$id.'" class="list-group-item"><a href="borrarMensaje.php?id='.$id.'"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
+                                </div>
+                              </ul>';
+                      }
+                     ?>
+                  </ul>
                 </div>
               </div>
+            </div>
         </div>
       </div>
       <br>

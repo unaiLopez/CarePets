@@ -20,6 +20,10 @@
   width: 100%;
 }
 
+.card-body {
+  height: 340px;
+}
+
 .nav-item {
   width: 300px;
 }

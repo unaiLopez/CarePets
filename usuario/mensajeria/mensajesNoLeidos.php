@@ -3,6 +3,7 @@
     //Variables para buscar en la BD
     $correoActual = $_SESSION['mail'];
     $noLeido = 0;
+    $tipo = 'Mensaje';
 
     //Mensajes sin leer
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and leido=:no");

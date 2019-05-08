@@ -25,7 +25,12 @@
 		$sentencia= $conn->prepare($sql);
 		$sentencia->execute([$leido,$id]);
 
-		include "conseguirRespuestas.php?id=$id";
+		//Conseguir todas las respuestas del mensaje principal
+		$sentencia = $conn->prepare("SELECT * FROM mensaje WHERE idrespuesta=:id ORDER BY fecha ASC");
+		$sentencia->bindParam(':id', $id);
+		$sentencia->execute();
+		$respuestas = $sentencia->fetchAll(PDO::FETCH_BOTH);
+
 		include 'mensajesNoLeidos.php';
     include '../datosUsuario.php';
 
@@ -92,7 +97,7 @@
                <div class="card-header mx-auto">
                  <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                    <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="contraseña" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="contraseña" aria-selected="true">Recibidos <span class="badge badge-danger badge-pill"><?php echo $notificaciones; ?></span></a>
                    </li>
                  </ul>
                </div>
@@ -100,24 +105,25 @@
                  <div class="card-body mx-auto">
                    <div class="tab-content" id="myTabContent">
 										 <div class="mensaje">
+
 											 <div class="row">
-												 <div class="col-xs-4 col-lg-4">
-													 <strong>De :</strong> <?php echo $mensaje['emisor']; ?>
+												 <div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
+													 <strong>Para :</strong> <?php echo $mensaje['mailreceptor']; ?>
 													 <div class="row">
 														 <div class="col-xs-7 col-lg-7">
-														<strong>De :</strong> <?php echo $mensaje['mailemisor']; ?>
-													 	</div>
+															 <strong>De :</strong> <?php echo $mensaje['mailemisor']; ?>
+													 		</div>
 													 </div>
 
 	                       </div>
-	 											<div class="col-xs-3 offset-xs-5 col-lg-3 offset-lg-5">
+	 											<div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
 													<strong>Fecha :</strong> <?php echo $mensaje['fecha']; ?>
 	                       </div>
 											 </div>
 											 <br>
 											 <br>
 											 <div class="row">
-												 <div class="col-xs-10 col-lg-10">
+												 <div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
 													 <?php echo $mensaje['contenido']; ?>
 													 <br>
 													 <br>
@@ -130,30 +136,30 @@
 											 </div>
 										 </div>
 										 <?php
-											 foreach ($mensajesRespuesta as $respuesta){
+										   foreach($respuestas as $respuesta){
 												 $mailemisor = $respuesta['mailemisor'];
 												 $mailreceptor = $respuesta['mailreceptor'];
 												 $fecha = $respuesta['fecha'];
 												 $contenido = $respuesta['contenido'];
-												 echo '<div class="mensaje">
+												 echo '<div class="respuesta">
 																 <div class="row">
-																	<div class="col-xs-4 col-lg-4">
-																		<strong>Para :</strong> echo $mailreceptor;
+																	<div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
+																		<strong>Para : </strong>'.$mailreceptor.'
 																		<div class="row">
 																			<div class="col-xs-7 col-lg-7">
-																			<strong>De :</strong> echo $mailemisor;
+																			<strong>De : </strong>'.$mailemisor.'
 																		 </div>
 																		</div>
 																	</div>
-																 <div class="col-xs-3 offset-xs-5 col-lg-3 offset-lg-5">
-																	 <strong>Fecha :</strong> echo $fecha;
+																 <div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
+																	 <strong>Fecha : </strong>'.$fecha.'
 																	</div>
 																</div>
 																<br>
 																<br>
 																<div class="row">
-																	<div class="col-xs-10 col-lg-10">
-																		echo $contenido;
+																	<div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
+																		'.$contenido.'
 																		<br>
 																		<br>
 																	</div>
@@ -166,29 +172,54 @@
 												 			 </div>';
 												}
 											?>
+										 <button data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
+	 									 <button onclick="location.href='tablonMensajes.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
+	 									 <br>
+	 									 <br>
                    </div>
                  </div>
-								 <div class="card-footer">
-									 <div class="btn btn-default">Responder</div>
-									 <div onclick="location.href='tablonMensajes.php';" class="btn btn-default">Volver a mis Mensajes</div>
-								 </div>
-               </div>
-         </div>
+         			</div>
+							<!-- Modal -->
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <strong>Para : </strong><?php echo $mensaje['mailemisor']; ?><span><button type="button" class="close" data-dismiss="modal">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-xs-12 mx-auto">
+                          <form id="responderMensaje" action="responder.php?id=<?php echo $id; ?>" role="form">
+                            <div id="form-modal" class="form-group">
+															<div class="form-group">
+																<label for="respuesta">Respuesta :</label>
+																<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" required></textarea>
+															</div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="col-xs-12 mx-auto">
+												<div id="form-modal" class="form-group">
+													<button type="submit" name="responder" id="responder" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
+												</div>
+												</form>
+                        <div id="form-modal" class="form-group">
+                          <button class="btn btn-default" data-dismiss="modal"><i class="fas fa-arrow-alt-circle-left"></i> Volver al Mensaje</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
        </div>
        <br>
        <br>
        <!-- Footer -->
-       <div class="footer">
-         <div class="container-fluid padding">
-           <div class="row text-center padding">
-             <div class="col-lg-12 social padding">
-               <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
-               <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
-               <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
-             </div>
-           </div>
-         </div>
-       </div>
-   </div>
+   		</div>
+			</div>
+		</div>
    </body>
  </html>

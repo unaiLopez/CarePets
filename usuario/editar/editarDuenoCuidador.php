@@ -159,8 +159,9 @@
                                 <div class="form-group">
                                   <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
-                              </div>
+                                <br>
                             </form>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -200,8 +201,9 @@
                                 <div class="form-group">
                                   <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
-                                </div>
+                                <br>
                               </form>
+                              </div>
                             </div>
                           </div>
                       </div>
@@ -265,6 +267,7 @@
                                 <div class="form-group">
                                   <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
+                                <br>
                               </form>
                             </div>
                           </div>

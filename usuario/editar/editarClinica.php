@@ -130,8 +130,8 @@
                                 <div class="form-group">
                                   <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
-                              </div>
                             </form>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -191,8 +191,9 @@
                                 <div class="form-group">
                                   <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
-                                </div>
+                                <br>
                               </form>
+                              </div>
                             </div>
                           </div>
                       </div>
@@ -217,18 +218,20 @@
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                  <label for="experiencia">Horario</label>
-                                  <div class="input-group">
-                                    <input type="text" id="horario" name="horario" class="form-control" value="<?=$row2['horario']; ?>" placeholder="Horario de su clínica">
-                                  </div>
-                                </div>
+  																<label for="horario">Horario :</label>
+  																<textarea class="form-control" col="6" rows="3" id="horario" name="horario"><?php echo $row2['horario']; ?></textarea>
+  															</div>
+                                <br>
+                                <br>
+                                <br>
                                 <br>
                                 <div class="form-group">
-                                  <label for="experiencia">Descripcion</label>
-                                  <div class="input-group">
-                                    <input type="text" id="descripcion" name="descripcion" class="form-control" value="<?=$row1['descripcion']; ?>" placeholder="Descripcion de su clínica y servicios">
-                                  </div>
-                                </div>
+  																<label for="descripcion">Descripción :</label>
+  																<textarea class="form-control" col="6" rows="3" id="descripcion" name="descripcion"><?php echo $row1['descripcion']; ?></textarea>
+  															</div>
+                                <br>
+                                <br>
+                                <br>
                                 <br>
                                 <div class="form-group">
                                   <label for="avatar">Foto de Perfil</label>
@@ -243,6 +246,7 @@
                                 <div class="form-group">
                                   <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
+                                <br>
                               </form>
                             </div>
                           </div>

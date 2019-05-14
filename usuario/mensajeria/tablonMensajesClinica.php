@@ -49,14 +49,15 @@
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
     <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
-    <script src="../../js/mensajeria.js"></script>
+    <script src="../../js/mensajeriaComun.js"></script>
+    <script src="../../js/mensajeriaClinica.js"></script>
   </head>
   <body>
     <div id="container">
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="perfilClinica.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+          <a class="navbar-brand" href="../perfil/perfilClinica.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
           <div class="dropdown">
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
@@ -68,11 +69,11 @@
                ?>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="perfilClinica.php"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a href="../perfil/perfilClinica.php"><i class="fas fa-user"></i> Perfil</a></li>
                 <hr>
                 <li><a href="../editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="../mensajeria/tablonMensajes.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
+                <li><a href="tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                 <hr>

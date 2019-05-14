@@ -32,7 +32,7 @@
                 <hr>
                 <li><a href="../editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="../mensajeria/tablonMensajes.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
+                <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                 <hr>

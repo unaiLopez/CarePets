@@ -73,7 +73,7 @@
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="../perfilDuenoCuidador.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+          <a class="navbar-brand" href="../perfil/perfilDuenoCuidador.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
           <div class="dropdown">
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
@@ -89,7 +89,7 @@
                 <hr>
                 <li><a href="editarDuenoCuidador.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="../mensajeria/tablonMensajesSolicitud.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
+                <li><a href="../mensajeria/tablonMensajesDuenoCuidador.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                 <hr>

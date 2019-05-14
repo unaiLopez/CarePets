@@ -180,40 +180,43 @@
                  </div>
          			</div>
 							<!-- Modal -->
-              <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <strong>Para : </strong><?php echo $mensaje['mailemisor']; ?><span><button type="button" class="close" data-dismiss="modal">&times;</button></span>
-                    </div>
-                    <div class="modal-body">
-                      <div class="row">
-                        <div class="col-xs-12 mx-auto">
-                          <form id="responderMensaje" action="responder.php?id=<?php echo $id; ?>" role="form">
-                            <div id="form-modal" class="form-group">
-															<div class="form-group">
-																<label for="respuesta">Respuesta :</label>
-																<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" required></textarea>
-															</div>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <div class="col-xs-12 mx-auto">
-												<div id="form-modal" class="form-group">
-													<button type="submit" name="responder" id="responder" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
-												</div>
-												</form>
-                        <div id="form-modal" class="form-group">
-                          <button class="btn btn-default" data-dismiss="modal"><i class="fas fa-arrow-alt-circle-left"></i> Volver al Mensaje</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+							<form class="responderMensaje" id="responderMensaje" role="form">
+	              <div class="modal fade" id="myModal" role="dialog">
+	                <div class="modal-dialog">
+	                  <!-- Modal content-->
+	                  <div class="modal-content">
+	                    <div class="modal-header">
+	                      <strong>Para : </strong><?php echo $mensaje['mailemisor']; ?><span><button type="button" class="close" data-dismiss="modal">&times;</button></span>
+	                    </div>
+	                    <div class="modal-body">
+	                      <div class="row">
+	                        <div class="col-xs-12 mx-auto">
+	                            <div id="form-modal" class="form-group">
+																<div class="form-group">
+																	<label for="respuesta">Respuesta :</label>
+																	<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" required></textarea>
+																</div>
+																<div class="form-group">
+																	<input type="hidden" id="idmensaje" name="idmensaje" value="<?=$id; ?>">
+																</div>
+	                            </div>
+	                        </div>
+	                      </div>
+	                    </div>
+	                    <div class="modal-footer">
+	                      <div class="col-xs-12 mx-auto">
+													<div id="form-modal" class="form-group">
+														<button onclick="responderMensaje($('#idmensaje').val(), $('#respuesta').val())" name="responder" id="responder" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
+													</div>
+	                        <div id="form-modal" class="form-group">
+	                          <button class="btn btn-default" data-dismiss="modal"><i class="fas fa-arrow-alt-circle-left"></i> Volver al Mensaje</button>
+	                        </div>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	              </div>
+							</form>
        </div>
        <br>
        <br>

@@ -1,10 +1,10 @@
 <?php
-  include '../../validaciones/verificarClinica.php';
+  require_once '../../validaciones/verificarClinica.php';
 
   try {
 
     //Configurar base de datos
-    include '../conectarDB.php';
+    require_once '../conectarDB.php';
 
     $conn = conectarse();
 
@@ -20,8 +20,12 @@
     $sentencia->execute();
     $mensajes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-    include 'mensajesNoLeidos.php';
-    include '../datosUsuario.php';
+    //Si un mensaje tiene respuestas sin leer. El mensaje principal se cambiará a no leido
+    require_once 'cambiarMensajesLeidos.php';
+    //Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
+    require_once 'mensajesNoLeidos.php';
+    //Toma los datos del usuario para mostrarlos posteriormente dinámicamente en la pantalla
+    require_once '../datosUsuario.php';
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
@@ -104,7 +108,7 @@
                                 <div class="row">
                                   <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
                                   <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
-                                  <li id="'.$id.'" class="list-group-item"><a href="borrarMensaje.php?id='.$id.'"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
+                                  <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
                                 </div>
                               </ul>';
                       }

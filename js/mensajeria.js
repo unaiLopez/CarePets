@@ -1,16 +1,16 @@
-//Redirreccionar a mostrarMensaje.php pasandole el id del mensaje clicado
+//Redirreccionar a mostrarMensaje.php pasandole el id del mensaje clicado a la session
 $(document).ready(function() {
  $(".list-group .list-group-item").click(function() {
-   var id = $(this).attr('id');
-   window.location.href = "mostrarMensaje.php?id=" + id;
+    var id = $(this).attr('id');
+    var data = {'id': id};
+    $.post('pasarIDaSession.php', data, function(){
+        window.location.href = "mostrarMensaje.php";
+    });
  });
 });
 
 //Responder mensaje desde modal
 function responderMensaje(idmensaje, respuesta) {
-  var bool = false;
-  alert("este es el ID del mensaje :");
-  alert(idmensaje);
   var datos = {"idmensaje" : idmensaje, "respuesta" : respuesta};
   $.ajax({
       data: datos,
@@ -18,12 +18,12 @@ function responderMensaje(idmensaje, respuesta) {
       type: 'post',
       async: false,
       success: function(response) {
-          alert("hecho");
-          bool = true;
+          alert('Mensaje enviado con exito');
+          location.reload(); // then reload the page.(3)
+
       },
       error: function() {
-          alert('Error');
+          alert('No se pudo enviar el mensaje');
       }
   });
-  return bool;
 }

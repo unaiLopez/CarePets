@@ -4,7 +4,7 @@
 
   try {
     //Configurar base de datos
-    include '../conectarDB.php';
+    require_once '../conectarDB.php';
 
     $conn = conectarse();
 
@@ -13,13 +13,9 @@
     $tipo = 'Respuesta';
     $contenido = $_POST['respuesta'];
     $leido = 0;
-    //Tomar fecha y hora actual
-    $tz_object = new DateTimeZone('Europe/Madrid');
-    //date_default_timezone_set('Brazil/East');
-
-    $fecha = new DateTime();
-    $fecha->setTimezone($tz_object);
-    $fecha->format('Y\-m\-d\ h:i:s');
+    //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
+    $tiempo = time();
+    $fecha = date("Y-m-d H:i:s", $tiempo);
 
     //Conseguir el mail del receptor
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE id=:id");
@@ -38,8 +34,7 @@
     $sentencia->bindParam(':mailreceptor', $mailreceptor);
     $sentencia->bindParam(':idrespuesta', $id);
     $sentencia->execute();
-
-    header('Location: mostrarMensaje.php?id='.$id);
+    $_SESSION['id'] = $id;
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();

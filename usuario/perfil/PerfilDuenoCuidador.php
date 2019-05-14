@@ -1,5 +1,5 @@
 <?php
-  include '../../validaciones/verificarDuenoCuidador.php';
+  require_once '../../validaciones/verificarDuenoCuidador.php';
  ?>
 
 <!DOCTYPE html>

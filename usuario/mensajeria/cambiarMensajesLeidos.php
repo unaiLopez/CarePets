@@ -1,18 +1,26 @@
 <?php
   try {
     //Variables para buscar en la BD
-    $correoActual = $_SESSION['mail'];
     $noLeido = 0;
-    $tipo = 'Mensaje';
+    $tipo = 'Respuesta';
 
-    //Mensajes sin leer
+    //Buscar todos los mensajes que sean de tipo respuesta
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and leido=:no");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':no', $noLeido);
     $sentencia->execute();
     $filas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-    $notificaciones = count($filas);
+
+    //Todos los mensajes que tengan respuestas sin leer se convertiran en mensajes no leidos
+    foreach ($filas as $fila) {
+      if($fila['leido'] == 0){
+        $idMensajeCambiar = $fila['idrespuesta'];
+        $sql = "UPDATE mensaje SET leido=? WHERE id=?";
+        $sentencia= $conn->prepare($sql);
+        $sentencia->execute([$noLeido, $idMensajeCambiar]);
+      }
+    }
 
     require_once '../datosUsuario.php';
 

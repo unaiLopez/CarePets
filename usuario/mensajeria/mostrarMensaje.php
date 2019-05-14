@@ -4,17 +4,17 @@
 
   try {
     //Configurar base de datos
-    include '../conectarDB.php';
+    require_once '../conectarDB.php';
 
     $conn = conectarse();
 
-    $id = $_GET['id'];
+		$id = $_SESSION['id'];
 		$leido = 1;
 
     //Tomar mail del usuario
     $correoActual = $_SESSION['mail'];
 
-    //Tomar el los datos del mensaje
+    //Tomar los datos del mensaje
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and id=:id");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':id', $id);
@@ -31,8 +31,9 @@
 		$sentencia->execute();
 		$respuestas = $sentencia->fetchAll(PDO::FETCH_BOTH);
 
-		include 'mensajesNoLeidos.php';
-    include '../datosUsuario.php';
+		require_once 'marcarRespuestasComoLeidas.php';
+		require_once 'mensajesNoLeidos.php';
+    require_once '../datosUsuario.php';
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
@@ -97,7 +98,7 @@
                <div class="card-header mx-auto">
                  <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                    <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="contraseña" aria-selected="true">Recibidos <span class="badge badge-danger badge-pill"><?php echo $notificaciones; ?></span></a>
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="contraseña" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
                    </li>
                  </ul>
                </div>

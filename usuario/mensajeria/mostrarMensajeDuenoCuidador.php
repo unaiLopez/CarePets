@@ -15,7 +15,7 @@
     $correoActual = $_SESSION['mail'];
 
     //Tomar los datos del mensaje
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and id=:id");
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailemisor=:mailusuario and id=:id");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
@@ -57,7 +57,7 @@
      <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
      <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
      <script src="../../js/mensajeriaComun.js"></script>
-     <script src="../../js/mensajeriaClinica.js"></script>
+     <script src="../../js/mensajeriaDuenoCuidador.js"></script>
    </head>
    <body>
      <div id="container">
@@ -71,16 +71,16 @@
                  if($row1['foto']){
                    echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
                  }else{
-                   echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
+                   echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
                  }
                 ?>
              </a>
              <ul class="dropdown-menu">
-                 <li><a href="../perfil/perfilClinica.php"><i class="fas fa-user"></i> Perfil</a></li>
+                 <li><a href="../perfil/perfilProtectora.php"><i class="fas fa-user"></i> Perfil</a></li>
                  <hr>
-                 <li><a href="../editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
+                 <li><a href="../editar/editarProtectora.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                  <hr>
-                 <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
+                 <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
                  <hr>
                  <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                  <hr>
@@ -96,86 +96,82 @@
          <div class="container-fluid">
            <div class="row">
              <div class="card">
-							 <div class="card-header mx-auto">
-								 <p><h5><?php echo 'Conversación con : '.$mensaje['mailemisor'];?></h5></p>
+               <div class="card-header mx-auto">
+								 <p><h5><?php echo 'Conversación con : '.$mensaje['mailreceptor'];?></h5></p>
                </div>
                <div class="col-lg-12 scroll">
                  <div class="card-body mx-auto">
-                   <div class="tab-content" id="myTabContent">
-										 <div class="tab-pane fade show active" id="recibidos" role="tabpanel" aria-labelledby="recibidos-tab">
-											 <div class="mensaje">
+									 <div class="mensaje">
+										 <div class="row">
+											 <div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
+												 <strong>Para :</strong> <?php echo $mensaje['mailreceptor']; ?>
 												 <div class="row">
-													 <div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
-														 <strong>Para :</strong> <?php echo $mensaje['mailreceptor']; ?>
-														 <div class="row">
-															 <div class="col-xs-7 col-lg-7">
-																 <strong>De :</strong> <?php echo $mensaje['mailemisor']; ?>
-														 		</div>
-														 </div>
+													 <div class="col-xs-7 col-lg-7">
+														 <strong>De :</strong> <?php echo $mensaje['mailemisor']; ?>
+												 		</div>
+												 </div>
 
-		                       </div>
-		 											<div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
-														<strong>Fecha :</strong> <?php echo $mensaje['fecha']; ?>
-		                       </div>
-												 </div>
+                       </div>
+ 											<div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
+												<strong>Fecha :</strong> <?php echo $mensaje['fecha']; ?>
+                       </div>
+										 </div>
+										 <br>
+										 <br>
+										 <div class="row">
+											 <div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
+												 <?php echo $mensaje['contenido']; ?>
 												 <br>
 												 <br>
-												 <div class="row">
-													 <div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
-														 <?php echo $mensaje['contenido']; ?>
-														 <br>
-														 <br>
-													 </div>
-												 </div>
-												 <div class="row">
-													 <div class="col-xs-12 col-lg-12">
-														 <hr>
-													 </div>
-												 </div>
 											 </div>
-											 <?php
-											   foreach($respuestas as $respuesta){
-													 $mailemisor = $respuesta['mailemisor'];
-													 $mailreceptor = $respuesta['mailreceptor'];
-													 $fecha = $respuesta['fecha'];
-													 $contenido = $respuesta['contenido'];
-													 echo '<div class="respuesta">
-																	 <div class="row">
-																		<div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
-																			<strong>Para : </strong>'.$mailreceptor.'
-																			<div class="row">
-																				<div class="col-xs-7 col-lg-7">
-																				<strong>De : </strong>'.$mailemisor.'
-																			 </div>
-																			</div>
-																		</div>
-																	 <div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
-																		 <strong>Fecha : </strong>'.$fecha.'
-																		</div>
-																	</div>
-																	<br>
-																	<br>
-																	<div class="row">
-																		<div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
-																			'.$contenido.'
-																			<br>
-																			<br>
-																		</div>
-																	</div>
-																	<div class="row">
-																		<div class="col-xs-12 col-lg-12">
-																			<hr>
-																		</div>
-																	</div>
-													 			 </div>';
-													}
-												?>
-											 <button data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
-		 									 <button onclick="location.href='tablonMensajesClinica.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
-		 									 <br>
-		 									 <br>
-	                   </div>
+										 </div>
+										 <div class="row">
+											 <div class="col-xs-12 col-lg-12">
+												 <hr>
+											 </div>
+										 </div>
 									 </div>
+									 <?php
+									   foreach($respuestas as $respuesta){
+											 $mailemisor = $respuesta['mailemisor'];
+											 $mailreceptor = $respuesta['mailreceptor'];
+											 $fecha = $respuesta['fecha'];
+											 $contenido = $respuesta['contenido'];
+											 echo '<div class="respuesta">
+															 <div class="row">
+																<div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
+																	<strong>Para : </strong>'.$mailreceptor.'
+																	<div class="row">
+																		<div class="col-xs-7 col-lg-7">
+																		<strong>De : </strong>'.$mailemisor.'
+																	 </div>
+																	</div>
+																</div>
+															 <div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
+																 <strong>Fecha : </strong>'.$fecha.'
+																</div>
+															</div>
+															<br>
+															<br>
+															<div class="row">
+																<div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
+																	'.$contenido.'
+																	<br>
+																	<br>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-xs-12 col-lg-12">
+																	<hr>
+																</div>
+															</div>
+											 			 </div>';
+											}
+										?>
+									 <button data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
+ 									 <button onclick="location.href='tablonMensajesDuenoCuidador.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
+ 									 <br>
+ 									 <br>
                  </div>
          				</div>
 								<!-- Modal -->

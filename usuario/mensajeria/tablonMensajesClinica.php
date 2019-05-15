@@ -14,7 +14,7 @@
     $tipo = 'Mensaje';
 
     //Tomar todos los mensajes del usuario y ponerlos en orden de fecha de más reciente a menos reciente
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and emisor not in (:mailusuario) ORDER BY fecha DESC");
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo ORDER BY fecha DESC");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->execute();
@@ -92,48 +92,65 @@
               <div class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="contraseña" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
+                   <a class="nav-link active" id="recibidos-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="recibidos" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
                   </li>
                 </ul>
               </div>
               <div class="col-lg-12 scroll">
                 <div class="card-body mx-auto">
                   <div class="tab-content" id="myTabContent">
-                    <?php
-                      foreach ($mensajes as $mensaje){
-                        $emisor = $mensaje['emisor'];
-                        $asunto = $mensaje['asunto'];
-                        $fecha = $mensaje['fecha'];
-                        $id = $mensaje['id'];
-                        echo '<ul class="list-group list-group-horizontal">
-                                <div class="row">
-                                  <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
-                                  <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
-                                  <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
-                                </div>
-                              </ul>';
-                      }
-                     ?>
-                  </ul>
+                    <div class="tab-pane fade show active" id="recibidos" role="tabpanel" aria-labelledby="recibidos-tab">
+                      <?php
+                        foreach ($mensajes as $mensaje){
+                          if($mensaje['mailreceptor'] == $correoActual && $mensaje['leido'] == 1){
+                            $emisor = $mensaje['emisor'];
+                            $asunto = $mensaje['asunto'];
+                            $fecha = $mensaje['fecha'];
+                            $id = $mensaje['id'];
+                            echo '<ul class="list-group list-group-horizontal">
+                                    <div class="row">
+                                      <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
+                                      <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
+                                      <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
+                                    </div>
+                                  </ul>';
+                          }else if($mensaje['mailreceptor'] == $correoActual && $mensaje['leido'] == 0){
+                            $emisor = $mensaje['emisor'];
+                            $asunto = $mensaje['asunto'];
+                            $fecha = $mensaje['fecha'];
+                            $id = $mensaje['id'];
+                            echo '<ul class="list-group list-group-horizontal">
+                                    <div class="row">
+                                      <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>
+                                      <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$asunto.'</li>
+                                      <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
+                                    </div>
+                                  </ul>';
+                          }
+                         }
+                        ?>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-        </div>
-      </div>
-      <br>
-      <br>
-      <!-- Footer -->
-      <div class="footer">
-        <div class="container-fluid padding">
-          <div class="row text-center padding">
-            <div class="col-lg-12 social padding">
-              <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
-              <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
-              <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
+          </div>
+          <br>
+          <br>
+          <!-- Footer -->
+          <div class="footer">
+            <div class="container-fluid padding">
+              <div class="row text-center padding">
+                <div class="col-lg-12 social padding">
+                  <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
+                  <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
+                  <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </body>
 </html>

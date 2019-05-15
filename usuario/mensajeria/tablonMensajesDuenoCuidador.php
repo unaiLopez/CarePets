@@ -31,7 +31,11 @@
     //Si un mensaje tiene respuestas sin leer. El mensaje principal se cambiará a no leido
     require_once 'cambiarMensajesLeidos.php';
     //Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
-    require_once 'mensajesNoLeidos.php';
+    require_once 'mensajesRecibidosNoLeidos.php';
+    //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente
+    require_once 'solicitudesRecibidasNoLeidas.php';
+    //Cuenta la cantidad de mensajes enviados no leidos para mostrarlos en las notificaciones posteriormente
+    require_once 'mensajesEnviadosNoLeidos.php';
     //Toma los datos del usuario para mostrarlos posteriormente dinámicamente en la pantalla
     require_once '../datosUsuario.php';
 
@@ -82,7 +86,7 @@
               <hr>
               <li><a href="../editar/editarDuenoCuidador.php"><i class="fas fa-user-edit"></i> Editar</a></li>
               <hr>
-              <li><a href="tablonMensajesDuenoCuidador.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
+              <li><a href="tablonMensajesDuenoCuidador.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos+$notificacionesEnviados+$notificacionesSolicitudes; ?></span></a></li>
               <hr>
               <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
               <hr>
@@ -101,13 +105,13 @@
               <div class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                   <a class="nav-link active" id="enviados-tab" data-toggle="tab" href="#enviados" role="tab" aria-controls="enviados" aria-selected="true">Enviados <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
+                   <a class="nav-link active" id="enviados-tab" data-toggle="tab" href="#enviados" role="tab" aria-controls="enviados" aria-selected="true">Enviados <span class="badge badge-primary badge-pill"><?php echo $notificacionesEnviados; ?></span></a>
                   </li>
                   <li class="nav-item">
-                   <a class="nav-link" id="recibidos-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="recibidos" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
+                   <a class="nav-link" id="recibidos-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="recibidos" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos; ?></span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="solicitudes-tab" data-toggle="tab" href="#solicitudes" role="tab" aria-controls="solicitudes" aria-selected="false">Solicitudes <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
+                    <a class="nav-link" id="solicitudes-tab" data-toggle="tab" href="#solicitudes" role="tab" aria-controls="solicitudes" aria-selected="false">Solicitudes <span class="badge badge-primary badge-pill"><?php echo $notificacionesSolicitudes; ?></span></a>
                   </li>
                 </ul>
               </div>

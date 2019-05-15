@@ -22,8 +22,8 @@
 
     //Si un mensaje tiene respuestas sin leer. El mensaje principal se cambiará a no leido
     require_once 'cambiarMensajesLeidos.php';
-    //Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
-    require_once 'mensajesNoLeidos.php';
+    //Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
+    require_once 'mensajesRecibidosNoLeidos.php';
     //Toma los datos del usuario para mostrarlos posteriormente dinámicamente en la pantalla
     require_once '../datosUsuario.php';
 
@@ -73,7 +73,7 @@
                 <hr>
                 <li><a href="../editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
+                <li><a href="tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos; ?></span></a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                 <hr>
@@ -92,7 +92,7 @@
               <div class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                   <a class="nav-link active" id="recibidos-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="recibidos" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificaciones; ?></span></a>
+                   <a class="nav-link active" id="recibidos-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="recibidos" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos; ?></span></a>
                   </li>
                 </ul>
               </div>

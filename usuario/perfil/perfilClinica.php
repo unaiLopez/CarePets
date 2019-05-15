@@ -1,5 +1,14 @@
 <?php
-  include '../../validaciones/verificarClinica.php';
+  require_once '../../validaciones/verificarClinica.php';
+  try {
+    require_once '../conectarDB.php';
+    $conn = conectarse();
+    //Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
+    require_once '../mensajeria/mensajesRecibidosNoLeidos.php';
+  }catch(PDOException $e){
+    echo "Error: " . $e->getMessage();
+  }
+$conn = null;
  ?>
 
 <!DOCTYPE html>
@@ -32,7 +41,7 @@
                 <hr>
                 <li><a href="../editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
+                <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes  <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos; ?></span></a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                 <hr>

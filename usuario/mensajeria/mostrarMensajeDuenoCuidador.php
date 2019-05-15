@@ -32,7 +32,12 @@
 		$respuestas = $sentencia->fetchAll(PDO::FETCH_BOTH);
 
 		require_once 'marcarRespuestasComoLeidas.php';
-		require_once 'mensajesNoLeidos.php';
+		//Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
+    require_once 'mensajesRecibidosNoLeidos.php';
+    //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente
+    require_once 'solicitudesRecibidasNoLeidas.php';
+    //Cuenta la cantidad de mensajes enviados no leidos para mostrarlos en las notificaciones posteriormente
+    require_once 'mensajesEnviadosNoLeidos.php';
     require_once '../datosUsuario.php';
 
   }catch(PDOException $e){
@@ -80,7 +85,7 @@
                  <hr>
                  <li><a href="../editar/editarProtectora.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                  <hr>
-                 <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
+                 <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos+$notificacionesEnviados+$notificacionesSolicitudes; ?></span></a></li>
                  <hr>
                  <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                  <hr>

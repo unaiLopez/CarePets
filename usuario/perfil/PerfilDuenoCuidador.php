@@ -1,6 +1,18 @@
 <?php
   require_once '../../validaciones/verificarDuenoCuidador.php';
- ?>
+  try {
+    require_once '../conectarDB.php';
+    $conn = conectarse();
+    //Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
+    require_once '../mensajeria/mensajesRecibidosNoLeidos.php';
+    //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente
+    require_once '../mensajeria/solicitudesRecibidasNoLeidas.php';
+    //Cuenta la cantidad de mensajes enviados no leidos para mostrarlos en las notificaciones posteriormente
+    require_once '../mensajeria/mensajesEnviadosNoLeidos.php';
+  }catch(PDOException $e){
+    echo "Error: " . $e->getMessage();
+  }
+?>
 
 <!DOCTYPE html>
 
@@ -35,7 +47,7 @@
                 <hr>
                 <li><a href="../editar/editarDuenoCuidador.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="../mensajeria/tablonMensajesDuenoCuidador.php"><i class="fas fa-envelope"></i> Mensajes</a></li>
+                <li><a href="../mensajeria/tablonMensajesDuenoCuidador.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos+$notificacionesEnviados+$notificacionesSolicitudes; ?></span></a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                 <hr>

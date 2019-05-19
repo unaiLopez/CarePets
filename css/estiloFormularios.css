@@ -1,5 +1,5 @@
 h1 {
-  font-family: CrimsonText;
+  font-family: Crimson;
   opacity: 0.9;
   color: #ffffff;
   text-align: center;
@@ -26,7 +26,7 @@ h1 {
 label {
   font-size: 18px;
   color: #ffffff;
-  font-family: CrimsonText;
+  font-family: Crimson;
 }
 
 #autocomplete {
@@ -64,13 +64,13 @@ label {
   background-color: rgba(224, 82, 3, 0.5);
   font-size: 18px;
   color: #ffffff;
-  font-family: CrimsonText;
+  font-family: Crimson;
   margin-top: 20px;
 }
 
 p {
   opacity: 0.9;
-  font-family: CrimsonText;
+  font-family: Crimson;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -81,13 +81,13 @@ p {
 }
 
 #compararContraseñas {
-  font-family: CrimsonText;
+  font-family: Crimson;
   font-size: 18px;
   color: black;
 }
 
 #autenticacionCorreo {
-  font-family: CrimsonText;
+  font-family: Crimson;
   font-size: 18px;
   color: black;
 }
@@ -125,7 +125,7 @@ a:hover {
 h4 {
   text-align: center;
   font-size: 30px;
-  font-family: CrimsonText;
+  font-family: Crimson;
   opacity: 0.9;
   color: #ffffff;
 }

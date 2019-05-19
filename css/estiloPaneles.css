@@ -44,12 +44,14 @@
 	border-top-right-radius:0;
 	border-bottom-left-radius:4px;
   width: 20%;
+  cursor: pointer;
 }
 .list-group-horizontal .list-group-item:nth-child(2)
 {
 	border-top-right-radius:0;
 	border-bottom-left-radius:4px;
   width: 60%;
+  cursor: pointer;
 }
 .list-group-horizontal .list-group-item:last-child
 {
@@ -57,7 +59,26 @@
 	border-bottom-left-radius:0;
 	border-right-width: 1px;
   width: 20%;
+  cursor: pointer;
 }
 .fa-trash-alt {
   color: black;
+}
+
+h3 {
+  font-family: Crimson;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+h5 {
+  font-family: Crimson;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+h2 {
+  margin-left: 30px;
+  font-family: Crimson;
+  color: #ffffff;
 }

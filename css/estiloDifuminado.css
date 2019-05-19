@@ -16,7 +16,7 @@ body {
 
 #titulo_carepets {
   mix-blend-mode: hard-light;
-  font-family: CrimsonText;
+  font-family: Crimson;
   font-size: 40px;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -34,13 +34,13 @@ body {
 .letra_nav {
   opacity: 0.9;
   text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
-  font-family: CrimsonText;
+  font-family: Crimson;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.9);
 }
 
 .letra_nav:hover {
-  font-family: CrimsonText;
+  font-family: Crimson;
   font-size: 20px;
   color: rgba(255, 255, 255, 0.9);
 }
@@ -61,7 +61,7 @@ body {
 }
 
 h6 {
-  font-family: CrimsonText;
+  font-family: Crimson;
   font-weight: bold;
   font-size: 16px;
   color: #ffffff;
@@ -85,7 +85,7 @@ h6 {
 .explicacion {
   opacity: 0.9;
   text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
-  font-family: CrimsonText;
+  font-family: Crimson;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.9);
 }

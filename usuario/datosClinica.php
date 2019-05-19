@@ -3,11 +3,11 @@
 
     $correoActual = $_SESSION['mail'];
 
-    //Tomar los datos del usuario
-    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
+    //Tomar los datos de la clinica
+    $sentencia = $conn->prepare("SELECT * FROM clinica WHERE mailusuario=:mailusuario");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->execute();
-    $row1 = $sentencia->fetch(PDO::FETCH_BOTH);
+    $rowClinica = $sentencia->fetch(PDO::FETCH_BOTH);
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();

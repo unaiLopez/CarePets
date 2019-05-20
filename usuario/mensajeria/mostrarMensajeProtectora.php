@@ -186,7 +186,7 @@
 		                    <div class="modal-header">
 		                      <strong>Para : </strong><?php echo $mensaje['mailemisor']; ?><span><button type="button" class="close" data-dismiss="modal">&times;</button></span>
 		                    </div>
-		                    <div class="modal-body">
+		                    <div id="responderModal" class="modal-body">
 		                      <div class="row">
 		                        <div class="col-xs-12 mx-auto">
 		                            <div id="form-modal" class="form-group">

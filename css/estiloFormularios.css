@@ -116,8 +116,14 @@ a:hover {
   border-top-right-radius: 10px;
 }
 
-.modal-body {
-  min-height: 250px;
+#responderModal {
+  height: 250px;
+  background-color: #EC9664;
+  border: solid 1px #ffffff;
+}
+
+#recuperarMailModal {
+  height: 110px;
   background-color: #EC9664;
   border: solid 1px #ffffff;
 }

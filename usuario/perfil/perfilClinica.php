@@ -115,7 +115,7 @@ $conn = null;
                             echo '<br>';
                           }
                           echo '<br>';
-                          if($rowClinica['especialidad']) {
+                          if($rowClinica['horario']) {
                             echo '<label for="horario">Horario de Apertura :</label>';
                             echo '<br>';
                             echo $rowClinica['horario'];
@@ -167,13 +167,5 @@ $conn = null;
         </div>
       </div>
     </div>
-    <script type="text/javascript">
-      $('#Estrellas').starrr({
-        rating: 5,
-        change:function(e, valor){
-          alert(valor);
-        }
-      });
-    </script>
   </body>
 </html>

@@ -8,7 +8,7 @@ function responderMensaje(idmensaje, respuesta) {
       async: false,
       success: function(response) {
           alert('Mensaje enviado con exito');
-          location.reload(); // then reload the page.(3)
+          location.reload(); // then reload the page
 
       },
       error: function() {

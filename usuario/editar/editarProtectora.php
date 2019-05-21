@@ -64,9 +64,9 @@
                ?>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="../perfil/perfilClinica.php"><i class="fas fa-user"></i> Perfil</a></li>
+                <li><a href="../perfil/perfilProtectora.php"><i class="fas fa-user"></i> Perfil</a></li>
                 <hr>
-                <li><a href="editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
+                <li><a href="editarProtectora.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
                 <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos+$notificacionesSolicitudes; ?></span></a></li>
                 <hr>

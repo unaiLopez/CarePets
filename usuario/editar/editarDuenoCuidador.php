@@ -69,11 +69,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTC035_2c7HqTdiIGYdAYtJCLI0ye4coc&libraries=places&callback=autocompletarEditar" async defer></script>
     <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
     <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <script src="../../js/validar.js"></script>
+    <script src="../../js/googleMaps.js"></script>
   </head>
   <body>
     <div id="container">
@@ -204,6 +206,17 @@
                                       <input type="number" id="movil" name="movil" class="form-control" value="<?=$row1['telefonomovil']; ?>" placeholder="Ejemplo: 690154921" size="9" onchange="validarTelefonoMovilEditar($('#movil').val());">
                                     </div>
                                     <div id="telefonoMovil"></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                      <div class="input-group-addon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                      </div>
+                                      <input type="text" name="autocomplete" id="autocomplete" class="form-control" placeholder="Ingrese su dirección" value="<?=$row1['direccion']; ?>">
+                                      <input type="hidden" name="direccion" id="direccion" value="<?=$row1['direccion'];?>">
+                                      <input type="hidden" name="latitud" id="latitud" value="<?=$row1['latitud'];?>">
+                                      <input type="hidden" name="longitud" id="longitud" value="<?=$row1['longitud'];?>">
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                   <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>

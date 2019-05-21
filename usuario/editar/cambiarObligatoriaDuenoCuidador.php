@@ -13,6 +13,9 @@
     $nombre = $_POST['nombre'];
     $movil = $_POST['movil'];
     $mailNuevo = $_POST['mail'];
+    $direccion = $_POST['autocomplete'];
+    $latitud = $_POST['latitud'];
+    $longitud = $_POST['longitud'];
 
     $cambiarMovil = false;
     $cambiarCorreo = false;
@@ -52,34 +55,34 @@
     if($cambiarMovil && $cambiarCorreo){
 
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, mailusuario=?, telefonomovil=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=?, telefonomovil=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $mailNuevo, $movil, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $movil, $mailActual]);
 
       $_SESSION['mail'] = $mailNuevo;
 
     }else if(!$cambiarMovil && !$cambiarCorreo){
 
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailActual]);
 
     }else if(!$cambiarMovil && $cambiarCorreo){
 
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, mailusuario=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $mailNuevo, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $mailActual]);
 
       $_SESSION['mail'] = $mailNuevo;
 
     }else{
 
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, telefonomovil=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $movil, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $mailActual]);
 
     }
 

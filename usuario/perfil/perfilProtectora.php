@@ -52,7 +52,7 @@ $conn = null;
                 if($row1['foto']){
                   echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
                 }else{
-                  echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
                 }
                ?>
             </a>
@@ -84,30 +84,32 @@ $conn = null;
                 <div class="col-xs-12 col-lg-12 scroll">
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-xs-12 col-lg-3">
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="container">
                           <br>
                           <?php
                             if($row1['foto']){
                               echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="240" width="200">';
                             }else{
-                              echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="240" width="200">';
+                              echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="240" width="200">';
                             }
                            ?>
                         </div>
                       </div>
-                      <div class="col-xs-12 col-lg-3">
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="container">
                           <br>
                           <h3>¡Bienvenido!</h3>
                           <br>
                           <h5>Reputación como protectora :</h5>
                           <x-star-rating value="<?=$mediaMostrar?>" number="5"></x-star-rating>
+                          <br>
                           <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
+                          <br>
                           <script src="../../js/showStars.js"></script>
                         </div>
                       </div>
-                      <div class="col-xs-12 col-lg-3">
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="container">
                           <?php
                           if($rowProtectora['horario']) {
@@ -116,11 +118,25 @@ $conn = null;
                             echo '<br>';
                             echo $rowProtectora['horario'];
                           }
+                          if($row1['descripcion']) {
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<label for="descripcion">Descripcion :</label>';
+                            echo '<br>';
+                            echo $row1['descripcion'];
+                          }
+                          if($row1['direccion']) {
+                            echo '<br>';
+                            echo '<br>';
+                            echo '<label for="direccion">Direccion :</label>';
+                            echo '<br>';
+                            echo $row1['direccion'];
+                          }
                           ?>
                           <br>
                         </div>
                       </div>
-                      <div class="col-xs-12 col-lg-3">
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="container">
                           <br>
                           <label for="fijo">Teléfono Fijo :</label>
@@ -144,7 +160,7 @@ $conn = null;
                     <br>
                     <br>
                     <div class="row">
-                      <div class="col-xs-12 col-lg-3">
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="container">
                           <div class="btn btn-default"><i class="fas fa-paw"></i> Animales en Adopción</div>
                         </div>

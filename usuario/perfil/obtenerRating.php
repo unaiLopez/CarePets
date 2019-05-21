@@ -18,4 +18,4 @@
   $valoraciones = $sentencia->fetchAll(PDO::FETCH_BOTH);
   $cantidadValoraciones = count($valoraciones);
 
- ?>
+?>

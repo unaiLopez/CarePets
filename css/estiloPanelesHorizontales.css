@@ -1,0 +1,80 @@
+#card-principal {
+  background-color: rgba(224, 82, 3, 0);
+  border: solid 1px #ffffff;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.scroll {
+  max-height: 350px;
+  overflow-y: scroll;
+  background-color: rgba(224, 82, 3, 0.6);
+  border-top: solid 1px #ffffff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 100%;
+}
+
+#card-header-principal {
+  background-color: #e05203;
+  width: 100%;
+}
+
+#card-body-principal {
+  height: 340px;
+}
+
+#card-horizontal {
+  height: 265px;
+  border: solid 2px #ffffff;
+}
+
+#card-body-horizontal {
+  background-color: #e05203;
+}
+
+.scroll-card-horizontal {
+  max-height: 265px;
+  overflow-y: scroll;
+  background-color: #e05203;
+  width: 100%;
+}
+
+#card-footer-horizontal {
+  background-color: #e05203;
+}
+
+.nav-item {
+  width: 300px;
+}
+
+h3 {
+  font-family: Crimson;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+h5 {
+  font-family: Crimson;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+h2 {
+  margin-left: 30px;
+  font-family: Crimson;
+  color: #ffffff;
+}
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.fa-times-circle {
+  color: #FE0000;
+}
+
+.fa-check-circle {
+  color: #317F43;
+}

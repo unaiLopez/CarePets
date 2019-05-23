@@ -82,3 +82,8 @@ h2 {
   font-family: Crimson;
   color: #ffffff;
 }
+
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}

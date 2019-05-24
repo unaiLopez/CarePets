@@ -77,7 +77,7 @@ $conn = null;
               <div class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                   <a class="nav-link active" id="miperfil-tab" data-toggle="tab" href="#miperfil" role="tab" aria-controls="miperfil" aria-selected="true">Mi Perfil</a>
+                   <a class="nav-link active" id="miperfil-tab" data-toggle="tab" href="#miperfil" role="tab" aria-controls="miperfil" aria-selected="true"><i class="fas fa-user"></i> Mi Perfil</a>
                   </li>
                 </ul>
               </div>

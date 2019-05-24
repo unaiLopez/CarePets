@@ -85,13 +85,13 @@
                 <div class="card-header mx-auto">
                   <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                     <li class="nav-item">
-                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#contraseña" role="tab" aria-controls="contraseña" aria-selected="true">Cambiar Contraseña</a>
+                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#contraseña" role="tab" aria-controls="contraseña" aria-selected="true"><i class="fas fa-key"></i> Cambiar Contraseña</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#obligatoria" role="tab" aria-controls="obligatoria" aria-selected="false">Información Obligatoria</a>
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#obligatoria" role="tab" aria-controls="obligatoria" aria-selected="false"><i class="fas fa-info-circle"></i> Información Obligatoria</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#opcional" role="tab" aria-controls="opcional" aria-selected="false">Información Opcional</a>
+                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#opcional" role="tab" aria-controls="opcional" aria-selected="false"><i class="fas fa-info"></i> Información Opcional</a>
                     </li>
                   </ul>
                 </div>

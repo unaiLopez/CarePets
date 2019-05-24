@@ -13,6 +13,8 @@
     require_once '../datosProtectora.php';
     //Obtener el rating del datosUsuario
     require_once 'obtenerRating.php';
+    //Tomar todos los datos de todos los animales del usuario para utilizarlos de forma dinámica
+    require_once 'datosAnimales.php';
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
   }
@@ -34,13 +36,14 @@ $conn = null;
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
-    <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
+    <link rel="stylesheet" href="../../css/estiloPanelesHorizontales.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <link rel="stylesheet" href="../../css/starRating.css">
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="../../js/validar.js"></script>
+    <script src="../../js/mostrarInformacionDinamica.js"></script>
   </head>
-  <body>
+  <body onload="mostrarInfoInicio()">
     <div id="container">
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
@@ -76,103 +79,24 @@ $conn = null;
       <div id="body">
         <div class="container-fluid">
           <div class="row">
-            <div class="card">
-              <div class="card-header mx-auto">
+            <div id="card-principal" class="card">
+              <div id="card-header-principal" class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                   <a class="nav-link active" id="miperfil-tab" data-toggle="tab" href="#miperfil" role="tab" aria-controls="miperfil" aria-selected="true">Mi Perfil</a>
+                   <a class="nav-link active" onclick="mostrarPerfil()" id="miperfil-tab" data-toggle="tab" href="#miperfil" role="tab" aria-controls="miperfil" aria-selected="true"><i class="fas fa-user"></i>  Mi Perfil</a>
+                  </li>
+                  <li class="nav-item">
+                   <a class="nav-link" onclick="mostrarTablon()" id="tablonadopciones-tab" data-toggle="tab" href="#tablonadopciones" role="tab" aria-controls="tablonadopciones" data-target="mostrarTablonAdopciones" aria-selected="true"><i class="fas fa-paw"></i> Mi Tablón de Adopciones</a>
                   </li>
                 </ul>
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
-                <div class="card-body">
+                <div id="card-body-principal" class="card-body">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="miperfil-tab" role="tabpanel" aria-labelledby="miperfil-tab">
-                      <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <br>
-                            <?php
-                              if($row1['foto']){
-                                echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="240" width="200">';
-                              }else{
-                                echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="240" width="200">';
-                              }
-                             ?>
-                          </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <br>
-                            <h3>¡Bienvenido!</h3>
-                            <br>
-                            <h5>Reputación como protectora :</h5>
-                            <x-star-rating value="<?=$mediaMostrar?>" number="5"></x-star-rating>
-                            <br>
-                            <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
-                            <br>
-                            <script src="../../js/showStars.js"></script>
-                          </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <?php
-                            if($rowProtectora['horario']) {
-                              echo '<br>';
-                              echo '<label for="horario">Horario de Apertura :</label>';
-                              echo '<br>';
-                              echo $rowProtectora['horario'];
-                            }
-                            if($row1['descripcion']) {
-                              echo '<br>';
-                              echo '<br>';
-                              echo '<label for="descripcion">Descripcion :</label>';
-                              echo '<br>';
-                              echo $row1['descripcion'];
-                            }
-                            if($row1['direccion']) {
-                              echo '<br>';
-                              echo '<br>';
-                              echo '<label for="direccion">Direccion :</label>';
-                              echo '<br>';
-                              echo $row1['direccion'];
-                            }
-                            ?>
-                            <br>
-                          </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <br>
-                            <label for="fijo">Teléfono Fijo :</label>
-                            <br>
-                            <?php echo $rowProtectora['telefonofijo']; ?>
-                            <br>
-                            <br>
-                            <label for="movil">Teléfono Móvil :</label>
-                            <br>
-                            <?php echo $row1['telefonomovil']; ?>
-                            <br>
-                            <br>
-                            <label for="correo">Correo Electrónico :</label>
-                            <br>
-                            <?php echo $row1['mailusuario']; ?>
-                            <br>
-                            <br>
-                          </div>
-                        </div>
-                      </div>
-                      <br>
-                      <br>
-                      <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <div class="btn btn-default" onclick="location.href='tablonAdopciones.php';"><i class="fas fa-paw"></i> Animales en Adopción</div>
-                          </div>
-                          <br>
-                          <br>
-                        </div>
-                      </div>
+                      <div id="perfilProtectora"></div>
+                    <div class="tab-pane fade show active" id="tablonadopciones-tab" role="tabpanel" aria-labelledby="tablonadopciones-tab">
+                    <div id="tablonAdopciones"></div>
                     </div>
                   </div>
                 </div>

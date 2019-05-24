@@ -70,11 +70,3 @@ h2 {
     display: flex;
     flex: 1 1 auto;
 }
-
-.fa-times-circle {
-  color: #FE0000;
-}
-
-.fa-check-circle {
-  color: #317F43;
-}

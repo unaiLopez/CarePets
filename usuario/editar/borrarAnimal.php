@@ -8,5 +8,5 @@
   $sentencia->bindParam(':mailusuario', $correoActual);
   $sentencia->execute();
 
-  header('Location: tablonAdopciones.php');
+  header('Location: mostrarEditarTablonAdopciones.php');
 ?>

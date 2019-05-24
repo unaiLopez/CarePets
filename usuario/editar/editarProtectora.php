@@ -42,10 +42,11 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTC035_2c7HqTdiIGYdAYtJCLI0ye4coc&libraries=places&callback=autocompletarEditar" async defer></script>
     <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
-    <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
+    <link rel="stylesheet" href="../../css/estiloPanelesHorizontales.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <script src="../../js/validar.js"></script>
     <script src="../../js/googleMaps.js"></script>
+    <script src="../../js/mostrarInformacionDinamica.js"></script>
   </head>
   <body>
     <div id="container">
@@ -83,22 +84,25 @@
       <div id="body">
         <div class="container-fluid">
           <div class="row">
-              <div class="card">
-                <div class="card-header mx-auto">
+              <div id="card-principal" class="card">
+                <div id="card-header-principal" class="card-header mx-auto">
                   <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                     <li class="nav-item">
-                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#contraseña" role="tab" aria-controls="contraseña" aria-selected="true">Cambiar Contraseña</a>
+                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#contraseña" role="tab" aria-controls="contraseña" aria-selected="true"><i class="fas fa-key"></i> Cambiar Contraseña</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#obligatoria" role="tab" aria-controls="obligatoria" aria-selected="false">Información Obligatoria</a>
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#obligatoria" role="tab" aria-controls="obligatoria" aria-selected="false"><i class="fas fa-info-circle"></i> Información Obligatoria</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#opcional" role="tab" aria-controls="opcional" aria-selected="false">Información Opcional</a>
+                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#opcional" role="tab" aria-controls="opcional" aria-selected="false"><i class="fas fa-info"></i> Información Opcional</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="tablonadopciones-tab" data-toggle="tab" href="#tablonadopciones" role="tab" aria-controls="tablonadopciones" aria-selected="false"><i class="fas fa-paw"></i> Tablon de Adopciones</a>
                     </li>
                   </ul>
                 </div>
                 <div class="col-lg-12 scroll">
-                  <div class="card-body mx-auto">
+                  <div id="card-body-principal" class="card-body mx-auto">
                     <div class="tab-content" id="myTabContent">
                       <div class="tab-pane fade show active" id="contraseña" role="tabpanel" aria-labelledby="contraseña-tab">
                         <div class="container-fluid padding">
@@ -242,28 +246,34 @@
                               </form>
                             </div>
                           </div>
+                        </div>
+                      </div>
+                      <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab">
+                        <?php
+                          require_once 'mostrarEditarTablonAdopciones.php';
+                         ?>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <br>
-      <br>
-      <!-- Footer -->
-      <div class="footer">
-        <div class="container-fluid padding">
-          <div class="row text-center padding">
-            <div class="col-lg-12 social padding">
-              <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
-              <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
-              <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
+          <br>
+          <br>
+          <!-- Footer -->
+          <div class="footer">
+            <div class="container-fluid padding">
+              <div class="row text-center padding">
+                <div class="col-lg-12 social padding">
+                  <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
+                  <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
+                  <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-  </div>
-  </body>
-</html>
+    </body>
+  </html>

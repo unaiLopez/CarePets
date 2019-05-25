@@ -1,12 +1,12 @@
 <?php
+  @ob_start();
+  session_start();
   $correoActual = $_SESSION['mail'];
-  $idAnimal = $_GET['id'];
+  $idAnimal = $_POST['id'];
 
-  //Tomar la media de las valoraciones al usuario
+  //Se elimina el animal con el id seleccionado
   $sentencia = $conn->prepare("DELETE FROM animal WHERE id=:id and mailusuario=:mailusuario");
   $sentencia->bindParam(':id', $idAnimal);
   $sentencia->bindParam(':mailusuario', $correoActual);
   $sentencia->execute();
-
-  header('Location: mostrarEditarTablonAdopciones.php');
 ?>

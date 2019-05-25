@@ -47,6 +47,7 @@
     <script src="../../js/validar.js"></script>
     <script src="../../js/googleMaps.js"></script>
     <script src="../../js/mostrarInformacionDinamica.js"></script>
+    <script src="../../js/funcionesAnimalesAdopcion.js"></script>
   </head>
   <body>
     <div id="container">

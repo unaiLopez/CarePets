@@ -1,14 +1,4 @@
 <?php
-require_once '../../validaciones/verificarProtectora.php';
-try {
-  require_once '../conectarDB.php';
-  $conn = conectarse();
-  //Tomar todos los datos de todos los animales del usuario para utilizarlos de forma dinámica
-  require_once 'datosAnimales.php';
-}catch(PDOException $e){
-  echo "Error: " . $e->getMessage();
-}
-$conn = null;
   foreach($animales as $animal){
     echo '<div id="'.$animal['id'].'" class="container-fluid animal-en-adopcion">
       <div class="row">

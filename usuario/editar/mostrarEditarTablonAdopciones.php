@@ -80,7 +80,7 @@ $conn = null;
             <div id="card-footer-horizontal" class="card-footer">
               <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                  <a onclick="borrarAnimal()"><i class="fas fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a onclick="editarAnimal()"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;&nbsp;<small style="color: #ffffff;"> '.$animal['fecha'].'</small>
+                  <small style="color: #ffffff;"> '.$animal['fecha'].'</small>&nbsp;&nbsp;&nbsp;&nbsp;<a id="'.$animal['id'].'" class="borrarAnimal" style="cursor:pointer"><i class="fas fa-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a id="'.$animal['id'].'" class="editarAnimal" style="cursor:pointer"><i class="fas fa-edit"></i></a>
                 </div>
               </div>
             </div>

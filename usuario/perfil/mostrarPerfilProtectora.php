@@ -1,18 +1,3 @@
-<?php
-require_once '../../validaciones/verificarProtectora.php';
-try {
-  require_once '../conectarDB.php';
-  $conn = conectarse();
-  require_once '../datosUsuario.php';
-  //Tomar los datos de la clinica para utilizarlos de forma dinámica
-  require_once '../datosProtectora.php';
-  //Obtener el rating del datosUsuario
-  require_once 'obtenerRating.php';
-}catch(PDOException $e){
-  echo "Error: " . $e->getMessage();
-}
-$conn = null;
-?>
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
     <div class="container">

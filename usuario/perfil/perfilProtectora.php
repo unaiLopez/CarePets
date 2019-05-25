@@ -41,9 +41,8 @@ $conn = null;
     <link rel="stylesheet" href="../../css/starRating.css">
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="../../js/validar.js"></script>
-    <script src="../../js/mostrarInformacionDinamica.js"></script>
   </head>
-  <body onload="mostrarInfoInicio()">
+  <body>
     <div id="container">
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
@@ -83,20 +82,25 @@ $conn = null;
               <div id="card-header-principal" class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                   <a class="nav-link active" onclick="mostrarPerfil()" id="miperfil-tab" data-toggle="tab" href="#miperfil" role="tab" aria-controls="miperfil" aria-selected="true"><i class="fas fa-user"></i>  Mi Perfil</a>
+                   <a class="nav-link active" id="miperfil-tab" data-toggle="tab" href="#miperfil" role="tab" aria-controls="miperfil" aria-selected="true"><i class="fas fa-user"></i>  Mi Perfil</a>
                   </li>
                   <li class="nav-item">
-                   <a class="nav-link" onclick="mostrarTablon()" id="tablonadopciones-tab" data-toggle="tab" href="#tablonadopciones" role="tab" aria-controls="tablonadopciones" data-target="mostrarTablonAdopciones" aria-selected="true"><i class="fas fa-paw"></i> Mi Tablón de Adopciones</a>
+                   <a class="nav-link" id="tablonadopciones-tab" data-toggle="tab" href="#tablonadopciones" role="tab" aria-controls="tablonadopciones" aria-selected="true"><i class="fas fa-paw"></i> Mi Tablón de Adopciones</a>
                   </li>
                 </ul>
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
                 <div id="card-body-principal" class="card-body">
                   <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="miperfil-tab" role="tabpanel" aria-labelledby="miperfil-tab">
-                      <div id="perfilProtectora"></div>
-                    <div class="tab-pane fade show active" id="tablonadopciones-tab" role="tabpanel" aria-labelledby="tablonadopciones-tab">
-                    <div id="tablonAdopciones"></div>
+                    <div class="tab-pane fade show active" id="miperfil" role="tabpanel" aria-labelledby="miperfil-tab">
+                      <?php
+                        require_once 'mostrarPerfilProtectora.php';
+                      ?>
+                    </div>
+                    <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab">
+                      <?php
+                        require_once 'mostrarTablonAdopciones.php';
+                      ?>
                     </div>
                   </div>
                 </div>

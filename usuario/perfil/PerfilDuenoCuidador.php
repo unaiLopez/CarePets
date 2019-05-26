@@ -113,7 +113,7 @@
                                   echo '<br>';
                                   echo '<h5>Aún no eres cuidador</h5>';
                                   echo '<h5>¿A qué esperas?</h5>';
-                                  echo '<button id="convertirmecuidador" name="convertirmecuidador" class="btn btn-default"><i class="fas fa-paw"></i> Convertirme en Cuidador</button>';
+                                  echo '<button id="convertirmecuidador" onclick="javascript:window.location.href=../editar/editarDuenoCuidador.php#cuidador/" name="convertirmecuidador" class="btn btn-default"><i class="fas fa-paw"></i> Convertirme en Cuidador</button>';
                               }else{
                              ?>
 

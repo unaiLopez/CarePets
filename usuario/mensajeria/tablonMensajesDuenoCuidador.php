@@ -64,6 +64,7 @@
    <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
    <script src="../../js/mensajeriaComun.js"></script>
    <script src="../../js/mensajeriaDuenoCuidador.js"></script>
+   <script src="../../js/pestañasConURL.js"></script>
  </head>
 <body>
   <div id="container">

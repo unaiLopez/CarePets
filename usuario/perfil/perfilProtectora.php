@@ -41,6 +41,7 @@ $conn = null;
     <link rel="stylesheet" href="../../css/starRating.css">
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="../../js/validar.js"></script>
+    <script src="../../js/pestañasConURL.js"></script>
   </head>
   <body>
     <div id="container">

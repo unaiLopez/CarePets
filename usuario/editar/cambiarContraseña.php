@@ -3,7 +3,7 @@
   session_start();
   try {
     //Configurar base de datos
-    include '../conectarDB.php';
+    require_once '../conectarDB.php';
 
     $conn = conectarse();
 

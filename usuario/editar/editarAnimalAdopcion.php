@@ -92,15 +92,6 @@
                     <li class="nav-item">
                      <a class="nav-link active" id="contraseña-tab" data-toggle="tab" href="#contraseña" role="tab" aria-controls="contraseña" aria-selected="true"><i class="fas fa-key"></i> Cambiar Contraseña</a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="obligatoria-tab" data-toggle="tab" href="#obligatoria" role="tab" aria-controls="obligatoria" aria-selected="false"><i class="fas fa-info-circle"></i> Información Obligatoria</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="opcional-tab" data-toggle="tab" href="#opcional" role="tab" aria-controls="opcional" aria-selected="false"><i class="fas fa-info"></i> Información Opcional</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="tablonadopciones-tab" data-toggle="tab" href="#tablonadopciones" role="tab" aria-controls="tablonadopciones" aria-selected="false"><i class="fas fa-paw"></i> Tablon de Adopciones</a>
-                    </li>
                   </ul>
                 </div>
                 <div class="col-lg-12 scroll">
@@ -110,7 +101,7 @@
                         <div class="container-fluid padding">
                           <div class="row">
                             <div class="col-xs-12 mx-auto">
-                              <h1><strong>Contraseña</strong></h1>
+                              <h1><strong>Nombre del animal</strong></h1>
                               <form id="formularioCambiarContraseña" action="cambiarContraseña.php" method="post" onsubmit="return validarContraseñaActual($('#passActual').val()) && validarContraseña($('#passNueva').val(), $('#confirmarPassNueva').val())">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -141,119 +132,11 @@
                                 <div class="form-group">
                                   <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
-                              <br>
-                            </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="tab-pane fade" id="obligatoria" role="tabpanel" aria-labelledby="obligatoria-tab">
-                        <div class="container-fluid padding">
-                          <div class="row">
-                            <div class="col-xs-12 mx-auto">
-                              <h1><strong>Obligatoria</strong></h1>
-                              <form name="formularioCambiarInfoObligatoria" id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaProtectora.php" method="post" onsubmit="return validarCorreoEditar($('#mail').val()) && validarTelefonoFijoEditar($('#fijo').val()) && validarTelefonoMovilEditar($('#movil').val())">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                      <div class="input-group-addon">
-                                        <i class="fas fa-user"></i>
-                                      </div>
-                                      <input type="text" id="nombre" name="nombre" maxlength="50" class="form-control" value="<?=$row1['nombre']; ?>" placeholder="Su nombre" autofocus>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                      <div class="input-group-addon">
-                                        <i class="fas fa-at"></i>
-                                      </div>
-                                      <input type="email" id="mail" name="mail" class="form-control" value="<?=$row1['mailusuario']; ?>" placeholder="Ejemplo: usuario@gmail.com" size="50" onkeyup="validarCorreoEditar($('#mail').val());">
-                                    </div>
-                                    <div id="autenticacionCorreo"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                      <div class="input-group-addon">
-                                        <i class="fas fa-mobile-alt"></i>
-                                        +34
-                                      </div>
-                                      <input type="number" id="movil" name="movil" class="form-control" value="<?=$row1['telefonomovil']; ?>" placeholder="Ejemplo: 690154921" size="9" onkeyup="validarTelefonoMovilEditar($('#movil').val());">
-                                    </div>
-                                    <div id="telefonoMovil"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                      <div class="input-group-addon">
-                                        <i class="fas fa-mobile-alt"></i>
-                                      </div>
-                                      <input type="number" id="fijo" name="fijo" class="form-control" value="<?=$row2['telefonofijo']; ?>" placeholder="Ejemplo: 948012761" size="9" onkeyup="validarTelefonoFijoEditar($('#fijo').val());">
-                                    </div>
-                                    <div id="telefonoFijo"></div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                      <div class="input-group-addon">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                      </div>
-                                      <input type="text" name="autocomplete" id="autocomplete" class="form-control" placeholder="Ingrese su dirección" value="<?=$row1['direccion']; ?>">
-                                      <input type="hidden" name="direccion" id="direccion" value="<?=$row1['direccion'];?>">
-                                      <input type="hidden" name="latitud" id="latitud" value="<?=$row1['latitud'];?>">
-                                      <input type="hidden" name="longitud" id="longitud" value="<?=$row1['longitud'];?>">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
-                                </div>
-                                <br>
-                              </form>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="tab-pane fade" id="opcional" role="tabpanel" aria-labelledby="opcional-tab">
-                        <div class="container-fluid padding">
-                          <div class="row">
-                            <div class="col-xs-12 mx-auto">
-                              <h1><strong>Opcional</strong></h1>
-                              <form id="formularioCambiarInfoOpcional" action="cambiarOpcionalProtectora.php" enctype="multipart/form-data" method="post">
-                                <div class="form-group">
-  																<label for="horario">Horario :</label>
-  																<textarea class="form-control" col="6" rows="3" id="horario" name="horario"><?php echo $row2['horario']; ?></textarea>
-  															</div>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <div class="form-group">
-  																<label for="descripcion">Descripción :</label>
-  																<textarea class="form-control" col="6" rows="3" id="descripcion" name="descripcion"><?php echo $row1['descripcion']; ?></textarea>
-  															</div>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <div class="form-group">
-                                  <label for="avatar">Foto de Perfil</label>
-                                  <input type="file" id="avatar" name="avatar">
-                                </div>
-                                <br>
-                                  <?php
-                                    if($row1['foto'])
-                                      echo '<img src="'.$row1['foto'].'" width="100" height="100" style="border: solid 2px #ffffff; border-radius: 10px;">';
-                                  ?>
-                                <br>
-                                <div class="form-group">
-                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
-                                </div>
                                 <br>
                               </form>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab">
-                        <?php
-                          require_once 'mostrarEditarTablonAdopciones.php';
-                         ?>
                       </div>
                     </div>
                   </div>

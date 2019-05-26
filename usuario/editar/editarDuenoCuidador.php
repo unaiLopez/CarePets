@@ -76,6 +76,7 @@
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <script src="../../js/validar.js"></script>
     <script src="../../js/googleMaps.js"></script>
+    <script src="../../js/pestañasConURL.js"></script>
   </head>
   <body>
     <div id="container">
@@ -144,7 +145,7 @@
                                       <div class="input-group-addon">
                                         <i class="fas fa-eye-slash"></i>
                                       </div>
-                                      <input type="password" id="passActual" name="passActual" minlength="6" class="form-control" placeholder="Su contraseña actual" onchange="validarContraseñaActual($('#passActual').val());" required>
+                                      <input type="password" id="passActual" name="passActual" minlength="6" class="form-control" placeholder="Su contraseña actual" onkeyup="validarContraseñaActual($('#passActual').val());" required>
                                     </div>
                                     <div id="validacionContraseñaActual"></div>
                                 </div>
@@ -153,7 +154,7 @@
                                       <div class="input-group-addon">
                                         <i class="fas fa-eye-slash"></i>
                                       </div>
-                                      <input type="password" id="passNueva" name="passNueva" minlength="6" class="form-control" placeholder="Su nueva contraseña" onchange="validarContraseña($('#passNueva').val(), $('#confirmarPassNueva').val());" required>
+                                      <input type="password" id="passNueva" name="passNueva" minlength="6" class="form-control" placeholder="Su nueva contraseña" onkeyup="validarContraseña($('#passNueva').val(), $('#confirmarPassNueva').val());" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -161,7 +162,7 @@
                                       <div class="input-group-addon">
                                         <i class="fas fa-eye-slash"></i>
                                       </div>
-                                      <input type="password" id="confirmarPassNueva" name="confirmarPassNueva" minlength="6" class="form-control" placeholder="Confirme su nueva contraseña" onchange="validarContraseña($('#passNueva').val(), $('#confirmarPassNueva').val());" required>
+                                      <input type="password" id="confirmarPassNueva" name="confirmarPassNueva" minlength="6" class="form-control" placeholder="Confirme su nueva contraseña" onkeyup="validarContraseña($('#passNueva').val(), $('#confirmarPassNueva').val());" required>
                                     </div>
                                     <div id="compararContraseñas"></div>
                                 </div>
@@ -193,7 +194,7 @@
                                       <div class="input-group-addon">
                                         <i class="fas fa-at"></i>
                                       </div>
-                                      <input type="email" id="mail" name="mail" class="form-control" value="<?=$row1['mailusuario']; ?>" placeholder="Ejemplo: usuario@gmail.com" size="50" onchange="validarCorreoEditar($('#mail').val());">
+                                      <input type="email" id="mail" name="mail" class="form-control" value="<?=$row1['mailusuario']; ?>" placeholder="Ejemplo: usuario@gmail.com" size="50" onkeyup="validarCorreoEditar($('#mail').val());">
                                     </div>
                                     <div id="autenticacionCorreo"></div>
                                 </div>
@@ -203,7 +204,7 @@
                                         <i class="fas fa-mobile-alt"></i>
                                         +34
                                       </div>
-                                      <input type="number" id="movil" name="movil" class="form-control" value="<?=$row1['telefonomovil']; ?>" placeholder="Ejemplo: 690154921" size="9" onchange="validarTelefonoMovilEditar($('#movil').val());">
+                                      <input type="number" id="movil" name="movil" class="form-control" value="<?=$row1['telefonomovil']; ?>" placeholder="Ejemplo: 690154921" size="9" onkeyup="validarTelefonoMovilEditar($('#movil').val());">
                                     </div>
                                     <div id="telefonoMovil"></div>
                                 </div>

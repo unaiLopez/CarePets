@@ -1,12 +1,19 @@
 <?php
   @ob_start();
   session_start();
-  $correoActual = $_SESSION['mail'];
-  $idAnimal = $_POST['id'];
+  try {
+    require_once '../conectarDB.php';
 
-  //Se elimina el animal con el id seleccionado
-  $sentencia = $conn->prepare("DELETE FROM animal WHERE id=:id and mailusuario=:mailusuario");
-  $sentencia->bindParam(':id', $idAnimal);
-  $sentencia->bindParam(':mailusuario', $correoActual);
-  $sentencia->execute();
+    $conn = conectarse();
+
+    $idAnimal = $_POST['id'];
+
+    //Se elimina el animal con el id seleccionado
+    $sql = "DELETE FROM animal WHERE id=?";
+    $sentencia = $conn->prepare($sql);
+    $sentencia->execute([$idAnimal]);
+  }catch(PDOException $e){
+    echo "Error: " . $e->getMessage();
+  }
+  $conn = null;
 ?>

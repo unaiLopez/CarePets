@@ -67,7 +67,7 @@
                       <div class="input-group-addon">
                         <i class="fas fa-at"></i>
                       </div>
-                      <input type="email" name="mail" class="form-control" id="mail" placeholder="Ejemplo: usuario@gmail.com" size="50" onchange="validarCorreo($('#mail').val());" required>
+                      <input type="email" name="mail" class="form-control" id="mail" placeholder="Ejemplo: usuario@gmail.com" size="50" onkeyup="validarCorreo($('#mail').val());" required>
                     </div>
                     <div id="autenticacionCorreo"></div>
                 </div>
@@ -76,7 +76,7 @@
                       <div class="input-group-addon">
                         <i class="fas fa-eye-slash"></i>
                       </div>
-                      <input type="password" name="pass" minlength="6" class="form-control" id="pass" placeholder="Su contraseña" onchange="validarContraseña($('#pass').val(), $('#confirmarpass').val());" required>
+                      <input type="password" name="pass" minlength="6" class="form-control" id="pass" placeholder="Su contraseña" onkeyup="validarContraseña($('#pass').val(), $('#confirmarpass').val());" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -84,7 +84,7 @@
                       <div class="input-group-addon">
                         <i class="fas fa-eye-slash"></i>
                       </div>
-                      <input type="password" name="confirmarpass" minlength="6" class="form-control" id="confirmarpass" placeholder="Confirme su contraseña" onchange="validarContraseña($('#pass').val(), $('#confirmarpass').val());" required>
+                      <input type="password" name="confirmarpass" minlength="6" class="form-control" id="confirmarpass" placeholder="Confirme su contraseña" onkeyup="validarContraseña($('#pass').val(), $('#confirmarpass').val());" required>
                     </div>
                     <div id="compararContraseñas"></div>
                 </div>
@@ -94,7 +94,7 @@
                         <i class="fas fa-mobile-alt"></i>
                         +34
                       </div>
-                      <input type="number" id="movil" name="movil" class="form-control" placeholder="Ejemplo: 690154921" size="9" onchange="validarTelefonoMovil($('#movil').val());" required>
+                      <input type="number" id="movil" name="movil" class="form-control" placeholder="Ejemplo: 690154921" size="9" onkeyup="validarTelefonoMovil($('#movil').val());" required>
                     </div>
                     <div id="telefonoMovil"></div>
                 </div>
@@ -103,7 +103,7 @@
                       <div class="input-group-addon">
                         <i class="fas fa-phone"></i>
                       </div>
-                      <input type="number" id="fijo" name="fijo" class="form-control" placeholder="Ejemplo: 948012761" size="9" onchange="validarTelefonoFijo($('#fijo').val());" required>
+                      <input type="number" id="fijo" name="fijo" class="form-control" placeholder="Ejemplo: 948012761" size="9" onkeyup="validarTelefonoFijo($('#fijo').val());" required>
                     </div>
                     <div id="telefonoFijo"></div>
                 </div>

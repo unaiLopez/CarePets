@@ -1,14 +1,15 @@
 <?php
-require_once '../../validaciones/verificarProtectora.php';
-try {
-  require_once '../conectarDB.php';
-  $conn = conectarse();
-  //Tomar todos los datos de todos los animales del usuario para utilizarlos de forma dinámica
-  require_once '../perfil/datosAnimales.php';
-}catch(PDOException $e){
-  echo "Error: " . $e->getMessage();
-}
-$conn = null;
+  require_once '../../validaciones/verificarProtectora.php';
+  try {
+    require_once '../conectarDB.php';
+    $conn = conectarse();
+    //Tomar todos los datos de todos los animales del usuario para utilizarlos de forma dinámica
+    require_once '../perfil/datosAnimales.php';
+  }catch(PDOException $e){
+    echo "Error: " . $e->getMessage();
+  }
+  $conn = null;
+  echo '<button style="width: 175px; margin-left: 30px;" onclick="redireccionarAñadirAnimal()" class="btn btn-default"><i class="fas fa-plus-circle"></i> Añadir Animal</button>';
   foreach($animales as $animal){
     echo '<div id="'.$animal['id'].'" class="container-fluid animal-en-adopcion">
       <div class="row">
@@ -22,7 +23,7 @@ $conn = null;
                     echo '<img src="'.$animal['foto'].'" class="imagen-perfil" height="160" width="180">';
                     echo '<br>';
                   }else{
-                    echo '<img class="card-image" src="http://via.placeholder.com/300x180" width="100%" height="100%" alt="Card image cap">';
+                    echo '<img src="http://via.placeholder.com/300x180" class="imagen-perfil" width="160" height="180">';
                   }
                   echo '</div>
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">

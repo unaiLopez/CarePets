@@ -1,7 +1,6 @@
 $(document).ready(function() {
     $('.borrarAnimal').click(function(){
         var id = $(this).attr('id');
-        alert(id);
         var data = {"id" : id};
         $.ajax({
             data: data,
@@ -16,16 +15,12 @@ $(document).ready(function() {
     });
     $('.editarAnimal').click(function(){
         var id = $(this).attr('id');
-        alert(id);
-        var data = {"id" : id};
-        $.ajax({
-            type: 'post',
-            url: '/carepets/usuario/editar/editarAnimalAdopcion.php',
-            data: data,
-            async: false,
-            success: function() {
-                alert("El animal se ha editado con exito.");
-            }
-        });
+        var tipo = 'Editar';
+        window.location.href = '/carepets/usuario/editar/editarAñadirAnimalAdopcion.php?tipo='+tipo+'&id='+id;
     });
 });
+
+function redireccionarAñadirAnimal() {
+  var tipo = 'Añadir';
+  window.location.href = '/carepets/usuario/editar/editarAñadirAnimalAdopcion.php?tipo='+tipo;
+}

@@ -20,8 +20,14 @@
     $vacunado = $_POST['vacunado'];
     $descripcion = $_POST['descripcion'];
     $fotoPerfil = $_FILES['avatar']['name'];
+    //Se cuentan todas las imagenes de la carpeta para dar un id a la imagen y que no se repitan los nombres
+    $nombreFoto = explode('.', $fotoPerfil);
+    $totalImagenes = count(glob('../../iconos/fotos/fotos_animales/{*.jpg,*.gif,*.png}',GLOB_BRACE));
+    $numeroImagen = $totalImagenes + 1;
+    $fotoPerfil = $numeroImagen.'.'.$nombreFoto[1];
+    //Fin de la conversión del nombre
     $ruta = $_FILES['avatar']['tmp_name'];
-    $destino = "../../iconos/fotos/".$fotoPerfil;
+    $destino = "../../iconos/fotos/fotos_animales/".$fotoPerfil;
     copy($ruta, $destino);
     //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
     $tiempo = time();

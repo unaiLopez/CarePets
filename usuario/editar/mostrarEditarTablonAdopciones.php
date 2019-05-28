@@ -9,7 +9,7 @@
     echo "Error: " . $e->getMessage();
   }
   $conn = null;
-  echo '<button style="width: 175px; margin-left: 30px;" onclick="redireccionarAñadirAnimal()" class="btn btn-default"><i class="fas fa-plus-circle"></i> Añadir Animal</button>';
+  echo '<button style="width: 175px; margin-left: 15px;" onclick="redireccionarAñadirAnimal()" class="btn btn-default"><i class="fas fa-plus-circle"></i> Añadir Animal</button>';
   foreach($animales as $animal){
     echo '<div id="'.$animal['id'].'" class="container-fluid animal-en-adopcion">
       <div class="row">

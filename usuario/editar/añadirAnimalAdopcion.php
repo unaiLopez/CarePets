@@ -20,17 +20,23 @@
     $vacunado = $_POST['vacunado'];
     $descripcion = $_POST['descripcion'];
     $fotoPerfil = $_FILES['avatar']['name'];
+    //Se cuentan todas las imagenes de la carpeta para dar un id a la imagen y que no se repitan los nombres
+    $nombreFoto = explode('.', $fotoPerfil);
+    $totalImagenes = count(glob('../../iconos/fotos/fotos_animales/{*.jpg,*.gif,*.png}',GLOB_BRACE));
+    $numeroImagen = $totalImagenes + 1;
+    $fotoPerfil = $numeroImagen.'.'.$nombreFoto[1];
+    //Fin de la conversión del nombre
     $ruta = $_FILES['avatar']['tmp_name'];
-    $destino = "../../iconos/fotos/".$fotoPerfil;
+    $destino = "../../iconos/fotos/fotos_animales/".$fotoPerfil;
     copy($ruta, $destino);
     //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
+
     if(!empty($fotoPerfil)){
       //Insertar animal
       $sentencia = $conn->prepare("INSERT INTO animal(foto, fecha, nombre, raza, peso, desparasitado, amigable, esterilizado, vacunado, sexo, edad, descripcion, mailusuario) VALUES(:foto, :fecha, :nombre, :raza, :peso, :desparasitado, :amigable, :esterilizado, :vacunado, :sexo, :edad, :descripcion, :mailusuario)");
-      $sentencia->bindParam(':mailusuario', $mailActual);
       $sentencia->bindParam(':foto', $destino);
       $sentencia->bindParam(':fecha', $fecha);
       $sentencia->bindParam(':nombre', $nombre);
@@ -43,12 +49,12 @@
       $sentencia->bindParam(':sexo', $sexo);
       $sentencia->bindParam(':edad', $edad);
       $sentencia->bindParam(':descripcion', $descripcion);
+      $sentencia->bindParam(':mailusuario', $mailActual);
       $sentencia->execute();
 
     }else{
       //Insertar en la tabla usuario
       $sentencia = $conn->prepare("INSERT INTO animal(fecha, nombre, raza, peso, desparasitado, amigable, esterilizado, vacunado, sexo, edad, descripcion, mailusuario) VALUES(:fecha, :nombre, :raza, :peso, :desparasitado, :amigable, :esterilizado, :vacunado, :sexo, :edad, :descripcion, :mailusuario)");
-      $sentencia->bindParam(':mailusuario', $mailActual);
       $sentencia->bindParam(':fecha', $fecha);
       $sentencia->bindParam(':nombre', $nombre);
       $sentencia->bindParam(':raza', $raza);
@@ -60,6 +66,7 @@
       $sentencia->bindParam(':sexo', $sexo);
       $sentencia->bindParam(':edad', $edad);
       $sentencia->bindParam(':descripcion', $descripcion);
+      $sentencia->bindParam(':mailusuario', $mailActual);
       $sentencia->execute();
     }
 

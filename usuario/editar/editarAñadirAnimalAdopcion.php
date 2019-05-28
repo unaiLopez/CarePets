@@ -121,7 +121,7 @@
                                 if($tipoFuncion == 'Editar'){
                               ?>
                                   <h1><strong>Editar Animal</strong></h1>
-                                  <form id="formularioEditarAnimal" action="cambiarAnimalAdopcion.php" method="post">
+                                  <form id="formularioEditarAnimal" action="cambiarAnimalAdopcion.php" enctype="multipart/form-data" method="post">
                                     <div class="form-group">
                                         <div class="input-group">
                                           <div class="input-group-addon">
@@ -221,7 +221,7 @@
                                 }else if($tipoFuncion == 'Añadir'){
                               ?>
                                   <h1><strong>Añadir Animal</strong></h1>
-                                  <form id="formulariAñadirAnimal" action="añadirAnimalAdopcion.php" method="post">
+                                  <form id="formulariAñadirAnimal" action="añadirAnimalAdopcion.php" enctype="multipart/form-data" method="post">
                                     <div class="form-group">
                                         <div class="input-group">
                                           <div class="input-group-addon">

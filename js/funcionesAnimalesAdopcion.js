@@ -15,8 +15,12 @@ $(document).ready(function() {
     });
     $('.editarAnimal').click(function(){
         var id = $(this).attr('id');
+        var data = {'id': id};
         var tipo = 'Editar';
-        window.location.href = '/carepets/usuario/editar/editarAñadirAnimalAdopcion.php?tipo='+tipo+'&id='+id;
+        $.post('/carepets/usuario/editar/pasarAnimalIDaSesion.php', data, function(){
+            window.location.href = '/carepets/usuario/editar/editarAñadirAnimalAdopcion.php?tipo='+tipo+'&id='+id;
+        });
+
     });
 });
 

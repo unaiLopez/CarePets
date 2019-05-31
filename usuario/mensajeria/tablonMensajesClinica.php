@@ -75,8 +75,6 @@
                 <hr>
                 <li><a href="tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos; ?></span></a></li>
                 <hr>
-                <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
-                <hr>
                 <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
                 <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>

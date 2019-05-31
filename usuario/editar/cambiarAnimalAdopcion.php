@@ -8,6 +8,7 @@
     $conn = conectarse();
 
     $mailActual = $_SESSION['mail'];
+    $idAnimal = $_SESSION['idAnimal'];
 
     $nombre = $_POST['nombre'];
     $raza = $_POST['raza'];
@@ -33,14 +34,20 @@
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
+    //Mirar si tiene una foto
+    $sentencia = $conn->prepare("SELECT * FROM animal WHERE mailusuario=:mailusuario");
+    $sentencia->bindParam(':mailusuario', $mailActual);
+    $sentencia->execute();
+    $animal = $sentencia->fetch(PDO::FETCH_BOTH);
+
     if(!empty($fotoPerfil)){
-      $sql = "UPDATE animal SET foto=?, fecha=?, nombre=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE mailusuario=?";
+      $sql = "UPDATE animal SET foto=?, fecha=?, nombre=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE mailusuario=? and id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$destino, $fecha, $nombre, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $mailActual]);
+      $sentencia->execute([$destino, $fecha, $nombre, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $mailActual, $idAnimal]);
     }else{
-      $sql = "UPDATE animal SET nombre=?, fecha=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE mailusuario=?";
+      $sql = "UPDATE animal SET nombre=?, fecha=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE mailusuario=? and id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $fecha, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $mailActual]);
+      $sentencia->execute([$nombre, $fecha, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $mailActual, $idAnimal]);
     }
 
     header('Location: editarProtectora.php');

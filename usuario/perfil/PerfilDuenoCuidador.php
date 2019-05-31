@@ -66,7 +66,7 @@
                 <hr>
                 <li><a href="../mensajeria/tablonMensajesDuenoCuidador.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos+$notificacionesSolicitudes+$notificacionesEnviados; ?></span></a></li>
                 <hr>
-                <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
+                <li><a href="../busqueda/menuBusqueda.php"><i class="fas fa-search"></i> Búsqueda</a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
@@ -199,7 +199,7 @@
                                 $nombre = $servicio['nombre'];
                                 $precio = $servicio['precio'];
                                 if($nombre == 'Alojamiento' && $precio != 0){
-                                  echo '<span><img src="../../iconos/miscelanea/icono_casa.png" height="40" with="40"> ';
+                                  echo '<span><img src="../../iconos/miscelanea/icono_noche.png" height="40" with="40">';
                                   echo ' '.$nombre.' '.$precio.' €';
                                   echo '<br>';
                                   echo '<br>';
@@ -214,7 +214,7 @@
                                   echo '<br>';
                                   echo '<br>';
                                 }else if($nombre == 'Visita' && $precio != 0){
-                                  echo '<img src="../../iconos/miscelanea/icono_noche.png" height="40" with="40"> ';
+                                  echo '<img src="../../iconos/miscelanea/icono_casa.png" height="40" with="40">';
                                   echo ' '.$nombre.' '.$precio.' €';
                                   echo '<br>';
                                   echo '<br>';

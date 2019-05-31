@@ -87,7 +87,7 @@
                  <hr>
                  <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos+$notificacionesEnviados+$notificacionesSolicitudes; ?></span></a></li>
                  <hr>
-                 <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
+                 <li><a href="../busqueda/menuBusqueda.php"><i class="fas fa-search"></i> Búsqueda</a></li>
                  <hr>
                  <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
                  <hr>

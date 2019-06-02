@@ -47,7 +47,13 @@
 		});
 			</script>
   </head>
-  <body>
+  <body onload="mostrarInicio()">
+    <div id="prueba1">
+
+    </div>
+    <div id="prueba2">
+
+    </div>
     <div id="container">
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
@@ -100,35 +106,64 @@
                           <div class="container">
                             <br>
                             <h3>Busco</h3>
-                            <select class="form-control" id="buscarTipo" name="buscarTipo">
+                            <select class="form-control" id="buscarTipo" name="buscarTipo" onchange="cambiarInterfaces()">
                               <option>Cuidador</option>
                               <option>Clinica Veterinaria</option>
                               <option>Protectora de Animales</option>
                             </select>
                           </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <div id="tiposServicios"></div>
-                          </div>
-                        </div>
-                        <div id="fechas"></div>
-                        <div id="fecha"></div>
-                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                        <div id="tiposServicios" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                           <div class="container">
                             <br>
-                            <h3>Desde</h3>
-                            <div class="dates">
+                            <h3>Servicios</h3>
+                            <select class="form-control" id="elegirServicio" name="elegirServicio" onchange="cambiarInterfaces()">
+                              <option>Alojamiento</option>
+                              <option>Cuidado de Día</option>
+                              <option>Paseo</option>
+                              <option>Visita a Domicilio</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div id="fecha1" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                          <div class="container">
+                            <br>
+                            <div class="d-none d-sm-block">
+                              <h3>Desde</h3>
+                            </div>
+                            <div class="input-group dates">
+                              <div class="input-group-addon">
+                                <i class="far fa-calendar-alt"></i>
+                              </div>
                               <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Inicio" autocomplete="off" >
                             </div>
                           </div>
                         </div>
-                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                        <div id="fecha2" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                           <div class="container">
                             <br>
-                            <h3>Hasta</h3>
-                            <div class="dates">
+                            <div class="d-none d-sm-block">
+                              <h3>Hasta</h3>
+                            </div>
+                            <div class="input-group dates">
+                              <div class="input-group-addon">
+                                <i class="far fa-calendar-alt"></i>
+                              </div>
                               <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Final" autocomplete="off" >
+                            </div>
+                          </div>
+                        </div>
+                        <div id="fecha3" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                          <div class="container">
+                            <br>
+                            <div class="d-none d-sm-block">
+                              <h3>Día</h3>
+                            </div>
+                            <div class="input-group dates">
+                              <div class="input-group-addon">
+                                <i class="far fa-calendar-alt"></i>
+                              </div>
+                              <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Elija el día" autocomplete="off" >
                             </div>
                           </div>
                         </div>
@@ -143,7 +178,56 @@
                     </div>
                   </div>
                   <br>
-                  <div id="informacionServicios"></div>
+                  <div id="informacionClinicas" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="container">
+                      <br>
+                      <img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" style="height:60px;width:60px;border-radius:360px;">
+                      <label for="clinica"> Clinicas Veterinarias</label>
+                      <p>Busca las clinicas veterinarias más cercanas y contáctalas mediante la mensajería</p>
+                    </div>
+                  </div>
+                  <div id="informacionProtectoras" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                    <div class="container">
+                      <br>
+                      <img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" style="height:60px;width:60px;border-radius:360px;">
+                      <label for="protectora"> Protectoras de Animales</label>
+                      <p>Busca las protectoras de animales más cercanas, contáctalas mediante la mensajería o solicita adoptarles algún animal desde su tablon de animales en adopción</p>
+                    </div>
+                  </div>
+                  <div id="informacionServicios" class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                      <div class="container">
+                        <br>
+                        <img src="../../iconos/miscelanea/icono_noche.png" height="40" with="40">
+                        <label for="alojamiento"> Alojamiento</label>
+                        <p>Deja a tu mascota alojada en la casa de tu cuidador para que la cuide las noches que necesites</p>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                      <div class="container">
+                        <br>
+                        <img src="../../iconos/miscelanea/icono_dia.png" height="40" with="40">
+                        <label for="cuidadoDia"> Cuidado de Día</label>
+                        <p>Deja a tu mascota en la casa de un cuidador para que la cuide durante el día</p>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                      <div class="container">
+                        <br>
+                        <img src="../../iconos/miscelanea/icono_paseo.png" height="40" with="40">
+                        <label for="paseo"> Paseo</label>
+                        <p>Un cuidador pasará a por tu mascota para darle un paseo de aproximadamente 1 hora</p>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                      <div class="container">
+                        <br>
+                        <img src="../../iconos/miscelanea/icono_casa.png" height="40" with="40">
+                        <label for="visita"> Visita a Domicilio</label>
+                        <p>Un cuidador pasará por tu casa para alimentar a tu mascota y darle los cuidados necesarios durante aproximadamente 1 hora</p>
+                      </div>
+                    </div>
+                  </div>
                   <br>
                 </div>
               </div>

@@ -107,7 +107,7 @@
                       <div class="tab-pane fade show active" id="contraseña" role="tabpanel" aria-labelledby="contraseña-tab">
                         <div class="container-fluid padding">
                           <div class="row">
-                            <div class="col-xs-12 mx-auto">
+                            <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                               <h1><strong>Contraseña</strong></h1>
                               <form id="formularioCambiarContraseña" action="cambiarContraseña.php" method="post" onsubmit="return validarContraseñaActual($('#passActual').val()) && validarContraseña($('#passNueva').val(), $('#confirmarPassNueva').val())">
                                 <div class="form-group">
@@ -137,7 +137,7 @@
                                     <div id="compararContraseñas"></div>
                                 </div>
                                 <div class="form-group">
-                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
+                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default block"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
                               <br>
                             </form>
@@ -148,7 +148,7 @@
                       <div class="tab-pane fade" id="obligatoria" role="tabpanel" aria-labelledby="obligatoria-tab">
                         <div class="container-fluid padding">
                           <div class="row">
-                            <div class="col-xs-12 mx-auto">
+                            <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                               <h1><strong>Obligatoria</strong></h1>
                               <form name="formularioCambiarInfoObligatoria" id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaProtectora.php" method="post" onsubmit="return validarCorreoEditar($('#mail').val()) && validarTelefonoFijoEditar($('#fijo').val()) && validarTelefonoMovilEditar($('#movil').val())">
                                 <div class="form-group">
@@ -199,7 +199,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
+                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default block"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
                                 <br>
                               </form>
@@ -210,37 +210,28 @@
                       <div class="tab-pane fade" id="opcional" role="tabpanel" aria-labelledby="opcional-tab">
                         <div class="container-fluid padding">
                           <div class="row">
-                            <div class="col-xs-12 mx-auto">
+                            <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                               <h1><strong>Opcional</strong></h1>
                               <form id="formularioCambiarInfoOpcional" action="cambiarOpcionalProtectora.php" enctype="multipart/form-data" method="post">
                                 <div class="form-group">
   																<label for="horario">Horario :</label>
   																<textarea class="form-control" col="6" rows="3" id="horario" name="horario"><?php echo $row2['horario']; ?></textarea>
   															</div>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
                                 <div class="form-group">
   																<label for="descripcion">Descripción :</label>
   																<textarea class="form-control" col="6" rows="3" id="descripcion" name="descripcion"><?php echo $row1['descripcion']; ?></textarea>
   															</div>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
                                 <div class="form-group">
                                   <label for="avatar">Foto de Perfil</label>
                                   <input type="file" id="avatar" name="avatar">
                                 </div>
-                                <br>
                                   <?php
                                     if($row1['foto'])
                                       echo '<img src="'.$row1['foto'].'" width="100" height="100" style="border: solid 2px #ffffff; border-radius: 10px;">';
                                   ?>
                                 <br>
                                 <div class="form-group">
-                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
+                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default block"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
                                 <br>
                               </form>

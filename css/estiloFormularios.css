@@ -7,12 +7,6 @@ h1 {
   font-size: 40px;
 }
 
-.form-group {
-  width: 350px;
-  height: 30px;
-  margin-bottom: 30px;
-}
-
 .custom-file-input {
   width: 350px;
   height: 30px;
@@ -21,6 +15,10 @@ h1 {
 
 #avatar {
   color: #ffffff;
+}
+
+#submit {
+  margin-top: 20px;
 }
 
 label {
@@ -121,7 +119,7 @@ a:hover {
 }
 
 #recuperarMailModal {
-  height: 110px;
+  height: 130px;
   background-color: #EC9664;
   border: solid 1px #ffffff;
 }

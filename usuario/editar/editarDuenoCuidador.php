@@ -137,7 +137,7 @@
                       <div class="tab-pane fade show active" id="contraseña" role="tabpanel" aria-labelledby="contraseña-tab">
                         <div class="container-fluid padding">
                           <div class="row">
-                            <div class="col-xs-12 mx-auto">
+                            <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                               <h1><strong>Contraseña</strong></h1>
                               <form id="formularioCambiarContraseña" action="cambiarContraseña.php" method="post" onsubmit="return validarContraseñaActual($('#passActual').val()) && validarContraseña($('#passNueva').val(), $('#confirmarPassNueva').val())">
                                 <div class="form-group">
@@ -167,7 +167,7 @@
                                     <div id="compararContraseñas"></div>
                                 </div>
                                 <div class="form-group">
-                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
+                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default block"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
                                 <br>
                             </form>
@@ -178,7 +178,7 @@
                       <div class="tab-pane fade" id="obligatoria" role="tabpanel" aria-labelledby="obligatoria-tab">
                         <div class="container-fluid padding">
                           <div class="row">
-                            <div class="col-xs-12 mx-auto">
+                            <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                               <h1><strong>Obligatoria</strong></h1>
                               <form id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaDuenoCuidador.php" method="post" onsubmit="return validarCorreoEditar($('#mail').val()) && validarTelefonoMovilEditar($('#movil').val())">
                                 <div class="form-group">
@@ -220,7 +220,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
+                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default block"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
                                 <br>
                               </form>
@@ -231,7 +231,7 @@
                       <div class="tab-pane fade" id="opcional" role="tabpanel" aria-labelledby="opcional-tab">
                         <div class="container-fluid padding">
                           <div class="row">
-                            <div class="col-xs-12 mx-auto">
+                            <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                               <h1><strong>Opcional</strong></h1>
                               <form id="formularioCambiarInfoOpcional" action="cambiarOpcionalDuenoCuidador.php" enctype="multipart/form-data" method="post">
                                 <div class="form-group">
@@ -264,7 +264,6 @@
                                     </div>
                                   </div>
                                 </div>
-                                <br>
                                 <div class="form-group">
                                   <label for="fechaNacimiento">Fecha de Nacimiento</label>
                                   <div class="input-group">
@@ -274,19 +273,17 @@
                                     <input type="date" id="calendario" name="calendario" class="form-control" value="<?=$row2['fechanacimiento']; ?>">
                                   </div>
                                 </div>
-                                <br>
                                 <div class="form-group">
                                   <label for="avatar">Foto de Perfil</label>
                                   <input type="file" id="avatar" name="avatar">
                                 </div>
-                                <br>
                                   <?php
                                     if($row1['foto'])
                                       echo '<img src="'.$row1['foto'].'" width="100" height="100" style="border: solid 2px #ffffff; border-radius: 10px;">';
                                   ?>
                                 <br>
                                 <div class="form-group">
-                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
+                                  <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default block"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
                                 <br>
                               </form>
@@ -297,7 +294,7 @@
                     <div class="tab-pane fade" id="cuidador" role="tabpanel" aria-labelledby="cuidador-tab">
                       <div class="container-fluid padding">
                         <div class="row">
-                          <div class="col-xs-12 mx-auto">
+                          <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                             <h1><strong>Cuidador</strong></h1>
                             <form id="formularioInformacionCuidador" action="cambiarInformacionCuidador.php" method="post" onsubmit="return validarCorreoEditar($('#mail').val()) && validarTelefonoMovilEditar($('#movil').val()) && validarPrecios()">
                               <?php
@@ -321,7 +318,6 @@
                                   </div>
                                 </div>
                               </div>
-                              <br>
                               <div class="form-group">
                                 <label for="tipos">¿De qué tamaños?</label>
                                 <div class="input-group">
@@ -336,25 +332,18 @@
                                   </div>
                                 </div>
                               </div>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
                               <div class="form-group">
                                 <label for="experiencia">Experiencia :</label>
                                 <div class="input-group">
                                   <input type="number" id="experiencia" name="experiencia" class="form-control" value="<?=$row2['experiencia']; ?>" placeholder="Años de experiencia">
                                 </div>
                               </div>
-                              <br>
                               <div class="form-group">
                                 <label for="experiencia">Descripcion</label>
                                 <div class="input-group">
                                   <input type="text" id="descripcion" name="descripcion" class="form-control" value="<?=$row1['descripcion']; ?>" placeholder="Descripcion de sus habilidades">
                                 </div>
                               </div>
-                              <br>
-                              <br>
                               <div class="form-group">
                                 <div class="input-group">
                                   <label for="tipos">¿Qué servicios quieres ofrecer?</label>
@@ -392,20 +381,12 @@
                                 </div>
                               </div>
                               <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
-                              <br>
                               <div class="form-group">
                                   <?php
                                     if($row2['escuidador'] == 0){
-                                      echo '<div class="form-group"><button type="submit" id="haztecuidador" name="haztecuidador" class="btn btn-default"><i class="fas fa-paw"></i> Hazte Cuidador</button></div>';
+                                      echo '<div class="form-group"><button type="submit" id="haztecuidador" name="haztecuidador" class="btn btn-default block"><i class="fas fa-paw"></i> Hazte Cuidador</button></div>';
                                     }else{
-                                      echo '<div class="form-group"><button type="submit" id="confirmarcambios" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button></div>';
+                                      echo '<div class="form-group"><button type="submit" id="confirmarcambios" name="confirmarcambios" class="btn btn-default block"><i class="fas fa-check-circle"></i> Confirmar Cambios</button></div>';
                                     }
                                   ?>
                                   <br>

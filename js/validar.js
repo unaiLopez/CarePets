@@ -176,3 +176,23 @@ function validarTelefonoFijo(fijo){
   });
   return bool;
 }
+
+function validarFechas(fecha1, fecha2, fecha3){
+  var bool = false;
+  var fechas = {"fecha1" : fecha1, "fecha2" : fecha2, "fecha3" : fecha3};
+  $.ajax({
+    data: fechas,
+    url: '/carepets/validaciones/validarFechas.php',
+    type: 'post',
+    async: false,
+    success: function(response){
+      if(response == true){
+        $("#validarFechas").html("Las fechas son correctas.").css("color","green");
+        bool = true;
+      }else{
+        $("#validarFechas").html("Las fechas no son correctas.").css("color","red");
+      }
+    }
+  });
+  return bool;
+}

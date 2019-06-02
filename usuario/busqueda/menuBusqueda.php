@@ -38,22 +38,9 @@
     <link rel="stylesheet" href="../../css/bootstrap-datepicker.css"/>
     <script src="../../js/funcionesBusqueda.js"></script>
     <script src="../../js/bootstrap-datepicker.js"></script>
-    <script>
-			$(function() {
-			$('.dates #usr1').datepicker({
-				'format': 'yyyy-mm-dd',
-				'autoclose': true
-			});
-		});
-			</script>
+    <script src="../../js/validar.js"></script>
   </head>
   <body onload="mostrarInicio()">
-    <div id="prueba1">
-
-    </div>
-    <div id="prueba2">
-
-    </div>
     <div id="container">
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
@@ -101,80 +88,83 @@
                 <div class="card-body">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="buscarservicios-tab" role="tabpanel" aria-labelledby="buscarservicios-tab">
-                      <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <br>
-                            <h3>Busco</h3>
-                            <select class="form-control" id="buscarTipo" name="buscarTipo" onchange="cambiarInterfaces()">
-                              <option>Cuidador</option>
-                              <option>Clinica Veterinaria</option>
-                              <option>Protectora de Animales</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div id="tiposServicios" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <br>
-                            <h3>Servicios</h3>
-                            <select class="form-control" id="elegirServicio" name="elegirServicio" onchange="cambiarInterfaces()">
-                              <option>Alojamiento</option>
-                              <option>Cuidado de Día</option>
-                              <option>Paseo</option>
-                              <option>Visita a Domicilio</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div id="fecha1" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                          <div class="container">
-                            <br>
-                            <div class="d-none d-sm-block">
-                              <h3>Desde</h3>
+                      <form action="buscarMapa.php" method="post" onsubmit="true">
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <div class="container">
+                              <br>
+                              <h3>Busco</h3>
+                              <select class="form-control" id="buscarTipo" name="buscarTipo" onchange="cambiarInterfaces()">
+                                <option>Cuidador</option>
+                                <option>Clinica Veterinaria</option>
+                                <option>Protectora de Animales</option>
+                              </select>
                             </div>
-                            <div class="input-group dates">
-                              <div class="input-group-addon">
-                                <i class="far fa-calendar-alt"></i>
+                          </div>
+                          <div id="tiposServicios" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <div class="container">
+                              <br>
+                              <h3>Servicios</h3>
+                              <select class="form-control" id="elegirServicio" name="elegirServicio" onchange="cambiarInterfaces()">
+                                <option>Alojamiento</option>
+                                <option>Cuidado de Día</option>
+                                <option>Paseo</option>
+                                <option>Visita a Domicilio</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div id="fecha1" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                            <div class="container">
+                              <br>
+                              <div class="d-none d-sm-block">
+                                <h3>Desde</h3>
                               </div>
-                              <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Inicio" autocomplete="off" >
-                            </div>
-                          </div>
-                        </div>
-                        <div id="fecha2" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                          <div class="container">
-                            <br>
-                            <div class="d-none d-sm-block">
-                              <h3>Hasta</h3>
-                            </div>
-                            <div class="input-group dates">
-                              <div class="input-group-addon">
-                                <i class="far fa-calendar-alt"></i>
+                              <div class="input-group dates">
+                                <div class="input-group-addon">
+                                  <i class="far fa-calendar-alt"></i>
+                                </div>
+                                <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Inicio" autocomplete="off" onchange="validarFechas($('#fecha1').val(), $('#fecha2').val(), $('#fecha3').val())">
                               </div>
-                              <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Final" autocomplete="off" >
                             </div>
                           </div>
-                        </div>
-                        <div id="fecha3" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                          <div class="container">
-                            <br>
-                            <div class="d-none d-sm-block">
-                              <h3>Día</h3>
-                            </div>
-                            <div class="input-group dates">
-                              <div class="input-group-addon">
-                                <i class="far fa-calendar-alt"></i>
+                          <div id="fecha2" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                            <div class="container">
+                              <br>
+                              <div class="d-none d-sm-block">
+                                <h3>Hasta</h3>
                               </div>
-                              <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Elija el día" autocomplete="off" >
+                              <div class="input-group dates">
+                                <div class="input-group-addon">
+                                  <i class="far fa-calendar-alt"></i>
+                                </div>
+                                <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Final" autocomplete="off" onchange="validarFechas($('#fecha1').val(), $('#fecha2').val(), $('#fecha3').val())">
+                              </div>
+                            </div>
+                          </div>
+                          <div id="fecha3" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                            <div class="container">
+                              <br>
+                              <div class="d-none d-sm-block">
+                                <h3>Día</h3>
+                              </div>
+                              <div class="input-group dates">
+                                <div class="input-group-addon">
+                                  <i class="far fa-calendar-alt"></i>
+                                </div>
+                                <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Elija el día" autocomplete="off" onchange="validarFechas($('#fecha1').val(), $('#fecha2').val(), $('#fecha3').val())">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+                            <div class="container">
+                              <br>
+                              <br>
+                              <button style="margin-top: 16px" type="submit" id="submit" name="buscar" class="btn btn-default block"><i class="fas fa-search"></i> Buscar</button>
+                              <div id="validarFechas"></div>
                             </div>
                           </div>
                         </div>
-                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
-                          <div class="container">
-                            <br>
-                            <br>
-                            <button style="margin-top: 16px" type="submit" id="submit" name="buscar" class="btn btn-default block"><i class="fas fa-search"></i> Buscar</button>
-                          </div>
-                        </div>
-                      </div>
+                      </form>
                     </div>
                   </div>
                   <br>

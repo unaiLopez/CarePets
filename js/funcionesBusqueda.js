@@ -55,3 +55,10 @@ function mostrarInicio() {
   $('#informacionClinicas').hide();
   $('#informacionProtectoras').hide();
 }
+
+$(function() {
+  $('.dates #usr1').datepicker({
+    'format': 'yyyy-mm-dd',
+    'autoclose': true
+  });
+});

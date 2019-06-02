@@ -1,7 +1,7 @@
 <?php
   try {
     //Configurar base de datos
-    include '../usuario/conectarDB.php';
+    require_once '../usuario/conectarDB.php';
 
     $conn = conectarse();
 

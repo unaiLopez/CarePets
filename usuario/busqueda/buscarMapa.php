@@ -33,44 +33,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTC035_2c7HqTdiIGYdAYtJCLI0ye4coc&libraries=places&callback=inicializarMapa" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTC035_2c7HqTdiIGYdAYtJCLI0ye4coc&libraries=places"></script>
     <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
-    <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
+    <link rel="stylesheet" href="../../css/estiloPanelesMapas.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <link rel="stylesheet" href="../../css/bootstrap-datepicker.css"/>
     <script src="../../js/funcionesBusqueda.js"></script>
     <script src="../../js/bootstrap-datepicker.js"></script>
-    <script>
-      function inicializarMapa() {
-        var options = {
-           zoom: 15,
-           center: new google.maps.LatLng(<?php echo $row1['latitud']; ?>, <?php echo $row1['longitud']; ?>),
-           mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map($("#map")[0], options);
-        marker = new google.maps.Marker({
-          map: map,
-          position: new google.maps.LatLng(<?php echo $row1['latitud']; ?>, <?php echo $row1['longitud']; ?>)
-        });
-        infowindow = new google.maps.InfoWindow({
-           content: "<?php echo $row1['direccion']; ?>"
-        });
-        google.maps.event.addListener(marker, "click", function () {
-            infowindow.open(map, marker);
-        });
-        alert("se ejecuta");
-       }
-       google.maps.event.addDomListener(window, 'load', inicializarMapa);
-    </script>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 275px;
-        width: 100%;
-      }
-    </style>
   </head>
   <body>
     <div id="container">
@@ -116,7 +86,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="col-xs-12 col-lg-12 scroll">
+              <div class="col-xs-12 col-lg-12 panel">
                 <div class="card-body">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="buscarservicios-tab" role="tabpanel" aria-labelledby="buscarservicios-tab">
@@ -126,6 +96,79 @@
                         </div>
                         <div class="col-xs-12 col-md-7 col-lg-7">
                           <div id="map">Cargando Mapa...</div>
+                          <?php
+                            $arrayLocations = array();
+                            foreach($busqueda as $markerUsuario) {
+                                $arrayMarker = array();
+                                $arrayInfoMarker = array();
+                                array_push($arrayMarker, $markerUsuario['direccion'], $markerUsuario['latitud'], $markerUsuario['longitud'], $markerUsuario['nombre'], $markerUsuario['foto']);
+                                array_push($arrayLocations, $arrayMarker);
+                            }
+                          ?>
+                          <script type="text/javascript">
+                        		function initialise() {
+
+                        			// create map object and apply properties
+                        			var map = new google.maps.Map( document.getElementById( "map" ), {
+                                zoom: 4,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                              });
+
+                        			// create map bounds object
+                        			var bounds = new google.maps.LatLngBounds();
+                        			// create array containing locations
+                        			var locations = <?php echo json_encode($arrayLocations); ?>
+
+                        			// loop through locations and add to map
+                        			for ( var i = 0; i < locations.length; i++ )
+                        			{
+                        				// get current location
+                        				var location = locations[ i ];
+
+                        				// create map position
+                        				var position = new google.maps.LatLng( location[ 1 ], location[ 2 ] );
+
+                        				// add position to bounds
+                        				bounds.extend( position );
+
+                        				// create marker (https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions)
+                        				var marker = new google.maps.Marker({
+                        					animation: google.maps.Animation.DROP
+                        					, icon: "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png"
+                        					, map: map
+                        					, position: position
+                        					, title: location[ 0 ]
+                        				});
+
+                        				// create info window and add to marker (https://developers.google.com/maps/documentation/javascript/reference#InfoWindowOptions)
+                        				google.maps.event.addListener( marker, 'click', (
+                        					function( marker, i ) {
+                        						return function() {
+                                      var contentString = '<div id="content">'+
+                                              '<img src="'+locations[i][4]+'" height="50" width="50">'+
+                                              '<h1 style="color:black">'+locations[i][3]+'</h1>'+
+                                              '<p>Dirección: '+locations[0]+'</p>'+
+                                           '</div>';
+                                      var infowindow = new google.maps.InfoWindow({
+                                        content: contentString
+                                      });
+                        							infowindow.open( map, marker );
+                        						}
+                        					}
+                        				)( marker, i ) );
+                        			};
+                        			// fit map to bounds
+                        			map.fitBounds( bounds );
+                        		}
+                        		// load map after page has finished loading
+                        		function loadScript() {
+                        			var script = document.createElement( "script" );
+                        			script.type = "text/javascript";
+                        			script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDTC035_2c7HqTdiIGYdAYtJCLI0ye4coc&libraries=places&callback=initialise"; // initialize method called using callback parameter
+                        			document.body.appendChild( script );
+                        		}
+                        		window.onload = loadScript;
+                        		</script>
                         </div>
                       </div>
                     </div>

@@ -15,6 +15,14 @@
   width: 100%;
 }
 
+.maps-color-panel {
+  background-color: rgba(224, 82, 3, 0.6);
+  border-top: solid 1px #ffffff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 100%;
+}
+
 .card-header {
   background-color: #e05203;
   width: 100%;

@@ -1,4 +1,7 @@
 <?php
+  try {
+
+    $conn = conectarse();
 
     $correoActual = $_SESSION['mail'];
     $tipoBusqueda = $_POST['buscarTipo'];
@@ -8,6 +11,7 @@
     $diaFecha = $_POST['fecha3'];
 
     if($tipoBusqueda == 'Cuidador'){
+      echo 'Ha entrado aqui en dueno cuidador';
 
       $esCuidador = 1;
       $tipo = 'DuenoCuidador';
@@ -15,7 +19,7 @@
       $sentencia = $conn->prepare("SELECT * FROM usuario WHERE tipo=:tipo");
       $sentencia->bindParam(':tipo', $tipo);
       $sentencia->execute();
-      $busqueda = $sentencia->fetch(PDO::FETCH_BOTH);
+      $busqueda = $sentencia->fetchAll(PDO::FETCH_BOTH);
 
     }else if($tipoBusqueda == 'Clinica Veterinaria'){
 
@@ -24,7 +28,7 @@
       $sentencia = $conn->prepare("SELECT * FROM usuario WHERE tipo=:tipo");
       $sentencia->bindParam(':tipo', $tipo);
       $sentencia->execute();
-      $busqueda = $sentencia->fetch(PDO::FETCH_BOTH);
+      $busqueda = $sentencia->fetchAll(PDO::FETCH_BOTH);
 
     }else if($tipoBusqueda == 'Protectora de Animales'){
 
@@ -33,9 +37,13 @@
       $sentencia = $conn->prepare("SELECT * FROM usuario WHERE tipo=:tipo");
       $sentencia->bindParam(':tipo', $tipo);
       $sentencia->execute();
-      $busqueda = $sentencia->fetch(PDO::FETCH_BOTH);
+      $busqueda = $sentencia->fetchAll(PDO::FETCH_BOTH);
 
     }
+    $cantidadUsuarios = count($busqueda);
 
-    $conn = null;
+  }catch(PDOException $e){
+    echo "Error: " . $e->getMessage();
+  }
+  $conn = null;
 ?>

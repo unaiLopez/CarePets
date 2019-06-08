@@ -6,12 +6,17 @@
     $correoActual = $_SESSION['mail'];
     $tipoBusqueda = $_POST['buscarTipo'];
     $servicio = $_POST['elegirServicio'];
-    $inicioFecha = $_POST['fecha1'];
-    $finalFecha = $_POST['fecha2'];
-    $diaFecha = $_POST['fecha3'];
+    if(isset($_POST['fecha1'])){
+      $inicioFecha = $_POST['fecha1'];
+    }
+    if(isset($_POST['fecha2'])){
+      $finalFecha = $_POST['fecha2'];
+    }
+    if(isset($_POST['fecha3'])){
+      $diaFecha = $_POST['fecha3'];
+    }
 
     if($tipoBusqueda == 'Cuidador'){
-      echo 'Ha entrado aqui en dueno cuidador';
 
       $esCuidador = 1;
       $tipo = 'DuenoCuidador';

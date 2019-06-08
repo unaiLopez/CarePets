@@ -31,6 +31,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
     <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
@@ -88,7 +92,7 @@
                 <div class="card-body">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="buscarservicios-tab" role="tabpanel" aria-labelledby="buscarservicios-tab">
-                      <form action="buscarMapa.php" method="post" onsubmit="true">
+                      <form action="buscarMapa.php" method="post" onsubmit="return validarMenuBusqueda($('#buscarTipo').val(), $('#elegirServicio').val(), $('#date1').val(), $('#date2').val(), $('#date3').val())">
                         <div class="row">
                           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                             <div class="container">
@@ -123,7 +127,7 @@
                                 <div class="input-group-addon">
                                   <i class="far fa-calendar-alt"></i>
                                 </div>
-                                <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Inicio" autocomplete="off" onchange="validarFechas($('#fecha1').val(), $('#fecha2').val(), $('#fecha3').val())">
+                                <input type="text" class="form-control" id="date1" name="date" placeholder="Inicio" autocomplete="off">
                               </div>
                             </div>
                           </div>
@@ -137,7 +141,7 @@
                                 <div class="input-group-addon">
                                   <i class="far fa-calendar-alt"></i>
                                 </div>
-                                <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Final" autocomplete="off" onchange="validarFechas($('#fecha1').val(), $('#fecha2').val(), $('#fecha3').val())">
+                                <input type="text" class="form-control" id="date2" name="date" placeholder="Final" autocomplete="off">
                               </div>
                             </div>
                           </div>
@@ -151,7 +155,7 @@
                                 <div class="input-group-addon">
                                   <i class="far fa-calendar-alt"></i>
                                 </div>
-                                <input type="text" class="form-control" id="usr1" name="event_date" placeholder="Elija el día" autocomplete="off" onchange="validarFechas($('#fecha1').val(), $('#fecha2').val(), $('#fecha3').val())">
+                                <input type="text" class="form-control" id="date3" name="date" placeholder="Elija el día" autocomplete="off">
                               </div>
                             </div>
                           </div>
@@ -160,11 +164,15 @@
                               <br>
                               <br>
                               <button style="margin-top: 16px" type="submit" id="submit" name="buscar" class="btn btn-default block"><i class="fas fa-search"></i> Buscar</button>
-                              <div id="validarFechas"></div>
                             </div>
                           </div>
                         </div>
                       </form>
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
+                          <div style="margin-top:10px;text-align: center;" id="validarDatos"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <br>

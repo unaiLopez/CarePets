@@ -177,20 +177,25 @@ function validarTelefonoFijo(fijo){
   return bool;
 }
 
-function validarFechas(fecha1, fecha2, fecha3){
+function validarMenuBusqueda(busco, servicio, date1, date2, date3){
   var bool = false;
-  var fechas = {"fecha1" : fecha1, "fecha2" : fecha2, "fecha3" : fecha3};
+  var datos = {"busco" : busco, "servicio" : servicio, "date1" : date1, "date2" : date2, "date3" : date3}
+  alert('busco: '+busco);
+  alert('servicio: '+servicio);
+  alert('fecha1: '+date1);
+  alert('fecha2: '+date2);
+  alert('fecha3: '+date3);
   $.ajax({
-    data: fechas,
-    url: '/carepets/validaciones/validarFechas.php',
+    data: datos,
+    url: '/carepets/validaciones/validarMenuBusqueda.php',
     type: 'post',
     async: false,
     success: function(response){
       if(response == true){
-        $("#validarFechas").html("Las fechas son correctas.").css("color","green");
+        $("#validarDatos").html("Los datos introducidos son correctos.").css("color","green");
         bool = true;
       }else{
-        $("#validarFechas").html("Las fechas no son correctas.").css("color","red");
+        $("#validarDatos").html("Los datos introducidos son incorrectos.").css("color","red");
       }
     }
   });

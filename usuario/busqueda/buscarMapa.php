@@ -92,7 +92,20 @@
                     <div class="tab-pane fade show active" id="buscarservicios-tab" role="tabpanel" aria-labelledby="buscarservicios-tab">
                       <div class="row">
                         <div class="col-xs-12 col-md-5 col-lg-5">
-                          sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                          <ul class="list-group list-group-horizontal scroll">
+                            <div class="row ">
+                              <li id="1" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">Esto es un prueba</li>
+                              <li id="2" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadas</li>
+                              <li id="3" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">sdasdasdas</li>
+                              <li id="4" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadsadas</li>
+                              <li id="5" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadsadsad</li>
+                              <li id="6" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">Esto es un prueba</li>
+                              <li id="7" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadas</li>
+                              <li id="8" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">sdasdasdas</li>
+                              <li id="9" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadsadas</li>
+                              <li id="10" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadsadsad</li>
+                            </div>
+                          </ul>';
                         </div>
                         <div class="col-xs-12 col-md-7 col-lg-7">
                           <div id="map">Cargando Mapa...</div>
@@ -101,16 +114,16 @@
                             foreach($busqueda as $markerUsuario) {
                                 $arrayMarker = array();
                                 $arrayInfoMarker = array();
-                                array_push($arrayMarker, $markerUsuario['direccion'], $markerUsuario['latitud'], $markerUsuario['longitud'], $markerUsuario['nombre'], $markerUsuario['foto']);
+                                array_push($arrayMarker, $markerUsuario['direccion'], $markerUsuario['latitud'], $markerUsuario['longitud'], $markerUsuario['nombre'], $markerUsuario['foto'], $markerUsuario['telefonomovil'], $markerUsuario['mailusuario'], $markerUsuario['tipo']);
                                 array_push($arrayLocations, $arrayMarker);
                             }
                           ?>
                           <script type="text/javascript">
                         		function initialise() {
-
                         			// create map object and apply properties
                         			var map = new google.maps.Map( document.getElementById( "map" ), {
-                                zoom: 4,
+                                zoom: 9,
+                                center: new google.maps.LatLng(<?php echo $row1['latitud']; ?>, <?php echo $row1['longitud']; ?>),
                                 mapTypeId: google.maps.MapTypeId.ROADMAP
                               });
 
@@ -130,25 +143,67 @@
 
                         				// add position to bounds
                         				bounds.extend( position );
-
-                        				// create marker (https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions)
-                        				var marker = new google.maps.Marker({
-                        					animation: google.maps.Animation.DROP
-                        					, icon: "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png"
-                        					, map: map
-                        					, position: position
-                        					, title: location[ 0 ]
-                        				});
-
+                                var tipoUsuario = location[ 7 ];
+                                if(tipoUsuario == 'DuenoCuidador'){
+                                  var icon = {
+                                      url: "../../iconos/tipos_usuario/icono_dueño_cuidador.jpg", // url
+                                      scaledSize: new google.maps.Size(30, 30), // scaled size
+                                      origin: new google.maps.Point(0,0), // origin
+                                      anchor: new google.maps.Point(0, 0) // anchor
+                                  };
+                                  var marker = new google.maps.Marker({
+                          					animation: google.maps.Animation.DROP
+                          					, icon: icon
+                          					, map: map
+                          					, position: position
+                          					, title: location[ 0 ]
+                          				});
+                                }else if(tipoUsuario == 'Clinica'){
+                                  var icon = {
+                                      url: "../../iconos/tipos_usuario/icono_clinica_veterinaria.png", // url
+                                      scaledSize: new google.maps.Size(30, 30), // scaled size
+                                      origin: new google.maps.Point(0,0), // origin
+                                      anchor: new google.maps.Point(0, 0) // anchor
+                                  };
+                                  var marker = new google.maps.Marker({
+                          					animation: google.maps.Animation.DROP
+                          					, icon: icon
+                          					, map: map
+                          					, position: position
+                          					, title: location[ 0 ]
+                          				});
+                                }else if(tipoUsuario == 'Protectora'){
+                                  var icon = {
+                                      url: "../../iconos/tipos_usuario/icono_protectora_animales.jpg", // url
+                                      scaledSize: new google.maps.Size(30, 30), // scaled size
+                                      origin: new google.maps.Point(0,0), // origin
+                                      anchor: new google.maps.Point(0, 0) // anchor
+                                  };
+                                  var marker = new google.maps.Marker({
+                          					animation: google.maps.Animation.DROP
+                          					, icon: icon
+                          					, map: map
+                          					, position: position
+                          					, title: location[ 0 ]
+                          				});
+                                }
                         				// create info window and add to marker (https://developers.google.com/maps/documentation/javascript/reference#InfoWindowOptions)
                         				google.maps.event.addListener( marker, 'click', (
                         					function( marker, i ) {
                         						return function() {
-                                      var contentString = '<div id="content">'+
-                                              '<img src="'+locations[i][4]+'" height="50" width="50">'+
-                                              '<h1 style="color:black">'+locations[i][3]+'</h1>'+
-                                              '<p>Dirección: '+locations[0]+'</p>'+
-                                           '</div>';
+                                      var contentString = '<div id="iw-container">' +
+                                                            '<div class="iw-title">'+locations[i][3]+'</div>' +
+                                                            '<div class="iw-content">' +
+                                                              '<img src="'+locations[i][4]+'" alt="PerfilUsuario" height="100" width="100">' +
+                                                              '<div class="iw-subTitle">Dirección</div>' +
+                                                              '<p style="color:black;font-style=crimson;">'+locations[i][0]+'</p>'+
+                                                              '<div class="iw-subTitle">Teléfono Movil</div>' +
+                                                              '<p style="color:black;font-style=crimson;">'+locations[i][5]+'</p>'+
+                                                              '<div class="iw-subTitle">Correo Electrónico</div>' +
+                                                              '<p style="color:black;font-style=crimson;">'+locations[i][6]+'</p>'+
+                                                            '</div>' +
+                                                            '<div class="iw-bottom-gradient"></div>' +
+                                                          '</div>';
                                       var infowindow = new google.maps.InfoWindow({
                                         content: contentString
                                       });
@@ -158,7 +213,7 @@
                         				)( marker, i ) );
                         			};
                         			// fit map to bounds
-                        			map.fitBounds( bounds );
+
                         		}
                         		// load map after page has finished loading
                         		function loadScript() {

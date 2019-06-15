@@ -13,6 +13,8 @@
     require_once '../datosUsuario.php';
     //Tomar los datos de la clinica para utilizarlos de forma dinámica
     require_once '../datosDuenoCuidador.php';
+    //Obtener el rating del datosUsuario
+    require_once '../perfil/obtenerRating.php';
     //buscar datos de búsqueda
     require_once 'buscar.php';
 
@@ -39,6 +41,7 @@
     <link rel="stylesheet" href="../../css/estiloPanelesMapas.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <link rel="stylesheet" href="../../css/bootstrap-datepicker.css"/>
+    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="../../js/funcionesBusqueda.js"></script>
     <script src="../../js/bootstrap-datepicker.js"></script>
   </head>
@@ -92,23 +95,40 @@
                     <div class="tab-pane fade show active" id="buscarservicios-tab" role="tabpanel" aria-labelledby="buscarservicios-tab">
                       <div class="row">
                         <div class="col-xs-12 col-md-5 col-lg-5">
-                          <ul class="list-group list-group-horizontal scroll">
-                            <div class="row ">
-                              <li id="1" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">Esto es un prueba</li>
-                              <li id="2" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadas</li>
-                              <li id="3" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">sdasdasdas</li>
-                              <li id="4" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadsadas</li>
-                              <li id="5" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadsadsad</li>
-                              <li id="6" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">Esto es un prueba</li>
-                              <li id="7" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadas</li>
-                              <li id="8" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">sdasdasdas</li>
-                              <li id="9" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadsadas</li>
-                              <li id="10" class="list-group-item" style="width: 100%;background-color: rgba(224, 82, 3, 0.1);color: white;border-color:white;">dsadsadsad</li>
-                            </div>
-                          </ul>';
+                          <ul class="list-group scroll">
+                            <?php
+                              foreach ($busqueda as $usuario){
+                                $mailusuario = $usuario['mailusuario'];
+                                $nombre = $usuario['nombre'];
+                                $descripcion = $usuario['descripcion'];
+                                $foto = $usuario['foto'];
+                                $direccion = $usuario['direccion'];
+                                $precio = 11;
+                                echo '<li style="cursor:pointer;width:100%;" id="'.$mailusuario.'" class="list-group-item">
+                                        <div class="row">
+                                            <div style="width:30%;" class="container">
+                                              <img style="border-radius:5px;" src="'.$foto.'" height="120" width="100%">
+                                            </div>
+                                            <div style="width:50%;" class="container">
+                                              <p style="font-size:20px;color:black;">'.$nombre.'</p>
+                                              <p style=color:black;">'.$descripcion.'</p>
+                                              <p style="color:black;"><i style="color:#dd4b39;" class="fas fa-map-marker-alt"></i> '.$direccion.'</p>
+                                              <x-star-rating value="<?='.$mediaMostrar.'?>" number="5"></x-star-rating>
+                                              <script src="../../js/showStars.js"></script>
+                                            </div>
+                                            <div style="width:20%;" class="container">
+                                              <h5 style="color: #85BB65;">'.$precio.'€</h5>
+                                          </div>
+                                        </div>
+                                      </li>';
+                              }
+                            ?>
+                          </ul>
                         </div>
                         <div class="col-xs-12 col-md-7 col-lg-7">
-                          <div id="map">Cargando Mapa...</div>
+                          <div class="d-none d-sm-none d-md-block">
+                            <div id="map">Cargando Mapa...</div>
+                          </div>
                           <?php
                             $arrayLocations = array();
                             foreach($busqueda as $markerUsuario) {

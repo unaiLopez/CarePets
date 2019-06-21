@@ -13,8 +13,6 @@
     require_once '../datosUsuario.php';
     //Tomar los datos de la clinica para utilizarlos de forma dinámica
     require_once '../datosDuenoCuidador.php';
-    //Obtener el rating del datosUsuario
-    require_once '../perfil/obtenerRating.php';
     //buscar datos de búsqueda
     require_once 'buscar.php';
 
@@ -40,10 +38,8 @@
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
     <link rel="stylesheet" href="../../css/estiloPanelesMapas.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
-    <link rel="stylesheet" href="../../css/bootstrap-datepicker.css"/>
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="../../js/funcionesBusqueda.js"></script>
-    <script src="../../js/bootstrap-datepicker.js"></script>
   </head>
   <body>
     <div id="container">
@@ -95,36 +91,47 @@
                     <div class="tab-pane fade show active" id="buscarservicios-tab" role="tabpanel" aria-labelledby="buscarservicios-tab">
                       <div class="row">
                         <div class="col-xs-12 col-md-5 col-lg-5">
-                          <ul class="list-group scroll">
-                            <?php
-                              foreach ($busqueda as $usuario){
-                                $mailusuario = $usuario['mailusuario'];
-                                $nombre = $usuario['nombre'];
-                                $descripcion = $usuario['descripcion'];
-                                $foto = $usuario['foto'];
-                                $direccion = $usuario['direccion'];
-                                $precio = 11;
-                                echo '<li style="cursor:pointer;width:100%;" id="'.$mailusuario.'" class="list-group-item">
-                                        <div class="row">
-                                            <div style="width:30%;" class="container">
-                                              <img style="border-radius:5px;" src="'.$foto.'" height="120" width="100%">
-                                            </div>
-                                            <div style="width:50%;" class="container">
-                                              <p style="font-size:20px;color:black;">'.$nombre.'</p>
-                                              <p style=color:black;">'.$descripcion.'</p>
-                                              <p style="color:black;"><i style="color:#dd4b39;" class="fas fa-map-marker-alt"></i> '.$direccion.'</p>
-                                              <x-star-rating value="<?='.$mediaMostrar.'?>" number="5"></x-star-rating>
-                                              <script src="../../js/showStars.js"></script>
-                                            </div>
-                                            <div style="width:20%;" class="container">
-                                              <h5 style="color: #85BB65;">'.$precio.'€</h5>
-                                          </div>
-                                        </div>
-                                      </li>';
+                          <?php
+                          if($cantidadUsuarios != 0){
+                            echo '<ul class="list-group scroll-list">';
+                                foreach ($busqueda as $usuario){
+                                  $mailusuario = $usuario['mailusuario'];
+                                  $nombre = $usuario['nombre'];
+                                  $descripcion = $usuario['descripcion'];
+                                  $foto = $usuario['foto'];
+                                  $direccion = $usuario['direccion'];
+                                  $tipo = $usuario['tipo'];
+                                  echo '<li style="cursor:pointer;width:100%;" id="'.$mailusuario.'" class="list-group-item">
+                                          <div class="row">
+                                              <div style="width:30%;" class="container">
+                                                <img style="border-radius:5px;" src="'.$foto.'" height="120" width="100%">
+                                              </div>
+                                              <div style="width:50%;" class="container">
+                                                <p style="font-size:20px;color:black;">'.$nombre.'</p>
+                                                <p style=color:black;">'.$descripcion.'</p>
+                                                <p style="color:black;"><i style="color:#dd4b39;" class="fas fa-map-marker-alt"></i> '.$direccion.'</p>
+                                              </div>';
+                                              if($tipo == 'Duenocuidador'){
+                                                echo '<div style="width:20%;" class="container">
+                                                  <h5 style="color: green;">'.$usuario['precio'].'€</h5>
+                                                  </div>';
+                                              }else{
+                                                echo '<div style="width:20%;" class="container">
+                                                  </div>';
+                                              }
+                                          echo '</div>
+                                        </li>';
+                                }
+                                echo '</ul>';
+                              }else{
+                                echo '<br>';
+                                echo '<h4>No se encontraron resultados</h4>';
+                                echo '<br>';
+                                echo '<button id="volvermenubusqueda" onclick="javascript:window.location.href=menuBusqueda.php" name="volvermenubusqueda" class="btn btn-default block"><i class="fas fa-paw"></i> Volver al Menu de Búsqueda</button>';
                               }
                             ?>
-                          </ul>
                         </div>
+
                         <div class="col-xs-12 col-md-7 col-lg-7">
                           <div class="d-none d-sm-none d-md-block">
                             <div id="map">Cargando Mapa...</div>

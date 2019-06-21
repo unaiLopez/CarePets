@@ -39,9 +39,7 @@
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
     <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
-    <link rel="stylesheet" href="../../css/bootstrap-datepicker.css"/>
     <script src="../../js/funcionesBusqueda.js"></script>
-    <script src="../../js/bootstrap-datepicker.js"></script>
     <script src="../../js/validar.js"></script>
   </head>
   <body onload="mostrarInicio()">
@@ -92,7 +90,7 @@
                 <div class="card-body">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="buscarservicios-tab" role="tabpanel" aria-labelledby="buscarservicios-tab">
-                      <form action="buscarMapa.php" method="post" onsubmit="return validarMenuBusqueda($('#buscarTipo').val(), $('#elegirServicio').val(), $('#date1').val(), $('#date2').val(), $('#date3').val())">
+                      <form action="buscarMapa.php" method="get" onsubmit="return validarMenuBusqueda($('#buscarTipo').val(), $('#elegirServicio').val(), $('#date1').val(), $('#date2').val(), $('#date3').val())">
                         <div class="row">
                           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                             <div class="container">
@@ -127,7 +125,7 @@
                                 <div class="input-group-addon">
                                   <i class="far fa-calendar-alt"></i>
                                 </div>
-                                <input type="text" class="form-control" id="date1" name="date" placeholder="Inicio" autocomplete="off">
+                                <input type="date" class="form-control" id="date1" name="date1" placeholder="Inicio" autocomplete="off">
                               </div>
                             </div>
                           </div>
@@ -141,7 +139,7 @@
                                 <div class="input-group-addon">
                                   <i class="far fa-calendar-alt"></i>
                                 </div>
-                                <input type="text" class="form-control" id="date2" name="date" placeholder="Final" autocomplete="off">
+                                <input type="date" class="form-control" id="date2" name="date2" placeholder="Final" autocomplete="off">
                               </div>
                             </div>
                           </div>
@@ -155,7 +153,7 @@
                                 <div class="input-group-addon">
                                   <i class="far fa-calendar-alt"></i>
                                 </div>
-                                <input type="text" class="form-control" id="date3" name="date" placeholder="Elija el día" autocomplete="off">
+                                <input type="date" class="form-control" id="date3" name="date3" placeholder="Elija el día" autocomplete="off">
                               </div>
                             </div>
                           </div>

@@ -32,16 +32,16 @@
           $resultado = true;
         }
       }
-      }else if($busco == 'Cuidador' && $servicio != 'Alojamiento'){
-        if($definida3){
-          if($fecha3 >= $fechaActual){
-            $resultado = true;
-          }
+    }else if($busco == 'Cuidador' && $servicio != 'Alojamiento'){
+      if($definida3){
+        if($fecha3 >= $fechaActual){
+          $resultado = true;
         }
-      //Condicion de buscar una Clinica o una Protectora
-      }else if($busco != 'Cuidador'){
-        $resultado = true;
       }
+    //Condicion de buscar una Clinica o una Protectora
+    }else if($busco != 'Cuidador'){
+      $resultado = true;
+    }
 
     echo $resultado;
 

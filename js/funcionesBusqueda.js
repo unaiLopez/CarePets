@@ -1,3 +1,14 @@
+//Redirreccionar a verPerfilDeSerivicio.php pasandole el id del mensaje clicado a la session
+$(document).ready(function() {
+ $(".list-group .list-group-item").click(function() {
+    var id = $(this).attr('id');
+    var data = {'id': id};
+    $.post('../mensajeria/pasarIDaSession.php', data, function(){
+        window.location.href = "perfilServicio.php";
+    });
+ });
+});
+
 function cambiarInterfaces(){
   var opcionSeleccionadaTipo = $('#buscarTipo option:selected');
   var opcionSeleccionadaServicio = $('#elegirServicio option:selected');

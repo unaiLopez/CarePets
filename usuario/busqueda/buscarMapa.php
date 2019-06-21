@@ -101,6 +101,7 @@
                                   $foto = $usuario['foto'];
                                   $direccion = $usuario['direccion'];
                                   $tipo = $usuario['tipo'];
+                                  $servicio = $usuario['nombreservicio'];
                                   echo '<li style="cursor:pointer;width:100%;" id="'.$mailusuario.'" class="list-group-item">
                                           <div class="row">
                                               <div style="width:30%;" class="container">
@@ -111,10 +112,24 @@
                                                 <p style=color:black;">'.$descripcion.'</p>
                                                 <p style="color:black;"><i style="color:#dd4b39;" class="fas fa-map-marker-alt"></i> '.$direccion.'</p>
                                               </div>';
-                                              if($tipo == 'Duenocuidador'){
-                                                echo '<div style="width:20%;" class="container">
-                                                  <h5 style="color: green;">'.$usuario['precio'].'€</h5>
-                                                  </div>';
+                                              if($tipo == 'DuenoCuidador'){
+                                                if($servicio == 'Alojamiento'){
+                                                  echo '<div style="width:20%;" class="container">
+                                                    <p style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por noche</p>
+                                                    </div>';
+                                                }else if($servicio == 'Paseo'){
+                                                  echo '<div style="width:20%;" class="container">
+                                                    <p style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por pasep</p>
+                                                    </div>';
+                                                }else if($servicio == 'Visita'){
+                                                  echo '<div style="width:20%;" class="container">
+                                                    <p style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por visita</p>
+                                                    </div>';
+                                                }else if($servicio == 'Dia Entero'){
+                                                  echo '<div style="width:20%;" class="container">
+                                                    <p style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por día</p>
+                                                    </div>';
+                                                }
                                               }else{
                                                 echo '<div style="width:20%;" class="container">
                                                   </div>';
@@ -124,12 +139,14 @@
                                 }
                                 echo '</ul>';
                               }else{
-                                echo '<br>';
-                                echo '<h4>No se encontraron resultados</h4>';
-                                echo '<br>';
-                                echo '<button id="volvermenubusqueda" onclick="javascript:window.location.href=menuBusqueda.php" name="volvermenubusqueda" class="btn btn-default block"><i class="fas fa-paw"></i> Volver al Menu de Búsqueda</button>';
-                              }
-                            ?>
+                                ?>
+                                <br>
+                                <h4>No se encontraron resultados</h4>
+                                <br>
+                                <button id="volvermenubusqueda" onclick="javascript:window.location.href='menuBusqueda.php'" name="volvermenubusqueda" class="btn btn-default block"><i class="fas fa-paw"></i> Volver al Menu de Búsqueda</button>
+                              <?php
+                            }?>
+
                         </div>
 
                         <div class="col-xs-12 col-md-7 col-lg-7">

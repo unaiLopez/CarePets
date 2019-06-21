@@ -18,14 +18,16 @@
     if($tipoBusqueda == 'Cuidador'){
 
       $esCuidador = 1;
-      $eventos = 1;
+      $eventosNo = 0;
+      $eventosSi = 1;
       $tipo = 'DuenoCuidador';
 
-      $sentencia = $conn->prepare("SELECT u.*, s.precio
-      FROM usuario AS u NATURAL JOIN duenocuidador AS d NATURAL JOIN evento AS e INNER JOIN servicio AS s ON s.mailusuario=d.mailusuario
-      WHERE tipo=:tipo and d.escuidador=:escuidador and s.nombre=:servicio and s.precio > 0 and u.mailusuario not in (:mailusuario) and u.eventos=:eventos and e.fecha not between (:fecha1) and (:fecha2) and fecha not in (:fecha3)");
+      $sentencia = $conn->prepare("SELECT DISTINCT u.*, s.precio, s.nombre as nombreservicio
+      FROM usuario AS u NATURAL JOIN duenocuidador AS d INNER JOIN servicio AS s ON s.mailusuario=d.mailusuario, evento as e
+      WHERE tipo=:tipo and d.escuidador=:escuidador and s.nombre=:servicio and s.precio > 0 and u.mailusuario not in (:mailusuario) and d.eventos=:eventosNo or d.eventos=:eventosSi and e.fecha not between (:fecha1) and (:fecha2) and fecha not in (:fecha3) and s.nombre=:servicio and s.precio > 0");
       $sentencia->bindParam(':tipo', $tipo);
-      $sentencia->bindParam(':eventos', $eventos);
+      $sentencia->bindParam(':eventosNo', $eventosNo);
+      $sentencia->bindParam(':eventosSi', $eventosSi);
       $sentencia->bindParam(':escuidador', $esCuidador);
       $sentencia->bindParam(':fecha1', $inicioFecha);
       $sentencia->bindParam(':fecha2', $finalFecha);

@@ -192,7 +192,7 @@
 		                    </div>
 		                    <div id="responderModal" class="modal-body">
 		                      <div class="row">
-		                        <div class="col-xs-12 col-md-12 col-lg-12 mx-auto">
+		                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
 		                            <div id="form-modal" class="form-group">
 																	<div class="form-group">
 																		<label for="respuesta">Respuesta :</label>
@@ -206,7 +206,7 @@
 		                      </div>
 		                    </div>
 		                    <div class="modal-footer">
-		                      <div class="col-xs-12 mx-auto">
+		                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
 														<div id="form-modal" class="form-group">
 															<button onclick="responderMensaje($('#idmensaje').val(), $('#respuesta').val())" name="responder" id="responder" class="btn btn-default block"><i class="far fa-comments"></i> Responder</button>
 														</div>

@@ -33,13 +33,41 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTC035_2c7HqTdiIGYdAYtJCLI0ye4coc&libraries=places"></script>
     <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
     <link rel="stylesheet" href="../../css/estiloPanelesMapas.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="../../js/funcionesBusqueda.js"></script>
+    <script type="text/javascript">
+      //Redirreccionar a verPerfilDeSerivicio.php pasandole el id del mensaje clicado a la session
+      $(document).ready(function() {
+       $(".list-group .list-group-item").click(function() {
+          var id = $(this).attr('id');
+          var precio = $(".list-group .list-group-item .precioServicio").attr('id');
+          var buscarTipo = '<?php echo $_GET['buscarTipo']; ?>';
+          alert(buscarTipo);
+          if(buscarTipo == 'Cuidador'){
+            var servicio = '<?php echo $_GET['elegirServicio']; ?>';
+            if(servicio == 'Alojamiento'){
+              var fechaInicio = '<?php echo $_GET['date1']; ?>';
+              var fechaFin = '<?php echo $_GET['date2']; ?>';
+              var data = {'buscarTipo':buscarTipo, 'id': id, 'servicio': servicio, 'precio': precio, 'fechaInicio': fechaInicio, 'fechaFin': fechaFin};
+            }else{
+              <?php if(isset($_GET['date3'])){?>
+                var fechaDia = '<?php echo $_GET['date3']; ?>';
+              <?php }?>
+              var data = {'buscarTipo':buscarTipo, 'id': id, 'servicio': servicio, 'precio': precio, 'fechaDia': fechaDia};
+            }
+          }else{
+            var data = {'buscarTipo':buscarTipo, 'id': id};
+          }
+          $.post('pasarDatosBusquedaSession.php', data, function(){
+              window.location.href = "perfilServicio.php";
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <div id="container">
@@ -115,19 +143,19 @@
                                               if($tipo == 'DuenoCuidador'){
                                                 if($servicio == 'Alojamiento'){
                                                   echo '<div style="width:20%;" class="container">
-                                                    <p style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por noche</p>
+                                                    <p class="precioServicio" id="'.$usuario['precio'].'" style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por noche</p>
                                                     </div>';
                                                 }else if($servicio == 'Paseo'){
                                                   echo '<div style="width:20%;" class="container">
-                                                    <p style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por pasep</p>
+                                                    <p class="precioServicio" id="'.$usuario['precio'].'" style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por pasep</p>
                                                     </div>';
                                                 }else if($servicio == 'Visita'){
                                                   echo '<div style="width:20%;" class="container">
-                                                    <p style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por visita</p>
+                                                    <p class="precioServicio" id="'.$usuario['precio'].'" style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por visita</p>
                                                     </div>';
                                                 }else if($servicio == 'Dia Entero'){
                                                   echo '<div style="width:20%;" class="container">
-                                                    <p style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por día</p>
+                                                    <p class="precioServicio" id="'.$usuario['precio'].'" style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por día</p>
                                                     </div>';
                                                 }
                                               }else{

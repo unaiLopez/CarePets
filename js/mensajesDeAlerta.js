@@ -1,18 +1,67 @@
-function mensajeEnviado(){
-  Swal.fire({
-  position: 'center',
-  type: 'success',
-  title: 'Mensaje enviado con éxito',
-  showConfirmButton: false,
-  timer: 1500
-})
+function enviarMensaje(mailUsuarioServicio, asunto, contenido){
+  var data = {"mailUsuarioServicio" : mailUsuarioServicio, "asunto" : asunto, "contenido" : contenido};
+  $.ajax({
+    data: data,
+    url: '/carepets/usuario/busqueda/enviarMensaje.php',
+    type: 'post',
+    async: false,
+    success: function(response){
+      if(response == true){
+        Swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Mensaje enviado con éxito',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        document.getElementById("asunto").value = "";
+        document.getElementById("mensaje").value = "";
+      }else{
+        Swal.fire({
+          position: 'center',
+          type: 'error',
+          title: 'Lo sentimos, no se pudo enviar el mensaje con éxito',
+          showConfirmButton: false,
+          timer: 2300
+        })
+      }
+    }
+  });
 }
 
-function solicitarServicio(nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3){
+function confirmarSolicitud(mailUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3, importeTotal){
+  var data = {"mailUsuarioServicio" : mailUsuarioServicio, "nombreUsuarioServicio" : nombreUsuarioServicio, "servicio" : servicio, "fecha1" : fecha1, "fecha2" : fecha2, "fecha3" : fecha3, "importeTotal" : importeTotal};
+  $.ajax({
+    data: data,
+    url: '/carepets/usuario/busqueda/enviarSolicitudCuidador.php',
+    type: 'post',
+    async: false,
+    success: function(response){
+      if(response == true){
+        Swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Solicitud enviada con éxito',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }else{
+        Swal.fire({
+          position: 'center',
+          type: 'error',
+          title: 'Lo sentimos, su solicitud no se pudo enviar con éxito',
+          showConfirmButton: false,
+          timer: 2300
+        })
+      }
+    }
+  });
+}
+
+function solicitarServicio(mailUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3){
   if(servicio == 'Alojamiento'){
     var fecha1Comparar = moment(fecha1);
     var fecha2Comparar = moment(fecha2);
-    alert(fecha2Comparar.diff(fecha1Comparar, 'days'));
     var diasDiferencia = fecha2Comparar.diff(fecha1Comparar, 'days');
     var importeTotal = (diasDiferencia * precio)+'€';
     swal.fire({
@@ -25,7 +74,11 @@ function solicitarServicio(nombreUsuarioServicio, servicio, precio, fecha1, fech
       confirmButtonColor: "#00ff55",
       cancelButtonColor: "#999999",
       reverseButtons: true,
-    });
+    }).then((result) => {
+        if (result.value) {
+            this.confirmarSolicitud(mailUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3, importeTotal);
+        }
+    })
   }else{
     importeTotal = precio+'€';
     swal.fire({
@@ -38,6 +91,10 @@ function solicitarServicio(nombreUsuarioServicio, servicio, precio, fecha1, fech
       confirmButtonColor: "#00ff55",
       cancelButtonColor: "#999999",
       reverseButtons: true,
-    });
+    }).then((result) => {
+        if (result.value) {
+            this.confirmarSolicitud(mailUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3, importeTotal);
+        }
+    })
   }
 }

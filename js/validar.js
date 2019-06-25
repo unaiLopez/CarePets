@@ -180,11 +180,6 @@ function validarTelefonoFijo(fijo){
 function validarMenuBusqueda(busco, servicio, date1, date2, date3){
   var bool = false;
   var datos = {"busco" : busco, "servicio" : servicio, "date1" : date1, "date2" : date2, "date3" : date3}
-  alert('busco: '+busco);
-  alert('servicio: '+servicio);
-  alert('fecha1: '+date1);
-  alert('fecha2: '+date2);
-  alert('fecha3: '+date3);
   $.ajax({
     data: datos,
     url: '/carepets/validaciones/validarMenuBusqueda.php',

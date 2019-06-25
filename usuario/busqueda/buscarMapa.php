@@ -147,7 +147,7 @@
                                                     </div>';
                                                 }else if($servicio == 'Paseo'){
                                                   echo '<div style="width:20%;" class="container">
-                                                    <p class="precioServicio" id="'.$usuario['precio'].'" style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por pasep</p>
+                                                    <p class="precioServicio" id="'.$usuario['precio'].'" style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por paseo</p>
                                                     </div>';
                                                 }else if($servicio == 'Visita'){
                                                   echo '<div style="width:20%;" class="container">

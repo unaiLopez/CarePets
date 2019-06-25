@@ -115,7 +115,7 @@
                     <div class="tab-pane fade show active" id="recibidos" role="tabpanel" aria-labelledby="recibidos-tab">
                       <?php
                         foreach ($mensajes as $mensaje){
-                          if($mensaje['mailreceptor'] == $correoActual && $mensaje['leido'] == 1){
+                          if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 1){
                             $emisor = $mensaje['emisor'];
                             $asunto = $mensaje['asunto'];
                             $fecha = $mensaje['fecha'];
@@ -127,7 +127,7 @@
                                       <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
                                     </div>
                                   </ul>';
-                          }else if($mensaje['mailreceptor'] == $correoActual && $mensaje['leido'] == 0){
+                          }else if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 0){
                             $emisor = $mensaje['emisor'];
                             $asunto = $mensaje['asunto'];
                             $fecha = $mensaje['fecha'];

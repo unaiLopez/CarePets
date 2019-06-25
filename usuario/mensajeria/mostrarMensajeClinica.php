@@ -21,7 +21,7 @@
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
 
-		$sql = "UPDATE mensaje SET leido=? WHERE id=?";
+		$sql = "UPDATE mensaje SET leidoreceptor=? WHERE id=?";
 		$sentencia= $conn->prepare($sql);
 		$sentencia->execute([$leido,$id]);
 

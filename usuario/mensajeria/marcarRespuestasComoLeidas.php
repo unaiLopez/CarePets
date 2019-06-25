@@ -16,7 +16,7 @@
 
     //Se marcaran como leidos todas las respuestas de este mensaje por haber entrado dentro del mensaje principal
     foreach ($filas as $fila) {
-      if($fila['leido'] == 0){
+      if($fila['leidoreceptor'] == 0){
         $idmensajeactual = $fila['id'];
         $sql = "UPDATE mensaje SET leido=? WHERE id=?";
         $sentencia= $conn->prepare($sql);

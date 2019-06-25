@@ -5,7 +5,7 @@
     $tipo = 'Respuesta';
 
     //Buscar todos los mensajes que sean de tipo respuesta
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and leido=:no");
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and leidoreceptor=:no");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':no', $noLeido);
@@ -14,9 +14,9 @@
 
     //Todos los mensajes que tengan respuestas sin leer se convertiran en mensajes no leidos
     foreach ($filas as $fila) {
-      if($fila['leido'] == 0){
+      if($fila['leidoreceptor'] == 0){
         $idMensajeCambiar = $fila['idrespuesta'];
-        $sql = "UPDATE mensaje SET leido=? WHERE id=?";
+        $sql = "UPDATE mensaje SET leidoreceptor=? WHERE id=?";
         $sentencia= $conn->prepare($sql);
         $sentencia->execute([$noLeido, $idMensajeCambiar]);
       }

@@ -89,7 +89,9 @@
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
                     <div class="row">
-                        <a class="nav-link active block" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true"><i class="fas fa-user"></i> Perfil de <strong><?php echo $row1['nombre'].' '; ?></strong>| Servicio: <strong>Alojamiento</strong> | Fechas: <strong>Desde 2019-02-03 Hasta 2019-03-02</strong></a>
+                      <a class="nav-link active block" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">
+                        <i class="fas fa-user"></i> Perfil de <strong><?php echo $row1['nombre'].' '; ?></strong>| Servicio: <strong><?php echo $_SESSION['servicio']; ?></strong> | <?php if($_SESSION['servicio'] == 'Alojamiento'){?>Fechas: <strong>Desde <?php echo $_SESSION['fechaInicio']; ?> Hasta <?php echo $_SESSION['fechaFin']; ?></strong> <?php }else{ ?> Día:<strong> <?php echo $_SESSION['fechaDia']?></strong><?php } ?>
+                      </a>
                     </div>
                   </li>
                 </ul>
@@ -177,7 +179,7 @@
                           <br>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <button onclick="solicitarServicio('<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-handshake"></i> Solicitar Servicio</button>
+                          <button onclick="solicitarServicio('<?php echo $row1['mailusuario']; ?>', '<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-handshake"></i> Solicitar Servicio</button>
                           <br>
                           <br>
                         </div>
@@ -203,24 +205,22 @@
                       <div style="height:325px;" id="recuperarMailModal" class="modal-body">
                         <div class="row">
                           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
-                            <form id="formularioRecuperarContraseña" action="recuperarContraseña.php" onsubmit="validarCorreo($('#emailRecuperar').val())" role="form">
+                            <div id="form-modal" class="form-group">
+                              <div class="form-group">
+                                <input class="form-control" id="asunto" name="asunto" placeholder="Asunto" required></input>
+                              </div>
+                              <div class="form-group">
+                                <textarea class="form-control" col="12" rows="6" id="mensaje" name="mensaje" placeholder="Contenido del mensaje" required></textarea>
+                              </div>
+                              <div class="form-group">
+                                <input type="hidden" id="mailusuarioservicio" name="mailusuarioservicio" value="<?=$row1['mailusuario']; ?>">
+                              </div>
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
                               <div id="form-modal" class="form-group">
-                                <div class="form-group">
-                                  <input class="form-control" id="asunto" name="asunto" placeholder="Asunto" required></input>
-                                </div>
-                                <div class="form-group">
-                                  <textarea class="form-control" col="12" rows="6" id="mensaje" name="mensaje" placeholder="Contenido del mensaje" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                  <input type="hidden" id="idmensaje" name="idmensaje" value="<?=$id; ?>">
-                                </div>
+                                <button onclick="enviarMensaje($('#mailusuarioservicio').val(), $('#asunto').val(), $('#mensaje').val())" name="enviar" id="enviar" class="btn btn-default block"><i class="far fa-comments"></i> Enviar</button>
                               </div>
-                              <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
-                                <div id="form-modal" class="form-group">
-                                  <button onclick="mensajeEnviado()" type="submit" name="enviar" id="enviar" class="btn btn-default block"><i class="far fa-comments"></i> Enviar</button>
-                                </div>
-                              </div>
-                            </form>
+                            </div>
                           </div>
                         </div>
                       </div>

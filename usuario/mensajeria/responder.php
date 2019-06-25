@@ -12,7 +12,8 @@
     $id = $_POST['idmensaje'];
     $tipo = 'Respuesta';
     $contenido = $_POST['respuesta'];
-    $leido = 0;
+    $leidoReceptor = 0;
+    $leidoEmisor = 1;
     //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
@@ -25,11 +26,12 @@
     $mailreceptor = $mensaje['mailemisor'];
 
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,leido,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:contenido,:fecha,:leido,:mailemisor,:mailreceptor,:idrespuesta)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,leidoreceptor,leidoemisor,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:contenido,:fecha,:leido,:mailemisor,:mailreceptor,:idrespuesta)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':contenido', $contenido);
     $sentencia->bindParam(':fecha', $fecha);
-    $sentencia->bindParam(':leido', $leido);
+    $sentencia->bindParam(':leidoreceptor', $leidoReceptor);
+    $sentencia->bindParam(':leidoemisor', $leidoEmidor);
     $sentencia->bindParam(':mailemisor', $correoActual);
     $sentencia->bindParam(':mailreceptor', $mailreceptor);
     $sentencia->bindParam(':idrespuesta', $id);

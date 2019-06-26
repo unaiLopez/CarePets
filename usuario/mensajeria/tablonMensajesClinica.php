@@ -13,7 +13,7 @@
     $noLeido = 0;
     $tipo = 'Mensaje';
 
-    //Tomar todos los mensajes del usuario y ponerlos en orden de fecha de más reciente a menos reciente
+    //Tomar todos los mensajes recibidos por el usuario y ponerlos en orden de fecha de más reciente a menos reciente
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo ORDER BY fecha DESC");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':tipo', $tipo);
@@ -100,11 +100,11 @@
                     <div class="tab-pane fade show active" id="recibidos" role="tabpanel" aria-labelledby="recibidos-tab">
                       <?php
                         foreach ($mensajes as $mensaje){
+                          $emisor = $mensaje['emisor'];
+                          $asunto = $mensaje['asunto'];
+                          $fecha = $mensaje['fecha'];
+                          $id = $mensaje['id'];
                           if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 1){
-                            $emisor = $mensaje['emisor'];
-                            $asunto = $mensaje['asunto'];
-                            $fecha = $mensaje['fecha'];
-                            $id = $mensaje['id'];
                             echo '<ul class="list-group list-group-horizontal">
                                     <div class="row">
                                       <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
@@ -113,10 +113,6 @@
                                     </div>
                                   </ul>';
                           }else if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 0){
-                            $emisor = $mensaje['emisor'];
-                            $asunto = $mensaje['asunto'];
-                            $fecha = $mensaje['fecha'];
-                            $id = $mensaje['id'];
                             echo '<ul class="list-group list-group-horizontal">
                                     <div class="row">
                                       <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>
@@ -127,6 +123,8 @@
                           }
                          }
                         ?>
+                        <br>
+                        <br>
                     </div>
                   </div>
                 </div>

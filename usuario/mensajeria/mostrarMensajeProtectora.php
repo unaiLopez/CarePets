@@ -126,11 +126,7 @@
 												 <br>
 											 </div>
 										 </div>
-										 <div class="row">
-											 <div class="col-xs-12 col-lg-12">
-												 <hr>
-											 </div>
-										 </div>
+										 <hr>
 									 </div>
 									 <?php
 									   foreach($respuestas as $respuesta){
@@ -161,11 +157,7 @@
 																	<br>
 																</div>
 															</div>
-															<div class="row">
-																<div class="col-xs-12 col-lg-12">
-																	<hr>
-																</div>
-															</div>
+															<hr>
 											 			 </div>';
 											}
 										?>

@@ -129,11 +129,10 @@
                                   $foto = $usuario['foto'];
                                   $direccion = $usuario['direccion'];
                                   $tipo = $usuario['tipo'];
-                                  $servicio = $usuario['nombreservicio'];
                                   echo '<li style="cursor:pointer;width:100%;" id="'.$mailusuario.'" class="list-group-item">
                                           <div class="row">
                                               <div style="width:30%;" class="container">
-                                                <img style="border-radius:5px;" src="'.$foto.'" height="120" width="100%">
+                                                <img style="border-radius:5px;border: solid 2px #ffffff;" src="'.$foto.'" height="120" width="100%">
                                               </div>
                                               <div style="width:50%;" class="container">
                                                 <p style="font-size:20px;color:black;">'.$nombre.'</p>
@@ -141,7 +140,7 @@
                                                 <p style="color:black;"><i style="color:#dd4b39;" class="fas fa-map-marker-alt"></i> '.$direccion.'</p>
                                               </div>';
                                               if($tipo == 'DuenoCuidador'){
-                                                if($servicio == 'Alojamiento'){
+                                                if($usuario['nombreservicio'] == 'Alojamiento'){
                                                   echo '<div style="width:20%;" class="container">
                                                     <p class="precioServicio" id="'.$usuario['precio'].'" style="color: green;font-weight: bold;font-size: 1em;">'.$usuario['precio'].'€ por noche</p>
                                                     </div>';

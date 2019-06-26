@@ -102,10 +102,10 @@
               <div class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                   <a class="nav-link active" id="recibidos-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="recibidos" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos; ?></span></a>
+                   <a onclick="mostrarTabMensajesRecibidos()" class="nav-link active" id="recibidos-tab" data-toggle="tab" href="#recibidos" role="tab" aria-controls="recibidos" aria-selected="true">Recibidos <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos; ?></span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="solicitudes-tab" data-toggle="tab" href="#solicitudes" role="tab" aria-controls="solicitudes" aria-selected="false">Solicitudes <span class="badge badge-primary badge-pill"><?php echo $notificacionesSolicitudes; ?></span></a>
+                    <a onclick="mostrarTabSolicitudes()" class="nav-link" id="solicitudes-tab" data-toggle="tab" href="#solicitudes" role="tab" aria-controls="solicitudes" aria-selected="false">Solicitudes <span class="badge badge-primary badge-pill"><?php echo $notificacionesSolicitudes; ?></span></a>
                   </li>
                 </ul>
               </div>
@@ -113,67 +113,75 @@
                 <div class="card-body mx-auto">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="recibidos" role="tabpanel" aria-labelledby="recibidos-tab">
-                      <?php
-                        foreach ($mensajes as $mensaje){
-                          if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 1){
-                            $emisor = $mensaje['emisor'];
-                            $asunto = $mensaje['asunto'];
-                            $fecha = $mensaje['fecha'];
-                            $id = $mensaje['id'];
-                            echo '<ul class="list-group list-group-horizontal">
-                                    <div class="row">
-                                      <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
-                                      <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
-                                      <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
-                                    </div>
-                                  </ul>';
-                          }else if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 0){
-                            $emisor = $mensaje['emisor'];
-                            $asunto = $mensaje['asunto'];
-                            $fecha = $mensaje['fecha'];
-                            $id = $mensaje['id'];
-                            echo '<ul class="list-group list-group-horizontal">
-                                    <div class="row">
-                                      <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>
-                                      <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$asunto.'</li>
-                                      <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
-                                    </div>
-                                  </ul>';
-                          }
-                         }
-                        ?>
+                      <div id="mensajesRecibidos">
+                        <?php
+                          foreach ($mensajes as $mensaje){
+                            if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 1){
+                              $emisor = $mensaje['emisor'];
+                              $asunto = $mensaje['asunto'];
+                              $fecha = $mensaje['fecha'];
+                              $id = $mensaje['id'];
+                              echo '<ul class="list-group list-group-horizontal">
+                                      <div class="row">
+                                        <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
+                                        <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
+                                        <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
+                                      </div>
+                                    </ul>';
+                            }else if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 0){
+                              $emisor = $mensaje['emisor'];
+                              $asunto = $mensaje['asunto'];
+                              $fecha = $mensaje['fecha'];
+                              $id = $mensaje['id'];
+                              echo '<ul class="list-group list-group-horizontal">
+                                      <div class="row">
+                                        <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>
+                                        <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$asunto.'</li>
+                                        <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
+                                      </div>
+                                    </ul>';
+                            }
+                           }
+                          ?>
+                      </div>
+                      <br>
+                      <br>
                     </div>
                     <div class="tab-pane fade" id="solicitudes" role="tabpanel" aria-labelledby="solicitudes-tab">
-                      <?php
-                        foreach ($solicitudes as $solicitud){
-                          if($solicitud['leido'] == 1){
-                            $emisor = $solicitud['emisor'];
-                            $asunto = $solicitud['asunto'];
-                            $fecha = $solicitud['fecha'];
-                            $id = $solicitud['id'];
-                            echo '<ul class="list-group list-group-horizontal">
-                                    <div class="row">
-                                      <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
-                                      <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
-                                      <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
-                                    </div>
-                                  </ul>';
+                      <div id="solicitudes">
+                        <?php
+                          foreach ($solicitudes as $solicitud){
+                            if($solicitud['leido'] == 1){
+                              $emisor = $solicitud['emisor'];
+                              $asunto = $solicitud['asunto'];
+                              $fecha = $solicitud['fecha'];
+                              $id = $solicitud['id'];
+                              echo '<ul class="list-group list-group-horizontal">
+                                      <div class="row">
+                                        <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
+                                        <li id="'.$id.'" class="list-group-item">'.$asunto.'</li>
+                                        <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
+                                      </div>
+                                    </ul>';
 
-                          }else{
-                            $emisor = $solicitud['emisor'];
-                            $asunto = $solicitud['asunto'];
-                            $fecha = $solicitud['fecha'];
-                            $id = $solicitud['id'];
-                            echo '<ul class="list-group list-group-horizontal">
-                                    <div class="row">
-                                      <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>
-                                      <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$asunto.'</li>
-                                      <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
-                                    </div>
-                                  </ul>';
+                            }else{
+                              $emisor = $solicitud['emisor'];
+                              $asunto = $solicitud['asunto'];
+                              $fecha = $solicitud['fecha'];
+                              $id = $solicitud['id'];
+                              echo '<ul class="list-group list-group-horizontal">
+                                      <div class="row">
+                                        <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>
+                                        <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$asunto.'</li>
+                                        <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
+                                      </div>
+                                    </ul>';
+                            }
                           }
-                        }
-                       ?>
+                         ?>
+                      </div>
+                      <br>
+                      <br>
                     </div>
                   </div>
                 </div>

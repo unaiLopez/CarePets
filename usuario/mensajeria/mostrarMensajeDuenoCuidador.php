@@ -15,11 +15,19 @@
     $correoActual = $_SESSION['mail'];
 
     //Tomar los datos del mensaje
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailemisor=:mailusuario and id=:id");
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and id=:id");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
+		if(!$mensaje){
+			//Tomar los datos del mensaje
+	    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailemisor=:mailusuario and id=:id");
+	    $sentencia->bindParam(':mailusuario', $correoActual);
+	    $sentencia->bindParam(':id', $id);
+	    $sentencia->execute();
+	    $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
+		}
 
 		$sql = "UPDATE mensaje SET leidoreceptor=? WHERE id=?";
 		$sentencia= $conn->prepare($sql);
@@ -130,11 +138,7 @@
 												 <br>
 											 </div>
 										 </div>
-										 <div class="row">
-											 <div class="col-xs-12 col-lg-12">
-												 <hr>
-											 </div>
-										 </div>
+										<hr>
 									 </div>
 									 <?php
 									   foreach($respuestas as $respuesta){
@@ -165,11 +169,7 @@
 																	<br>
 																</div>
 															</div>
-															<div class="row">
-																<div class="col-xs-12 col-lg-12">
-																	<hr>
-																</div>
-															</div>
+															<hr>
 											 			 </div>';
 											}
 										?>

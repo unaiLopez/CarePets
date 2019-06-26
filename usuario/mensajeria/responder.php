@@ -26,12 +26,12 @@
     $mailreceptor = $mensaje['mailemisor'];
 
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,leidoreceptor,leidoemisor,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:contenido,:fecha,:leido,:mailemisor,:mailreceptor,:idrespuesta)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,leidoreceptor,leidoemisor,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:contenido,:fecha,:leidoreceptor,:leidoemisor, :mailemisor,:mailreceptor,:idrespuesta)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':contenido', $contenido);
     $sentencia->bindParam(':fecha', $fecha);
     $sentencia->bindParam(':leidoreceptor', $leidoReceptor);
-    $sentencia->bindParam(':leidoemisor', $leidoEmidor);
+    $sentencia->bindParam(':leidoemisor', $leidoEmisor);
     $sentencia->bindParam(':mailemisor', $correoActual);
     $sentencia->bindParam(':mailreceptor', $mailreceptor);
     $sentencia->bindParam(':idrespuesta', $id);

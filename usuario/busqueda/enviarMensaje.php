@@ -28,7 +28,7 @@
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
-    //Insertar mensaje de respuesta
+    //Insertar mensaje de emisor
     $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:emisor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor,:idrespuesta)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':emisor', $emisor);

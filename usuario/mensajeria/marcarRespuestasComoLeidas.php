@@ -18,7 +18,7 @@
     foreach ($filas as $fila) {
       if($fila['leidoreceptor'] == 0){
         $idmensajeactual = $fila['id'];
-        $sql = "UPDATE mensaje SET leido=? WHERE id=?";
+        $sql = "UPDATE mensaje SET leidoreceptor=? WHERE id=?";
         $sentencia= $conn->prepare($sql);
         $sentencia->execute([$leido, $idmensajeactual]);
       }

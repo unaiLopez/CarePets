@@ -95,3 +95,7 @@ h2 {
     display: flex;
     flex: 1 1 auto;
 }
+
+hr {
+  width: 100%;
+}

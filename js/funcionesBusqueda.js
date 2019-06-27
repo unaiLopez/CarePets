@@ -2,6 +2,16 @@ function volverBusqueda() {
   window.history.back();
 }
 
+function mostrarTabPerfil(){
+  $('#tablonAdopciones').hide();
+  $('#perfil').show();
+}
+
+function mostrarTabTablonAdopciones(){
+  $('#perfil').hide();
+  $('#tablonAdopciones').show();
+}
+
 function cambiarInterfaces(){
   var opcionSeleccionadaTipo = $('#buscarTipo option:selected');
   var opcionSeleccionadaServicio = $('#elegirServicio option:selected');

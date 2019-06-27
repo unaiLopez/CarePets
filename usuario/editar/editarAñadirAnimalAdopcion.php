@@ -116,206 +116,188 @@
                       <div class="tab-pane fade show active" id="contraseña" role="tabpanel" aria-labelledby="contraseña-tab">
                         <div class="container-fluid padding">
                           <div class="row">
-                            <div class="col-xs-12 mx-auto">
-                              <?php
-                                if($tipoFuncion == 'Editar'){
-                              ?>
-                                  <h1><strong>Editar Animal</strong></h1>
-                                  <form id="formularioEditarAnimal" action="cambiarAnimalAdopcion.php" enctype="multipart/form-data" method="post">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                          <div class="input-group-addon">
-                                            <i class="fas fa-file-signature"></i>
-                                          </div>
-                                          <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del animal" value="<?php echo $animal['nombre']; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                          <div class="input-group-addon">
-                                            <i class="fas fa-dog"></i>
-                                          </div>
-                                          <input type="text" id="raza" name="raza" class="form-control" placeholder="Raza del animal" value="<?php echo $animal['raza']; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="descripcion">Descripción :</label>
-                                      <textarea class="form-control" col="6" rows="3" id="descripcion" name="descripcion"><?php echo $animal['descripcion']; ?></textarea>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                          <div class="input-group-addon">
-                                            <strong>Kg</strong>
-                                          </div>
-                                          <input type="number" id="peso" name="peso" class="form-control" placeholder="Peso del animal" value="<?php echo $animal['peso']; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                          <div class="input-group-addon">
-                                            <strong>Años</strong>
-                                          </div>
-                                          <input type="number" id="edad" name="edad" class="form-control" placeholder="Edad del animal" value="<?php echo $animal['edad']; ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="sexo">Sexo :</label>
+                            <?php
+                              if($tipoFuncion == 'Editar'){
+                            ?>
+                              <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
+                                <h1><strong>Editar Animal</strong></h1>
+                                <form id="formularioEditarAnimal" action="cambiarAnimalAdopcion.php" enctype="multipart/form-data" method="post">
+                                  <div class="form-group">
                                       <div class="input-group">
-                                        <div class="radio">
-                                          <label><input type="radio" id="sexo" name="sexo" value="Macho" <?php echo ($animal['sexo']=='Macho') ?  "checked" : "" ; ?>  required> Macho &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <div class="input-group-addon">
+                                          <i class="fas fa-file-signature"></i>
                                         </div>
-                                        <div class="radio">
-                                          <label><input type="radio" id="sexo" name="sexo" value="Hembra" <?php echo ($animal['sexo']=='Hembra') ?  "checked" : "" ; ?>  required> Hembra &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                        </div>
+                                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del animal" value="<?php echo $animal['nombre']; ?>" required>
                                       </div>
-                                    </div>
-                                    <br>
-                                    <div class="form-group">
-                                      <label for="condiciones"> Condiciones Actuales :</label>
-                                      <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input type="checkbox" id="amigable" name="amigable" class="form-check-input" value="1" <?php echo ($animal['amigable']==1) ?  "checked" : "" ; ?>  > Amigable
-                                        </label>
-                                      </div>
-                                      <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input type="checkbox" id="esterilizado" name="esterilizado" class="form-check-input" value="1" <?php echo ($animal['esterilizado']==1) ?  "checked" : "" ; ?>  >Esterilizado
-                                        </label>
-                                      </div>
-                                     <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input type="checkbox" id="vacunado" name="vacunado" class="form-check-input" value="1" <?php echo ($animal['vacunado']==1) ?  "checked" : "" ; ?>  >Vacunado
-                                        </label>
-                                     </div>
-                                     <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input type="checkbox" id="desparasitado" name="desparasitado" class="form-check-input" value="1" <?php echo ($animal['desparasitado']==1) ?  "checked" : "" ; ?>  >Desparasitado
-                                        </label>
-                                     </div>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                      <label for="avatar">Foto del Animal :</label>
-                                      <input type="file" id="avatar" name="avatar">
-                                    </div>
-                                    <br>
-                                      <?php
-                                        if($animal['foto'])
-                                          echo '<img src="'.$animal['foto'].'" width="100" height="100" style="border: solid 2px #ffffff; border-radius: 10px;">';
-                                          echo '<br>';
-                                      ?>
-                                    <div class="form-group">
-                                      <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
-                                    </div>
-                                    <br>
-                                  </form>
-                              <?php
-                                }else if($tipoFuncion == 'Añadir'){
-                              ?>
-                                  <h1><strong>Añadir Animal</strong></h1>
-                                  <form id="formulariAñadirAnimal" action="añadirAnimalAdopcion.php" enctype="multipart/form-data" method="post">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                          <div class="input-group-addon">
-                                            <i class="fas fa-file-signature"></i>
-                                          </div>
-                                          <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del animal" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                          <div class="input-group-addon">
-                                            <i class="fas fa-dog"></i>
-                                          </div>
-                                          <input type="text" id="raza" name="raza" class="form-control" placeholder="Raza del animal" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="descripcion">Descripción :</label>
-                                      <textarea class="form-control" col="6" rows="3" id="descripcion" name="descripcion" placeholder="Descripción breve del animal"></textarea>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                          <div class="input-group-addon">
-                                            <strong>Kg</strong>
-                                          </div>
-                                          <input type="number" id="peso" name="peso" class="form-control" placeholder="Peso del animal" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                          <div class="input-group-addon">
-                                            <strong>Años</strong>
-                                          </div>
-                                          <input type="number" id="edad" name="edad" class="form-control" placeholder="Edad del animal" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="sexo">Sexo :</label>
+                                  </div>
+                                  <div class="form-group">
                                       <div class="input-group">
-                                        <div class="radio">
-                                          <label><input type="radio" id="sexo" name="sexo" value="Macho" required> Macho &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <div class="input-group-addon">
+                                          <i class="fas fa-dog"></i>
                                         </div>
-                                        <div class="radio">
-                                          <label><input type="radio" id="sexo" name="sexo" value="Hembra" required> Hembra &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <input type="text" id="raza" name="raza" class="form-control" placeholder="Raza del animal" value="<?php echo $animal['raza']; ?>" required>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="descripcion">Descripción :</label>
+                                    <textarea class="form-control" col="6" rows="3" id="descripcion" name="descripcion"><?php echo $animal['descripcion']; ?></textarea>
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                        <div class="input-group-addon">
+                                          <strong>Kg</strong>
                                         </div>
+                                        <input type="number" id="peso" name="peso" class="form-control" placeholder="Peso del animal" value="<?php echo $animal['peso']; ?>" required>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                        <div class="input-group-addon">
+                                          <strong>Años</strong>
+                                        </div>
+                                        <input type="number" id="edad" name="edad" class="form-control" placeholder="Edad del animal" value="<?php echo $animal['edad']; ?>" required>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="sexo">Sexo :</label>
+                                    <div class="input-group">
+                                      <div class="radio">
+                                        <label><input type="radio" id="sexo" name="sexo" value="Macho" <?php echo ($animal['sexo']=='Macho') ?  "checked" : "" ; ?>  required> Macho &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                      </div>
+                                      <div class="radio">
+                                        <label><input type="radio" id="sexo" name="sexo" value="Hembra" <?php echo ($animal['sexo']=='Hembra') ?  "checked" : "" ; ?>  required> Hembra &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                       </div>
                                     </div>
-                                    <br>
-                                    <div class="form-group">
-                                      <label for="condiciones"> Condiciones Actuales :</label>
-                                      <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input type="checkbox" id="amigable" name="amigable" class="form-check-input" value="1">Amigable
-                                        </label>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="condiciones"> Condiciones Actuales :</label>
+                                    <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" id="amigable" name="amigable" class="form-check-input" value="1" <?php echo ($animal['amigable']==1) ?  "checked" : "" ; ?>  > Amigable
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" id="esterilizado" name="esterilizado" class="form-check-input" value="1" <?php echo ($animal['esterilizado']==1) ?  "checked" : "" ; ?>  >Esterilizado
+                                      </label>
+                                    </div>
+                                   <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" id="vacunado" name="vacunado" class="form-check-input" value="1" <?php echo ($animal['vacunado']==1) ?  "checked" : "" ; ?>  >Vacunado
+                                      </label>
+                                   </div>
+                                   <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" id="desparasitado" name="desparasitado" class="form-check-input" value="1" <?php echo ($animal['desparasitado']==1) ?  "checked" : "" ; ?>  >Desparasitado
+                                      </label>
+                                   </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="avatar">Foto del Animal :</label>
+                                    <input type="file" id="avatar" name="avatar">
+                                  </div>
+                                  <br>
+                                    <?php
+                                      if($animal['foto'])
+                                        echo '<img src="'.$animal['foto'].'" width="100" height="100" style="border: solid 2px #ffffff; border-radius: 10px;">';
+                                        echo '<br>';
+                                    ?>
+                                  <div class="form-group">
+                                    <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default block"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
+                                  </div>
+                                  <br>
+                                </form>
+                              </div>
+                            <?php
+                              }else if($tipoFuncion == 'Añadir'){
+                            ?>
+                              <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
+                                <h1><strong>Añadir Animal</strong></h1>
+                                <form id="formulariAñadirAnimal" action="añadirAnimalAdopcion.php" enctype="multipart/form-data" method="post">
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                        <div class="input-group-addon">
+                                          <i class="fas fa-file-signature"></i>
+                                        </div>
+                                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre del animal" required>
                                       </div>
-                                      <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input type="checkbox" id="esterilizado" name="esterilizado" class="form-check-input" value="1">Esterilizado
-                                        </label>
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                        <div class="input-group-addon">
+                                          <i class="fas fa-dog"></i>
+                                        </div>
+                                        <input type="text" id="raza" name="raza" class="form-control" placeholder="Raza del animal" required>
                                       </div>
-                                     <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input type="checkbox" id="vacunado" name="vacunado" class="form-check-input" value="1">Vacunado
-                                        </label>
-                                     </div>
-                                     <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input type="checkbox"  id="desparasitado" name="desparasitado" class="form-check-input" value="1">Desparasitado
-                                        </label>
-                                     </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="descripcion">Descripción :</label>
+                                    <textarea class="form-control" col="6" rows="3" id="descripcion" name="descripcion" placeholder="Descripción breve del animal"></textarea>
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                        <div class="input-group-addon">
+                                          <strong>Kg</strong>
+                                        </div>
+                                        <input type="number" id="peso" name="peso" class="form-control" placeholder="Peso del animal" required>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <div class="input-group">
+                                        <div class="input-group-addon">
+                                          <strong>Años</strong>
+                                        </div>
+                                        <input type="number" id="edad" name="edad" class="form-control" placeholder="Edad del animal" required>
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="sexo">Sexo :</label>
+                                    <div class="input-group">
+                                      <div class="radio">
+                                        <label><input type="radio" id="sexo" name="sexo" value="Macho" required> Macho &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                      </div>
+                                      <div class="radio">
+                                        <label><input type="radio" id="sexo" name="sexo" value="Hembra" required> Hembra &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                      </div>
                                     </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <div class="form-group">
-                                      <label for="avatar">Foto del Animal :</label>
-                                      <input type="file" id="avatar" name="avatar">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="condiciones"> Condiciones Actuales :</label>
+                                    <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" id="amigable" name="amigable" class="form-check-input" value="1">Amigable
+                                      </label>
                                     </div>
-                                    <br>
-                                    <div class="form-group">
-                                      <button type="submit" id="submit" name="añadiranimal" class="btn btn-default"><i class="fas fa-plus-circle"></i> Añadir Animal</button>
+                                    <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" id="esterilizado" name="esterilizado" class="form-check-input" value="1">Esterilizado
+                                      </label>
                                     </div>
-                                    <br>
-                                  </form>
-                              <?php
-                                }
-                              ?>
-                            </div>
+                                   <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" id="vacunado" name="vacunado" class="form-check-input" value="1">Vacunado
+                                      </label>
+                                   </div>
+                                   <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input type="checkbox"  id="desparasitado" name="desparasitado" class="form-check-input" value="1">Desparasitado
+                                      </label>
+                                   </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="avatar">Foto del Animal :</label>
+                                    <input type="file" id="avatar" name="avatar">
+                                  </div>
+                                  <br>
+                                  <div class="form-group">
+                                    <button type="submit" id="submit" name="añadiranimal" class="btn btn-default block"><i class="fas fa-plus-circle"></i> Añadir Animal</button>
+                                  </div>
+                                  <br>
+                                </form>
+                              </div>
+                            <?php
+                              }
+                            ?>
                           </div>
                         </div>
                       </div>

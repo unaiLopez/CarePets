@@ -42,10 +42,12 @@
     <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <link rel="stylesheet" href="../../css/starRating.css">
-    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <script type="text/javascript" src="../../js/funcionesBusqueda.js"></script>
-    <script type="text/javascript" src="../../js/mensajesDeAlerta.js"></script>
-    <script type="text/javascript" src="../../js/pestañasConURL.js"></script>
+    <link rel="stylesheet" href="../../css/estiloPanelesHorizontales.css"/>
+    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+    <script src="../../js/funcionesBusqueda.js"></script>
+    <script src="../../js/mensajesDeAlerta.js"></script>
+    <script src="../../js/pestañasConURL.js"></script>
+    <script src="../../js/funcionesAnimalesAdopcion.js"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
   </head>
@@ -89,7 +91,7 @@
               <div class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active block" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">
+                    <a onclick="mostrarTabPerfil()" class="nav-link active block" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">
                       <?php if($row1['tipo']!='DuenoCuidador'){?>
                           <i class="fas fa-user"></i> Perfil de <strong><?php echo $row1['nombre'].' '; ?></strong>
                       <?php }else{ ?>
@@ -99,7 +101,7 @@
                   </li>
                   <?php if($row1['tipo'] == 'Protectora'){ ?>
                   <li class="nav-item">
-                   <a class="nav-link" id="tablonadopciones-tab" data-toggle="tab" href="#tablonadopciones" role="tab" aria-controls="tablonadopciones" aria-selected="true"><i class="fas fa-paw"></i> Solicitar Adopción de Animal</a>
+                   <a onclick="mostrarTabTablonAdopciones()" class="nav-link" id="tablonadopciones-tab" data-toggle="tab" href="#tablonadopciones" role="tab" aria-controls="tablonadopciones" aria-selected="true"><i class="fas fa-paw"></i> Solicitar Adopción de Animal</a>
                   </li>
                   <?php } ?>
                 </ul>
@@ -108,114 +110,110 @@
                 <div class="card-body">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="perfil-tab" role="tabpanel" aria-labelledby="perfil-tab">
-                      <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <br>
-                            <?php
-                              if($row1['foto']){
-                                echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="240" width="200">';
-                              }else{
-                                echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="200" width="200">';
-                              }
-                             ?>
+                      <div id="perfil">
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <div class="container">
+                              <br>
+                              <?php
+                                if($row1['foto']){
+                                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="200" width="200">';
+                                }else{
+                                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="200" width="200">';
+                                }
+                               ?>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <div class="container">
+                              <br>
+                              <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
+                              <br>
+                              <h5>Reputación como cuidador :</h5>
+                              <x-star-rating value="<?=$mediaMostrar?>" number="5"></x-star-rating>
+                              <br>
+                              <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
+                              <script src="../../js/showStars.js"></script>
+                              <br>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <div class="container">
+                              <br>
+                              <?php
+                                if($rowTipo['tipo'] != 'Protectora'){
+                                  if($row1['experiencia']){
+                                    echo '<label for="experiencia">Experiencia :</label>';
+                                    echo '<br>';
+                                    echo $row1['experiencia'].' Años';
+                                    echo '<br>';
+                                    echo '<br>';
+                                  }
+                                }
+                                if($row1['descripcion']){
+                                  echo '<label for="descripcion">Descripción :</label>';
+                                  echo '<br>';
+                                  echo $row1['descripcion'];
+                                  echo '<br>';
+                                  echo '<br>';
+                                }
+                                if($row1['direccion']){
+                                  echo '<label for="direccion">Dirección :</label>';
+                                  echo '<br>';
+                                  echo $row1['direccion'];
+                                  echo '<br>';
+                                  echo '<br>';
+                                }
+                              ?>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <div class="container">
+                              <br>
+                              <label for="correo">Correo Electrónico :</label>
+                              <br>
+                              <?php echo $row1['mailusuario']; ?>
+                              <br>
+                              <br>
+                              <label for="movil">Teléfono Móvil :</label>
+                              <br>
+                              <?php echo $row1['telefonomovil']; ?>
+                              <br>
+                              <br>
+                            </div>
                           </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <br>
-                            <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
-                            <br>
-                            <h5>Reputación como cuidador :</h5>
-                            <x-star-rating value="<?=$mediaMostrar?>" number="5"></x-star-rating>
-                            <br>
-                            <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
-                            <script src="../../js/showStars.js"></script>
+                        <div style="margin-top:15px;" class="row">
+                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <button onclick="volverBusqueda()" class="btn btn-default block"><i class="fas fa-arrow-alt-circle-left"></i> Volver a la Búsqueda</button>
                             <br>
                             <br>
                           </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <br>
-                            <?php
-                              if($row1['experiencia']){
-                                echo '<label for="experiencia">Experiencia :</label>';
-                                echo '<br>';
-                                echo $row1['experiencia'].' Años';
-                                echo '<br>';
-                                echo '<br>';
-                              }
-                              if($row1['descripcion']){
-                                echo '<label for="descripcion">Descripción :</label>';
-                                echo '<br>';
-                                echo $row1['descripcion'];
-                                echo '<br>';
-                                echo '<br>';
-                              }
-                              if($row1['direccion']){
-                                echo '<label for="direccion">Dirección :</label>';
-                                echo '<br>';
-                                echo $row1['direccion'];
-                                echo '<br>';
-                              }
-                            ?>
+                          <?php if($row1['tipo'] == 'DuenoCuidador'){ ?>
+                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <button onclick="solicitarServicio('<?php echo $row1['mailusuario']; ?>', '<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-handshake"></i> Solicitar Servicio</button>
                             <br>
                             <br>
                           </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <div class="container">
-                            <br>
-                            <label for="correo">Correo Electrónico :</label>
-                            <br>
-                            <?php echo $row1['mailusuario']; ?>
-                            <br>
-                            <br>
-                            <label for="movil">Teléfono Móvil :</label>
-                            <br>
-                            <?php echo $row1['telefonomovil']; ?>
+                          <?php } ?>
+                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <button data-toggle="modal" href="#myModal" class="btn btn-default block"><i class="fas fa-envelope"></i> Enviar Mensaje</button>
                             <br>
                             <br>
                           </div>
                         </div>
                       </div>
-                      <div style="margin-top:15px;" class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <button onclick="volverBusqueda()" class="btn btn-default block"><i class="fas fa-arrow-alt-circle-left"></i> Volver a la Búsqueda</button>
-                          <br>
-                          <br>
-                        </div>
-                        <?php if($row1['tipo'] == 'DuenoCuidador'){ ?>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <button onclick="solicitarServicio('<?php echo $row1['mailusuario']; ?>', '<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-handshake"></i> Solicitar Servicio</button>
-                          <br>
-                          <br>
-                        </div>
-                        <?php }else if($row1['tipo'] == 'Protectora'){ ?>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <button onclick="solicitarServicio('<?php echo $row1['mailusuario']; ?>', '<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-paw"></i> Ver Tablón de Adopciones</button>
-                          <br>
-                          <br>
-                        </div>
-                        <?php } ?>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                          <button data-toggle="modal" href="#myModal" class="btn btn-default block"><i class="fas fa-envelope"></i> Enviar Mensaje</button>
-                          <br>
-                          <br>
-                        </div>
+                    </div>
+                    <div id="tablonAdopciones">
+                      <?php if($row1['tipo'] == 'Protectora'){ ?>
+                      <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab">
+                        <?php
+                          require_once 'mostrarAdopcionDeAnimales.php';
+                        ?>
                       </div>
+                    <?php } ?>
                     </div>
-                    <?php if($row1['tipo'] == 'Protectora'){ ?>
-                    <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab">
-                      <?php
-                        require_once 'mostrarAdopcionDeAnimales.php';
-                      ?>
-                    </div>
-                  <?php } ?>
                   </div>
-                  <br>
-                  <br>
                 </div>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" role="dialog">

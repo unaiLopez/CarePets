@@ -46,9 +46,9 @@
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <script src="../../js/validar.js"></script>
     <script src="../../js/googleMaps.js"></script>
-    <script src="../../js/mostrarInformacionDinamica.js"></script>
     <script src="../../js/funcionesAnimalesAdopcion.js"></script>
     <script src="../../js/pestañasConURL.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
   </head>
   <body>
     <div id="container">

@@ -8,8 +8,23 @@ $(document).ready(function() {
             type: 'post',
             async: false,
             success: function(response) {
-                alert("El animal se ha borrado con exito.");
-                location.reload();
+              if(response == true){
+                Swal.fire({
+                  position: 'center',
+                  type: 'success',
+                  title: 'El animal se ha borrado con éxito',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+              }else{
+                Swal.fire({
+                  position: 'center',
+                  type: 'error',
+                  title: 'Lo sentimos, no se pudo borrar el animal con éxito',
+                  showConfirmButton: false,
+                  timer: 2300
+                })
+              }
             }
         });
     });
@@ -23,6 +38,35 @@ $(document).ready(function() {
 
     });
 });
+
+function enviarSolicitudAdopcion(id,nombre,raza,sexo,foto, mailUsuarioServicio){
+  var data = {"id" : id, "nombre" : nombre, "raza" : raza, "sexo" : sexo, "foto" : foto, "mailUsuarioServicio" : mailUsuarioServicio};
+  $.ajax({
+      data: data,
+      url: '/carepets/usuario/editar/enviarSolicitudAdopcion.php',
+      type: 'post',
+      async: false,
+      success: function(response) {
+        if(response == true){
+          Swal.fire({
+            position: 'center',
+            type: 'success',
+            title: 'Solicitud de adopción enviada con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }else{
+          Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: 'Lo sentimos, no se pudo enviar la solicitud de adopción con éxito',
+            showConfirmButton: false,
+            timer: 2300
+          })
+        }
+      }
+  });
+}
 
 function redireccionarAñadirAnimal() {
   var tipo = 'Añadir';

@@ -12,6 +12,13 @@
     $sql = "DELETE FROM animal WHERE id=?";
     $sentencia = $conn->prepare($sql);
     $sentencia->execute([$idAnimal]);
+
+    if($sentencia){
+      echo true;
+    }else{
+      echo false;
+    }
+
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
   }

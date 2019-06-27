@@ -7,13 +7,23 @@ function responderMensaje(idmensaje, respuesta) {
       type: 'post',
       async: false,
       success: function(response) {
-          alert(response);
-          alert('Mensaje enviado con exito');
-          location.reload(); // then reload the page
-
-      },
-      error: function() {
-          alert('No se pudo enviar el mensaje');
+        if(response == true){
+          Swal.fire({
+            position: 'center',
+            type: 'success',
+            title: 'Respuesta enviada con éxito',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }else{
+          Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: 'Lo sentimos, no se pudo enviar la respuesta con éxito',
+            showConfirmButton: false,
+            timer: 2300
+          })
+        }
       }
-  });
+   });
 }

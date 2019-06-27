@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script type="text/javascript" src="../../js/funcionesBusqueda.js"></script>
     <script type="text/javascript" src="../../js/mensajesDeAlerta.js"></script>
+    <script type="text/javascript" src="../../js/pestañasConURL.js"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
   </head>
@@ -88,12 +89,19 @@
               <div class="card-header mx-auto">
                 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                   <li class="nav-item">
-                    <div class="row">
-                      <a class="nav-link active block" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">
+                    <a class="nav-link active block" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">
+                      <?php if($row1['tipo']!='DuenoCuidador'){?>
+                          <i class="fas fa-user"></i> Perfil de <strong><?php echo $row1['nombre'].' '; ?></strong>
+                      <?php }else{ ?>
                         <i class="fas fa-user"></i> Perfil de <strong><?php echo $row1['nombre'].' '; ?></strong>| Servicio: <strong><?php echo $_SESSION['servicio']; ?></strong> | <?php if($_SESSION['servicio'] == 'Alojamiento'){?>Fechas: <strong>Desde <?php echo $_SESSION['fechaInicio']; ?> Hasta <?php echo $_SESSION['fechaFin']; ?></strong> <?php }else{ ?> Día:<strong> <?php echo $_SESSION['fechaDia']?></strong><?php } ?>
-                      </a>
-                    </div>
+                      <?php } ?>
+                    </a>
                   </li>
+                  <?php if($row1['tipo'] == 'Protectora'){ ?>
+                  <li class="nav-item">
+                   <a class="nav-link" id="tablonadopciones-tab" data-toggle="tab" href="#tablonadopciones" role="tab" aria-controls="tablonadopciones" aria-selected="true"><i class="fas fa-paw"></i> Solicitar Adopción de Animal</a>
+                  </li>
+                  <?php } ?>
                 </ul>
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
@@ -178,11 +186,19 @@
                           <br>
                           <br>
                         </div>
+                        <?php if($row1['tipo'] == 'DuenoCuidador'){ ?>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                           <button onclick="solicitarServicio('<?php echo $row1['mailusuario']; ?>', '<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-handshake"></i> Solicitar Servicio</button>
                           <br>
                           <br>
                         </div>
+                        <?php }else if($row1['tipo'] == 'Protectora'){ ?>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                          <button onclick="solicitarServicio('<?php echo $row1['mailusuario']; ?>', '<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-paw"></i> Ver Tablón de Adopciones</button>
+                          <br>
+                          <br>
+                        </div>
+                        <?php } ?>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                           <button data-toggle="modal" href="#myModal" class="btn btn-default block"><i class="fas fa-envelope"></i> Enviar Mensaje</button>
                           <br>
@@ -190,6 +206,13 @@
                         </div>
                       </div>
                     </div>
+                    <?php if($row1['tipo'] == 'Protectora'){ ?>
+                    <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab">
+                      <?php
+                        require_once 'mostrarAdopcionDeAnimales.php';
+                      ?>
+                    </div>
+                  <?php } ?>
                   </div>
                   <br>
                   <br>

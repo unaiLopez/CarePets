@@ -183,12 +183,12 @@
                     <div class="tab-pane fade" id="solicitudes" role="tabpanel" aria-labelledby="solicitudes-tab">
                       <div class="solicitudes">
                         <?php
-                          foreach ($solicitudes as $solicitud){
-                            if($solicitud['leidoreceptor'] == 1){
-                              $emisor = $solicitud['emisor'];
-                              $asunto = $solicitud['asunto'];
-                              $fecha = $solicitud['fecha'];
-                              $id = $solicitud['id'];
+                          foreach ($mensajesRecibidosSolicitudes as $mensajeRecibidoSolicitudes){
+                            $emisor = $mensajeRecibidoSolicitudes['emisor'];
+                            $asunto = $mensajeRecibidoSolicitudes['asunto'];
+                            $fecha = $mensajeRecibidoSolicitudes['fecha'];
+                            $id = $mensajeRecibidoSolicitudes['id'];
+                            if($mensajeRecibidoSolicitudes['leidoreceptor'] == 1){
                               echo '<ul class="list-group list-group-horizontal">
                                       <div class="row">
                                         <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
@@ -198,10 +198,6 @@
                                     </ul>';
 
                             }else{
-                              $emisor = $solicitud['emisor'];
-                              $asunto = $solicitud['asunto'];
-                              $fecha = $solicitud['fecha'];
-                              $id = $solicitud['id'];
                               echo '<ul class="list-group list-group-horizontal">
                                       <div class="row">
                                         <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>

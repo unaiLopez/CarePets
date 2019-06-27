@@ -38,6 +38,12 @@
     $sentencia->execute();
     $_SESSION['id'] = $id;
 
+    if($sentencia){
+      echo true;
+    }else{
+      echo false;
+    }
+
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
   }

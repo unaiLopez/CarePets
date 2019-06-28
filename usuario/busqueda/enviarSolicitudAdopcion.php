@@ -10,25 +10,23 @@
 
     $correoActual = $_SESSION['mail'];
 
-    $sentencia = $conn->prepare("SELECT direccion,telefonomovil,nombre FROM usuario WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correoActual);
-    $sentencia->execute();
-    $usuario = $sentencia->fetch(PDO::FETCH_BOTH);
+    require_once '../datosAnimal.php?id='.$_POST['id'];
+    require_once '../datosUsuario.php';
 
     //Si existe ya una solicitud tuya en esas fechas se manda una notificación negandotela, si no se manda la solicitud
-    $contenido = '<label for="solicitante">Nombre Solicitante</label><p>'.$usuario['nombre'].
+    $contenido = '<label for="solicitante">Nombre Solicitante</label><p>'.$row1['nombre'].
     '<label for="mailSolicitante">Correo Electrónico Solicitante</label><p>'.$correoActual.
     '<label for="direccion">Dirección Solicitante</label><p>'.$usuario['direccion'].
     '<label for="telefonoMovil">Teléfono Móvil Solicitante</label><p>'.$usuario['telefonomovil'].
-    '<label for="nombre">Nombre Animal</label><p>'.$_POST['nombre'].
-    '</p><br><label for="edad">Edad Animal</label><p>'.$_POST['edad'].
-    '</p><br><label for="raza">Raza Animal</label><p>'.$_POST['raza'].
-    '</p><br><label for="sexo">Sexo Animal</label><p>'.$_POST['sexo'].
-    '</p><br><label for="foto" style="width:50px;height:50px;:border-radius:5px;border: solid 2px #ffffff;">Foto Animal</label><p>'.$_POST['foto'].
+    '<label for="nombre">Nombre Animal</label><p>'.$animal['nombre'].
+    '</p><br><label for="edad">Edad Animal</label><p>'.$animal['edad'].
+    '</p><br><label for="raza">Raza Animal</label><p>'.$animal['raza'].
+    '</p><br><label for="sexo">Sexo Animal</label><p>'.$animal['sexo'].
+    '</p><br><label for="foto" style="width:50px;height:50px;:border-radius:5px;border: solid 2px #ffffff;">Foto Animal</label><p>'.$animal['foto'].
     '</p><br>';
 
     $tipo = 'Solicitud';
-    $emisor = $usuario['nombre'];
+    $emisor = $row1['nombre'];
     $leidoEmisor = 1;
     $leidoReceptor = 0;
     $mailReceptor = $_POST['mailUsuarioServicio'];

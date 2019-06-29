@@ -3,8 +3,8 @@
   try {
     require_once '../conectarDB.php';
     $conn = conectarse();
-    //Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
-    require_once '../mensajeria/mensajesRecibidosNoLeidos.php';
+    //Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
+    require_once '../mensajeria/notificacionesMensajeriaRecibidosMensajes.php';
     //Tomar los datos del usuario para utilizarlos de forma dinámica
     require_once '../datosUsuario.php';
     //Tomar los datos de la clinica para utilizarlos de forma dinámica
@@ -58,7 +58,7 @@ $conn = null;
                 <hr>
                 <li><a href="../editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos; ?></span></a></li>
+                <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes; ?></span></a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>

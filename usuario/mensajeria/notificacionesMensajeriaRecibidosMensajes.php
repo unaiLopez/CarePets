@@ -5,16 +5,14 @@
     $noLeido = 0;
     $tipo = 'Mensaje';
 
-    //Mensajes sin leer
+    //Mensajes recibidos sin leer
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo and leidoreceptor=:no");
     $sentencia->bindParam(':mailusuario', $correoActual);
-    $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':no', $noLeido);
+    $sentencia->bindParam(':tipo', $tipo);
     $sentencia->execute();
     $filas = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-    $notificacionesRecibidos = count($filas);
-
-    require_once '../datosUsuario.php';
+    $notificacionesRecibidosMensajes = count($filas);
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();

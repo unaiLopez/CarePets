@@ -40,12 +40,12 @@
 		$respuestas = $sentencia->fetchAll(PDO::FETCH_BOTH);
 
 		require_once 'marcarRespuestasComoLeidas.php';
-		//Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
-    require_once 'mensajesRecibidosNoLeidos.php';
+		//Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
+    require_once 'notificacionesMensajeriaRecibidosMensajes.php';
     //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente
-    require_once 'solicitudesRecibidasNoLeidas.php';
+    require_once 'notificacionesMensajeriaRecibidosSolicitudes.php';
     //Cuenta la cantidad de mensajes enviados no leidos para mostrarlos en las notificaciones posteriormente
-    require_once 'mensajesEnviadosNoLeidos.php';
+    require_once 'notificacionesMensajeriaEnviados.php';
     require_once '../datosUsuario.php';
 		require_once 'datosMensaje.php';
 
@@ -95,7 +95,7 @@
                  <hr>
                  <li><a href="../editar/editarProtectora.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                  <hr>
-                 <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos+$notificacionesEnviados+$notificacionesSolicitudes; ?></span></a></li>
+                 <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes+$notificacionesEnviados+$notificacionesRecibidosSolicitudes; ?></span></a></li>
                  <hr>
                  <li><a href="../busqueda/menuBusqueda.php"><i class="fas fa-search"></i> Búsqueda</a></li>
                  <hr>
@@ -112,17 +112,17 @@
            <div class="row">
              <div class="card">
                <div class="card-header mx-auto">
-								 <p><h5><?php echo 'Conversación con : '.$mensaje['mailreceptor'];?></h5></p>
+								 <p><h5><?php echo 'Conversación con : '.$mensaje['receptor'];?></h5></p>
                </div>
                <div class="col-lg-12 scroll">
                  <div class="card-body mx-auto">
 									 <div class="mensaje">
 										 <div class="row">
 											 <div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
-												 <strong>Para :</strong> <?php echo $mensaje['mailreceptor']; ?>
+												 <strong>Para :</strong> <?php echo $mensaje['receptor']; ?>
 												 <div class="row">
 													 <div class="col-xs-7 col-lg-7">
-														 <strong>De :</strong> <?php echo $mensaje['mailemisor']; ?>
+														 <strong>De :</strong> <?php echo $mensaje['emisor']; ?>
 												 		</div>
 												 </div>
 
@@ -144,17 +144,17 @@
 									 </div>
 									 <?php
 									   foreach($respuestas as $respuesta){
-											 $mailemisor = $respuesta['mailemisor'];
-											 $mailreceptor = $respuesta['mailreceptor'];
+											 $emisor = $respuesta['emisor'];
+											 $receptor = $respuesta['receptor'];
 											 $fecha = $respuesta['fecha'];
 											 $contenido = $respuesta['contenido'];
 											 echo '<div class="respuesta">
 															 <div class="row">
 																<div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
-																	<strong>Para : </strong>'.$mailreceptor.'
+																	<strong>Para : </strong>'.$receptor.'
 																	<div class="row">
 																		<div class="col-xs-7 col-lg-7">
-																		<strong>De : </strong>'.$mailemisor.'
+																		<strong>De : </strong>'.$emisor.'
 																	 </div>
 																	</div>
 																</div>
@@ -193,7 +193,7 @@
 		                  <div class="modal-content">
 		                    <div class="modal-header">
 													<div class="col-xs-12 col-md-12 col-lg-12">
-		                      	<h3>Para : <?php echo $mensaje['mailemisor']; ?><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></h3>
+		                      	<h3>Para : <?php echo $mensaje['emisor']; ?><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></h3>
 													</div>
 		                    </div>
 		                    <div id="responderModal" class="modal-body">

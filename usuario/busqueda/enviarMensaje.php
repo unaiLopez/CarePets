@@ -10,14 +10,7 @@
 
     $correoActual = $_SESSION['mail'];
 
-    //Conseguir el mail del receptor
-    $sentencia = $conn->prepare("SELECT direccion,telefonomovil,nombre FROM usuario WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correoActual);
-    $sentencia->execute();
-    $usuario = $sentencia->fetch(PDO::FETCH_BOTH);
-
     $tipo = 'Mensaje';
-    $emisor = $usuario['nombre'];
     $leidoEmisor = 1;
     $leidoReceptor = 0;
     $mailReceptor = $_POST['mailUsuarioServicio'];
@@ -27,10 +20,22 @@
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
+    //Conseguir el nombre del emisor
+    $sentencia = $conn->prepare("SELECT nombre FROM usuario WHERE mailusuario=:mailusuario");
+    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia->execute();
+    $emisor = $sentencia->fetch(PDO::FETCH_BOTH);
+
+    //Conseguir el nombre del receptor
+    $sentencia = $conn->prepare("SELECT nombre FROM usuario WHERE mailusuario=:mailusuario");
+    $sentencia->bindParam(':mailusuario', $mailReceptor);
+    $sentencia->execute();
+    $receptor = $sentencia->fetch(PDO::FETCH_BOTH);
+
     //Insertar mensaje de emisor
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor) VALUES(:tipo,:emisor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor,receptor) VALUES(:tipo,:emisor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor,:receptor)");
     $sentencia->bindParam(':tipo', $tipo);
-    $sentencia->bindParam(':emisor', $emisor);
+    $sentencia->bindParam(':emisor', $emisor['nombre']);
     $sentencia->bindParam(':contenido', $contenido);
     $sentencia->bindParam(':fecha', $fecha);
     $sentencia->bindParam(':asunto', $asunto);
@@ -38,6 +43,7 @@
     $sentencia->bindParam(':leidoreceptor', $leidoReceptor);
     $sentencia->bindParam(':mailemisor', $correoActual);
     $sentencia->bindParam(':mailreceptor', $mailReceptor);
+    $sentencia->bindParam(':receptor', $receptor['nombre']);
     $sentencia->execute();
 
     if($sentencia){

@@ -22,8 +22,6 @@
       }
     }
 
-    require_once '../datosUsuario.php';
-
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
   }

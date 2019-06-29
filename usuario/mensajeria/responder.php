@@ -24,9 +24,11 @@
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
     $mailreceptor = $mensaje['mailemisor'];
+    $receptor = $mensaje['emisor'];
+    $emisor = $mensaje['receptor'];
 
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,leidoreceptor,leidoemisor,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:contenido,:fecha,:leidoreceptor,:leidoemisor, :mailemisor,:mailreceptor,:idrespuesta)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,leidoreceptor,leidoemisor,mailemisor,mailreceptor,emisor,receptor,idrespuesta) VALUES(:tipo,:contenido,:fecha,:leidoreceptor,:leidoemisor, :mailemisor,:mailreceptor,:emisor,:receptor,:idrespuesta)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':contenido', $contenido);
     $sentencia->bindParam(':fecha', $fecha);
@@ -34,8 +36,11 @@
     $sentencia->bindParam(':leidoemisor', $leidoEmisor);
     $sentencia->bindParam(':mailemisor', $correoActual);
     $sentencia->bindParam(':mailreceptor', $mailreceptor);
+    $sentencia->bindParam(':emisor', $emisor);
+    $sentencia->bindParam(':receptor', $receptor);
     $sentencia->bindParam(':idrespuesta', $id);
     $sentencia->execute();
+    
     $_SESSION['id'] = $id;
 
     if($sentencia){

@@ -3,10 +3,11 @@
   try {
     require_once '../conectarDB.php';
     $conn = conectarse();
-    //Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
-    require_once '../mensajeria/mensajesRecibidosNoLeidos.php';
-    //Cuenta la cantidad de solicitudes no leidas para mostrarlo en las notificaciones posteriormente
-    require_once '../mensajeria/solicitudesRecibidasNoLeidas.php';
+    //Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
+    require_once '../mensajeria/notificacionesMensajeriaRecibidosMensajes.php';
+    //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente
+    require_once '../mensajeria/notificacionesMensajeriaRecibidosSolicitudes.php';
+    //Cuenta la cantidad de mensajes enviados no leidos para mostrarlos en las notificaciones posteriormente
     //Tomar los datos del usuario para utilizarlos de forma dinámica
     require_once '../datosUsuario.php';
     //Tomar los datos de la clinica para utilizarlos de forma dinámica
@@ -64,7 +65,7 @@ $conn = null;
                 <hr>
                 <li><a href="../editar/editarProtectora.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos+$notificacionesSolicitudes; ?></span></a></li>
+                <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes+$notificacionesRecibidosSolicitudes; ?></span></a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>

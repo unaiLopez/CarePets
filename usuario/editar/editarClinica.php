@@ -14,8 +14,8 @@
     $sentencia->execute();
     $row2 = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    //Cuenta la cantidad de mensajes no leidos para mostrarlo en las notificaciones posteriormente
-    require_once '../mensajeria/mensajesRecibidosNoLeidos.php';
+    //Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
+    require_once '../mensajeria/notificacionesMensajeriaRecibidosMensajes.php';
 
     require_once '../datosUsuario.php';
 
@@ -67,7 +67,7 @@
                 <hr>
                 <li><a href="editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                 <hr>
-                <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidos; ?></span></a></li>
+                <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes; ?></span></a></li>
                 <hr>
                 <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>

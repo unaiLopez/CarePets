@@ -15,19 +15,16 @@
     $tipo2 = 'Solicitud';
     $tipo3 = 'Respuesta';
 
-    //Se tomarán los mensajes enviados por mi de la base de datos
-    require_once 'mensajesEnviados.php';
-    //Se tomarán los mensajes enviados por el usuario que han sido respondidos y los mensajes que me han enviado otros cuidadores de la base de datos
-    require_once 'mensajesRecibidos.php';
-
     //Tomar todas las solicitudes que te han hecho y ponerlos en orden de fecha de más reciente a menos reciente
     $sentencia = $conn->prepare("SELECT * FROM mensaje m INNER JOIN solicitud s ON m.idrespuesta=s.id WHERE m.mailreceptor=:mailusuario ORDER BY fecha DESC");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->execute();
     $solicitudes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-    //Si un mensaje tiene respuestas sin leer. El mensaje principal se cambiará a no leido
-    require_once 'cambiarMensajesLeidos.php';
+    //Se tomarán los mensajes enviados por mi de la base de datos
+    require_once 'mensajesEnviados.php';
+    //Se tomarán los mensajes enviados por el usuario que han sido respondidos y los mensajes que me han enviado otros cuidadores de la base de datos
+    require_once 'mensajesRecibidos.php';
     //Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
     require_once 'notificacionesMensajeriaRecibidosMensajes.php';
     //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente

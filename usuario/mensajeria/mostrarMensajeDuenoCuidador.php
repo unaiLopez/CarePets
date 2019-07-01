@@ -9,7 +9,6 @@
     $conn = conectarse();
 
 		$id = $_SESSION['id'];
-		$leido = 1;
 
     //Tomar mail del usuario
     $correoActual = $_SESSION['mail'];
@@ -29,17 +28,13 @@
 	    $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
 		}
 
-		$sql = "UPDATE mensaje SET leidoreceptor=? WHERE id=?";
-		$sentencia= $conn->prepare($sql);
-		$sentencia->execute([$leido,$id]);
-
 		//Conseguir todas las respuestas del mensaje principal
 		$sentencia = $conn->prepare("SELECT * FROM mensaje WHERE idrespuesta=:id ORDER BY fecha ASC");
 		$sentencia->bindParam(':id', $id);
 		$sentencia->execute();
 		$respuestas = $sentencia->fetchAll(PDO::FETCH_BOTH);
 
-		require_once 'marcarRespuestasComoLeidas.php';
+		require_once 'actualizarMensajesLeidos.php';
 		//Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
     require_once 'notificacionesMensajeriaRecibidosMensajes.php';
     //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente
@@ -112,7 +107,7 @@
            <div class="row">
              <div class="card">
                <div class="card-header mx-auto">
-								 <p><h5><?php echo 'Conversación con : '.$mensaje['receptor'];?></h5></p>
+								 <p><h5><?php echo 'Conversación con : '; if($correoActual == $mensaje['receptor']){echo $mensaje['emisor'];}else{echo $mensaje['receptor'];}?></h5></p>
                </div>
                <div class="col-lg-12 scroll">
                  <div class="card-body mx-auto">

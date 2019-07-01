@@ -12,35 +12,44 @@
     $id = $_POST['idmensaje'];
     $tipo = 'Respuesta';
     $contenido = $_POST['respuesta'];
-    $leidoReceptor = 0;
-    $leidoEmisor = 1;
     //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
-    //Conseguir el mail del receptor
+    //Conseguir datos del mensaje
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE id=:id");
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
+
     $mailreceptor = $mensaje['mailemisor'];
     $receptor = $mensaje['emisor'];
     $emisor = $mensaje['receptor'];
 
+    if($mensaje['mailemisor'] == $correoActual){
+      $leidoemisor = 1;
+      $leidoreceptor = 0;
+    }else if($mensaje['mailreceptor'] == $correoActual){
+      $leidoemisor = 0;
+      $leidoreceptor = 1;
+    }
+
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,leidoreceptor,leidoemisor,mailemisor,mailreceptor,emisor,receptor,idrespuesta) VALUES(:tipo,:contenido,:fecha,:leidoreceptor,:leidoemisor, :mailemisor,:mailreceptor,:emisor,:receptor,:idrespuesta)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,mailemisor,mailreceptor,emisor,receptor,idrespuesta) VALUES(:tipo,:contenido,:fecha, :mailemisor,:mailreceptor,:emisor,:receptor,:idrespuesta)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':contenido', $contenido);
     $sentencia->bindParam(':fecha', $fecha);
-    $sentencia->bindParam(':leidoreceptor', $leidoReceptor);
-    $sentencia->bindParam(':leidoemisor', $leidoEmisor);
     $sentencia->bindParam(':mailemisor', $correoActual);
     $sentencia->bindParam(':mailreceptor', $mailreceptor);
     $sentencia->bindParam(':emisor', $emisor);
     $sentencia->bindParam(':receptor', $receptor);
     $sentencia->bindParam(':idrespuesta', $id);
     $sentencia->execute();
-    
+
+    $sql = "UPDATE mensaje SET leidoemisor=?, leidoreceptor=? WHERE id=?";
+    $sentencia= $conn->prepare($sql);
+    $sentencia->execute([$leidoemisor,$leidoreceptor, $id]);
+
     $_SESSION['id'] = $id;
 
     if($sentencia){

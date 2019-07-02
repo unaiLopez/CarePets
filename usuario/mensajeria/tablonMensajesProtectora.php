@@ -28,8 +28,8 @@
     $sentencia->execute();
     $solicitudes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
-    //Si un mensaje tiene respuestas sin leer. El mensaje principal se cambiará a no leido
-    require_once 'cambiarMensajesLeidos.php';
+    //Se tomarán los mensajes enviados por el usuario que han sido respondidos y los mensajes que me han enviado otros cuidadores de la base de datos
+    require_once 'mensajesRecibidos.php';
     //Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
     require_once 'notificacionesMensajeriaRecibidosMensajes.php';
     //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente
@@ -115,7 +115,7 @@
                     <div class="tab-pane fade show active" id="recibidos" role="tabpanel" aria-labelledby="recibidos-tab">
                       <div id="mensajesRecibidos">
                         <?php
-                          foreach ($mensajes as $mensaje){
+                          foreach ($mensajesRecibidos as $mensaje){
                             if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 1){
                               $emisor = $mensaje['emisor'];
                               $asunto = $mensaje['asunto'];
@@ -150,7 +150,7 @@
                     <div class="tab-pane fade" id="solicitudes" role="tabpanel" aria-labelledby="solicitudes-tab">
                       <div id="solicitudes">
                         <?php
-                          foreach ($solicitudes as $solicitud){
+                          foreach ($mensajesRecibidosSolicitudes as $solicitud){
                             if($solicitud['leido'] == 1){
                               $emisor = $solicitud['emisor'];
                               $asunto = $solicitud['asunto'];

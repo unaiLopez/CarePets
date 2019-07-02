@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    alert("entraaaaaaaaaaaaaaaa");
     $('.borrarAnimal').click(function(){
         var id = $(this).attr('id');
         var data = {"id" : id};

@@ -10,18 +10,9 @@
 
     //Variables para buscar en la BD
     $correoActual = $_SESSION['mail'];
-    $noLeido = 0;
-    $tipo = 'Mensaje';
 
-    //Tomar todos los mensajes recibidos por el usuario y ponerlos en orden de fecha de más reciente a menos reciente
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo ORDER BY fecha DESC");
-    $sentencia->bindParam(':mailusuario', $correoActual);
-    $sentencia->bindParam(':tipo', $tipo);
-    $sentencia->execute();
-    $mensajes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
-
-    //Si un mensaje tiene respuestas sin leer. El mensaje principal se cambiará a no leido
-    require_once 'cambiarMensajesLeidos.php';
+    //Se tomarán los mensajes enviados por el usuario que han sido respondidos y los mensajes que me han enviado otros cuidadores de la base de datos
+    require_once 'mensajesRecibidos.php';
     //Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
     require_once 'notificacionesMensajeriaRecibidosMensajes.php';
     //Toma los datos del usuario para mostrarlos posteriormente dinámicamente en la pantalla
@@ -99,7 +90,7 @@
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="recibidos" role="tabpanel" aria-labelledby="recibidos-tab">
                       <?php
-                        foreach ($mensajes as $mensaje){
+                        foreach ($mensajesRecibidos as $mensaje){
                           $emisor = $mensaje['emisor'];
                           $asunto = $mensaje['asunto'];
                           $fecha = $mensaje['fecha'];

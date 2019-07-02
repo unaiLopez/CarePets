@@ -10,33 +10,26 @@
 
     $correoActual = $_SESSION['mail'];
 
-
-
-    $sentencia = $conn->prepare("SELECT direccion,telefonomovil,nombre FROM usuario WHERE mailusuario=:mailusuario");
+    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
     $sentencia->bindParam(':mailusuario', $correoActual);
     $sentencia->execute();
     $usuario = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    //Si existe ya una solicitud tuya en esas fechas se manda una notificación negandotela, si no se manda la solicitud
+    $servicio = $_POST['servicio'];
+    $importetotal = $_POST['importeTotal'];
+    $contenido = 'Se solicita lo siguiente :';
+    $direccion = $usuario['direccion'];
+    $telefonomovil = $usuario['telefonomovil'];
+
     if($_SESSION['servicio'] == 'Alojamiento'){
-      $contenido = '<label for="emisor">Usuario</label><p>'.$_POST['nombreUsuarioServicio'].'
-      </p><br><label for="correo">Correo electrónico</label><p>'.$correoActual.'
-      </p><br><label for="servicio">Servicio</label><p>'.$_POST['servicio'].'
-      </p><br><label for="importeTotal">Importe Total</label><p>'.$_POST['importeTotal'].'
-      </p><br><label for="fechaInicio">Fecha Inicio</label><p>'.$_POST['fecha1'].'
-      </p><br><label for="fechaFin">Fecha Fin</label><p>'.$_POST['fecha2'].'
-      </p><br><label for="direccion">Dirección</label><p>'.$usuario['direccion'].'
-      </p><br><label for="telefonoMovil">Teléfono Móvil</label><p>'.$usuario['telefonomovil'].'
-      </p><br>';
+
+      $fechafinal = $_POST['fecha1'];
+      $fechainicio = $_POST['fecha2'];
+
     }else{
-      $contenido = '<label for="emisor">Emisor</label><p>'.$_POST['nombreUsuarioServicio'].'
-      </p><br><label for="correo">Correo electrónico</label><p>'.$correoActual.'
-      </p><br><label for="servicio">Servicio</label><p>'.$_POST['servicio'].'
-      </p><br><label for="importeTotal">Importe Total</label><p>'.$_POST['importeTotal'].'
-      </p><br><label for="fechaDia">Día</label><p>'.$_POST['fecha3'].'
-      </p><br><label for="direccion">Dirección</label><p>'.$usuario['direccion'].'
-      </p><br><label for="telefonoMovil">Teléfono Móvil</label><p>'.$usuario['telefonomovil'].'
-      </p><br>';
+
+      $fechadia = $_POST['fecha3'];
+
     }
 
     $tipo = 'Solicitud';
@@ -44,14 +37,13 @@
     $leidoEmisor = 1;
     $leidoReceptor = 0;
     $mailReceptor = $_POST['mailUsuarioServicio'];
-    $idRespuesta = -1;
-    $asunto = 'Solicitud de Servicio <strong>|</strong> '.$_POST['servicio'];
+    $asunto = 'Solicitud de Servicio <strong>|</strong> '.$servicio;
     //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:emisor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor,:idrespuesta)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor) VALUES(:tipo,:emisor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':emisor', $emisor);
     $sentencia->bindParam(':contenido', $contenido);
@@ -61,16 +53,38 @@
     $sentencia->bindParam(':leidoreceptor', $leidoReceptor);
     $sentencia->bindParam(':mailemisor', $correoActual);
     $sentencia->bindParam(':mailreceptor', $mailReceptor);
-    $sentencia->bindParam(':idrespuesta', $idRespuesta);
     $sentencia->execute();
+    $ultimoId = $conn->lastInsertId();
 
     if($sentencia){
-      echo true;
+      if(isset($fechadia)){
+        //Insertar mensaje de respuesta
+        $sentencia = $conn->prepare("INSERT INTO solicitud (id,servicio,importetotal,fechadia) VALUES(:id,:servicio,:importetotal,:fechadia)");
+        $sentencia->bindParam(':servicio', $servicio);
+        $sentencia->bindParam(':importetotal', $importetotal);
+        $sentencia->bindParam(':fechadia', $fechadia);
+        $sentencia->bindParam(':id', $ultimoId);
+        $sentencia->execute();
+      }else{
+        //Insertar mensaje de respuesta
+        $sentencia = $conn->prepare("INSERT INTO solicitud (id,servicio,importetotal,fechafinal,fechainicio) VALUES(:id,:servicio,:importetotal,:fechafinal,:fechainicio)");
+        $sentencia->bindParam(':servicio', $servicio);
+        $sentencia->bindParam(':importetotal', $importetotal);
+        $sentencia->bindParam(':fechafinal', $fechafinal);
+        $sentencia->bindParam(':fechainicio', $fechainicio);
+        $sentencia->bindParam(':id', $ultimoId);
+        $sentencia->execute();
+      }
+
+      if($sentencia){
+        echo true;
+      }else{
+        echo false;
+      }
+
     }else{
       echo false;
     }
-
-
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();

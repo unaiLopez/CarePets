@@ -107,77 +107,85 @@
            <div class="row">
              <div class="card">
                <div class="card-header mx-auto">
-								 <p><h5><?php echo 'Conversación con : '; if($correoActual == $mensaje['receptor']){echo $mensaje['emisor'];}else{echo $mensaje['receptor'];}?></h5></p>
+								 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
+                   <li class="nav-item">
+                    <a class="nav-link active" id="conversacion-tab" data-toggle="tab" href="#conversacion" role="tab" aria-controls="conversacion" aria-selected="true"><?php echo 'Conversación con : ';?><strong><?php if($correoActual == $mensaje['receptor']){echo $mensaje['emisor'];}else{echo $mensaje['receptor'];}?></strong> </a>
+                   </li>
+                 </ul>
                </div>
                <div class="col-lg-12 scroll">
                  <div class="card-body mx-auto">
-									 <div class="mensaje">
-										 <div class="row">
-											 <div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
-												 <strong>Para :</strong> <?php echo $mensaje['receptor']; ?>
+									 <div class="tab-content" id="myTabContent">
+                     <div class="tab-pane fade show active" id="conversacion" role="tabpanel" aria-labelledby="conversacion-tab">
+											 <div class="mensaje">
 												 <div class="row">
-													 <div class="col-xs-7 col-lg-7">
-														 <strong>De :</strong> <?php echo $mensaje['emisor']; ?>
-												 		</div>
-												 </div>
+													 <div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
+														 <strong>Para :</strong> <?php echo $mensaje['receptor']; ?>
+														 <div class="row">
+															 <div class="col-xs-7 col-lg-7">
+																 <strong>De :</strong> <?php echo $mensaje['emisor']; ?>
+														 		</div>
+														 </div>
 
-                       </div>
- 											<div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
-												<strong>Fecha :</strong> <?php echo $mensaje['fecha']; ?>
-                       </div>
-										 </div>
-										 <br>
-										 <br>
-										 <div class="row">
-											 <div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
-												 <?php echo $mensaje['contenido']; ?>
+		                       </div>
+		 											<div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
+														<strong>Fecha :</strong> <?php echo $mensaje['fecha']; ?>
+		                       </div>
+												 </div>
 												 <br>
 												 <br>
+												 <div class="row">
+													 <div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
+														 <?php echo $mensaje['contenido']; ?>
+														 <br>
+														 <br>
+													 </div>
+												 </div>
+												<hr>
 											 </div>
-										 </div>
-										<hr>
-									 </div>
-									 <?php
-									   foreach($respuestas as $respuesta){
-											 $emisor = $respuesta['emisor'];
-											 $receptor = $respuesta['receptor'];
-											 $fecha = $respuesta['fecha'];
-											 $contenido = $respuesta['contenido'];
-											 echo '<div class="respuesta">
-															 <div class="row">
-																<div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
-																	<strong>Para : </strong>'.$receptor.'
-																	<div class="row">
-																		<div class="col-xs-7 col-lg-7">
-																		<strong>De : </strong>'.$emisor.'
-																	 </div>
+											 <?php
+											   foreach($respuestas as $respuesta){
+													 $emisor = $respuesta['emisor'];
+													 $receptor = $respuesta['receptor'];
+													 $fecha = $respuesta['fecha'];
+													 $contenido = $respuesta['contenido'];
+													 echo '<div class="respuesta">
+																	 <div class="row">
+																		<div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
+																			<strong>Para : </strong>'.$receptor.'
+																			<div class="row">
+																				<div class="col-xs-7 col-lg-7">
+																				<strong>De : </strong>'.$emisor.'
+																			 </div>
+																			</div>
+																		</div>
+																	 <div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
+																		 <strong>Fecha : </strong>'.$fecha.'
+																		</div>
 																	</div>
-																</div>
-															 <div class="col-xs-3 offset-xs-3 col-lg-3 offset-lg-3">
-																 <strong>Fecha : </strong>'.$fecha.'
-																</div>
-															</div>
-															<br>
-															<br>
-															<div class="row">
-																<div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
-																	'.$contenido.'
 																	<br>
 																	<br>
-																</div>
-															</div>
-															<hr>
-											 			 </div>';
-											}
-											if($solicitud['tipo'] == 'Solicitud'){
-										?>
-											<button style="width: 220px;" onclick="aceptarSolicitud('<?php echo $solicitud['contenido']; ?>','<?php echo $solicitud['mailemisor']; ?>')" name="aceptar" id="aceptar" class="btn btn-default"><i class="fas fa-check-circle"></i> Aceptar Solicitud</button>
-											<button style="width: 220px;" onclick="rechazarSolicitud('<?php echo $solicitud['id']; ?>','<?php echo $solicitud['mailemisor']; ?>')" name="rechazar" id="rechazar" class="btn btn-default"><i class="fas fa-times-circle"></i> Rechazar Solicitud</button>
-								<?php	} ?>
-									 <button style="width: 220px;" data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
- 									 <button style="width: 220px;" onclick="location.href='tablonMensajesDuenoCuidador.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
- 									 <br>
- 									 <br>
+																	<div class="row">
+																		<div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
+																			'.$contenido.'
+																			<br>
+																			<br>
+																		</div>
+																	</div>
+																	<hr>
+													 			 </div>';
+													}
+													if($solicitud['tipo'] == 'Solicitud'){
+												?>
+													<button style="width: 220px;" onclick="aceptarSolicitud('<?php echo $solicitud['contenido']; ?>','<?php echo $solicitud['mailemisor']; ?>')" name="aceptar" id="aceptar" class="btn btn-default"><i class="fas fa-check-circle"></i> Aceptar Solicitud</button>
+													<button style="width: 220px;" onclick="rechazarSolicitud('<?php echo $solicitud['id']; ?>','<?php echo $solicitud['mailemisor']; ?>')" name="rechazar" id="rechazar" class="btn btn-default"><i class="fas fa-times-circle"></i> Rechazar Solicitud</button>
+										<?php	} ?>
+											 <button style="width: 220px;" data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
+		 									 <button style="width: 220px;" onclick="location.href='tablonMensajesDuenoCuidador.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
+		 									 <br>
+		 									 <br>
+										 </div>
+									 </div>
                  </div>
          				</div>
 								<!-- Modal -->

@@ -44,6 +44,14 @@
     require_once '../datosUsuario.php';
 		require_once 'datosMensaje.php';
 
+		//Conseguir datos para contactar con el usuario que pide la solicitud
+		if($solicitud){
+			$sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
+			$sentencia->bindParam(':mailusuario', $mensaje['mailemisor']);
+			$sentencia->execute();
+			$datosUsuarioSolicitud = $sentencia->fetch(PDO::FETCH_BOTH);
+		}
+
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
   }
@@ -136,7 +144,38 @@
 												 <br>
 												 <div class="row">
 													 <div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
-														 <?php echo $mensaje['contenido']; ?>
+														 <?php
+														 echo $mensaje['contenido'];
+														 if($solicitud){
+															 if(isset($solicitud['fechadia'])){
+																 echo '<br>';
+																 echo '<br>';
+																 echo '<strong>Servicio:</strong> '.$solicitud['servicio'];
+																 echo '<br>';
+																 echo '<strong>Importe Total:</strong> '.$solicitud['importetotal'].'€';
+																 echo '<br>';
+																 echo '<strong>Para el Día:</strong> '.$solicitud['fechadia'];
+																 echo '<br>';
+																 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
+																 echo '<br>';
+																 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
+															 }else{
+																 echo '<br>';
+																 echo '<br>';
+																 echo '<strong>Servicio:</strong> '.$solicitud['servicio'];
+																 echo '<br>';
+																 echo '<strong>Importe Total:</strong> '.$solicitud['importetotal'].'€';
+																 echo '<br>';
+																 echo '<strong>Desde el Día:</strong> '.$solicitud['fechainicio'];
+																 echo '<br>';
+																 echo '<strong>Hasta el Día</strong>: '.$solicitud['fechafinal'];
+																 echo '<br>';
+																 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
+																 echo '<br>';
+																 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
+															 }
+														 }
+														 ?>
 														 <br>
 														 <br>
 													 </div>
@@ -175,10 +214,10 @@
 																	<hr>
 													 			 </div>';
 													}
-													if($solicitud['tipo'] == 'Solicitud'){
+													if($mensaje['tipo'] == 'Solicitud' && $solicitud['solicitudverificada'] == 0){
 												?>
-													<button style="width: 220px;" onclick="aceptarSolicitud('<?php echo $solicitud['contenido']; ?>','<?php echo $solicitud['mailemisor']; ?>')" name="aceptar" id="aceptar" class="btn btn-default"><i class="fas fa-check-circle"></i> Aceptar Solicitud</button>
-													<button style="width: 220px;" onclick="rechazarSolicitud('<?php echo $solicitud['id']; ?>','<?php echo $solicitud['mailemisor']; ?>')" name="rechazar" id="rechazar" class="btn btn-default"><i class="fas fa-times-circle"></i> Rechazar Solicitud</button>
+													<button style="width: 220px;" onclick="aceptarSolicitud('<?php echo $mensaje['id']; ?>')" name="aceptar" id="aceptar" class="btn btn-default"><i class="fas fa-check-circle"></i> Aceptar Solicitud</button>
+													<button style="width: 220px;" onclick="rechazarSolicitud('<?php echo $mensaje['id']; ?>')" name="rechazar" id="rechazar" class="btn btn-default"><i class="fas fa-times-circle"></i> Rechazar Solicitud</button>
 										<?php	} ?>
 											 <button style="width: 220px;" data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
 		 									 <button style="width: 220px;" onclick="location.href='tablonMensajesDuenoCuidador.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>

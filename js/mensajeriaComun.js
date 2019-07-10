@@ -15,6 +15,9 @@ function responderMensaje(idmensaje, respuesta) {
             showConfirmButton: false,
             timer: 1500
           })
+          setTimeout(function(){
+            window.location.reload();
+          }, 1500)
         }else{
           Swal.fire({
             position: 'center',

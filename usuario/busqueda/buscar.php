@@ -18,24 +18,36 @@
     if($tipoBusqueda == 'Cuidador'){
 
       $esCuidador = 1;
-      $eventosNo = 0;
-      $eventosSi = 1;
       $tipo = 'DuenoCuidador';
+      if($servicio == 'Alojamiento'){
 
-      $sentencia = $conn->prepare("SELECT DISTINCT u.*, s.precio, s.nombre as nombreservicio
-      FROM usuario AS u NATURAL JOIN duenocuidador AS d INNER JOIN servicio AS s ON s.mailusuario=d.mailusuario, evento as e
-      WHERE tipo=:tipo and d.escuidador=:escuidador and s.nombre=:servicio and s.precio > 0 and u.mailusuario not in (:mailusuario) and d.eventos=:eventosNo or d.eventos=:eventosSi and e.fecha not between (:fecha1) and (:fecha2) and fecha not in (:fecha3) and s.nombre=:servicio and s.precio > 0");
-      $sentencia->bindParam(':tipo', $tipo);
-      $sentencia->bindParam(':eventosNo', $eventosNo);
-      $sentencia->bindParam(':eventosSi', $eventosSi);
-      $sentencia->bindParam(':escuidador', $esCuidador);
-      $sentencia->bindParam(':fecha1', $inicioFecha);
-      $sentencia->bindParam(':fecha2', $finalFecha);
-      $sentencia->bindParam(':fecha3', $diaFecha);
-      $sentencia->bindParam(':servicio', $servicio);
-      $sentencia->bindParam(':mailusuario', $correoActual);
-      $sentencia->execute();
-      $busqueda = $sentencia->fetchAll(PDO::FETCH_BOTH);
+        $sentencia = $conn->prepare("SELECT DISTINCT u.*, s.precio, s.nombre as nombreservicio
+        FROM usuario AS u NATURAL JOIN duenocuidador AS d INNER JOIN servicio AS s ON s.mailusuario=d.mailusuario INNER JOIN evento as e ON u.mailusuario=e.mailusuario
+        WHERE tipo=:tipo and d.escuidador=:escuidador and s.nombre=:servicio and s.precio > 0 and u.mailusuario not in (:mailusuario) and not exists(select mailusuario from evento where fecha not between (:fecha1) and (:fecha2))");
+        $sentencia->bindParam(':tipo', $tipo);
+        $sentencia->bindParam(':escuidador', $esCuidador);
+        $sentencia->bindParam(':fecha1', $inicioFecha);
+        $sentencia->bindParam(':fecha2', $finalFecha);
+        $sentencia->bindParam(':servicio', $servicio);
+        $sentencia->bindParam(':mailusuario', $correoActual);
+        $sentencia->execute();
+        $busqueda = $sentencia->fetchAll(PDO::FETCH_BOTH);
+
+      }else{
+
+        $sentencia = $conn->prepare("SELECT DISTINCT u.*, s.precio, s.nombre as nombreservicio
+        FROM usuario AS u NATURAL JOIN duenocuidador AS d INNER JOIN servicio AS s ON s.mailusuario=d.mailusuario INNER JOIN evento as e ON u.mailusuario=e.mailusuario
+        WHERE tipo=:tipo and d.escuidador=:escuidador and s.nombre=:servicio and s.precio > 0 and u.mailusuario not in (:mailusuario) and e.fecha not in (:fecha3)");
+        $sentencia->bindParam(':tipo', $tipo);
+        $sentencia->bindParam(':escuidador', $esCuidador);
+        $sentencia->bindParam(':fecha3', $diaFecha);
+        $sentencia->bindParam(':servicio', $servicio);
+        $sentencia->bindParam(':mailusuario', $correoActual);
+        $sentencia->execute();
+        $busqueda = $sentencia->fetchAll(PDO::FETCH_BOTH);
+
+      }
+
 
     }else if($tipoBusqueda == 'Clinica Veterinaria'){
 

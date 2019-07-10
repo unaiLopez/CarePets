@@ -4,12 +4,14 @@
     $correoActual = $_SESSION['mail'];
     $id = $_SESSION['id'];
     $leido = 1;
-    $tipo = 'Mensaje';
+    $tipoMensaje = 'Mensaje';
+    $tipoSolicitud = 'Solicitud';
 
     //Buscar el mensaje
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE id=:id and tipo=:tipo");
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE id=:id and tipo=:tipo1 or tipo=:tipo2");
     $sentencia->bindParam(':id', $id);
-    $sentencia->bindParam(':tipo', $tipo);
+    $sentencia->bindParam(':tipo1', $tipoMensaje);
+    $sentencia->bindParam(':tipo2', $tipoSolicitud);
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_ASSOC);
 
@@ -21,7 +23,7 @@
       $sentencia->execute([$leidoemisor, $id]);
 
     }else if($mensaje['mailreceptor'] == $correoActual){
-      
+
       $leidoreceptor = 1;
       $sql = "UPDATE mensaje SET leidoreceptor=? WHERE id=?";
       $sentencia= $conn->prepare($sql);

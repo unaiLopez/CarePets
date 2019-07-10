@@ -63,6 +63,7 @@ function solicitarServicio(mailUsuarioServicio, nombreUsuarioServicio, servicio,
     var fecha1Comparar = moment(fecha1);
     var fecha2Comparar = moment(fecha2);
     var diasDiferencia = fecha2Comparar.diff(fecha1Comparar, 'days');
+    diasDiferencia = diasDiferencia+1;
     var importeTotal = (diasDiferencia * precio)+'€';
     swal.fire({
       title: "¿Seguro que deseas solicitar este servicio?",

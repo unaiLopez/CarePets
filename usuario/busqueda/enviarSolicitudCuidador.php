@@ -23,8 +23,8 @@
 
     if($_SESSION['servicio'] == 'Alojamiento'){
 
-      $fechafinal = $_POST['fecha1'];
-      $fechainicio = $_POST['fecha2'];
+      $fechafinal = $_POST['fecha2'];
+      $fechainicio = $_POST['fecha1'];
 
     }else{
 
@@ -37,15 +37,24 @@
     $leidoEmisor = 1;
     $leidoReceptor = 0;
     $mailReceptor = $_POST['mailUsuarioServicio'];
+
+    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
+    $sentencia->bindParam(':mailusuario', $mailReceptor);
+    $sentencia->execute();
+    $usuarioReceptor = $sentencia->fetch(PDO::FETCH_BOTH);
+
+    $receptor = $usuarioReceptor['nombre'];
+
     $asunto = 'Solicitud de Servicio <strong>|</strong> '.$servicio;
     //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor) VALUES(:tipo,:emisor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,receptor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor) VALUES(:tipo,:emisor,:receptor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':emisor', $emisor);
+    $sentencia->bindParam(':receptor', $receptor);
     $sentencia->bindParam(':contenido', $contenido);
     $sentencia->bindParam(':fecha', $fecha);
     $sentencia->bindParam(':asunto', $asunto);

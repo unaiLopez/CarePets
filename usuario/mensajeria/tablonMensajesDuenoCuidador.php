@@ -59,7 +59,6 @@
    <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
    <script src="../../js/mensajeriaComun.js"></script>
    <script src="../../js/mensajeriaDuenoCuidador.js"></script>
-   <script src="../../js/pestañasConURL.js"></script>
  </head>
 <body>
   <div id="container">
@@ -179,12 +178,12 @@
                     <div class="tab-pane fade" id="solicitudes" role="tabpanel" aria-labelledby="solicitudes-tab">
                       <div class="solicitudes">
                         <?php
-                          foreach ($mensajesRecibidosSolicitudes as $mensajeRecibidoSolicitudes){
-                            $emisor = $mensajeRecibidoSolicitudes['emisor'];
-                            $asunto = $mensajeRecibidoSolicitudes['asunto'];
-                            $fecha = $mensajeRecibidoSolicitudes['fecha'];
-                            $id = $mensajeRecibidoSolicitudes['id'];
-                            if($mensajeRecibidoSolicitudes['leidoreceptor'] == 1){
+                          foreach ($mensajesRecibidosSolicitudes as $mensajeRecibidoSolicitud){
+                            $emisor = $mensajeRecibidoSolicitud['emisor'];
+                            $asunto = $mensajeRecibidoSolicitud['asunto'];
+                            $fecha = $mensajeRecibidoSolicitud['fecha'];
+                            $id = $mensajeRecibidoSolicitud['id'];
+                            if($mensajeRecibidoSolicitud['leidoreceptor'] == 1){
                               echo '<ul class="list-group list-group-horizontal">
                                       <div class="row">
                                         <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
@@ -192,7 +191,6 @@
                                         <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
                                       </div>
                                     </ul>';
-
                             }else{
                               echo '<ul class="list-group list-group-horizontal">
                                       <div class="row">

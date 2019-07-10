@@ -42,6 +42,15 @@
       $sentencia->bindParam(':escuidador', $escuidador);
       $sentencia->execute();
 
+      $tiempo = time();
+      $fecha = date("Y-m-d", $tiempo);
+
+      //Insertar evento
+      $sentencia = $conn->prepare("INSERT INTO evento(mailusuario, fecha) VALUES(:mailusuario, :fecha)");
+      $sentencia->bindParam(':mailusuario', $mailusuario);
+      $sentencia->bindParam(':fecha', $fecha);
+      $sentencia->execute();
+
 
       //Crear cookies para guardar datos del usuario
       $_SESSION['mail'] = $mailusuario;

@@ -30,6 +30,14 @@
     $leidoEmisor = 1;
     $leidoReceptor = 0;
     $mailReceptor = $_POST['mailUsuarioServicio'];
+
+    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
+    $sentencia->bindParam(':mailusuario', $mailReceptor);
+    $sentencia->execute();
+    $usuarioReceptor = $sentencia->fetch(PDO::FETCH_BOTH);
+
+    $receptor = $usuarioReceptor['nombre'];
+
     $idRespuesta = -1;
     $asunto = 'Solicitud de Adopción <strong>|</strong> '.$_POST['nombre'];
     //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
@@ -37,9 +45,10 @@
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:emisor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor,:idrespuesta)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,receptor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:emisor,:receptor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor,:idrespuesta)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':emisor', $emisor);
+    $sentencia->bindParam(':receptor', $receptor);
     $sentencia->bindParam(':contenido', $contenido);
     $sentencia->bindParam(':fecha', $fecha);
     $sentencia->bindParam(':asunto', $asunto);

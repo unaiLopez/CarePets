@@ -88,9 +88,9 @@
                     <small style="color: #ffffff;"> <?php echo $animal['fecha']; ?> </small>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                    <?php echo $animal['id']; header("Access-Control-Allow-Origin: *");?>
-                    <?php echo $row1['mailusuario']; ?>
-                    <button class="btn btn-default" class="adoptarAnimal" id="<?php echo $animal['id']; ?>" value="<?php echo $row1['mailusuario']; ?>"><i class="fas fa-bone"></i> ¡Adóptame!</button>
+                    <?php
+                    echo '<button class="btn btn-default" class="adoptarAnimal" id="'.$animal['id'].'" value="'.$row1['mailusuario'].'"><i class="fas fa-bone"></i> ¡Adóptame!</button>';
+                    ?>
                   </div>
                 </div>
               </div>

@@ -47,7 +47,6 @@
     <script src="../../js/mensajesDeAlerta.js"></script>
     <script src="../../js/pestañasConURL.js"></script>
     <script src="../../js/funcionesAnimalesAdopcion.js"></script>
-    <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
   </head>
   <body>
@@ -75,7 +74,7 @@
                 <hr>
                 <li><a href="../busqueda/menuBusqueda.php"><i class="fas fa-search"></i> Búsqueda</a></li>
                 <hr>
-                <li><a href="#"><i class="fas fa-question"></i> Ayuda</a></li>
+                <li><a href="../../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
                 <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>

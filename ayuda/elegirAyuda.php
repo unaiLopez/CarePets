@@ -70,7 +70,7 @@
           if($row1['tipo'] == 'DuenoCuidador'){
             echo '  <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="../perfil/perfilDuenoCuidador.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+                  <a class="navbar-brand" href="../usuario/perfil/perfilDuenoCuidador.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
                   <div class="dropdown">
                     <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                       if($row1['foto']){
@@ -98,13 +98,13 @@
           }else if($row1['tipo'] == 'Protectora'){
             echo '  <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="../perfil/perfilProtectora.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+                  <a class="navbar-brand" href="../usuario/perfil/perfilProtectora.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
                   <div class="dropdown">
                     <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                       if($row1['foto']){
                         echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
                       }else{
-                        echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
+                        echo '<img src="../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
                       }
                     echo '</a>
                     <ul class="dropdown-menu">
@@ -124,7 +124,7 @@
           }else if($row1['tipo'] == 'Clinica'){
             echo '  <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="../perfil/perfilClinica.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+                  <a class="navbar-brand" href="../usuario/perfil/perfilClinica.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
                   <div class="dropdown">
                     <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                       if($row1['foto']){
@@ -160,12 +160,12 @@
         <div class="container-fluid padding">
           <div class="row text-center padding">
             <div class="col-xs-12 col-sm-12 offset-md-2 col-md-4">
-              <a href="preguntasFrecuentes.php"><img class="icono" src="../iconos/miscelanea/preguntasFrecuentes.png" height="100" width="100"></a>
+              <a href="preguntasFrecuentes.php"><img class="icono" src="../iconos/miscelanea/preguntas_frecuentes.png" height="100" width="100"></a>
               <h6>Preguntas Frecuentes</h6>
               <p class="explicacion">En esta sección de ayuda encontrarás las preguntas frecuentes de los usuarios y las respuestas de estas.</p>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4">
-              <a href="comoFunciona.php"><img class="icono" src="../iconos/miscenelanea/comoFunciona.png" height="100" width="100"></a>
+              <a href="comoFunciona.php"><img class="icono" src="../iconos/miscenelanea/como_funciona.png" height="100" width="100"></a>
               <h6>Funcionamiento</h6>
               <p class="explicacion">En esta sección encontrarás un video explicativo sobre el funcionamiento de la plataforma junto con un pequeño infograma.</p>
             </div>
@@ -177,9 +177,9 @@
         <div class="container-fluid padding">
           <div class="row text-center padding">
             <div class="col-lg-12 social padding">
-              <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
-              <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
-              <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.facebook.com/unai.lopez5851"><i class="fab fa-facebook-square"></i></a>
+              <a href="https://www.instagram.com/carepets1/"><i class="fab fa-instagram"></i></a>
+              <a href="https://twitter.com/cuidacarepets"><i class="fab fa-twitter"></i></a>
             </div>
           </div>
         </div>

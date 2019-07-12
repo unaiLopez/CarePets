@@ -267,8 +267,6 @@
                                                               '<img src="'+locations[i][4]+'" alt="PerfilUsuario" height="100" width="100">' +
                                                               '<div class="iw-subTitle">Dirección</div>' +
                                                               '<p style="color:black;font-style=crimson;">'+locations[i][0]+'</p>'+
-                                                              '<div class="iw-subTitle">Teléfono Movil</div>' +
-                                                              '<p style="color:black;font-style=crimson;">'+locations[i][5]+'</p>'+
                                                               '<div class="iw-subTitle">Correo Electrónico</div>' +
                                                               '<p style="color:black;font-style=crimson;">'+locations[i][6]+'</p>'+
                                                             '</div>' +
@@ -313,9 +311,9 @@
         <div class="container-fluid padding">
           <div class="row text-center padding">
             <div class="col-lg-12 social padding">
-              <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
-              <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
-              <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.facebook.com/unai.lopez5851"><i class="fab fa-facebook-square"></i></a>
+              <a href="https://www.instagram.com/carepets1/"><i class="fab fa-instagram"></i></a>
+              <a href="https://twitter.com/cuidacarepets"><i class="fab fa-twitter"></i></a>
             </div>
           </div>
         </div>

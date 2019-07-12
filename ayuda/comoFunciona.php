@@ -68,9 +68,10 @@
           </nav>';
         }else{
           if($row1['tipo'] == 'DuenoCuidador'){
+            $notificacionDuenoCuidador =  $notificacionesRecibidosMensajes+$notificacionesEnviados+$notificacionesRecibidosSolicitudes;
             echo '  <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="../perfil/perfilDuenoCuidador.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+                  <a class="navbar-brand" href="../usuario/perfil/perfilDuenoCuidador.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
                   <div class="dropdown">
                     <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                       if($row1['foto']){
@@ -84,7 +85,7 @@
                         <hr>
                         <li><a href="../usuario/editar/editarDuenoCuidador.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                         <hr>
-                        <li><a href="../usuario/mensajeria/tablonMensajesDuenoCuidador.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes+$notificacionesEnviados+$notificacionesRecibidosSolicitudes; ?></span></a></li>
+                        <li><a href="../usuario/mensajeria/tablonMensajesDuenoCuidador.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill">'.$notificacionDuenoCuidador.'</span></a></li>
                         <hr>
                         <li><a href="../usuario/busqueda/menuBusqueda.php"><i class="fas fa-search"></i> Búsqueda</a></li>
                         <hr>
@@ -96,9 +97,10 @@
                 </div>
               </nav>';
           }else if($row1['tipo'] == 'Protectora'){
+            $notificacionProtectora = $notificacionesRecibidosMensajes+$notificacionesRecibidosSolicitudes;
             echo '  <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="../perfil/perfilProtectora.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+                  <a class="navbar-brand" href="../usuario/perfil/perfilProtectora.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
                   <div class="dropdown">
                     <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                       if($row1['foto']){
@@ -112,7 +114,7 @@
                         <hr>
                         <li><a href="../usuario/editar/editarProtectora.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                         <hr>
-                        <li><a href="../usuario/mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes+$notificacionesRecibidosSolicitudes; ?></span></a></li>
+                        <li><a href="../usuario/mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"> '.$notificacionProtectora.'</span></a></li>
                         <hr>
                         <li><a href="elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                         <hr>
@@ -124,7 +126,7 @@
           }else if($row1['tipo'] == 'Clinica'){
             echo '  <nav class="navbar navbar-expand-md navbar-light">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="../perfil/perfilClinica.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+                  <a class="navbar-brand" href="../usuario/perfil/perfilClinica.php"><img src="../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
                   <div class="dropdown">
                     <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                       if($row1['foto']){
@@ -138,7 +140,7 @@
                         <hr>
                         <li><a href="../usuario/editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                         <hr>
-                        <li><a href="../usuario/mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes; ?></span></a></li>
+                        <li><a href="../usuario/mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill">'.$notificacionesRecibidosMensajes.'</span></a></li>
                         <hr>
                         <li><a href="elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                         <hr>
@@ -164,11 +166,12 @@
           </div>
           <br>
           <div style="background-color: rgba(224, 82, 3, 0.6);border: solid 1px #ffffff;" class="card">
-            <div class="row">
-              <div class="container">
-                <br>
-                <h4 style="text-align:center;">Tipos de Usuario</h4>
-              </div>
+            <div style="background-color:#e05203;" class="card-header">
+              <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
+                <li class="nav-item">
+                 <a class="nav-link active" id="tiposusuario-tab" data-toggle="tab" href="#tiposusuario" role="tab" aria-controls="tiposusuario" aria-selected="true"><i class="fas fa-user"></i> Tipos de Usuario</a>
+                </li>
+              </ul>
             </div>
             <div class="row">
               <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
@@ -202,13 +205,14 @@
           </div>
           <br>
           <div style="background-color: rgba(224, 82, 3, 0.6);border: solid 1px #ffffff;" class="card">
-            <br>
-            <div class="row">
-              <div class="container">
-                <br>
-                <h4 style="text-align:center;">Tipos de Servicio</h4>
-              </div>
+            <div style="background-color:#e05203;" class="card-header">
+              <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
+                <li class="nav-item">
+                 <a class="nav-link active" id="servicios-tab" data-toggle="tab" href="#servicios" role="tab" aria-controls="servicios" aria-selected="true"><i class="fas fa-paw"></i> Tipos de Servicio</a>
+                </li>
+              </ul>
             </div>
+            <br>
             <div class="row">
               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                 <div class="container">
@@ -255,9 +259,9 @@
         <div class="container-fluid padding">
           <div class="row text-center padding">
             <div class="col-lg-12 social padding">
-              <a href="www.facebook.com"><i class="fab fa-facebook-square"></i></a>
-              <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
-              <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.facebook.com/unai.lopez5851"><i class="fab fa-facebook-square"></i></a>
+              <a href="https://www.instagram.com/carepets1/"><i class="fab fa-instagram"></i></a>
+              <a href="https://twitter.com/cuidacarepets"><i class="fab fa-twitter"></i></a>
             </div>
           </div>
         </div>

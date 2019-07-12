@@ -71,7 +71,7 @@ h4 {
 h6 {
   font-family: Crimson;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 20px;
   color: #ffffff;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -91,11 +91,9 @@ h6 {
 }
 
 .explicacion {
-  opacity: 0.9;
-  text-shadow: 0 8px 4px rgba(0, 0, 0, 0.25);
   font-family: Crimson;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 19px;
+  color: #ffffff;
 }
 
 .icono {
@@ -105,9 +103,7 @@ h6 {
 }
 
 .icono:hover {
-  width: 155px;
-  height: 155px;
-  border-radius: 20px;
+  border: solid 4px #ffffff;
 }
 
 #expli1 {
@@ -157,4 +153,18 @@ label {
   font-size: 18px;
   color: #ffffff;
   font-family: Crimson;
+}
+
+.pregunta:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pregunta {
+  color: #ffffff;
+  margin-bottom: 30px;
+}
+
+.logo_preguntas {
+  border-radius: 360px;
 }

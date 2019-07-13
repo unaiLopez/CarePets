@@ -43,6 +43,11 @@
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <link rel="stylesheet" href="../../css/starRating.css">
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script type="text/javascript">
+      function convertirmeCuidador() {
+        window.location.href = "../editar/editarDuenoCuidador.php";
+      }
+    </script>
   </head>
   <body>
     <div id="container">
@@ -105,19 +110,23 @@
                              ?>
                           </div>
                         </div>
+                        <?php if($rowDuenoCuidador['escuidador'] == 0){
+                        echo '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">';
+                          echo '<div class="container">';
+                            echo '<br>';
+                            echo '<h3>¡Hola '.$row1['nombre'].'!</h3>';
+                            echo '<br>';
+                            echo '<h5>Aún no eres cuidador</h5>';
+                            echo '<h5>¿A qué esperas?</h5>';
+                            echo '<br>';
+                            echo '<button id="convertirmecuidador" onclick="convertirmeCuidador()" name="convertirmecuidador" class="btn btn-default"><i class="fas fa-paw"></i> Convertirme en Cuidador</button>';
+                          echo '</div>';
+                        echo '</div>';
+                        }else{ ?>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                           <div class="container">
                             <br>
                             <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
-                            <?php
-                              if($rowDuenoCuidador['escuidador'] == 0){
-                                  echo '<br>';
-                                  echo '<h5>Aún no eres cuidador</h5>';
-                                  echo '<h5>¿A qué esperas?</h5>';
-                                  echo '<button id="convertirmecuidador" onclick="javascript:window.location.href=../editar/editarDuenoCuidador.php#cuidador/" name="convertirmecuidador" class="btn btn-default"><i class="fas fa-paw"></i> Convertirme en Cuidador</button>';
-                              }else{
-                             ?>
-
                             <br>
                             <h5>Reputación como cuidador :</h5>
                             <x-star-rating value="<?=$mediaMostrar?>" number="5"></x-star-rating>
@@ -263,6 +272,5 @@
           </div>
         </div>
       </div>
-    </div>
   </body>
 </html>

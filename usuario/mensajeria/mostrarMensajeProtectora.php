@@ -56,6 +56,7 @@
      <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
      <script src="../../js/mensajeriaComun.js"></script>
      <script src="../../js/mensajeriaProtectora.js"></script>
+		 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
    </head>
    <body>
      <div id="container">

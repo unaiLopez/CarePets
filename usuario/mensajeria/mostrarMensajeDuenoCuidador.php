@@ -89,7 +89,7 @@
                  if($row1['foto']){
                    echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
                  }else{
-                   echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
+                   echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
                  }
                 ?>
              </a>

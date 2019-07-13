@@ -1,31 +1,32 @@
 <?php
+  //Crear contraseña de 6 dígitos
+  function crearNuevaContraseña(){
+    $n = array(0,1,2,3,4,5,6,7,8,9);
+    $nuevaContraseñaArray = array_rand($n, 6);
+    return $nuevaContraseñaArray[0].$nuevaContraseñaArray[1].$nuevaContraseñaArray[2].$nuevaContraseñaArray[3].$nuevaContraseñaArray[4].$nuevaContraseñaArray[5];
+  }
+
   try {
     //Configurar base de datos
-    include 'conectarDB.php';
+    require_once 'conectarDB.php';
 
     $conn = conectarse();
 
-    $correo = $_REQUEST['emailRecuperar'];
+    $correo = $_POST['mailusuario'];
 
-    $sentencia = $conn->prepare("SELECT contrasena FROM usuario WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correo);
-    $sentencia->execute();
-    $row = $sentencia->fetch(PDO::FETCH_BOTH);
-    if($row){
-      $contraseña = $row[0];
-      $hash = crypt($contraseña, $correo);
-      $to = $correo;
-      $subject = "Nueva Contraseña";
-      $message = "Esta es su nueva contraseña. Por favor, usela para iniciar sesión la próxima vez".$hash;
-      $headers = "From: unai19970315@gmail.com"."\r\n";
-      if(mail($to, $subject, $message, $headers)){
-        mail($to, $subject, $message, $headers);
-        echo "Tu nueva contraseña ha sido enviada a su dirección de correo electrónico.";
-        header('Location: ingresar.html');
-      }else{
-        echo "No se ha podido recuperar su contraseña, vuelva a intentarlo.";
-      }
+    $nuevaContraseña = crearNuevaContraseña();
+
+    $to = $correo;
+    $subject = "Nueva Contraseña CarePets";
+    $message = "Esta es su nueva contraseña. Por favor, usela para iniciar sesión la próxima vez: ".$nuevaContraseña;
+    $headers = "From: cuidacarepets@gmail.com"."\r\n";
+    if(mail($to, $subject, $message, $headers)){
+      mail($to, $subject, $message, $headers);
+      echo 'true';
+    }else{
+      echo 'false';
     }
+
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
   }

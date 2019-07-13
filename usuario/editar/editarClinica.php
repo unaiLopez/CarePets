@@ -55,9 +55,9 @@
           <div class="dropdown">
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
-                if($row1['foto']){
-                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
-                }else{
+                if($row1['foto']){?>
+                  <img src="../obtenerFotografiaUsuario.php" class="imagen-perfil" height="70" width="70">
+         <?php   }else{
                   echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
                 }
                ?>
@@ -84,7 +84,7 @@
                 <div class="card-header mx-auto">
                   <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                     <li class="nav-item">
-                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#contraseña" role="tab" aria-controls="contraseña" aria-selected="true"><i class="fas fa-key"></i> Cambiar Contraseña</a>
+                     <a class="nav-link active" id="contraseña-tab" data-toggle="tab" href="#contraseña" role="tab" aria-controls="contraseña" aria-selected="true"><i class="fas fa-key"></i> Cambiar Contraseña</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#obligatoria" role="tab" aria-controls="obligatoria" aria-selected="false"><i class="fas fa-info-circle"></i> Información Obligatoria</a>
@@ -274,6 +274,6 @@
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </body>
 </html>

@@ -14,7 +14,7 @@ $(document).ready(() => {
   $('a[data-toggle="tab"]').on("click", function() {
     let newUrl;
     const hash = $(this).attr("href");
-    if(hash == "#home") {
+    if(hash == "#contraseña") {
       newUrl = url.split("#")[0];
     } else {
       newUrl = url.split("#")[0] + hash;

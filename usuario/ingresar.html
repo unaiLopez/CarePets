@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="../css/estiloDifuminado.css"/>
     <link rel="stylesheet" href="../css/estiloFormularios.css"/>
     <script src="../js/validar.js"></script>
+    <script src="../js/recuperarContraseña.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
   </head>
   <body>
     <div id="container-fluid">
@@ -85,19 +87,17 @@
                     <div id="recuperarMailModal" class="modal-body">
                       <div class="row">
                         <div class="col-xs-12 mx-auto">
-                          <form id="formularioRecuperarContraseña" action="recuperarContraseña.php" onsubmit="validarCorreo($('#emailRecuperar').val())" role="form">
-                            <div id="form-modal" class="form-group">
-                                <div class="input-group">
-                                  <div class="input-group-addon">
-                                    <i class="fas fa-user"></i>
-                                  </div>
-                                  <input type="email" class="form-control" name="emailRecuperar" id="emailRecuperar" placeholder="Ingrese su correo electrónico" required>
+                          <div id="form-modal" class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-addon">
+                                  <i class="fas fa-user"></i>
                                 </div>
-                            </div>
-                            <div id="form-modal" class="form-group">
-                              <button type="submit" name="recuperar" id="recuperar" class="btn btn-default block">Recuperar</button>
-                            </div>
-                          </form>
+                                <input type="email" class="form-control" name="emailRecuperar" id="emailRecuperar" placeholder="Ingrese su correo electrónico" onleyup="validarCorreo($('#emailRecuperar').val())" required>
+                              </div>
+                          </div>
+                          <div id="form-modal" class="form-group">
+                            <button onclick="recuperarContraseña($('#emailRecuperar').val())" name="recuperar" id="recuperar" class="btn btn-default block"><div id="recuperarBotonTexto">Recuperar</div><div id="cargando"><img src="../iconos/miscelanea/loading_gif.gif" height="30" width="40"></div></button>
+                          </div>
                         </div>
                       </div>
                     </div>

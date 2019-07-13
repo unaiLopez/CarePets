@@ -130,8 +130,10 @@
                               <h5>Reputación como cuidador :</h5>
                               <x-star-rating value="<?=$mediaMostrar?>" number="5"></x-star-rating>
                               <br>
+                              <script src="../../js/starRating.js"></script>
                               <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
                               <script src="../../js/showStars.js"></script>
+
                               <br>
                             </div>
                           </div>

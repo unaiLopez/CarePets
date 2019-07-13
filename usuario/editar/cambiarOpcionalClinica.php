@@ -25,13 +25,41 @@
     copy($ruta, $destino);
 
     if(!empty($fotoPerfil)){
-      $sql = "UPDATE usuario SET foto=?, descripcion=? WHERE mailusuario=?";
-      $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$destino, $descripcion, $mailActual]);
 
-      $sql = "UPDATE clinica SET experiencia=?, especialidad=?, horario=? WHERE mailusuario=?";
-      $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$experiencia, $especialidad, $horario, $mailActual]);
+      if (!isset($_FILES["avatar"]) || $_FILES["avatar"]["error"] > 0) {
+        echo "Ha ocurrido un error.";
+      }else{
+        // Verificamos si el tipo de archivo es un tipo de imagen permitido.
+        // y que el tamaño del archivo no exceda los 16MB
+        $permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
+        $limite_kb = 16384;
+
+        if (in_array($_FILES['avatar']['type'], $permitidos) && $_FILES['avatar']['size'] <= $limite_kb * 1024){
+            // Archivo temporal
+            $imagen_temporal = $_FILES['avatar']['tmp_name'];
+            // Tipo de archivo
+            $tipo = $_FILES['avatar']['type'];
+            // Leemos el contenido del archivo temporal en binario.
+            $fp = fopen($imagen_temporal, 'r+b');
+            $data = fread($fp, filesize($imagen_temporal));
+            fclose($fp);
+            //Podríamos utilizar también la siguiente instrucción en lugar de las 3 anteriores.
+            // $data=file_get_contents($imagen_temporal);
+            // Escapamos los caracteres para que se puedan almacenar en la base de datos correctamente.
+            $data = $conn->quote($data);
+
+        }else{
+            echo "Formato de archivo no permitido o excede el tamaño límite de $limite_kb Kbytes.";
+        }
+
+        $sql = "UPDATE usuario SET foto=?, tipoimagen=?, descripcion=? WHERE mailusuario=?";
+        $sentencia= $conn->prepare($sql);
+        $sentencia->execute([$data, $tipo, $descripcion, $mailActual]);
+
+        $sql = "UPDATE clinica SET experiencia=?, especialidad=?, horario=? WHERE mailusuario=?";
+        $sentencia= $conn->prepare($sql);
+        $sentencia->execute([$experiencia, $especialidad, $horario, $mailActual]);
+      }
     }else{
       $sql = "UPDATE usuario SET descripcion=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);

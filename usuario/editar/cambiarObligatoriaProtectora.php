@@ -8,7 +8,7 @@
 
     $conn = conectarse();
 
-    $mailActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
     $nombre = $_POST['nombre'];
     $direccion = $_POST['autocomplete'];
@@ -78,77 +78,70 @@
 
     if(!$cambiarMovil && !$cambiarCorreo && !$cambiarFijo){
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $idActual]);
 
     }else if(!$cambiarMovil && !$cambiarCorreo && $cambiarFijo){
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $idActual]);
 
       //Cambiar información obligatoria
-      $sql = "UPDATE protectora SET telefonofijo=? WHERE mailusuario=?";
+      $sql = "UPDATE protectora SET telefonofijo=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$fijo, $mailActual]);
+      $sentencia->execute([$fijo, $idActual]);
 
     }else if(!$cambiarMovil && $cambiarCorreo && !$cambiarFijo){
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $mailActual]);
-
-      $_SESSION['mail'] = $mailNuevo;
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $idActual]);
 
     }else if(!$cambiarMovil && $cambiarCorreo && $cambiarFijo){
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $idActual]);
 
       //Cambiar información obligatoria
-      $sql = "UPDATE protectora SET fijo=? WHERE mailusuario=?";
+      $sql = "UPDATE protectora SET fijo=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$fijo, $mailNuevo]);
-
-      $_SESSION['mail'] = $mailNuevo;
+      $sentencia->execute([$fijo, $idActual]);
 
     }else if($cambiarMovil && !$cambiarCorreo && !$cambiarFijo){
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $idActual]);
 
     }else if($cambiarMovil && !$cambiarCorreo && $cambiarFijo){
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $idActual]);
 
-      $sql = "UPDATE protectora SET fijo=? WHERE mailusuario=?";
+      $sql = "UPDATE protectora SET fijo=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$fijo, $mailNuevo]);
+      $sentencia->execute([$fijo, $idActual]);
 
     }else if($cambiarMovil && $cambiarCorreo && !$cambiarFijo){
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=?, mailusuario=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=?, mailusuario=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $mailNuevo, $mailActual]);
-
-      $_SESSION['mail'] = $mailNuevo;
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $mailNuevo, $idActual]);
 
     }else{
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=?, mailusuario=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=?, mailusuario=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $mailNuevo, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $mailNuevo, $idActual]);
 
       $sql = "UPDATE protectora SET fijo=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$fijo, $mailNuevo]);
+      $sentencia->execute([$fijo, $idActual]);
 
-      $_SESSION['mail'] = $mailNuevo;
     }
 
     header('Location: editarProtectora.php');

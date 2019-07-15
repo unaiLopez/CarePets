@@ -7,7 +7,7 @@
 
     $conn = conectarse();
 
-    $mailActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
     $idAnimal = $_SESSION['idAnimal'];
 
     $nombre = $_POST['nombre'];
@@ -35,19 +35,19 @@
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
     //Mirar si tiene una foto
-    $sentencia = $conn->prepare("SELECT * FROM animal WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $mailActual);
+    $sentencia = $conn->prepare("SELECT * FROM animal WHERE user_id=:user_id");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->execute();
     $animal = $sentencia->fetch(PDO::FETCH_BOTH);
 
     if(!empty($fotoPerfil)){
-      $sql = "UPDATE animal SET foto=?, fecha=?, nombre=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE mailusuario=? and id=?";
+      $sql = "UPDATE animal SET foto=?, fecha=?, nombre=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE user_id=? and id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$destino, $fecha, $nombre, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $mailActual, $idAnimal]);
+      $sentencia->execute([$destino, $fecha, $nombre, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $idActual, $idAnimal]);
     }else{
-      $sql = "UPDATE animal SET nombre=?, fecha=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE mailusuario=? and id=?";
+      $sql = "UPDATE animal SET nombre=?, fecha=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE user_id=? and id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $fecha, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $mailActual, $idAnimal]);
+      $sentencia->execute([$nombre, $fecha, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $idActual, $idAnimal]);
     }
 
     header('Location: editarProtectora.php');

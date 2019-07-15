@@ -7,7 +7,7 @@
 
     $conn = conectarse();
 
-    $mailActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
     $nombre = $_POST['nombre'];
     $raza = $_POST['raza'];
@@ -36,7 +36,7 @@
 
     if(!empty($fotoPerfil)){
       //Insertar animal
-      $sentencia = $conn->prepare("INSERT INTO animal(foto, fecha, nombre, raza, peso, desparasitado, amigable, esterilizado, vacunado, sexo, edad, descripcion, mailusuario) VALUES(:foto, :fecha, :nombre, :raza, :peso, :desparasitado, :amigable, :esterilizado, :vacunado, :sexo, :edad, :descripcion, :mailusuario)");
+      $sentencia = $conn->prepare("INSERT INTO animal(foto, fecha, nombre, raza, peso, desparasitado, amigable, esterilizado, vacunado, sexo, edad, descripcion, user_id) VALUES(:foto, :fecha, :nombre, :raza, :peso, :desparasitado, :amigable, :esterilizado, :vacunado, :sexo, :edad, :descripcion, :user_id)");
       $sentencia->bindParam(':foto', $destino);
       $sentencia->bindParam(':fecha', $fecha);
       $sentencia->bindParam(':nombre', $nombre);
@@ -49,12 +49,12 @@
       $sentencia->bindParam(':sexo', $sexo);
       $sentencia->bindParam(':edad', $edad);
       $sentencia->bindParam(':descripcion', $descripcion);
-      $sentencia->bindParam(':mailusuario', $mailActual);
+      $sentencia->bindParam(':user_id', $idActual);
       $sentencia->execute();
 
     }else{
       //Insertar en la tabla usuario
-      $sentencia = $conn->prepare("INSERT INTO animal(fecha, nombre, raza, peso, desparasitado, amigable, esterilizado, vacunado, sexo, edad, descripcion, mailusuario) VALUES(:fecha, :nombre, :raza, :peso, :desparasitado, :amigable, :esterilizado, :vacunado, :sexo, :edad, :descripcion, :mailusuario)");
+      $sentencia = $conn->prepare("INSERT INTO animal(fecha, nombre, raza, peso, desparasitado, amigable, esterilizado, vacunado, sexo, edad, descripcion, user_id) VALUES(:fecha, :nombre, :raza, :peso, :desparasitado, :amigable, :esterilizado, :vacunado, :sexo, :edad, :descripcion, :user_id)");
       $sentencia->bindParam(':fecha', $fecha);
       $sentencia->bindParam(':nombre', $nombre);
       $sentencia->bindParam(':raza', $raza);
@@ -66,7 +66,7 @@
       $sentencia->bindParam(':sexo', $sexo);
       $sentencia->bindParam(':edad', $edad);
       $sentencia->bindParam(':descripcion', $descripcion);
-      $sentencia->bindParam(':mailusuario', $mailActual);
+      $sentencia->bindParam(':user_id', $idActual);
       $sentencia->execute();
     }
 

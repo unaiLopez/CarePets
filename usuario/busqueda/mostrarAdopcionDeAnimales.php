@@ -1,10 +1,10 @@
 <?php
   try{
-    $correoServicio = $row1['mailusuario'];
+    $idUsuarioServicio = $row1['user_id'];
 
     //Tomar todos los datos de todos los animales en adopcion del usuario
-    $sentencia = $conn->prepare("SELECT * FROM animal WHERE mailusuario=:mailusuario ORDER BY fecha ASC");
-    $sentencia->bindParam(':mailusuario', $correoServicio);
+    $sentencia = $conn->prepare("SELECT * FROM animal WHERE user_id=:user_id ORDER BY fecha ASC");
+    $sentencia->bindParam(':user_id', $idUsuarioServicio);
     $sentencia->execute();
     $animales = $sentencia->fetchAll(PDO::FETCH_BOTH);
 
@@ -89,7 +89,7 @@
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                     <?php
-                    echo '<button class="btn btn-default" class="adoptarAnimal" id="'.$animal['id'].'" value="'.$row1['mailusuario'].'"><i class="fas fa-bone"></i> ¡Adóptame!</button>';
+                    echo '<button class="btn btn-default" class="adoptarAnimal" id="'.$animal['id'].'" value="'.$row1['user_id'].'"><i class="fas fa-bone"></i> ¡Adóptame!</button>';
                     ?>
                   </div>
                 </div>

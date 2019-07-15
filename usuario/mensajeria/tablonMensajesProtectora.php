@@ -9,21 +9,21 @@
     $conn = conectarse();
 
     //Variables para buscar en la BD
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
     $noLeido = 0;
     $tipo1 = 'Mensaje';
     $tipo2 = 'Solicitud';
 
     //Tomar todos los mensajes del usuario y ponerlos en orden de fecha de más reciente a menos reciente
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo ORDER BY fecha DESC");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE user_id_receptor=:user_id and tipo=:tipo ORDER BY fecha DESC");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':tipo', $tipo1);
     $sentencia->execute();
     $mensajes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
     //Tomar todas las solicitudes que te han hecho y ponerlos en orden de fecha de más reciente a menos reciente
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and tipo=:tipo ORDER BY fecha DESC");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE user_id_receptor=:user_id and tipo=:tipo ORDER BY fecha DESC");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':tipo', $tipo2);
     $sentencia->execute();
     $solicitudes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
@@ -115,7 +115,7 @@
                       <div id="mensajesRecibidos">
                         <?php
                           foreach ($mensajesRecibidos as $mensaje){
-                            if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 1){
+                            if($mensaje['user_id_receptor'] == $idActual && $mensaje['leidoreceptor'] == 1){
                               $emisor = $mensaje['emisor'];
                               $asunto = $mensaje['asunto'];
                               $fecha = $mensaje['fecha'];
@@ -127,7 +127,7 @@
                                         <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
                                       </div>
                                     </ul>';
-                            }else if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 0){
+                            }else if($mensaje['user_id_receptor'] == $idActual && $mensaje['leidoreceptor'] == 0){
                               $emisor = $mensaje['emisor'];
                               $asunto = $mensaje['asunto'];
                               $fecha = $mensaje['fecha'];

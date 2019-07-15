@@ -8,10 +8,10 @@
 
     $conn = conectarse();
 
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
-    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE user_id=:user_id");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->execute();
     $usuario = $sentencia->fetch(PDO::FETCH_BOTH);
 
@@ -36,10 +36,10 @@
     $emisor = $usuario['nombre'];
     $leidoEmisor = 1;
     $leidoReceptor = 0;
-    $mailReceptor = $_POST['mailUsuarioServicio'];
+    $user_id_receptor = $_POST['idUsuarioServicio'];
 
-    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $mailReceptor);
+    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE user_id=:user_id");
+    $sentencia->bindParam(':user_id', $user_id_receptor);
     $sentencia->execute();
     $usuarioReceptor = $sentencia->fetch(PDO::FETCH_BOTH);
 
@@ -51,7 +51,7 @@
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,receptor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor) VALUES(:tipo,:emisor,:receptor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,receptor,contenido,fecha,asunto,leidoemisor,leidoreceptor,user_id_emisor,user_id_receptor) VALUES(:tipo,:emisor,:receptor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:user_id_emisor,:user_id_receptor)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':emisor', $emisor);
     $sentencia->bindParam(':receptor', $receptor);
@@ -60,8 +60,8 @@
     $sentencia->bindParam(':asunto', $asunto);
     $sentencia->bindParam(':leidoemisor', $leidoEmisor);
     $sentencia->bindParam(':leidoreceptor', $leidoReceptor);
-    $sentencia->bindParam(':mailemisor', $correoActual);
-    $sentencia->bindParam(':mailreceptor', $mailReceptor);
+    $sentencia->bindParam(':user_id_emisor', $idActual);
+    $sentencia->bindParam(':user_id_receptor', $user_id_receptor);
     $sentencia->execute();
     $ultimoId = $conn->lastInsertId();
 

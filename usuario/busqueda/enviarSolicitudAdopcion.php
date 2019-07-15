@@ -8,14 +8,14 @@
 
     $conn = conectarse();
 
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
     require_once '../datosAnimal.php?id='.$_POST['id'];
     require_once '../datosUsuario.php';
 
     //Si existe ya una solicitud tuya en esas fechas se manda una notificación negandotela, si no se manda la solicitud
     $contenido = '<label for="solicitante">Nombre Solicitante</label><p>'.$row1['nombre'].
-    '<label for="mailSolicitante">Correo Electrónico Solicitante</label><p>'.$correoActual.
+    '<label for="mailSolicitante">Correo Electrónico Solicitante</label><p>'.$row1['mailusuario'].
     '<label for="direccion">Dirección Solicitante</label><p>'.$usuario['direccion'].
     '<label for="telefonoMovil">Teléfono Móvil Solicitante</label><p>'.$usuario['telefonomovil'].
     '<label for="nombre">Nombre Animal</label><p>'.$animal['nombre'].

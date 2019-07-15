@@ -7,7 +7,7 @@
 
     $conn = conectarse();
 
-    $mailActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
     $horario = $_POST['horario'];
     $descripcion = $_POST['descripcion'];
@@ -23,21 +23,21 @@
     copy($ruta, $destino);
 
     if(!empty($fotoPerfil)){
-      $sql = "UPDATE usuario SET foto=?, descripcion=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET foto=?, descripcion=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$destino, $descripcion, $mailActual]);
+      $sentencia->execute([$destino, $descripcion, $idActual]);
 
-      $sql = "UPDATE protectora SET horario=? WHERE mailusuario=?";
+      $sql = "UPDATE protectora SET horario=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$horario, $mailActual]);
+      $sentencia->execute([$horario, $idActual]);
     }else{
-      $sql = "UPDATE usuario SET descripcion=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET descripcion=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$descripcion, $mailActual]);
+      $sentencia->execute([$descripcion, $idActual]);
 
-      $sql = "UPDATE protectora SET horario=? WHERE mailusuario=?";
+      $sql = "UPDATE protectora SET horario=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$horario, $mailActual]);
+      $sentencia->execute([$horario, $idActual]);
     }
 
     header('Location: editarProtectora.php');

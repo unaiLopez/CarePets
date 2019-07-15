@@ -8,7 +8,7 @@
 
     $conn = conectarse();
 
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
     $movil = $_POST['movil'];
     $resultado = false;
 
@@ -30,7 +30,7 @@
     $sentencia->execute();
     $rows3 = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-    if(!$rows1 && !$rows2 && !$rows3 && strlen((string)$movil) == 9 || $rows1 && $rows1['mailusuario'] == $correoActual){
+    if(!$rows1 && !$rows2 && !$rows3 && strlen((string)$movil) == 9 || $rows1 && $rows1['user_id'] == $idActual){
       $resultado = true;
     }
 

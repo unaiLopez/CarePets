@@ -7,17 +7,18 @@
 
     $conn = conectarse();
 
-    $mail = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
+    $tipo = $_SESSION['verificar'];
     //Encriptar la contraseña para poder buscarla en la BD
     $pass = $_POST['pass'];
-    $hash = crypt($pass, $mail);
+    $hash = crypt($pass, $tipo);
     //Fin de la encriptación
 
     $resultado = false;
 
     //Buscar en la tabla usuario la contraseña actual
-    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario and contrasena=:contrasena");
-    $sentencia->bindParam(':mailusuario', $mail);
+    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE user_id=:user_id and contrasena=:contrasena");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':contrasena', $hash);
     $sentencia->execute();
     $row = $sentencia->fetch(PDO::FETCH_BOTH);

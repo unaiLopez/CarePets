@@ -10,7 +10,14 @@
     $correo = $_POST['mail'];
     //Inicio de la encriptación
     $contraseña = $_POST['pass'];
-    $hash = crypt($contraseña, $correo);
+
+    //Tomar el tipo de usuario
+    $sentencia = $conn->prepare("SELECT tipo FROM usuario WHERE mailusuario=:mailusuario");
+    $sentencia->bindParam(':mailusuario', $correo);
+    $sentencia->execute();
+    $tipoUsuario = $sentencia->fetch(PDO::FETCH_BOTH);
+
+    $hash = crypt($contraseña, $tipoUsuario['tipo']);
     //Fin de la encriptación
 
     //Tomar el valor de la contraseña y del mail

@@ -10,8 +10,8 @@
 
 		$id = $_SESSION['id'];
 
-    //Tomar mail del usuario
-    $correoActual = $_SESSION['mail'];
+    //Tomar id del usuario
+    $idActual = $_SESSION['user_id'];
 
     //Tomar los datos del mensaje
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE id=:id");

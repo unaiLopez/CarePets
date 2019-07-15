@@ -3,7 +3,7 @@
   try {
     require_once '../conectarDB.php';
     $conn = conectarse();
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
     //Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
     require_once '../mensajeria/notificacionesMensajeriaRecibidosMensajes.php';
     //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente

@@ -8,7 +8,7 @@
 
     $conn = conectarse();
 
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
     $id = $_POST['idmensaje'];
     $tipo = 'Respuesta';
     $contenido = $_POST['respuesta'];
@@ -22,25 +22,25 @@
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    $mailreceptor = $mensaje['mailemisor'];
+    $user_id_receptor = $mensaje['user_id_emisor'];
     $receptor = $mensaje['emisor'];
     $emisor = $mensaje['receptor'];
 
-    if($mensaje['mailemisor'] == $correoActual){
+    if($mensaje['user_id_emisor'] == $idActual){
       $leidoemisor = 1;
       $leidoreceptor = 0;
-    }else if($mensaje['mailreceptor'] == $correoActual){
+    }else if($mensaje['user_id_receptor'] == $idActual){
       $leidoemisor = 0;
       $leidoreceptor = 1;
     }
 
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,mailemisor,mailreceptor,emisor,receptor,idrespuesta) VALUES(:tipo,:contenido,:fecha, :mailemisor,:mailreceptor,:emisor,:receptor,:idrespuesta)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,contenido,fecha,user_id_emisor,user_id_receptor,emisor,receptor,idrespuesta) VALUES(:tipo,:contenido,:fecha, :user_id_emisor,:user_id_receptor,:emisor,:receptor,:idrespuesta)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':contenido', $contenido);
     $sentencia->bindParam(':fecha', $fecha);
-    $sentencia->bindParam(':mailemisor', $correoActual);
-    $sentencia->bindParam(':mailreceptor', $mailreceptor);
+    $sentencia->bindParam(':user_id_emisor', $idActual);
+    $sentencia->bindParam(':user_id_receptor', $user_id_receptor);
     $sentencia->bindParam(':emisor', $emisor);
     $sentencia->bindParam(':receptor', $receptor);
     $sentencia->bindParam(':idrespuesta', $id);

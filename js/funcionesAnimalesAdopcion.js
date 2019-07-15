@@ -16,6 +16,9 @@ $(document).ready(function() {
                   showConfirmButton: false,
                   timer: 1500
                 })
+                setTimeout(function(){
+                  window.location.reload();
+                }, 1500)
               }else{
                 Swal.fire({
                   position: 'center',
@@ -37,9 +40,10 @@ $(document).ready(function() {
         });
     });
     $('.adoptarAnimal').click(function(){
+      alert("aa");
         var id = $(this).attr('id');
-        var mailUsuarioServicio = $(this).attr('value');
-        var data = {"id" : id, "mailUsuarioServicio" : mailUsuarioServicio};
+        var idUsuarioServicio = $(this).attr('value');
+        var data = {"id" : id, "idUsuarioServicio" : idUsuarioServicio};
         $.ajax({
             data: data,
             url: '/carepets/usuario/editar/enviarSolicitudAdopcion.php',

@@ -8,17 +8,17 @@
 
     $conn = conectarse();
 
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
     $correo = $_POST['mail'];
     $resultado = false;
 
     //Buscar en la tabla usuario
-    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correo);
+    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE user_id=:user_id");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->execute();
     $rows = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-    if(!$rows && filter_var($correo, FILTER_VALIDATE_EMAIL) || $rows && $rows['mailusuario'] == $correoActual){
+    if(!$rows && filter_var($correo, FILTER_VALIDATE_EMAIL) || $rows && $rows['user_id'] == $idActual){
       $resultado = true;
     }
 

@@ -9,7 +9,7 @@
     $conn = conectarse();
 
     //Variables para buscar en la BD
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
     //Se tomarán los mensajes enviados por el usuario que han sido respondidos y los mensajes que me han enviado otros cuidadores de la base de datos
     require_once 'mensajesRecibidos.php';
@@ -95,7 +95,7 @@
                           $asunto = $mensaje['asunto'];
                           $fecha = $mensaje['fecha'];
                           $id = $mensaje['id'];
-                          if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 1){
+                          if($mensaje['user_id_receptor'] == $idActual && $mensaje['leidoreceptor'] == 1){
                             echo '<ul class="list-group list-group-horizontal">
                                     <div class="row">
                                       <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
@@ -103,7 +103,7 @@
                                       <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
                                     </div>
                                   </ul>';
-                          }else if($mensaje['mailreceptor'] == $correoActual && $mensaje['leidoreceptor'] == 0){
+                          }else if($mensaje['user_id_receptor'] == $idActual && $mensaje['leidoreceptor'] == 0){
                             echo '<ul class="list-group list-group-horizontal">
                                     <div class="row">
                                       <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>

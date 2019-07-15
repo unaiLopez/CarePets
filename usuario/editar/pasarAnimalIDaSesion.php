@@ -2,6 +2,5 @@
   @ob_start();
   session_start();
 
-  $id = $_POST['id'];
-  $_SESSION['idAnimal'] = $id;
+  $_SESSION['idAnimal'] = $_POST['id'];
 ?>

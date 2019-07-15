@@ -1,9 +1,9 @@
 <?php
-  $correoActual = $_SESSION['mail'];
+  $idActual = $_SESSION['user_id'];
 
   //Tomar todos los datos de todos los animales en adopcion del usuario
-  $sentencia = $conn->prepare("SELECT foto,tipoimagen FROM usuario WHERE mailusuario=:mailusuario");
-  $sentencia->bindParam(':mailusuario', $correoActual);
+  $sentencia = $conn->prepare("SELECT foto,tipoimagen FROM usuario WHERE user_id=:user_id");
+  $sentencia->bindParam(':user_id', $idActual);
   $sentencia->execute();
   $usuarioFoto = $sentencia->fetch(PDO::FETCH_BOTH);
 

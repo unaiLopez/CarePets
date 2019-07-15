@@ -7,37 +7,37 @@
 
     $conn = conectarse();
 
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
     $servicio1 = 'Alojamiento';
     $servicio2 = 'Dia Entero';
     $servicio3 = 'Paseo';
     $servicio4 = 'Visita';
 
-    $sentencia = $conn->prepare("SELECT * FROM duenocuidador WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM duenocuidador WHERE user_id=:user_id");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->execute();
     $row2 = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    $sentencia = $conn->prepare("SELECT * FROM servicio WHERE mailusuario=:mailusuario and nombre=:nombre");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM servicio WHERE user_id=:user_id and nombre=:nombre");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':nombre', $servicio1);
     $sentencia->execute();
     $row31 = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    $sentencia = $conn->prepare("SELECT * FROM servicio WHERE mailusuario=:mailusuario and nombre=:nombre");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM servicio WHERE user_id=:user_id and nombre=:nombre");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':nombre', $servicio2);
     $sentencia->execute();
     $row32 = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    $sentencia = $conn->prepare("SELECT * FROM servicio WHERE mailusuario=:mailusuario and nombre=:nombre");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM servicio WHERE user_id=:user_id and nombre=:nombre");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':nombre', $servicio3);
     $sentencia->execute();
     $row33 = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    $sentencia = $conn->prepare("SELECT * FROM servicio WHERE mailusuario=:mailusuario and nombre=:nombre");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM servicio WHERE user_id=:user_id and nombre=:nombre");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':nombre', $servicio4);
     $sentencia->execute();
     $row34 = $sentencia->fetch(PDO::FETCH_BOTH);
@@ -301,37 +301,6 @@
                                 if($row2['escuidador']==0)
                                   echo '<div class="form-group"><h5 style="color: red;">Aún no eres cuidador hazte cuidador rellenando este formulario.</h5></div>'
                               ?>
-                              <div class="form-group">
-                                <label for="tipos">¿Qué tipos de animales puede cuidar?</label>
-                                <div class="input-group">
-                                  <div class="checkbox">
-                                    <label><input type="checkbox" id="perros" name="perros" value="1" <?php echo ($row2['perro']==1) ?  "checked" : "" ;  ?>> Perros &nbsp;&nbsp;</label>
-                                  </div>
-                                  <div class="checkbox">
-                                    <label><input type="checkbox" id="gatos" name="gatos" value="1" <?php echo ($row2['gato']==1) ?  "checked" : "" ;  ?>> Gatos &nbsp;&nbsp;</label>
-                                  </div>
-                                  <div class="checkbox">
-                                    <label><input type="checkbox" id="exoticos" name="exoticos" value="1" <?php echo ($row2['exotico']==1) ?  "checked" : "" ;  ?>> Exóticos &nbsp;&nbsp;</label>
-                                  </div>
-                                  <div class="checkbox">
-                                    <label><input type="checkbox" id="otros" name="otros" value="1" <?php echo ($row2['otros']==1) ?  "checked" : "" ;  ?>> Otros</label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label for="tipos">¿De qué tamaños?</label>
-                                <div class="input-group">
-                                  <div class="checkbox">
-                                    <label><input type="checkbox" id="pequeno" name="pequeno" value="1" <?php echo ($row2['pequeno']==1) ?  "checked" : "" ;  ?>> <span>Pequeños 1 - 5 kg  &nbsp;&nbsp; <img src="../../iconos/miscelanea/icono_perro.png" height="20" with="20"></span></label>
-                                  </div>
-                                  <div class="checkbox">
-                                    <label><input type="checkbox" id="mediano" name="mediano" value="1" <?php echo ($row2['mediano']==1) ?  "checked" : "" ;  ?>> <span>Medianos 5 - 15 kg  &nbsp;&nbsp; <img src="../../iconos/miscelanea/icono_perro.png" height="25" with="25"></span></label>
-                                  </div>
-                                  <div class="checkbox">
-                                    <label><input type="checkbox" id="grande" name="grande" value="1" <?php echo ($row2['grande']==1) ?  "checked" : "" ;  ?>> <span>Grandes 15 - 50 kg  &nbsp;&nbsp; <img src="../../iconos/miscelanea/icono_perro.png" height="35" with="35"></span></label>
-                                  </div>
-                                </div>
-                              </div>
                               <div class="form-group">
                                 <label for="experiencia">Experiencia :</label>
                                 <div class="input-group">

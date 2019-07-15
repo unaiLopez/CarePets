@@ -51,15 +51,15 @@
             if(servicio == 'Alojamiento'){
               var fechaInicio = '<?php echo $_GET['date1']; ?>';
               var fechaFin = '<?php echo $_GET['date2']; ?>';
-              var data = {'buscarTipo':buscarTipo, 'id': id, 'servicio': servicio, 'precio': precio, 'fechaInicio': fechaInicio, 'fechaFin': fechaFin};
+              var data = {'buscarTipo':buscarTipo, 'idUsuarioServicio': id, 'servicio': servicio, 'precio': precio, 'fechaInicio': fechaInicio, 'fechaFin': fechaFin};
             }else{
               <?php if(isset($_GET['date3'])){?>
                 var fechaDia = '<?php echo $_GET['date3']; ?>';
               <?php }?>
-              var data = {'buscarTipo':buscarTipo, 'id': id, 'servicio': servicio, 'precio': precio, 'fechaDia': fechaDia};
+              var data = {'buscarTipo':buscarTipo, 'idUsuarioServicio': id, 'servicio': servicio, 'precio': precio, 'fechaDia': fechaDia};
             }
           }else{
-            var data = {'buscarTipo':buscarTipo, 'id': id};
+            var data = {'buscarTipo':buscarTipo, 'idUsuarioServicio': id};
           }
           $.post('pasarDatosBusquedaSession.php', data, function(){
               window.location.href = "perfilServicio.php";
@@ -122,13 +122,13 @@
                           if($cantidadUsuarios != 0){
                             echo '<ul class="list-group scroll-list">';
                                 foreach ($busqueda as $usuario){
-                                  $mailusuario = $usuario['mailusuario'];
+                                  $user_id = $usuario['user_id'];
                                   $nombre = $usuario['nombre'];
                                   $descripcion = $usuario['descripcion'];
                                   $foto = $usuario['foto'];
                                   $direccion = $usuario['direccion'];
                                   $tipo = $usuario['tipo'];
-                                  echo '<li style="cursor:pointer;width:100%;" id="'.$mailusuario.'" class="list-group-item">
+                                  echo '<li style="cursor:pointer;width:100%;" id="'.$user_id.'" class="list-group-item">
                                           <div class="row">
                                               <div style="width:30%;" class="container">
                                                 <img style="border-radius:5px;border: solid 2px #ffffff;" src="'.$foto.'" height="120" width="100%">

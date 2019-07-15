@@ -1,5 +1,5 @@
-function enviarMensaje(mailUsuarioServicio, asunto, contenido){
-  var data = {"mailUsuarioServicio" : mailUsuarioServicio, "asunto" : asunto, "contenido" : contenido};
+function enviarMensaje(idUsuarioServicio, asunto, contenido){
+  var data = {"idUsuarioServicio" : idUsuarioServicio, "asunto" : asunto, "contenido" : contenido};
   $.ajax({
     data: data,
     url: '/carepets/usuario/busqueda/enviarMensaje.php',
@@ -29,14 +29,15 @@ function enviarMensaje(mailUsuarioServicio, asunto, contenido){
   });
 }
 
-function confirmarSolicitud(mailUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3, importeTotal){
-  var data = {"mailUsuarioServicio" : mailUsuarioServicio, "nombreUsuarioServicio" : nombreUsuarioServicio, "servicio" : servicio, "fecha1" : fecha1, "fecha2" : fecha2, "fecha3" : fecha3, "importeTotal" : importeTotal};
+function confirmarSolicitud(idUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3, importeTotal){
+  var data = {"idUsuarioServicio" : idUsuarioServicio, "nombreUsuarioServicio" : nombreUsuarioServicio, "servicio" : servicio, "fecha1" : fecha1, "fecha2" : fecha2, "fecha3" : fecha3, "importeTotal" : importeTotal};
   $.ajax({
     data: data,
     url: '/carepets/usuario/busqueda/enviarSolicitudCuidador.php',
     type: 'post',
     async: false,
     success: function(response){
+      alert(response);
       if(response == true){
         Swal.fire({
           position: 'center',
@@ -58,7 +59,7 @@ function confirmarSolicitud(mailUsuarioServicio, nombreUsuarioServicio, servicio
   });
 }
 
-function solicitarServicio(mailUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3){
+function solicitarServicio(idUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3){
   if(servicio == 'Alojamiento'){
     var fecha1Comparar = moment(fecha1);
     var fecha2Comparar = moment(fecha2);
@@ -77,7 +78,7 @@ function solicitarServicio(mailUsuarioServicio, nombreUsuarioServicio, servicio,
       reverseButtons: true,
     }).then((result) => {
         if (result.value) {
-            this.confirmarSolicitud(mailUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3, importeTotal);
+            this.confirmarSolicitud(idUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3, importeTotal);
         }
     })
   }else{
@@ -94,7 +95,7 @@ function solicitarServicio(mailUsuarioServicio, nombreUsuarioServicio, servicio,
       reverseButtons: true,
     }).then((result) => {
         if (result.value) {
-            this.confirmarSolicitud(mailUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3, importeTotal);
+            this.confirmarSolicitud(idUsuarioServicio, nombreUsuarioServicio, servicio, precio, fecha1, fecha2, fecha3, importeTotal);
         }
     })
   }

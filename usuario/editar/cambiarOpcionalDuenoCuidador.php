@@ -7,7 +7,7 @@
 
     $conn = conectarse();
 
-    $mailActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
     $apellido1 = $_POST['apellido1'];
     $apellido2 = $_POST['apellido2'];
@@ -25,17 +25,17 @@
     copy($ruta, $destino);
 
     if(!empty($fotoPerfil)){
-      $sql = "UPDATE usuario SET foto=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET foto=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$destino, $mailActual]);
+      $sentencia->execute([$destino, $idActual]);
 
-      $sql = "UPDATE duenocuidador SET apellido1=?, apellido2=?, sexo=?, fechanacimiento=? WHERE mailusuario=?";
+      $sql = "UPDATE duenocuidador SET apellido1=?, apellido2=?, sexo=?, fechanacimiento=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$apellido1, $apellido2, $sexo, $fechaNacimiento, $mailActual]);
+      $sentencia->execute([$apellido1, $apellido2, $sexo, $fechaNacimiento, $idActual]);
     }else{
-      $sql = "UPDATE duenocuidador SET apellido1=?, apellido2=?, sexo=?, fechanacimiento=? WHERE mailusuario=?";
+      $sql = "UPDATE duenocuidador SET apellido1=?, apellido2=?, sexo=?, fechanacimiento=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$apellido1, $apellido2, $sexo, $fechaNacimiento, $mailActual]);
+      $sentencia->execute([$apellido1, $apellido2, $sexo, $fechaNacimiento, $idActual]);
     }
 
     header('Location: editarDuenoCuidador.php');

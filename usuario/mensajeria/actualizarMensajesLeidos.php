@@ -1,7 +1,7 @@
 <?php
   try {
     //Variables para buscar en la BD
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
     $id = $_SESSION['id'];
     $leido = 1;
     $tipoMensaje = 'Mensaje';
@@ -15,14 +15,14 @@
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-    if($mensaje['mailemisor'] == $correoActual){
+    if($mensaje['user_id_emisor'] == $idActual){
 
       $leidoemisor = 1;
       $sql = "UPDATE mensaje SET leidoemisor=? WHERE id=?";
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$leidoemisor, $id]);
 
-    }else if($mensaje['mailreceptor'] == $correoActual){
+    }else if($mensaje['user_id_receptor'] == $idActual){
 
       $leidoreceptor = 1;
       $sql = "UPDATE mensaje SET leidoreceptor=? WHERE id=?";

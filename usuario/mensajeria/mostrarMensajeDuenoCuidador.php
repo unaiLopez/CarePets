@@ -11,18 +11,18 @@
 		$id = $_SESSION['id'];
 
     //Tomar mail del usuario
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
     //Tomar los datos del mensaje
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and id=:id");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE user_id_receptor=:user_id and id=:id");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
 		if(!$mensaje){
 			//Tomar los datos del mensaje
-	    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailemisor=:mailusuario and id=:id");
-	    $sentencia->bindParam(':mailusuario', $correoActual);
+	    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE user_id_emisor=:user_id and id=:id");
+	    $sentencia->bindParam(':user_id', $idActual);
 	    $sentencia->bindParam(':id', $id);
 	    $sentencia->execute();
 	    $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
@@ -45,11 +45,13 @@
 		require_once 'datosMensaje.php';
 
 		//Conseguir datos para contactar con el usuario que pide la solicitud
-		if($solicitud){
-			$sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
-			$sentencia->bindParam(':mailusuario', $mensaje['mailemisor']);
-			$sentencia->execute();
-			$datosUsuarioSolicitud = $sentencia->fetch(PDO::FETCH_BOTH);
+		if($mensaje['tipo'] == 'Solicitud'){
+			if($solicitud){
+				$sentencia = $conn->prepare("SELECT * FROM usuario WHERE user_id=:user_id");
+				$sentencia->bindParam(':user_id', $mensaje['user_id_emisor']);
+				$sentencia->execute();
+				$datosUsuarioSolicitud = $sentencia->fetch(PDO::FETCH_BOTH);
+			}
 		}
 
   }catch(PDOException $e){
@@ -117,7 +119,7 @@
                <div class="card-header mx-auto">
 								 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                    <li class="nav-item">
-                    <a class="nav-link active" id="conversacion-tab" data-toggle="tab" href="#conversacion" role="tab" aria-controls="conversacion" aria-selected="true"><?php echo 'Conversación con : ';?><strong><?php if($correoActual == $mensaje['receptor']){echo $mensaje['emisor'];}else{echo $mensaje['receptor'];}?></strong> </a>
+                    <a class="nav-link active" id="conversacion-tab" data-toggle="tab" href="#conversacion" role="tab" aria-controls="conversacion" aria-selected="true"><?php echo 'Conversación con : ';?><strong><?php if($idActual == $mensaje['user_id_receptor']){echo $mensaje['emisor'];}else{echo $mensaje['receptor'];}?></strong> </a>
                    </li>
                  </ul>
                </div>
@@ -146,33 +148,35 @@
 													 <div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
 														 <?php
 														 echo $mensaje['contenido'];
-														 if($solicitud){
-															 if(isset($solicitud['fechadia'])){
-																 echo '<br>';
-																 echo '<br>';
-																 echo '<strong>Servicio:</strong> '.$solicitud['servicio'];
-																 echo '<br>';
-																 echo '<strong>Importe Total:</strong> '.$solicitud['importetotal'].'€';
-																 echo '<br>';
-																 echo '<strong>Para el Día:</strong> '.$solicitud['fechadia'];
-																 echo '<br>';
-																 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
-																 echo '<br>';
-																 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
-															 }else{
-																 echo '<br>';
-																 echo '<br>';
-																 echo '<strong>Servicio:</strong> '.$solicitud['servicio'];
-																 echo '<br>';
-																 echo '<strong>Importe Total:</strong> '.$solicitud['importetotal'].'€';
-																 echo '<br>';
-																 echo '<strong>Desde el Día:</strong> '.$solicitud['fechainicio'];
-																 echo '<br>';
-																 echo '<strong>Hasta el Día</strong>: '.$solicitud['fechafinal'];
-																 echo '<br>';
-																 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
-																 echo '<br>';
-																 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
+														 if($mensaje['tipo'] == 'Solicitud'){
+															 if($solicitud){
+																 if(isset($solicitud['fechadia'])){
+																	 echo '<br>';
+																	 echo '<br>';
+																	 echo '<strong>Servicio:</strong> '.$solicitud['servicio'];
+																	 echo '<br>';
+																	 echo '<strong>Importe Total:</strong> '.$solicitud['importetotal'].'€';
+																	 echo '<br>';
+																	 echo '<strong>Para el Día:</strong> '.$solicitud['fechadia'];
+																	 echo '<br>';
+																	 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
+																	 echo '<br>';
+																	 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
+																 }else{
+																	 echo '<br>';
+																	 echo '<br>';
+																	 echo '<strong>Servicio:</strong> '.$solicitud['servicio'];
+																	 echo '<br>';
+																	 echo '<strong>Importe Total:</strong> '.$solicitud['importetotal'].'€';
+																	 echo '<br>';
+																	 echo '<strong>Desde el Día:</strong> '.$solicitud['fechainicio'];
+																	 echo '<br>';
+																	 echo '<strong>Hasta el Día</strong>: '.$solicitud['fechafinal'];
+																	 echo '<br>';
+																	 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
+																	 echo '<br>';
+																	 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
+																 }
 															 }
 														 }
 														 ?>
@@ -216,7 +220,7 @@
 													}
 													if($mensaje['tipo'] == 'Solicitud' && $solicitud['solicitudverificada'] == 0){
 												?>
-													<button style="width: 220px;" onclick="aceptarSolicitud('<?php echo $mensaje['id']; ?>')" name="aceptar" id="aceptar" class="btn btn-default"><i class="fas fa-check-circle"></i> Aceptar Solicitud</button>
+													<button style="width: 220px;" onclick="aceptarSolicitud('<?php echo $mensaje['id']; ?>,<?php echo $solicitud['servicio']; ?>')" name="aceptar" id="aceptar" class="btn btn-default"><i class="fas fa-check-circle"></i> Aceptar Solicitud</button>
 													<button style="width: 220px;" onclick="rechazarSolicitud('<?php echo $mensaje['id']; ?>')" name="rechazar" id="rechazar" class="btn btn-default"><i class="fas fa-times-circle"></i> Rechazar Solicitud</button>
 										<?php	} ?>
 											 <button style="width: 220px;" data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>

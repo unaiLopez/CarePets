@@ -48,9 +48,11 @@
     <script src="../../js/pestañasConURL.js"></script>
     <script src="../../js/funcionesAnimalesAdopcion.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
   </head>
   <body>
     <div id="container">
+      <button class="adoptarAnimal" id="3" value="9">Prueba</button>
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
@@ -191,7 +193,8 @@
                           </div>
                           <?php if($row1['tipo'] == 'DuenoCuidador'){ ?>
                           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            <button onclick="solicitarServicio('<?php echo $row1['mailusuario']; ?>', '<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-handshake"></i> Solicitar Servicio</button>
+                            <?php echo $_SESSION['idUsuarioServicio']; ?>
+                            <button onclick="solicitarServicio('<?php echo $_SESSION['idUsuarioServicio']; ?>', '<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-handshake"></i> Solicitar Servicio</button>
                             <br>
                             <br>
                           </div>
@@ -234,12 +237,12 @@
                                 <textarea class="form-control" col="12" rows="6" id="mensaje" name="mensaje" placeholder="Contenido del mensaje" required></textarea>
                               </div>
                               <div class="form-group">
-                                <input type="hidden" id="mailusuarioservicio" name="mailusuarioservicio" value="<?=$row1['mailusuario']; ?>">
+                                <input type="hidden" id="idusuarioservicio" name="mailusuarioservicio" value="<?=$row1['user_id']; ?>">
                               </div>
                             </div>
                             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
                               <div id="form-modal" class="form-group">
-                                <button onclick="enviarMensaje($('#mailusuarioservicio').val(), $('#asunto').val(), $('#mensaje').val())" name="enviar" id="enviar" class="btn btn-default block"><i class="far fa-comments"></i> Enviar</button>
+                                <button onclick="enviarMensaje($('#idusuarioservicio').val(), $('#asunto').val(), $('#mensaje').val())" name="enviar" id="enviar" class="btn btn-default block"><i class="far fa-comments"></i> Enviar</button>
                               </div>
                             </div>
                           </div>

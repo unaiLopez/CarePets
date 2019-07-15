@@ -2,19 +2,11 @@
   @ob_start();
   session_start();
 
-  $id = $_POST['id'];
-  $buscarTipo = $_POST['buscarTipo'];
-  $fechaInicio = $_POST['fechaInicio'];
-  $fechaFin = $_POST['fechaFin'];
-  $fechaDia = $_POST['fechaDia'];
-  $servicio = $_POST['servicio'];
-  $precio = $_POST['precio'];
-
-  $_SESSION['id'] = $id;
-  $_SESSION['buscarTipo'] = $buscarTipo;
-  $_SESSION['fechaInicio'] = $fechaInicio;
-  $_SESSION['servicio'] = $servicio;
-  $_SESSION['fechaDia'] = $fechaDia;
-  $_SESSION['fechaFin'] = $fechaFin;
-  $_SESSION['precio'] = $precio;
+  $_SESSION['idUsuarioServicio'] = $_POST['idUsuarioServicio'];
+  $_SESSION['buscarTipo'] = $_POST['buscarTipo'];
+  $_SESSION['fechaInicio'] = $_POST['fechaInicio'];
+  $_SESSION['servicio'] = $_POST['servicio'];
+  $_SESSION['fechaDia'] = $_POST['fechaDia'];
+  $_SESSION['fechaFin'] = $_POST['fechaFin'];
+  $_SESSION['precio'] = $_POST['precio'];
 ?>

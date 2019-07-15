@@ -8,7 +8,7 @@
 
     $conn = conectarse();
 
-    $mailActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
     $nombre = $_POST['nombre'];
     $movil = $_POST['movil'];
@@ -55,34 +55,30 @@
     if($cambiarMovil && $cambiarCorreo){
 
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=?, telefonomovil=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=?, telefonomovil=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $movil, $mailActual]);
-
-      $_SESSION['mail'] = $mailNuevo;
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $movil, $idActual]);
 
     }else if(!$cambiarMovil && !$cambiarCorreo){
 
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $idActual]);
 
     }else if(!$cambiarMovil && $cambiarCorreo){
 
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, mailusuario=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $mailActual]);
-
-      $_SESSION['mail'] = $mailNuevo;
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $idActual]);
 
     }else{
 
       //Cambiar información obligatoria
-      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=? WHERE mailusuario=?";
+      $sql = "UPDATE usuario SET nombre=?, direccion=?, latitud=?, longitud=?, telefonomovil=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $mailActual]);
+      $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $idActual]);
 
     }
 

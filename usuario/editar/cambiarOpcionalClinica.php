@@ -7,7 +7,7 @@
 
     $conn = conectarse();
 
-    $mailActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
     $experiencia = $_POST['experiencia'];
     $especialidad = $_POST['especialidad'];
@@ -52,22 +52,22 @@
             echo "Formato de archivo no permitido o excede el tamaño límite de $limite_kb Kbytes.";
         }
 
-        $sql = "UPDATE usuario SET foto=?, tipoimagen=?, descripcion=? WHERE mailusuario=?";
+        $sql = "UPDATE usuario SET foto=?, tipoimagen=?, descripcion=? WHERE user_id=?";
         $sentencia= $conn->prepare($sql);
-        $sentencia->execute([$data, $tipo, $descripcion, $mailActual]);
+        $sentencia->execute([$data, $tipo, $descripcion, $idActual]);
 
-        $sql = "UPDATE clinica SET experiencia=?, especialidad=?, horario=? WHERE mailusuario=?";
+        $sql = "UPDATE clinica SET experiencia=?, especialidad=?, horario=? WHERE user_id=?";
         $sentencia= $conn->prepare($sql);
-        $sentencia->execute([$experiencia, $especialidad, $horario, $mailActual]);
+        $sentencia->execute([$experiencia, $especialidad, $horario, $idActual]);
       }
     }else{
       $sql = "UPDATE usuario SET descripcion=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$descripcion, $mailActual]);
 
-      $sql = "UPDATE clinica SET experiencia=?, especialidad=?, horario=? WHERE mailusuario=?";
+      $sql = "UPDATE clinica SET experiencia=?, especialidad=?, horario=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$experiencia, $especialidad, $horario, $mailActual]);
+      $sentencia->execute([$experiencia, $especialidad, $horario, $idActual]);
     }
 
     header('Location: editarClinica.php');

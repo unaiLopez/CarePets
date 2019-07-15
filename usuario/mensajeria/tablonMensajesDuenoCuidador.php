@@ -9,15 +9,15 @@
     $conn = conectarse();
 
     //Variables para buscar en la BD
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
     $noLeido = 0;
     $tipo1 = 'Mensaje';
     $tipo2 = 'Solicitud';
     $tipo3 = 'Respuesta';
 
     //Tomar todas las solicitudes que te han hecho y ponerlos en orden de fecha de más reciente a menos reciente
-    $sentencia = $conn->prepare("SELECT * FROM mensaje m INNER JOIN solicitud s ON m.idrespuesta=s.id WHERE m.mailreceptor=:mailusuario ORDER BY fecha DESC");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM mensaje m INNER JOIN solicitud s ON m.idrespuesta=s.id WHERE m.user_id_receptor=:user_id ORDER BY fecha DESC");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->execute();
     $solicitudes = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
@@ -121,7 +121,7 @@
                             $asunto = $mensajeEnviado['asunto'];
                             $fecha = $mensajeEnviado['fecha'];
                             $id = $mensajeEnviado['id'];
-                            if($mensajeEnviado['mailemisor'] == $correoActual && $mensajeEnviado['leidoemisor'] == 1){
+                            if($mensajeEnviado['user_id_emisor'] == $idActual && $mensajeEnviado['leidoemisor'] == 1){
                               echo '<ul class="list-group list-group-horizontal">
                                       <div class="row">
                                         <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
@@ -129,7 +129,7 @@
                                         <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
                                       </div>
                                     </ul>';
-                            }else if($mensajeEnviado['mailemisor'] == $correoActual && $mensajeEnviado['leidoemisor'] == 0){
+                            }else if($mensajeEnviado['user_id_emisor'] == $idActual && $mensajeEnviado['leidoemisor'] == 0){
                               echo '<ul class="list-group list-group-horizontal">
                                       <div class="row">
                                         <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>
@@ -152,7 +152,7 @@
                             $asunto = $mensajeRecibido['asunto'];
                             $fecha = $mensajeRecibido['fecha'];
                             $id = $mensajeRecibido['id'];
-                            if($mensajeRecibido['mailreceptor'] == $correoActual && $mensajeRecibido['leidoreceptor'] == 1){
+                            if($mensajeRecibido['user_id_receptor'] == $idActual && $mensajeRecibido['leidoreceptor'] == 1){
                               echo '<ul class="list-group list-group-horizontal">
                                       <div class="row">
                                         <li id="'.$id.'" class="list-group-item">'.$emisor.'</li>
@@ -160,7 +160,7 @@
                                         <li id="'.$id.'" class="list-group-item">&nbsp;&nbsp;&nbsp; '.$fecha.'</li>
                                       </div>
                                     </ul>';
-                            }else if($mensajeRecibido['mailreceptor'] == $correoActual && $mensajeRecibido['leidoreceptor'] == 0){
+                            }else if($mensajeRecibido['user_id_receptor'] == $idActual && $mensajeRecibido['leidoreceptor'] == 0){
                               echo '<ul class="list-group list-group-horizontal">
                                       <div class="row">
                                         <li id="'.$id.'" class="list-group-item" style="background-color: grey;color: white;border-color:white;">'.$emisor.'</li>

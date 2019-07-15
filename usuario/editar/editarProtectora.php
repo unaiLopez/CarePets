@@ -7,10 +7,10 @@
 
     $conn = conectarse();
 
-    $correoActual = $_SESSION['mail'];
+    $idActual = $_SESSION['user_id'];
 
-    $sentencia = $conn->prepare("SELECT * FROM protectora WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM protectora WHERE user_id=:user_id");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->execute();
     $row2 = $sentencia->fetch(PDO::FETCH_BOTH);
 

@@ -103,7 +103,7 @@
                 <hr>
                 <li><a href="../busqueda/menuBusqueda.php"><i class="fas fa-search"></i> Búsqueda</a></li>
                 <hr>
-                <li><a href="../../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
+                <li><a href="../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
                 <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>
@@ -302,7 +302,7 @@
                                   echo '<div class="form-group"><h5 style="color: red;">Aún no eres cuidador hazte cuidador rellenando este formulario.</h5></div>'
                               ?>
                               <div class="form-group">
-                                <label for="experiencia">Experiencia :</label>
+                                <label for="experiencia">Experiencia</label>
                                 <div class="input-group">
                                   <input type="number" id="experiencia" name="experiencia" class="form-control" value="<?=$row2['experiencia']; ?>" placeholder="Años de experiencia">
                                 </div>

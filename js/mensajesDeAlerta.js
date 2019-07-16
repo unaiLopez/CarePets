@@ -37,7 +37,6 @@ function confirmarSolicitud(idUsuarioServicio, nombreUsuarioServicio, servicio, 
     type: 'post',
     async: false,
     success: function(response){
-      alert(response);
       if(response == true){
         Swal.fire({
           position: 'center',

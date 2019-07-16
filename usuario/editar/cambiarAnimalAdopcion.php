@@ -21,15 +21,6 @@
     $vacunado = $_POST['vacunado'];
     $descripcion = $_POST['descripcion'];
     $fotoPerfil = $_FILES['avatar']['name'];
-    //Se cuentan todas las imagenes de la carpeta para dar un id a la imagen y que no se repitan los nombres
-    $nombreFoto = explode('.', $fotoPerfil);
-    $totalImagenes = count(glob('../../iconos/fotos/fotos_animales/{*.jpg,*.gif,*.png}',GLOB_BRACE));
-    $numeroImagen = $totalImagenes + 1;
-    $fotoPerfil = $numeroImagen.'.'.$nombreFoto[1];
-    //Fin de la conversión del nombre
-    $ruta = $_FILES['avatar']['tmp_name'];
-    $destino = "../../iconos/fotos/fotos_animales/".$fotoPerfil;
-    copy($ruta, $destino);
     //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
@@ -41,13 +32,27 @@
     $animal = $sentencia->fetch(PDO::FETCH_BOTH);
 
     if(!empty($fotoPerfil)){
-      $sql = "UPDATE animal SET foto=?, fecha=?, nombre=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE user_id=? and id=?";
+      //Se cuentan todas las imagenes de la carpeta para dar un id a la imagen y que no se repitan los nombres
+      $nombreFoto = explode('.', $fotoPerfil);
+      $pathCarpeta  = '../../iconos/fotos/fotos_adopcion/'.$idActual.'/';
+      $totalImagenes = count(glob($pathCarpeta.'{*.jpg,*.gif,*.png}',GLOB_BRACE));
+      $numeroImagen = $totalImagenes + 1;
+      $fotoPerfil = $numeroImagen.'.'.$nombreFoto[1];
+      for($i = 0; $i < 2 ; $i++){
+        if(!mkdir($pathCarpeta, 0777)){
+          $ruta = $_FILES['avatar']['tmp_name'];
+          $destino = $pathCarpeta.$fotoPerfil;
+          copy($ruta, $destino);
+        }
+      }
+
+      $sql = "UPDATE animal SET foto=?, fecha=?, nombre=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$destino, $fecha, $nombre, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $idActual, $idAnimal]);
+      $sentencia->execute([$destino, $fecha, $nombre, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $idAnimal]);
     }else{
-      $sql = "UPDATE animal SET nombre=?, fecha=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE user_id=? and id=?";
+      $sql = "UPDATE animal SET nombre=?, fecha=?, raza=?, peso=?, desparasitado=?, amigable=?, esterilizado=?, vacunado=?, sexo=?, edad=?, descripcion=? WHERE id=?";
       $sentencia= $conn->prepare($sql);
-      $sentencia->execute([$nombre, $fecha, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $idActual, $idAnimal]);
+      $sentencia->execute([$nombre, $fecha, $raza, $peso, $desparasitado, $amigable, $esterilizado, $vacunado, $sexo, $edad, $descripcion, $idAnimal]);
     }
 
     header('Location: editarProtectora.php');

@@ -56,7 +56,7 @@ $conn = null;
                 if($row1['foto']){
                   echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
                 }else{
-                  echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg"  class="imagen-de-perfi" height="70" width="70">';
                 }
                ?>
             </a>
@@ -67,7 +67,7 @@ $conn = null;
                 <hr>
                 <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes+$notificacionesRecibidosSolicitudes; ?></span></a></li>
                 <hr>
-                <li><a href="../../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
+                <li><a href="../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
                 <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>

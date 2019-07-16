@@ -55,6 +55,11 @@ li {
   border: solid 2px #ffffff;
 }
 
+.imagen-de-perfil {
+  border-radius: 5px;
+  border: solid 2px #ffffff;
+}
+
 .btn-tertiary {
   border-radius: 10px;
   border: solid 1px #ffffff;

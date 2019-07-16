@@ -58,8 +58,9 @@ class StarRating extends HTMLElement {
                 starIndex = Math.floor((e.pageX - box.left) / box.width * this.stars.length);
 
             this.value = starIndex + 1;
-
+            
             let rateEvent = new Event('rate');
+
             this.dispatchEvent(rateEvent);
         });
     }

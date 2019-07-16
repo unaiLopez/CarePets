@@ -4,9 +4,9 @@
       <br>
       <?php
         if($row1['foto']){
-          echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="240" width="200">';
+          echo '<img src="'.$row1['foto'].'"  class="imagen-de-perfil" height="240" width="200">';
         }else{
-          echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="240" width="200">';
+          echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-de-perfil" height="240" width="200">';
         }
        ?>
     </div>
@@ -32,16 +32,16 @@
         echo '<label for="horario">Horario de Apertura :</label>';
         echo '<br>';
         echo $rowProtectora['horario'];
+        echo '<br>';
       }
       if($row1['descripcion']) {
-        echo '<br>';
         echo '<br>';
         echo '<label for="descripcion">Descripcion :</label>';
         echo '<br>';
         echo $row1['descripcion'];
+        echo '<br>';
       }
       if($row1['direccion']) {
-        echo '<br>';
         echo '<br>';
         echo '<label for="direccion">Direccion :</label>';
         echo '<br>';

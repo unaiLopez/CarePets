@@ -49,7 +49,7 @@ $conn = null;
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
                 if($row1['foto']){
-                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="'.$row1['foto'].'"  class="imagen-de-perfi" height="70" width="70">';
                 }else{
                   echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
                 }
@@ -64,7 +64,7 @@ $conn = null;
                 <hr>
                 <li><a href="#"><i class="fas fa-users"></i> Foro</a></li>
                 <hr>
-                <li><a href="../../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
+                <li><a href="../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
                 <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>
@@ -98,7 +98,7 @@ $conn = null;
                                       <div class="row">
                                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">';
                                         if($animal['foto']){
-                                          echo '<img src="'.$animal['foto'].'" class="imagen-perfil" height="160" width="180">';
+                                          echo '<img src="'.$animal['foto'].'"  class="imagen-de-perfi" height="160" width="180">';
                                           echo '<br>';
                                         }else{
                                           echo '<img class="card-image" src="http://via.placeholder.com/300x180" width="100%" height="100%" alt="Card image cap">';

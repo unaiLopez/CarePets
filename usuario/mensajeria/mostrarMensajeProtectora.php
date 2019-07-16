@@ -10,12 +10,12 @@
 
 		$id = $_SESSION['id'];
 
-    //Tomar mail del usuario
-    $correoActual = $_SESSION['mail'];
+    //Tomar id del usuario
+    $idActual = $_SESSION['user_id'];
 
     //Tomar los datos del mensaje
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE mailreceptor=:mailusuario and id=:id");
-    $sentencia->bindParam(':mailusuario', $correoActual);
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE user_id_receptor=:user_id and id=:id");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
@@ -81,7 +81,7 @@
                  <hr>
                  <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes  <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes+$notificacionesRecibidosSolicitudes; ?></span></a></li>
                  <hr>
-                 <li><a href="../../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
+                 <li><a href="../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                  <hr>
                  <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
              </ul>
@@ -96,7 +96,7 @@
                <div class="card-header mx-auto">
 								 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                    <li class="nav-item">
-                    <a class="nav-link active" id="conversacion-tab" data-toggle="tab" href="#conversacion" role="tab" aria-controls="conversacion" aria-selected="true"><?php echo 'Conversación con : ';?><strong><?php if($correoActual == $mensaje['receptor']){echo $mensaje['emisor'];}else{echo $mensaje['receptor'];}?></strong> </a>
+                    <a class="nav-link active" id="conversacion-tab" data-toggle="tab" href="#conversacion" role="tab" aria-controls="conversacion" aria-selected="true"><?php echo 'Conversación con : ';?><strong><?php if($idActual == $mensaje['user_id_receptor']){echo $mensaje['emisor'];}else{echo $mensaje['receptor'];}?></strong> </a>
                    </li>
                  </ul>
                </div>

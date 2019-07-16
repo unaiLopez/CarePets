@@ -60,7 +60,7 @@ $conn = null;
                 <hr>
                 <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes; ?></span></a></li>
                 <hr>
-                <li><a href="../../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
+                <li><a href="../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
                 <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>
@@ -89,9 +89,9 @@ $conn = null;
                             <br>
                             <?php
                               if($row1['foto']){
-                                echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="240" width="200">';
+                                echo '<img src="'.$row1['foto'].'"  class="imagen-de-perfil" height="240" width="200">';
                               }else{
-                                echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="240" width="200">';
+                                echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png"  class="imagen-de-perfil" height="240" width="200">';
                               }
                              ?>
                           </div>

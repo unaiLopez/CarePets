@@ -8,4 +8,5 @@
   $sentencia->bindParam(':tipo2', $tipoSolicitud);
   $sentencia->execute();
   $mensajesEnviados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
 ?>

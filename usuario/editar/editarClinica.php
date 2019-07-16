@@ -56,7 +56,7 @@
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
                 if($row1['foto']){?>
-                  <img src="../obtenerFotografiaUsuario.php" class="imagen-perfil" height="70" width="70">
+                  <img src="<?php echo $row1['foto']; ?>" class="imagen-perfil" height="70" width="70">
          <?php   }else{
                   echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
                 }
@@ -69,7 +69,7 @@
                 <hr>
                 <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes; ?></span></a></li>
                 <hr>
-                <li><a href="../../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
+                <li><a href="../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
                 <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>
@@ -142,7 +142,7 @@
                           <div class="row">
                             <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                               <h1><strong>Obligatoria</strong></h1>
-                              <form name="formularioCambiarInfoObligatoria" id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaClinica.php" method="post" onsubmit="return validarCorreoEditar($('#mail').val()) && validarTelefonoFijoEditar($('#fijo').val()); && validarTelefonoMovilEditar($('#movil').val())">
+                              <form name="formularioCambiarInfoObligatoria" id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaClinica.php" method="post" onsubmit="return compararTelefonos($('#fijo').val(), $('#movil').val()) && validarCorreoEditar($('#mail').val()) && validarTelefonoFijoEditar($('#fijo').val()); && validarTelefonoMovilEditar($('#movil').val())">
                                 <div class="form-group">
                                     <div class="input-group">
                                       <div class="input-group-addon">
@@ -169,6 +169,7 @@
                                       <input type="number" id="movil" name="movil" class="form-control" value="<?=$row1['telefonomovil']; ?>" placeholder="Ejemplo: 690154921" size="9" onkeyup="validarTelefonoMovilEditar($('#movil').val());">
                                     </div>
                                     <div id="telefonoMovil"></div>
+                                    <div class="compararMovilFijo"></div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -178,6 +179,7 @@
                                       <input type="number" id="fijo" name="fijo" class="form-control" value="<?=$row2['telefonofijo']; ?>" placeholder="Ejemplo: 948012761" size="9" onkeyup="validarTelefonoFijoEditar($('#fijo').val());">
                                     </div>
                                     <div id="telefonoFijo"></div>
+                                    <div class="compararMovilFijo"></div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -211,44 +213,31 @@
                                     <input type="number" id="experiencia" name="experiencia" class="form-control" value="<?=$row2['experiencia']; ?>" placeholder="Años de experiencia">
                                   </div>
                                 </div>
-                                <br>
                                 <div class="form-group">
                                   <label for="experiencia">Especialidad</label>
                                   <div class="input-group">
                                     <input type="text" id="especialidad" name="especialidad" class="form-control" value="<?=$row2['especialidad']; ?>" placeholder="Especialidad de su clínica">
                                   </div>
                                 </div>
-                                <br>
                                 <div class="form-group">
-  																<label for="horario">Horario :</label>
+  																<label for="horario">Horario</label>
   																<textarea class="form-control" col="6" rows="3" id="horario" name="horario"><?php echo $row2['horario']; ?></textarea>
   															</div>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
                                 <div class="form-group">
-  																<label for="descripcion">Descripción :</label>
+  																<label for="descripcion">Descripción</label>
   																<textarea class="form-control" col="6" rows="3" id="descripcion" name="descripcion"><?php echo $row1['descripcion']; ?></textarea>
   															</div>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
                                 <div class="form-group">
                                   <label for="avatar">Foto de Perfil</label>
                                   <input type="file" id="avatar" name="avatar">
                                 </div>
-                                <br>
                                   <?php
                                     if($row1['foto'])
                                       echo '<img src="'.$row1['foto'].'" width="100" height="100" style="border: solid 2px #ffffff; border-radius: 10px;">';
                                   ?>
-                                <br>
                                 <div class="form-group">
                                   <button type="submit" id="submit" name="confirmarcambios" class="btn btn-default block"><i class="fas fa-check-circle"></i> Confirmar Cambios</button>
                                 </div>
-                                <br>
                               </form>
                             </div>
                           </div>

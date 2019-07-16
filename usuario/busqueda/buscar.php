@@ -19,6 +19,13 @@
 
       $esCuidador = 1;
       $tipo = 'DuenoCuidador';
+
+      if($servicio == 'Visita a Domicilio'){
+        $servicio = 'Visita';
+      }else if($servicio == 'Cuidado de Día'){
+        $servicio = 'Dia Entero';
+      }
+
       if($servicio == 'Alojamiento'){
 
         $sentencia = $conn->prepare("SELECT DISTINCT u.*, s.precio, s.nombre as nombreservicio

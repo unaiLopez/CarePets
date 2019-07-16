@@ -52,7 +52,6 @@
   </head>
   <body>
     <div id="container">
-      <button class="adoptarAnimal" id="3" value="9">Prueba</button>
       <!-- Navegación -->
       <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
@@ -76,7 +75,7 @@
                 <hr>
                 <li><a href="../busqueda/menuBusqueda.php"><i class="fas fa-search"></i> Búsqueda</a></li>
                 <hr>
-                <li><a href="../../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
+                <li><a href="../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
                 <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>
@@ -117,28 +116,123 @@
                               <br>
                               <?php
                                 if($row1['foto']){
-                                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="200" width="200">';
+                                  echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="200" width="200">';
                                 }else{
-                                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="200" width="200">';
+                                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-de-perfil" height="200" width="200">';
                                 }
                                ?>
                             </div>
                           </div>
-                          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            <div class="container">
-                              <br>
-                              <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
-                              <br>
-                              <h5>Reputación como cuidador :</h5>
-                              <x-star-rating value="<?=$mediaMostrar?>" number="5"></x-star-rating>
-                              <br>
-                              <script src="../../js/starRating.js"></script>
-                              <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
-                              <script src="../../js/showStars.js"></script>
+                          <?php
+                            if($row1['tipo'] == 'DuenoCuidador'){ ?>
 
-                              <br>
-                            </div>
-                          </div>
+                              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                <div class="container">
+                                  <br>
+                                  <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
+                                  <br>
+                                  <h5>Reputación como cuidador :</h5>
+                                  <x-star-rating id="rating" value="<?=$mediaMostrar?>" number="5"></x-star-rating>
+                                  <br>
+                                  <script src="../../js/showStars.js"></script>
+                                  <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
+                                  <br>
+                                </div>
+                              </div>
+
+                    <?php   }else if($row1['tipo'] = 'Clinica'){ ?>
+
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                        <div class="container">
+                          <br>
+                          <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
+                          <br>
+                          <h5>Reputación como clínica :</h5>
+                          <x-star-rating id="rating" value="<?=$mediaMostrar?>" number="5"></x-star-rating>
+                          <br>
+                          <script src="../../js/starRating.js"></script>
+                          <script type="text/javascript">
+                            rating.addEventListener('rate', () => {
+                              var id = <?php echo $row1['user_id']; ?>;
+                              var puntuacion = rating.value;
+                              var data = {"id" : id, "puntuacion" : puntuacion};
+                              $.ajax({
+                                  data: data,
+                                  url: '/carepets/usuario/busqueda/valorarClinicaProtectora.php',
+                                  type: 'post',
+                                  async: false,
+                                  success: function(response) {
+                                    if(response == true){
+                                      window.location.reload();
+                                    }else{
+                                      Swal.fire({
+                                        position: 'center',
+                                        type: 'error',
+                                        title: 'Lo sentimos, este usuario ya ha sido valorado por ti',
+                                        showConfirmButton: false,
+                                        timer: 2300
+                                      })
+                                      setTimeout(function(){
+                                        window.location.reload();
+                                      }, 2300)
+                                    }
+                                  }
+                              });
+                            });
+                          </script>
+                          <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
+                          <br>
+                        </div>
+                      </div>
+
+                    <?php   }else if($row1['tipo'] == 'Protectora') { ?>
+
+                      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                        <div class="container">
+                          <br>
+                          <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
+                          <br>
+                          <h5>Reputación como protectora :</h5>
+                          <x-star-rating id="rating" value="<?=$mediaMostrar?>" number="5"></x-star-rating>
+                          <br>
+                          <script src="../../js/starRating.js"></script>
+                          <script type="text/javascript">
+                            rating.addEventListener('rate', () => {
+                              var id = <?php echo $row1['user_id']; ?>;
+                              var puntuacion = rating.value;
+                              var data = {"id" : id, "puntuacion" : puntuacion};
+                              $.ajax({
+                                  data: data,
+                                  url: '/carepets/usuario/busqueda/valorarClinicaProtectora.php',
+                                  type: 'post',
+                                  async: false,
+                                  success: function(response) {
+                                    if(response == true){
+                                      window.location.reload();
+                                    }else{
+                                      Swal.fire({
+                                        position: 'center',
+                                        type: 'error',
+                                        title: 'Lo sentimos, este usuario ya ha sido valorado por ti',
+                                        showConfirmButton: false,
+                                        timer: 2300
+                                      })
+                                      setTimeout(function(){
+                                        window.location.reload();
+                                      }, 2300)
+                                    }
+                                  }
+                              });
+                            });
+                          </script>
+                          <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
+                          <br>
+                        </div>
+                      </div>
+
+                    <?php   }
+                          ?>
+
                           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                             <div class="container">
                               <br>
@@ -193,7 +287,6 @@
                           </div>
                           <?php if($row1['tipo'] == 'DuenoCuidador'){ ?>
                           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            <?php echo $_SESSION['idUsuarioServicio']; ?>
                             <button onclick="solicitarServicio('<?php echo $_SESSION['idUsuarioServicio']; ?>', '<?php echo $row1['nombre']; ?>', '<?php echo $_SESSION['servicio']; ?>', <?php echo $_SESSION['precio']; ?>, '<?php echo $_SESSION['fechaInicio']; ?>', '<?php echo $_SESSION['fechaFin']; ?>', '<?php echo $_SESSION['fechaDia']; ?>')" class="btn btn-default block"><i class="fas fa-handshake"></i> Solicitar Servicio</button>
                             <br>
                             <br>
@@ -262,16 +355,17 @@
             </div>
           </div>
         </div>
-        <br>
-        <!-- Footer -->
-        <div class="footer">
-          <div class="container-fluid padding">
-            <div class="row text-center padding">
-              <div class="col-lg-12 social padding">
-                <a href="https://www.facebook.com/unai.lopez5851"><i class="fab fa-facebook-square"></i></a>
-                <a href="https://www.instagram.com/carepets1/"><i class="fab fa-instagram"></i></a>
-                <a href="https://twitter.com/cuidacarepets"><i class="fab fa-twitter"></i></a>
-              </div>
+      </div>
+      <br>
+      <br>
+      <!-- Footer -->
+      <div class="footer">
+        <div class="container-fluid padding">
+          <div class="row text-center padding">
+            <div class="col-lg-12 social padding">
+              <a href="https://www.facebook.com/unai.lopez5851"><i class="fab fa-facebook-square"></i></a>
+              <a href="https://www.instagram.com/carepets1/"><i class="fab fa-instagram"></i></a>
+              <a href="https://twitter.com/cuidacarepets"><i class="fab fa-twitter"></i></a>
             </div>
           </div>
         </div>

@@ -74,7 +74,7 @@
                 <hr>
                 <li><a href="../busqueda/menuBusqueda.php"><i class="fas fa-search"></i> Búsqueda</a></li>
                 <hr>
-                <li><a href="../../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
+                <li><a href="../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                 <hr>
                 <li><a href="../salir.php"><i class="fas fa-door-open"></i> Salir</a></li>
             </ul>
@@ -103,9 +103,9 @@
                             <br>
                             <?php
                               if($row1['foto']){
-                                echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="240" width="200">';
+                                echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="240" width="200">';
                               }else{
-                                echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="240" width="200">';
+                                echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg"  class="imagen-de-perfi" height="240" width="200">';
                               }
                              ?>
                           </div>
@@ -135,15 +135,9 @@
                             <script src="../../js/showStars.js"></script>
                             <br>
                             <br>
-                            <label for="movil">Teléfono Móvil :</label>
-                            <br>
-                            <?php echo $row1['telefonomovil']; ?>
-                            <br>
-                            <br>
                             <label for="correo">Correo Electrónico :</label>
                             <br>
                             <?php echo $row1['mailusuario']; ?>
-                            <br>
                             <br>
                           </div>
                         </div>
@@ -151,53 +145,25 @@
                           <div class="container">
                             <br>
                             <?php
-                              if($rowDuenoCuidador['perro'] || $rowDuenoCuidador['gato'] || $rowDuenoCuidador['exotico'] || $rowDuenoCuidador['otros']) {
-                                echo '<label for="animalesCuidas">Animales que cuidas :</label>';
+                              if($row1['descripcion']){
+                                echo '<label for="descripcion">Descripción :</label>';
                                 echo '<br>';
-                                if($rowDuenoCuidador['perro'] && $rowDuenoCuidador['gato'] && $rowDuenoCuidador['exotico'] && $rowDuenoCuidador['otros']) {
-                                  echo 'Cuidas todo tipo de animales';
-                                }else{
-                                  if($rowDuenoCuidador['perro'])
-                                    echo 'Perros';
-                                    echo '<br>';
-                                  if($rowDuenoCuidador['gato'])
-                                    echo 'Gatos';
-                                    echo '<br>';
-                                  if($rowDuenoCuidador['exotico'])
-                                    echo 'Animales exóticos';
-                                    echo '<br>';
-                                  if($rowDuenoCuidador['otros'])
-                                    echo 'Otros animales';
-                                }
+                                echo $row1['descripcion'];
+                                echo '<br>';
                                 echo '<br>';
                               }
-                              if($rowDuenoCuidador['pequeno'] || $rowDuenoCuidador['mediano'] || $rowDuenoCuidador['grande']){
-                                echo '<label for="tamañosCuidar">Tamaños que cuidas :</label>';
+                              if($row1['direccion']){
+                                echo '<label for="direccion">Dirección :</label>';
                                 echo '<br>';
-                                if($rowDuenoCuidador['pequeno']){
-                                  echo '<span>Pequeños 1 - 5 kg  &nbsp;&nbsp; <img src="../../iconos/miscelanea/icono_perro.png" height="20" with="20"></span></label>';
-                                  echo '<br>';
-                                  echo '<br>';
-                                }
-                                if($rowDuenoCuidador['mediano']){
-                                  echo '<span>Pequeños 5 - 15 kg  &nbsp;&nbsp; <img src="../../iconos/miscelanea/icono_perro.png" height="25" with="25"></span></label>';
-                                  echo '<br>';
-                                  echo '<br>';
-                                }
-                                if($rowDuenoCuidador['grande']){
-                                  echo '<span>Pequeños 15 - 50 kg  &nbsp;&nbsp; <img src="../../iconos/miscelanea/icono_perro.png" height="30" with="30"></span></label>';
-                                  echo '<br>';
-                                  echo '<br>';
-                                }
-                                if($rowDuenoCuidador['experiencia']){
-                                  echo '<br>';
-                                  echo '<label for="experiencia">Experiencia :</label>';
-                                  echo '<br>';
-                                  echo $rowDuenoCuidador['experiencia'].' Años';
-                                  echo '<br>';
-                                }
+                                echo $row1['direccion'];
+                                echo '<br>';
                               }
                             ?>
+                            <br>
+                            <label for="movil">Teléfono Móvil :</label>
+                            <br>
+                            <?php echo $row1['telefonomovil']; ?>
+                            <br>
                             <br>
                           </div>
                         </div>
@@ -229,19 +195,6 @@
                                   echo '<br>';
                                   echo '<br>';
                                 }
-                              }
-                              if($row1['descripcion']){
-                                echo '<label for="descripcion">Descripción :</label>';
-                                echo '<br>';
-                                echo $row1['descripcion'];
-                                echo '<br>';
-                                echo '<br>';
-                              }
-                              if($row1['direccion']){
-                                echo '<label for="direccion">Dirección :</label>';
-                                echo '<br>';
-                                echo $row1['direccion'];
-                                echo '<br>';
                               }
                             ?>
                           </div>

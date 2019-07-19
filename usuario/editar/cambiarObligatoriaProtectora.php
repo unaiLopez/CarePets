@@ -106,7 +106,7 @@
       $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $mailNuevo, $idActual]);
 
       //Cambiar información obligatoria
-      $sql = "UPDATE protectora SET fijo=? WHERE user_id=?";
+      $sql = "UPDATE protectora SET telefonofijo=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$fijo, $idActual]);
 
@@ -122,7 +122,7 @@
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $idActual]);
 
-      $sql = "UPDATE protectora SET fijo=? WHERE user_id=?";
+      $sql = "UPDATE protectora SET telefonofijo=? WHERE user_id=?";
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$fijo, $idActual]);
 
@@ -138,7 +138,7 @@
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$nombre, $direccion, $latitud, $longitud, $movil, $mailNuevo, $idActual]);
 
-      $sql = "UPDATE protectora SET fijo=? WHERE mailusuario=?";
+      $sql = "UPDATE protectora SET telefonofijo=? WHERE mailusuario=?";
       $sentencia= $conn->prepare($sql);
       $sentencia->execute([$fijo, $idActual]);
 

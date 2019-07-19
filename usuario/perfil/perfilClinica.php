@@ -47,9 +47,9 @@ $conn = null;
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
                 if($row1['foto']){
-                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                 }else{
-                  echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-de-perfil" height="70" width="70">';
                 }
                ?>
             </a>

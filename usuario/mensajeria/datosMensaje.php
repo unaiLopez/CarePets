@@ -15,6 +15,14 @@
       $sentencia->bindParam(':id', $idMensaje);
       $sentencia->execute();
       $solicitud = $sentencia->fetch(PDO::FETCH_BOTH);
+
+      $idAnimal = $solicitud['id_animal'];
+
+      //Tomar todos los datos de todos los animales en adopcion del usuario
+      $sentencia = $conn->prepare("SELECT * FROM animal WHERE id=:id");
+      $sentencia->bindParam(':id', $idAnimal);
+      $sentencia->execute();
+      $animalSolicitud = $sentencia->fetch(PDO::FETCH_BOTH);
     }
 
   }catch(PDOException $e){

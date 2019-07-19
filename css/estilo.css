@@ -9,6 +9,11 @@ body {
   position: relative;
 }
 
+.navbar-brand>img {
+  width: 160px;
+  height: 80px;
+}
+
 .iconos_redes_sociales {
   border-radius: 360px;
   border: solid 1px #ffffff;
@@ -17,7 +22,7 @@ body {
 #titulo_carepets {
   mix-blend-mode: hard-light;
   font-family: Crimson;
-  font-size: 40px;
+  font-size: 35px;
   color: rgba(255, 255, 255, 0.9);
 }
 

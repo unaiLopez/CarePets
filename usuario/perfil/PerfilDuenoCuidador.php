@@ -34,15 +34,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
     <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <link rel="stylesheet" href="../../css/starRating.css">
     <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script type="text/javascript">
       function convertirmeCuidador() {
         window.location.href = "../editar/editarDuenoCuidador.php";
@@ -59,9 +59,9 @@
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
                 if($row1['foto']){
-                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                 }else{
-                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-de-perfil" height="70" width="70">';
                 }
                ?>
             </a>
@@ -132,7 +132,7 @@
                             <x-star-rating value="<?=$mediaMostrar?>" number="5"></x-star-rating>
                             <br>
                             <label for="cantidadValoraciones">Con <?php echo $cantidadValoraciones;?> valoraciones</label>
-                            <script src="../../js/showStars.js"></script>
+
                             <br>
                             <br>
                             <label for="correo">Correo Electrónico :</label>
@@ -227,3 +227,8 @@
       </div>
   </body>
 </html>
+<?php
+  //Valora los servicios que ya hayas recibido
+  require_once 'valorarServicio.php';
+?>
+<script src="../../js/showStars.js"></script>

@@ -13,12 +13,20 @@
     //Tomar id del usuario
     $idActual = $_SESSION['user_id'];
 
-    //Tomar los datos del mensaje
+		//Tomar los datos del mensaje
     $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE user_id_receptor=:user_id and id=:id");
     $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
+		if(!$mensaje){
+			//Tomar los datos del mensaje
+	    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE user_id_emisor=:user_id and id=:id");
+	    $sentencia->bindParam(':user_id', $idActual);
+	    $sentencia->bindParam(':id', $id);
+	    $sentencia->execute();
+	    $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
+		}
 
 		//Conseguir todas las respuestas del mensaje principal
 		$sentencia = $conn->prepare("SELECT * FROM mensaje WHERE idrespuesta=:id ORDER BY fecha ASC");
@@ -32,6 +40,18 @@
     //Cuenta la cantidad de solicitudes no leidos para mostrarlos en las notificaciones posteriormente
     require_once 'notificacionesMensajeriaRecibidosSolicitudes.php';
     require_once '../datosUsuario.php';
+		require_once 'datosMensaje.php';
+
+		//Conseguir datos para contactar con el usuario que pide la solicitud
+		if($mensaje['tipo'] == 'Solicitud'){
+			if($solicitud){
+				$sentencia = $conn->prepare("SELECT * FROM usuario WHERE user_id=:user_id");
+				$sentencia->bindParam(':user_id', $mensaje['user_id_emisor']);
+				$sentencia->execute();
+				$datosUsuarioSolicitud = $sentencia->fetch(PDO::FETCH_BOTH);
+
+			}
+		}
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
@@ -68,9 +88,9 @@
              <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
                <?php
                  if($row1['foto']){
-                   echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                   echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                  }else{
-                   echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
+                   echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-de-perfil" height="70" width="70">';
                  }
                 ?>
              </a>
@@ -92,7 +112,7 @@
        <div id="body">
          <div class="container-fluid">
            <div class="row">
-             <div class="card">
+						 <div class="card">
                <div class="card-header mx-auto">
 								 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                    <li class="nav-item">
@@ -123,12 +143,31 @@
 												 <br>
 												 <div class="row">
 													 <div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
-														 <?php echo $mensaje['contenido']; ?>
+														 <?php
+														 echo $mensaje['contenido'];
+														 if($mensaje['tipo'] == 'Solicitud'){
+															 if($solicitud){
+																 echo '<br>';
+																 echo '<br>';
+																 echo '<strong>Servicio:</strong> '.$solicitud['servicio'];
+																 echo '<br>';
+																 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
+																 echo '<br>';
+																 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
+																 echo '<br>';
+																 echo '<strong>Nombre Animal:</strong> '.$animalSolicitud['nombre'];
+																 echo '<br>';
+																 echo '<br>';
+																 echo '<img style="border-radius: 5px;border: solid 1px #ffffff" src="'.$animalSolicitud['foto'].'" height="150" width="150">';
+																 echo '<br>';
+															 }
+														 }
+														 ?>
 														 <br>
 														 <br>
 													 </div>
 												 </div>
-												 <hr>
+												<hr>
 											 </div>
 											 <?php
 											   foreach($respuestas as $respuesta){
@@ -162,9 +201,13 @@
 																	<hr>
 													 			 </div>';
 													}
+													if($mensaje['tipo'] == 'Solicitud' && $solicitud['solicitudverificada'] == 0 && $solicitud['servicio'] == 'Adopción' && $mensaje['user_id_receptor'] == $idActual){
 												?>
-											 <button data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
-		 									 <button onclick="location.href='tablonMensajesProtectora.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
+													<button style="width: 220px;" onclick="aceptarSolicitud('<?php echo $mensaje['id']; ?>,<?php echo $solicitud['servicio']; ?>')" name="aceptar" id="aceptar" class="btn btn-default"><i class="fas fa-check-circle"></i> Aceptar Solicitud</button>
+													<button style="width: 220px;" onclick="rechazarSolicitud('<?php echo $mensaje['id']; ?>')" name="rechazar" id="rechazar" class="btn btn-default"><i class="fas fa-times-circle"></i> Rechazar Solicitud</button>
+										<?php } ?>
+											 <button style="width: 220px;" data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
+		 									 <button style="width: 220px;" onclick="location.href='tablonMensajesProtectora.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
 		 									 <br>
 		 									 <br>
 										 </div>
@@ -181,14 +224,13 @@
 													<div class="col-xs-12 col-md-12 col-lg-12">
 		                      	<h3>Para : <?php echo $mensaje['emisor']; ?><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></h3>
 													</div>
-												</div>
+		                    </div>
 		                    <div id="responderModal" class="modal-body">
 		                      <div class="row">
-		                        <div class="col-xs-12 col-md-12 col-lg-12 mx-auto">
+		                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
 		                            <div id="form-modal" class="form-group">
 																	<div class="form-group">
-																		<label for="respuesta">Respuesta :</label>
-																		<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" required></textarea>
+																		<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" placeholder="Contenido de la respuesta" required></textarea>
 																	</div>
 																	<div class="form-group">
 																		<input type="hidden" id="idmensaje" name="idmensaje" value="<?=$id; ?>">
@@ -198,7 +240,7 @@
 		                      </div>
 		                    </div>
 		                    <div class="modal-footer">
-		                      <div class="col-xs-12 mx-auto">
+		                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
 														<div id="form-modal" class="form-group">
 															<button onclick="responderMensaje($('#idmensaje').val(), $('#respuesta').val())" name="responder" id="responder" class="btn btn-default block"><i class="far fa-comments"></i> Responder</button>
 														</div>

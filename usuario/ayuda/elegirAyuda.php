@@ -75,9 +75,9 @@
                 <div class="dropdown">
                   <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                     if($row1['foto']){
-                      echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                     }else{
-                      echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-de-perfil" height="70" width="70">';
                     }
                   echo '</a>
                   <ul class="dropdown-menu">
@@ -104,9 +104,9 @@
                 <div class="dropdown">
                   <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                     if($row1['foto']){
-                      echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                     }else{
-                      echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-de-perfil" height="70" width="70">';
                     }
                   echo '</a>
                   <ul class="dropdown-menu">
@@ -130,9 +130,9 @@
                 <div class="dropdown">
                   <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                     if($row1['foto']){
-                      echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                     }else{
-                      echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-de-perfil" height="70" width="70">';
                     }
                   echo '</a>
                   <ul class="dropdown-menu">

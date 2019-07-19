@@ -11,7 +11,7 @@
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
   }
-  if(count($animales) > 0){
+  if($animales){
       foreach($animales as $animal){
         echo '<div id="'.$animal['id'].'" class="container-fluid animal-en-adopcion">
           <div class="row">
@@ -84,6 +84,9 @@
                   <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                       <small style="color: #ffffff;"> '.$animal['fecha'].'</small>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 offset-lg-6 col-lg-3">
+                      <button id="'.$idUsuarioServicio.'" class="btn btn-default adoptarAnimal">¡Adóptame!</button>
                     </div>
                   </div>
                 </div>

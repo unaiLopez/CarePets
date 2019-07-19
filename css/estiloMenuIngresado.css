@@ -1,11 +1,13 @@
 .navbar>div.dropdown>a.profile-image img-circle {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .imagen-perfil {
   border-radius: 5px;
   border: solid 2px #ffffff;
+  width: 70px;
+  height: 70px;
 }
 
 a.dropdown-toggle {
@@ -13,7 +15,7 @@ a.dropdown-toggle {
   margin-right: 25px;
   font-family: Crimson;
   opacity: 0.9;
-  font-size: 18px;
+  font-size: 12px;
   color: #ffffff;
 }
 
@@ -22,19 +24,13 @@ a.dropdown-toggle:hover {
   text-decoration: none;
   font-family: Crimson;
   opacity: 0.9;
-  font-size: 18px;
   color: #ffffff;
-}
-
-.imagen-perfil:hover {
-  width: 70px;
-  height: 70px;
 }
 
 .dropdown-menu {
   box-shadow: 4px 8px 4px 0 rgba(0, 0, 0, 0.25);
   border: solid 1px #ffffff;
-  background-color: rgba(224, 82, 3, 0.5);
+  background-color: rgba(224, 82, 3);
   border: solid 2px #ffffff;
 }
 

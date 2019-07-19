@@ -60,14 +60,14 @@
        <!-- Navegación -->
        <nav class="navbar navbar-expand-md navbar-light">
          <div class="container-fluid">
-           <a class="navbar-brand" href="../perfil/perfilProtectora.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+           <a class="navbar-brand" href="../perfil/perfilClinica.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
            <div class="dropdown">
              <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
                <?php
                  if($row1['foto']){
-                   echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                   echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                  }else{
-                   echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
+                   echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-de-perfil" height="70" width="70">';
                  }
                 ?>
              </a>
@@ -184,8 +184,7 @@
 		                        <div class="col-xs-12 col-md-12 col-lg-12 mx-auto">
 		                            <div id="form-modal" class="form-group">
 																	<div class="form-group">
-																		<label for="respuesta">Respuesta :</label>
-																		<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" required></textarea>
+																		<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" placeholder="Contenido de la respuesta" required></textarea>
 																	</div>
 																	<div class="form-group">
 																		<input type="hidden" id="idmensaje" name="idmensaje" value="<?=$id; ?>">

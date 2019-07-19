@@ -29,8 +29,8 @@
       if($servicio == 'Alojamiento'){
 
         $sentencia = $conn->prepare("SELECT DISTINCT u.*, s.precio, s.nombre as nombreservicio
-        FROM usuario AS u NATURAL JOIN duenocuidador AS d INNER JOIN servicio AS s ON s.user_id=d.user_id
-        WHERE tipo=:tipo and d.escuidador=:escuidador and s.nombre=:servicio and s.precio > 0 and u.user_id not in (:user_id) and not exists(select mailusuario from evento where fecha not between (:fecha1) and (:fecha2))");
+        FROM usuario AS u NATURAL JOIN duenocuidador AS d INNER JOIN servicio AS s ON s.user_id=d.user_id LEFT JOIN evento as e ON u.user_id=e.user_id_dar
+        WHERE tipo=:tipo and d.escuidador=:escuidador and s.nombre=:servicio and s.precio > 0 and u.user_id not in (:user_id) and u.user_id not in(select user_id_dar from evento as ev where ev.fecha between(:fecha1) and (:fecha2))");
         $sentencia->bindParam(':tipo', $tipo);
         $sentencia->bindParam(':escuidador', $esCuidador);
         $sentencia->bindParam(':fecha1', $inicioFecha);
@@ -43,8 +43,8 @@
       }else{
 
         $sentencia = $conn->prepare("SELECT DISTINCT u.*, s.precio, s.nombre as nombreservicio
-        FROM usuario AS u NATURAL JOIN duenocuidador AS d INNER JOIN servicio AS s ON s.user_id=d.user_id INNER JOIN evento as e ON u.user_id=e.user_id_dar
-        WHERE tipo=:tipo and d.escuidador=:escuidador and s.nombre=:servicio and s.precio > 0 and u.user_id not in (:user_id) and e.fecha not in (:fecha3)");
+        FROM usuario AS u NATURAL JOIN duenocuidador AS d INNER JOIN servicio AS s ON s.user_id=d.user_id LEFT JOIN evento as e ON u.user_id=e.user_id_dar
+        WHERE tipo=:tipo and d.escuidador=:escuidador and s.nombre=:servicio and s.precio > 0 and u.user_id not in (:user_id) and (:fecha3) not in (select fecha from evento as ev where u.user_id=ev.user_id_dar)");
         $sentencia->bindParam(':tipo', $tipo);
         $sentencia->bindParam(':escuidador', $esCuidador);
         $sentencia->bindParam(':fecha3', $diaFecha);

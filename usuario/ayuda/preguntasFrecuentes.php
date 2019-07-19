@@ -52,7 +52,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="../index.html"><p class="letra_nav"><i class="fas fa-home"></i> Inicio</p></a>
+                  <a class="nav-link" href="../../index.html"><p class="letra_nav"><i class="fas fa-home"></i> Inicio</p></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="elegirAyuda.php"><p class="letra_nav"><i class="fas fa-question"></i> Ayuda</p></a>
@@ -76,9 +76,9 @@
                 <div class="dropdown">
                   <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                     if($row1['foto']){
-                      echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                     }else{
-                      echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-de-perfil" height="70" width="70">';
                     }
                   echo '</a>
                   <ul class="dropdown-menu">
@@ -105,9 +105,9 @@
                 <div class="dropdown">
                   <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                     if($row1['foto']){
-                      echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                     }else{
-                      echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-de-perfil" height="70" width="70">';
                     }
                   echo '</a>
                   <ul class="dropdown-menu">
@@ -131,9 +131,9 @@
                 <div class="dropdown">
                   <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">';
                     if($row1['foto']){
-                      echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                     }else{
-                      echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
+                      echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-de-perfil" height="70" width="70">';
                     }
                   echo '</a>
                   <ul class="dropdown-menu">

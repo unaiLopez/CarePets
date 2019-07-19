@@ -11,6 +11,71 @@ $(document).ready(function() {
    });
 });
 
+function rechazarSolicitud(idmensaje) {
+  var datos = {"idmensaje" : idmensaje};
+  $.ajax({
+      data: datos,
+      url: '/carepets/usuario/busqueda/rechazarSolicitud.php',
+      type: 'post',
+      async: false,
+      success: function(response) {
+        if(response == true){
+          Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: 'Solicitud Rechazada',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          setTimeout(function(){
+            window.location.reload();
+          }, 1500)
+        }else{
+          Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: 'Lo sentimos, no se pudo enviar la respuesta con éxito',
+            showConfirmButton: false,
+            timer: 2300
+          })
+        }
+      }
+   });
+}
+
+function aceptarSolicitud(idmensaje) {
+  var datos = {"idmensaje" : idmensaje};
+  $.ajax({
+      data: datos,
+      url: '/carepets/usuario/busqueda/aceptarSolicitudAdopcion.php',
+      type: 'post',
+      async: false,
+      success: function(response) {
+        if(response == true){
+          Swal.fire({
+            position: 'center',
+            type: 'success',
+            title: 'Solicitud Aceptada',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          setTimeout(function(){
+            window.location.reload();
+          }, 1500)
+        }else{
+          Swal.fire({
+            position: 'center',
+            type: 'error',
+            title: 'Lo sentimos, no se pudo enviar la respuesta con éxito',
+            showConfirmButton: false,
+            timer: 2300
+          })
+        }
+      }
+   });
+}
+
+
 function mostrarTabMensajesRecibidos(){
   $("#solicitudes").hide();
   $("#mensajesRecibidos").show();

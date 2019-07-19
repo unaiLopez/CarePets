@@ -13,6 +13,14 @@
     require_once 'datosUsuarioServicio.php';
     //Obtener el rating del datosUsuario
     require_once 'obtenerRatingServicio.php';
+    //Obtener datos de usuario actual
+    $idActual = $_SESSION['user_id'];
+
+    //Tomar los datos del usuario
+    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE user_id=:user_id");
+    $sentencia->bindParam(':user_id', $idActual);
+    $sentencia->execute();
+    $yo = $sentencia->fetch(PDO::FETCH_BOTH);
 
     if($rowTipo[0] == 'DuenoCuidador'){
       //Obetener datos de los servicios cuando el tipo de usuario es dueno cuidador
@@ -38,7 +46,6 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="../../css/estiloDifuminadoScrollingFooter.css"/>
     <link rel="stylesheet" href="../../css/estiloMenuIngresado.css"/>
-    <link rel="stylesheet" href="../../css/estiloPaneles.css"/>
     <link rel="stylesheet" href="../../css/estiloFormularios.css"/>
     <link rel="stylesheet" href="../../css/starRating.css">
     <link rel="stylesheet" href="../../css/estiloPanelesHorizontales.css"/>
@@ -49,6 +56,12 @@
     <script src="../../js/funcionesAnimalesAdopcion.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+       $("#perfil").show();
+       $("#tablonAdopciones").hide();
+    });
+    </script>
   </head>
   <body>
     <div id="container">
@@ -59,10 +72,10 @@
           <div class="dropdown">
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
-                if($row1['foto']){
-                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                if($yo['foto']){
+                  echo '<img src="'.$yo['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                 }else{
-                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-de-perfil" height="70" width="70">';
                 }
                ?>
             </a>
@@ -86,9 +99,9 @@
       <div id="body">
         <div class="container-fluid">
           <div class="row">
-            <div class="card">
-              <div class="card-header mx-auto">
-                <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
+            <div id="card-principal" class="card">
+              <div id="card-header-principal" class="card-header mx-auto">
+                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                   <li class="nav-item">
                     <a onclick="mostrarTabPerfil()" class="nav-link active block" id="perfil-tab" data-toggle="tab" href="#perfil" role="tab" aria-controls="perfil" aria-selected="true">
                       <?php if($row1['tipo']!='DuenoCuidador'){?>
@@ -106,10 +119,9 @@
                 </ul>
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
-                <div class="card-body">
+                <div id="card-body-principal" class="card-body">
                   <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="perfil-tab" role="tabpanel" aria-labelledby="perfil-tab">
-                      <div id="perfil">
+                    <div class="tab-pane fade show active" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
                         <div class="row">
                           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                             <div class="container">
@@ -140,7 +152,7 @@
                                 </div>
                               </div>
 
-                    <?php   }else if($row1['tipo'] = 'Clinica'){ ?>
+                    <?php   }else if($row1['tipo'] == 'Clinica'){ ?>
 
                       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="container">
@@ -298,17 +310,15 @@
                             <br>
                           </div>
                         </div>
-                      </div>
                     </div>
-                    <div id="tablonAdopciones">
                       <?php if($row1['tipo'] == 'Protectora'){ ?>
+
                       <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab">
                         <?php
                           require_once 'mostrarAdopcionDeAnimales.php';
                         ?>
                       </div>
                     <?php } ?>
-                    </div>
                   </div>
                 </div>
                 <!-- Modal -->

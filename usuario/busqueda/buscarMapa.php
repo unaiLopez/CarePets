@@ -78,9 +78,9 @@
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
                 if($row1['foto']){
-                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                 }else{
-                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-de-perfil" height="70" width="70">';
                 }
                ?>
             </a>
@@ -130,8 +130,19 @@
                                   $tipo = $usuario['tipo'];
                                   echo '<li style="cursor:pointer;width:100%;" id="'.$user_id.'" class="list-group-item">
                                           <div class="row">
-                                              <div style="width:30%;" class="container">
-                                                <img style="border-radius:5px;border: solid 2px #ffffff;" src="'.$foto.'" height="120" width="100%">
+                                              <div style="width:30%;" class="container">';
+                                              if(!is_null($foto)){
+                                                echo '<img style="border-radius:5px;border: solid 2px #ffffff;" src="'.$foto.'" height="120" width="100%">';
+                                              }else if(is_null($foto)){
+                                                if($tipo == 'DuenoCuidador'){
+                                                  echo '<img style="border-radius:5px;border: solid 2px #ffffff;" src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" height="120" width="100%">';
+                                                }else if($tipo == 'Protectora'){
+                                                  echo '<img style="border-radius:5px;border: solid 2px #ffffff;" src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" height="120" width="100%">';
+                                                }else if($tipo == 'Clinica'){
+                                                  echo '<img style="border-radius:5px;border: solid 2px #ffffff;" src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" height="120" width="100%">';
+                                                }
+                                              }
+                                              echo '
                                               </div>
                                               <div style="width:50%;" class="container">
                                                 <p style="font-size:20px;color:black;">'.$nombre.'</p>

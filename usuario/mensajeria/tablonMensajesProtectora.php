@@ -68,14 +68,14 @@
     <!-- Navegación -->
     <nav class="navbar navbar-expand-md navbar-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="../perfil/perfilClinica.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+        <a class="navbar-brand" href="../perfil/perfilProtectora.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
         <div class="dropdown">
           <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
             <?php
               if($row1['foto']){
-                echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
               }else{
-                echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-perfil" height="70" width="70">';
+                echo '<img src="../../iconos/tipos_usuario/icono_protectora_animales.jpg" class="imagen-de-perfil" height="70" width="70">';
               }
              ?>
           </a>
@@ -150,7 +150,7 @@
                       <div id="solicitudes">
                         <?php
                           foreach ($mensajesRecibidosSolicitudes as $solicitud){
-                            if($solicitud['leido'] == 1){
+                            if($solicitud['leidoreceptor'] == 1){
                               $emisor = $solicitud['emisor'];
                               $asunto = $solicitud['asunto'];
                               $fecha = $solicitud['fecha'];

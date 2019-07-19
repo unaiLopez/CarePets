@@ -56,9 +56,9 @@
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
                 if($row1['foto']){?>
-                  <img src="<?php echo $row1['foto']; ?>" class="imagen-perfil" height="70" width="70">
+                  <img src="<?php echo $row1['foto']; ?>" class="imagen-de-perfil" height="70" width="70">
          <?php   }else{
-                  echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_clinica_veterinaria.png" class="imagen-de-perfil" height="70" width="70">';
                 }
                ?>
             </a>
@@ -142,7 +142,7 @@
                           <div class="row">
                             <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                               <h1><strong>Obligatoria</strong></h1>
-                              <form name="formularioCambiarInfoObligatoria" id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaClinica.php" method="post" onsubmit="return compararTelefonos($('#fijo').val(), $('#movil').val()) && validarCorreoEditar($('#mail').val()) && validarTelefonoFijoEditar($('#fijo').val()); && validarTelefonoMovilEditar($('#movil').val())">
+                              <form name="formularioCambiarInfoObligatoria" id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaClinica.php" method="post" onsubmit="return compararTelefonos($('#movil').val(), $('#fijo').val()) && validarCorreoEditar($('#mail').val()) && validarTelefonoFijoEditar($('#fijo').val()) && validarTelefonoMovilEditar($('#movil').val())">
                                 <div class="form-group">
                                     <div class="input-group">
                                       <div class="input-group-addon">
@@ -166,20 +166,20 @@
                                         <i class="fas fa-mobile-alt"></i>
                                         +34
                                       </div>
-                                      <input type="number" id="movil" name="movil" class="form-control" value="<?=$row1['telefonomovil']; ?>" placeholder="Ejemplo: 690154921" size="9" onkeyup="validarTelefonoMovilEditar($('#movil').val());">
+                                      <input type="number" id="movil" name="movil" class="form-control" value="<?=$row1['telefonomovil']; ?>" placeholder="Ejemplo: 690154921" size="9" onkeyup="validarTelefonoMovilEditar($('#movil').val()) && compararTelefonos($('#movil').val(), $('#fijo').val())">
                                     </div>
                                     <div id="telefonoMovil"></div>
-                                    <div class="compararMovilFijo"></div>
+                                    <div id="compararTelefonos"></div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                       <div class="input-group-addon">
                                         <i class="fas fa-mobile-alt"></i>
                                       </div>
-                                      <input type="number" id="fijo" name="fijo" class="form-control" value="<?=$row2['telefonofijo']; ?>" placeholder="Ejemplo: 948012761" size="9" onkeyup="validarTelefonoFijoEditar($('#fijo').val());">
+                                      <input type="number" id="fijo" name="fijo" class="form-control" value="<?=$row2['telefonofijo']; ?>" placeholder="Ejemplo: 948012761" size="9" onkeyup="validarTelefonoFijoEditar($('#fijo').val()) && compararTelefonos($('#movil').val(), $('#fijo').val())">
                                     </div>
                                     <div id="telefonoFijo"></div>
-                                    <div class="compararMovilFijo"></div>
+                                    <div id="compararTelefonos"></div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">

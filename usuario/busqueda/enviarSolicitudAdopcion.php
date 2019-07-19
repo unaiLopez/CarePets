@@ -10,42 +10,41 @@
 
     $idActual = $_SESSION['user_id'];
 
-    require_once '../datosAnimal.php?id='.$_POST['id'];
+    $idAnimal = $_POST['id'];
+
+    //Tomar todos los datos de todos los animales en adopcion del usuario
+    $sentencia = $conn->prepare("SELECT * FROM animal WHERE id=:id");
+    $sentencia->bindParam(':id', $idAnimal);
+    $sentencia->execute();
+    $animal = $sentencia->fetch(PDO::FETCH_BOTH);
+
     require_once '../datosUsuario.php';
 
-    //Si existe ya una solicitud tuya en esas fechas se manda una notificación negandotela, si no se manda la solicitud
-    $contenido = '<label for="solicitante">Nombre Solicitante</label><p>'.$row1['nombre'].
-    '<label for="mailSolicitante">Correo Electrónico Solicitante</label><p>'.$row1['mailusuario'].
-    '<label for="direccion">Dirección Solicitante</label><p>'.$usuario['direccion'].
-    '<label for="telefonoMovil">Teléfono Móvil Solicitante</label><p>'.$usuario['telefonomovil'].
-    '<label for="nombre">Nombre Animal</label><p>'.$animal['nombre'].
-    '</p><br><label for="edad">Edad Animal</label><p>'.$animal['edad'].
-    '</p><br><label for="raza">Raza Animal</label><p>'.$animal['raza'].
-    '</p><br><label for="sexo">Sexo Animal</label><p>'.$animal['sexo'].
-    '</p><br><label for="foto" style="width:50px;height:50px;:border-radius:5px;border: solid 2px #ffffff;">Foto Animal</label><p>'.$animal['foto'].
-    '</p><br>';
+    $servicio = 'Adopción';
+    $contenido = 'Se solicita lo siguiente :';
+    $direccion = $row1['direccion'];
+    $telefonomovil = $row1['telefonomovil'];
 
     $tipo = 'Solicitud';
     $emisor = $row1['nombre'];
     $leidoEmisor = 1;
     $leidoReceptor = 0;
-    $mailReceptor = $_POST['mailUsuarioServicio'];
+    $user_id_receptor = $_POST['idUsuarioServicio'];
 
-    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE mailusuario=:mailusuario");
-    $sentencia->bindParam(':mailusuario', $mailReceptor);
+    $sentencia = $conn->prepare("SELECT * FROM usuario WHERE user_id=:user_id");
+    $sentencia->bindParam(':user_id', $user_id_receptor);
     $sentencia->execute();
     $usuarioReceptor = $sentencia->fetch(PDO::FETCH_BOTH);
 
     $receptor = $usuarioReceptor['nombre'];
 
-    $idRespuesta = -1;
-    $asunto = 'Solicitud de Adopción <strong>|</strong> '.$_POST['nombre'];
+    $asunto = 'Solicitud de Adopción de <strong>|</strong> '.$animal['nombre'];
     //Tomar fecha y hora actual año-mes-dia hora:minuto:segundo
     $tiempo = time();
     $fecha = date("Y-m-d H:i:s", $tiempo);
 
     //Insertar mensaje de respuesta
-    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,receptor,contenido,fecha,asunto,leidoemisor,leidoreceptor,mailemisor,mailreceptor,idrespuesta) VALUES(:tipo,:emisor,:receptor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:mailemisor,:mailreceptor,:idrespuesta)");
+    $sentencia = $conn->prepare("INSERT INTO mensaje (tipo,emisor,receptor,contenido,fecha,asunto,leidoemisor,leidoreceptor,user_id_emisor,user_id_receptor) VALUES(:tipo,:emisor,:receptor,:contenido,:fecha,:asunto,:leidoemisor,:leidoreceptor,:user_id_emisor,:user_id_receptor)");
     $sentencia->bindParam(':tipo', $tipo);
     $sentencia->bindParam(':emisor', $emisor);
     $sentencia->bindParam(':receptor', $receptor);
@@ -54,21 +53,32 @@
     $sentencia->bindParam(':asunto', $asunto);
     $sentencia->bindParam(':leidoemisor', $leidoEmisor);
     $sentencia->bindParam(':leidoreceptor', $leidoReceptor);
-    $sentencia->bindParam(':mailemisor', $correoActual);
-    $sentencia->bindParam(':mailreceptor', $mailReceptor);
-    $sentencia->bindParam(':idrespuesta', $idRespuesta);
+    $sentencia->bindParam(':user_id_emisor', $idActual);
+    $sentencia->bindParam(':user_id_receptor', $user_id_receptor);
     $sentencia->execute();
+    $ultimoId = $conn->lastInsertId();
 
     if($sentencia){
-      echo true;
+        //Insertar mensaje de respuesta
+        $sentencia = $conn->prepare("INSERT INTO solicitud (id,servicio,id_animal) VALUES(:id,:servicio,:id_animal)");
+        $sentencia->bindParam(':servicio', $servicio);
+        $sentencia->bindParam(':id', $ultimoId);
+        $sentencia->bindParam(':id_animal', $animal['id']);
+        $sentencia->execute();
+
+        if($sentencia){
+          echo true;
+        }else{
+          echo false;
+        }
+
     }else{
       echo false;
     }
-
-
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
   }
   $conn = null;
+
 ?>

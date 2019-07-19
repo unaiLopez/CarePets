@@ -3,7 +3,6 @@
     //Variables para buscar en la BD
     $idActual = $_SESSION['user_id'];
     $id = $_SESSION['id'];
-    $leido = 1;
     $tipoMensaje = 'Mensaje';
     $tipoSolicitud = 'Solicitud';
 

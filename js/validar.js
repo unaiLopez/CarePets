@@ -38,6 +38,16 @@ function validarContraseñaActual(pass){
   return bool;
 }
 
+function compararTelefonos(movil, fijo){
+  if(movil == fijo) {
+    $("#compararTelefonos").html("El teléfono móvil y el teléfono fijo no pueden ser iguales.").css("color","red");
+    return false;
+  }else{
+    $("#compararTelefonos").html("El teléfono móvil y el teléfono fijo son diferentes.").css("color","green");
+    return true;
+  }
+}
+
 function validarDatosInicioSesion(pass, mail){
   var bool = false;
   var datos = {"pass" : pass, "mail" : mail};

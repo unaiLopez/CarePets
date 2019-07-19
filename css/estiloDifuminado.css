@@ -9,6 +9,11 @@ body {
   position: relative;
 }
 
+.navbar-brand>img {
+  width: 160px;
+  height: 60px;
+}
+
 h4 {
   text-align: center;
   font-size: 30px;
@@ -29,7 +34,7 @@ ul li a:hover {
 #titulo_carepets {
   mix-blend-mode: hard-light;
   font-family: Crimson;
-  font-size: 40px;
+  font-size: 25px;
   color: rgba(255, 255, 255, 0.9);
 }
 

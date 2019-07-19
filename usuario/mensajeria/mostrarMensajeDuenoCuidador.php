@@ -57,7 +57,6 @@
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
   }
-  $conn = null;
  ?>
  <!DOCTYPE html>
 
@@ -84,23 +83,23 @@
        <!-- Navegación -->
        <nav class="navbar navbar-expand-md navbar-light">
          <div class="container-fluid">
-           <a class="navbar-brand" href="../perfil/perfilProtectora.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+           <a class="navbar-brand" href="../perfil/perfilDuenoCuidador.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
            <div class="dropdown">
              <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
                <?php
                  if($row1['foto']){
-                   echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                   echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                  }else{
-                   echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
+                   echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-de-perfil" height="70" width="70">';
                  }
                 ?>
              </a>
              <ul class="dropdown-menu">
-                 <li><a href="../perfil/perfilProtectora.php"><i class="fas fa-user"></i> Perfil</a></li>
+                 <li><a href="../perfil/perfilDuenoCuidador.php"><i class="fas fa-user"></i> Perfil</a></li>
                  <hr>
-                 <li><a href="../editar/editarProtectora.php"><i class="fas fa-user-edit"></i> Editar</a></li>
+                 <li><a href="../editar/editarDuenoCuidador.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                  <hr>
-                 <li><a href="../mensajeria/tablonMensajesProtectora.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes+$notificacionesEnviados+$notificacionesRecibidosSolicitudes; ?></span></a></li>
+                 <li><a href="../mensajeria/tablonMensajesDuenoCuidador.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes+$notificacionesEnviados+$notificacionesRecibidosSolicitudes; ?></span></a></li>
                  <hr>
                  <li><a href="../busqueda/menuBusqueda.php"><i class="fas fa-search"></i> Búsqueda</a></li>
                  <hr>
@@ -162,7 +161,7 @@
 																	 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
 																	 echo '<br>';
 																	 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
-																 }else{
+																 }else if(isset($solicitud['fechainicio'])){
 																	 echo '<br>';
 																	 echo '<br>';
 																	 echo '<strong>Servicio:</strong> '.$solicitud['servicio'];
@@ -176,6 +175,20 @@
 																	 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
 																	 echo '<br>';
 																	 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
+																 }else{
+																	 echo '<br>';
+																	 echo '<br>';
+																	 echo '<strong>Servicio:</strong> '.$solicitud['servicio'];
+																	 echo '<br>';
+																	 echo '<strong>Dirección:</strong> '.$datosUsuarioSolicitud['direccion'];
+																	 echo '<br>';
+																	 echo '<strong>Teléfono Móvil:</strong> '.$datosUsuarioSolicitud['telefonomovil'];
+																	 echo '<br>';
+																	 echo '<strong>Nombre Animal:</strong> '.$animalSolicitud['nombre'];
+																	 echo '<br>';
+																	 echo '<br>';
+																	 echo '<img style="border-radius: 5px;border: solid 1px #ffffff" src="'.$animalSolicitud['foto'].'" height="150" width="150">';
+																	 echo '<br>';
 																 }
 															 }
 														 }
@@ -218,11 +231,15 @@
 																	<hr>
 													 			 </div>';
 													}
-													if($mensaje['tipo'] == 'Solicitud' && $solicitud['solicitudverificada'] == 0){
+													if($mensaje['tipo'] == 'Solicitud' && $solicitud['solicitudverificada'] == 0 && $solicitud['servicio'] != 'Adopción' && $mensaje['user_id_receptor'] == $idActual){
+														$tiempo = time();
+												    $fechaActual = date("Y-m-d", $tiempo);
+														if($solicitud['fechainicio'] > $fechaActual || $solicitud['fechadia'] > $fechaActual){
 												?>
 													<button style="width: 220px;" onclick="aceptarSolicitud('<?php echo $mensaje['id']; ?>,<?php echo $solicitud['servicio']; ?>')" name="aceptar" id="aceptar" class="btn btn-default"><i class="fas fa-check-circle"></i> Aceptar Solicitud</button>
 													<button style="width: 220px;" onclick="rechazarSolicitud('<?php echo $mensaje['id']; ?>')" name="rechazar" id="rechazar" class="btn btn-default"><i class="fas fa-times-circle"></i> Rechazar Solicitud</button>
-										<?php	} ?>
+										<?php	}
+										} ?>
 											 <button style="width: 220px;" data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
 		 									 <button style="width: 220px;" onclick="location.href='tablonMensajesDuenoCuidador.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
 		 									 <br>
@@ -247,8 +264,7 @@
 		                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
 		                            <div id="form-modal" class="form-group">
 																	<div class="form-group">
-																		<label for="respuesta">Respuesta :</label>
-																		<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" required></textarea>
+																		<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" placeholder="Contenido de la respuesta" required></textarea>
 																	</div>
 																	<div class="form-group">
 																		<input type="hidden" id="idmensaje" name="idmensaje" value="<?=$id; ?>">

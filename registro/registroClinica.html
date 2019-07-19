@@ -50,7 +50,7 @@
           <div class="row">
             <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
               <h1><strong>Clínica Veterinaria</strong></h1>
-              <form name="formularioRegistro" id="formularioRegistro" action="registrarClinica.php" method="post" onsubmit="return validarCorreo($('#mail').val()) && validarContraseña($('#pass').val(), $('#confirmarpass').val()) && validarTelefonoMovil($('#movil').val()) && validarTelefonoFijo($('#fijo').val())">
+              <form name="formularioRegistro" id="formularioRegistro" action="registrarClinica.php" method="post" onsubmit="return compararTelefonos($('#movil').val(), $('#fijo').val()) && validarCorreo($('#mail').val()) && validarContraseña($('#pass').val(), $('#confirmarpass').val()) && validarTelefonoMovil($('#movil').val()) && validarTelefonoFijo($('#fijo').val())">
                 <div class="form-group">
                     <div class="input-group">
                       <div class="input-group-addon">
@@ -91,18 +91,20 @@
                         <i class="fas fa-mobile-alt"></i>
                         +34
                       </div>
-                      <input type="number" id="movil" name="movil" class="form-control" placeholder="Ejemplo: 690154921" size="9" onkeyup="validarTelefonoMovil($('#movil').val());" required>
+                      <input type="number" id="movil" name="movil" class="form-control" placeholder="Ejemplo: 690154921" size="9" onkeyup="validarTelefonoMovil($('#movil').val()) && compararTelefonos($('#movil').val(), $('#fijo').val())" required>
                     </div>
                     <div id="telefonoMovil"></div>
+                    <div id="compararTelefonos"></div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                       <div class="input-group-addon">
                         <i class="fas fa-phone"></i>
                       </div>
-                      <input type="number" id="fijo" name="fijo" class="form-control" placeholder="Ejemplo: 948012761" size="9" onkeyup="validarTelefonoFijo($('#fijo').val());" required>
+                      <input type="number" id="fijo" name="fijo" class="form-control" placeholder="Ejemplo: 948012761" size="9" onkeyup="validarTelefonoFijo($('#fijo').val()) && compararTelefonos($('#movil').val(), $('#fijo').val())" required>
                     </div>
                     <div id="telefonoFijo"></div>
+                    <div id="compararTelefonos"></div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">

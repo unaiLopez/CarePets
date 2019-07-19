@@ -40,13 +40,12 @@ $(document).ready(function() {
         });
     });
     $('.adoptarAnimal').click(function(){
-      alert("aa");
-        var id = $(this).attr('id');
-        var idUsuarioServicio = $(this).attr('value');
+        var id = $('.animal-en-adopcion').attr('id');
+        var idUsuarioServicio = $(this).attr('id');
         var data = {"id" : id, "idUsuarioServicio" : idUsuarioServicio};
         $.ajax({
             data: data,
-            url: '/carepets/usuario/editar/enviarSolicitudAdopcion.php',
+            url: '/carepets/usuario/busqueda/enviarSolicitudAdopcion.php',
             type: 'post',
             async: false,
             success: function(response) {

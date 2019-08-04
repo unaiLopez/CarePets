@@ -121,7 +121,7 @@
                  </ul>
                </div>
                <div class="col-lg-12 scroll">
-                 <div class="card-body mx-auto">
+                 <div style="height: 350px;" class="card-body mx-auto">
 									 <div class="tab-content" id="myTabContent">
                      <div class="tab-pane fade show active" id="conversacion" role="tabpanel" aria-labelledby="conversacion-tab">
 											 <div class="mensaje">

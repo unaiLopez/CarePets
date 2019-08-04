@@ -119,7 +119,7 @@
                 </ul>
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
-                <div id="card-body-principal" class="card-body">
+                <div style="height: 350px;" id="card-body-principal" class="card-body">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
                         <div class="row">

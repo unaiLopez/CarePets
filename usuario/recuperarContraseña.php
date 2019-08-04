@@ -1,14 +1,11 @@
 <?php
+
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\Exception;
-  /* Exception class. */
-  require_once '..\PHPMailer\src\Exception.php';
 
-  /* The main PHPMailer class. */
-  require_once '..\PHPMailer\src\PHPMailer.php';
-
-  /* SMTP class, needed if you want to use SMTP. */
-  require_once '..\PHPMailer\src\SMTP.php';
+  require '../PHPMailer/src/Exception.php';
+  require '../PHPMailer/src/PHPMailer.php';
+  require '../PHPMailer/src/SMTP.php';
 
   //Crear contraseña de 6 dígitos
   function crearNuevaContraseña(){
@@ -32,29 +29,25 @@
     $subject = "Nueva Contraseña CarePets";
     $message = "Esta es su nueva contraseña. Por favor, usela para iniciar sesión la próxima vez: ".$nuevaContraseña;
 
-    $mail = new PHPMailer;
-    $mail->IsSMTP();
-    $mail->IsHTML(true);
-    $mail->SMTPDebug = 2; // 0 = off (for production use) - 1 = client messages - 2 = client and server messages
-    $mail->Mailer = "smtp";
-    $mail->Host = gethostbyname('smtp.gmail.com'); // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
-    $mail->Port = 587; // TLS only
-    $mail->SMTPSecure = 'ssl'; // ssl is depracated
+    $mail = new PHPMailer();
+    $mail->isSMTP();
     $mail->SMTPAuth = true;
+    $mail->SMTPDebug = 4;
+    $mail->SMTPSecure = 'tls'; // ssl is depracated
+    $mail->Host = 'smtp.gmail.com'; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
+    $mail->Port = '587'; // TLS only
+    $mail->isHTML();
     $mail->Username = "cuidacarepets@gmail.com";
     $mail->Password = "Aixerrota1";
-    $mail->SetFrom('cuidacarepets@gmail.com', 'CarePets');
-    $mail->AddAddress($address);
+    $mail->SetFrom('no-reply@cuidacarepets.com');
     $mail->Subject = $subject;
-    $mail->MsgHTML($message); //$mail->msgHTML(file_get_contents('contents.html'), __DIR__); //Read an HTML message body from an external file, convert referenced images to embedded,
-    $mail->AltBody = 'HTML messaging not supported';
+    $mail->Body = $message;
+    $mail->AddAddress($correo);
 
-    if(!$mail->Send()){
-        echo "Mailer Error: " . $mail->ErrorInfo;
-        echo false;
+    if($mail->Send()){
+      echo true;
     }else{
-        echo "Message sent!";
-        echo true;
+      echo false;
     }
 
   }catch(PDOException $e){

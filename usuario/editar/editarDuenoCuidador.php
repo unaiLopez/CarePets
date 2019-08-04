@@ -132,7 +132,7 @@
                   </ul>
                 </div>
                 <div class="col-lg-12 scroll">
-                  <div class="card-body mx-auto">
+                  <div style="height: 350px;" class="card-body mx-auto">
                     <div class="tab-content" id="myTabContent">
                       <div class="tab-pane fade show active" id="contraseña" role="tabpanel" aria-labelledby="contraseña-tab">
                         <div class="container-fluid padding">

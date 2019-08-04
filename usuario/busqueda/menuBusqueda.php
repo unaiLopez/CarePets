@@ -52,9 +52,9 @@
             <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
               <?php
                 if($row1['foto']){
-                  echo '<img src="'.$row1['foto'].'" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="'.$row1['foto'].'" class="imagen-de-perfil" height="70" width="70">';
                 }else{
-                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-perfil" height="70" width="70">';
+                  echo '<img src="../../iconos/tipos_usuario/icono_dueño_cuidador.jpg" class="imagen-de-perfil" height="70" width="70">';
                 }
                ?>
             </a>
@@ -87,7 +87,7 @@
                 </ul>
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
-                <div class="card-body">
+                <div style="height: 350px;" class="card-body">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="buscarservicios-tab" role="tabpanel" aria-labelledby="buscarservicios-tab">
                       <form action="buscarMapa.php" method="get" onsubmit="return validarMenuBusqueda($('#buscarTipo').val(), $('#elegirServicio').val(), $('#date1').val(), $('#date2').val(), $('#date3').val())">

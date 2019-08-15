@@ -20,10 +20,10 @@
                 <div class="row">
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">';
                   if($animal['foto']){
-                    echo '<img src="'.$animal['foto'].'"  class="imagen-de-perfi" height="160" width="180">';
+                    echo '<img src="'.$animal['foto'].'"  class="imagen-de-perfil" height="160" width="180">';
                     echo '<br>';
                   }else{
-                    echo '<img src="http://via.placeholder.com/300x180"  class="imagen-de-perfi" width="160" height="180">';
+                    echo '<img src="http://via.placeholder.com/300x180"  class="imagen-de-perfil" width="160" height="180">';
                   }
                   echo '</div>
                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">

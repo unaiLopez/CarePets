@@ -28,23 +28,24 @@
     $address = $correo;
     $subject = "Nueva Contraseña CarePets";
     $message = "Esta es su nueva contraseña. Por favor, usela para iniciar sesión la próxima vez: ".$nuevaContraseña;
-
-    $mail = new PHPMailer();
+    $mail = new PHPMailer(true);
+    $mail->SMTPDebug = 2;
     $mail->isSMTP();
-    $mail->SMTPAuth = true;
-    $mail->SMTPDebug = 4;
-    $mail->SMTPSecure = 'tls'; // ssl is depracated
     $mail->Host = 'smtp.gmail.com'; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
-    $mail->Port = '587'; // TLS only
-    $mail->isHTML();
+    $mail->SMTPAuth = true;
     $mail->Username = "cuidacarepets@gmail.com";
     $mail->Password = "Aixerrota1";
-    $mail->SetFrom('no-reply@cuidacarepets.com');
+    $mail->SMTPSecure = 'tls'; // ssl is depracated
+    $mail->Port = '587'; // TLS only
+    $mail->isHTML();
+    $mail->setFrom('cuidacarepets@gmail.com');
+    $mail->addAddress($correo);
+
+    $mail->isHTML(true);
     $mail->Subject = $subject;
     $mail->Body = $message;
-    $mail->AddAddress($correo);
 
-    if($mail->Send()){
+    if($mail->send()){
       echo true;
     }else{
       echo false;
@@ -52,6 +53,8 @@
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
+  }catch(Exception $e){
+    echo 'No se pudo enviar el mensaje. Mailer Error: ', $mail->ErrorInfo;
   }
   $conn = null;
 ?>

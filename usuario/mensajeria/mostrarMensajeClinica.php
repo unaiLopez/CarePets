@@ -13,8 +13,9 @@
     //Tomar id del usuario
     $idActual = $_SESSION['user_id'];
 
-    //Tomar los datos del mensaje
-    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE id=:id");
+		//Tomar los datos del mensaje
+    $sentencia = $conn->prepare("SELECT * FROM mensaje WHERE user_id_receptor=:user_id and id=:id");
+    $sentencia->bindParam(':user_id', $idActual);
     $sentencia->bindParam(':id', $id);
     $sentencia->execute();
     $mensaje = $sentencia->fetch(PDO::FETCH_BOTH);
@@ -29,6 +30,7 @@
 		//Cuenta la cantidad de mensajes recibidos no leidos para mostrarlo en las notificaciones posteriormente
     require_once 'notificacionesMensajeriaRecibidosMensajes.php';
     require_once '../datosUsuario.php';
+		require_once 'datosMensaje.php';
 
   }catch(PDOException $e){
     echo "Error: " . $e->getMessage();
@@ -60,7 +62,7 @@
        <!-- Navegación -->
        <nav class="navbar navbar-expand-md navbar-light">
          <div class="container-fluid">
-           <a class="navbar-brand" href="../perfil/perfilClinica.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
+           <a class="navbar-brand" href="../perfil/perfilProtectora.php"><img src="../../iconos/barra_navegacion/logo_carepets.png" height="75" width="210"></a>
            <div class="dropdown">
              <a href="#" class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
                <?php
@@ -76,7 +78,7 @@
                  <hr>
                  <li><a href="../editar/editarClinica.php"><i class="fas fa-user-edit"></i> Editar</a></li>
                  <hr>
-                 <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes; ?></span></a></li>
+                 <li><a href="../mensajeria/tablonMensajesClinica.php"><i class="fas fa-envelope"></i> Mensajes  <span class="badge badge-primary badge-pill"><?php echo $notificacionesRecibidosMensajes; ?></span></a></li>
                  <hr>
                  <li><a href="../ayuda/elegirAyuda.php"><i class="fas fa-question"></i> Ayuda</a></li>
                  <hr>
@@ -89,18 +91,18 @@
        <div id="body">
          <div class="container-fluid">
            <div class="row">
-             <div class="card">
-							 <div class="card-header mx-auto">
+						 <div class="card">
+               <div class="card-header mx-auto">
 								 <ul class="nav nav-tabs card-header-tabs"  id="myTab" role="tablist">
                    <li class="nav-item">
-                    <a class="nav-link active" id="conversacion-tab" data-toggle="tab" href="#conversacion" role="tab" aria-controls="conversacion" aria-selected="true"><?php echo 'Conversación con : ';?><strong><?php if($correoActual == $mensaje['receptor']){echo $mensaje['emisor'];}else{echo $mensaje['receptor'];}?></strong> </a>
+                    <a class="nav-link active" id="conversacion-tab" data-toggle="tab" href="#conversacion" role="tab" aria-controls="conversacion" aria-selected="true"><?php echo 'Conversación con : ';?><strong><?php if($idActual == $mensaje['user_id_receptor']){echo $mensaje['emisor'];}else{echo $mensaje['receptor'];}?></strong> </a>
                    </li>
                  </ul>
                </div>
                <div class="col-lg-12 scroll">
                  <div style="height: 350px;" class="card-body mx-auto">
-                   <div class="tab-content" id="myTabContent">
-										 <div class="tab-pane fade show active" id="recibidos" role="tabpanel" aria-labelledby="recibidos-tab">
+									 <div class="tab-content" id="myTabContent">
+                     <div class="tab-pane fade show active" id="conversacion" role="tabpanel" aria-labelledby="conversacion-tab">
 											 <div class="mensaje">
 												 <div class="row">
 													 <div class="col-xs-4 offset-xs-1 col-lg-4 offset-lg-1">
@@ -120,12 +122,14 @@
 												 <br>
 												 <div class="row">
 													 <div class="col-xs-10 offset-xs-1 col-lg-10 offset-lg-1">
-														 <?php echo $mensaje['contenido']; ?>
+														 <?php
+														 	echo $mensaje['contenido'];
+														 ?>
 														 <br>
 														 <br>
 													 </div>
 												 </div>
-												 <hr>
+												<hr>
 											 </div>
 											 <?php
 											   foreach($respuestas as $respuesta){
@@ -158,13 +162,12 @@
 																	</div>
 																	<hr>
 													 			 </div>';
-													}
-												?>
-											 <button data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
-		 									 <button onclick="location.href='tablonMensajesClinica.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
+													} ?>
+											 <button style="width: 220px;" data-toggle="modal" href="#myModal" class="btn btn-default"><i class="far fa-comments"></i> Responder</button>
+		 									 <button style="width: 220px;" onclick="location.href='tablonMensajesClinica.php';" class="btn btn-default"><i class="fas fa-arrow-alt-circle-left"></i> Volver a mis Mensajes</button>
 		 									 <br>
 		 									 <br>
-	                   </div>
+										 </div>
 									 </div>
                  </div>
          				</div>
@@ -181,7 +184,7 @@
 		                    </div>
 		                    <div id="responderModal" class="modal-body">
 		                      <div class="row">
-		                        <div class="col-xs-12 col-md-12 col-lg-12 mx-auto">
+		                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
 		                            <div id="form-modal" class="form-group">
 																	<div class="form-group">
 																		<textarea class="form-control" col="12" rows="6" id="respuesta" name="respuesta" placeholder="Contenido de la respuesta" required></textarea>
@@ -194,7 +197,7 @@
 		                      </div>
 		                    </div>
 		                    <div class="modal-footer">
-		                      <div class="col-xs-12 mx-auto">
+		                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
 														<div id="form-modal" class="form-group">
 															<button onclick="responderMensaje($('#idmensaje').val(), $('#respuesta').val())" name="responder" id="responder" class="btn btn-default block"><i class="far fa-comments"></i> Responder</button>
 														</div>

@@ -29,7 +29,7 @@
     if($mensaje['user_id_emisor'] == $idActual){
       $leidoemisor = 1;
       $leidoreceptor = 0;
-    }else if($mensaje['user_id_receptor'] == $idActual){
+    }else if($mensaje['user_id_receptor'] == $idActual){  
       $leidoemisor = 0;
       $leidoreceptor = 1;
     }

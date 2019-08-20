@@ -119,9 +119,9 @@
                 </ul>
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
-                <div style="height: 350px;" id="card-body-principal" class="card-body">
+                <div id="card-body-principal" class="card-body">
                   <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="perfil" role="tabpanel" aria-labelledby="perfil-tab">
+                    <div class="tab-pane fade show active" id="perfil" role="tabpanel" aria-labelledby="perfil-tab" style="margin-top: 5vh;margin-bottom:10vh;">
                         <div class="row">
                           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                             <div class="container">
@@ -141,7 +141,7 @@
                               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                                 <div class="container">
                                   <br>
-                                  <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
+                                  <h3><?php echo $row1['nombre']; ?></h3>
                                   <br>
                                   <h5>Reputación como cuidador :</h5>
                                   <x-star-rating id="rating" value="<?=$mediaMostrar?>" number="5"></x-star-rating>
@@ -157,7 +157,7 @@
                       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="container">
                           <br>
-                          <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
+                          <h3><?php echo $row1['nombre']; ?></h3>
                           <br>
                           <h5>Reputación como clínica :</h5>
                           <x-star-rating id="rating" value="<?=$mediaMostrar?>" number="5"></x-star-rating>
@@ -202,7 +202,7 @@
                       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="container">
                           <br>
-                          <h3>¡Hola <?php echo $row1['nombre']; ?>!</h3>
+                          <h3><?php echo $row1['nombre']; ?></h3>
                           <br>
                           <h5>Reputación como protectora :</h5>
                           <x-star-rating id="rating" value="<?=$mediaMostrar?>" number="5"></x-star-rating>
@@ -313,7 +313,7 @@
                     </div>
                       <?php if($row1['tipo'] == 'Protectora'){ ?>
 
-                      <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab">
+                      <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab" style="margin-top: 5vh;margin-bottom:10vh;">
                         <?php
                           require_once 'mostrarAdopcionDeAnimales.php';
                         ?>

@@ -180,7 +180,7 @@
                           <div class="row">
                             <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 mx-auto">
                               <h1><strong>Obligatoria</strong></h1>
-                              <form id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaDuenoCuidador.php" method="post" onsubmit="return validarCorreoEditar($('#mail').val()) && validarTelefonoMovilEditar($('#movil').val())">
+                              <form name="formularioCambiarInfoObligatoria" id="formularioCambiarInfoObligatoria" action="cambiarObligatoriaDuenoCuidador.php" method="post" onsubmit="return validarCorreoEditar($('#mail').val()) && validarTelefonoMovilEditar($('#movil').val())">
                                 <div class="form-group">
                                     <div class="input-group">
                                       <div class="input-group-addon">

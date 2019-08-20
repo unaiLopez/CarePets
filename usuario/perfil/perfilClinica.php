@@ -81,7 +81,7 @@ $conn = null;
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
                 <div style="height: 350px;" class="card-body">
-                  <div class="tab-content" id="myTabContent">
+                  <div class="tab-content" id="myTabContent" style="margin-top: 5vh;margin-bottom:10vh;">
                     <div class="tab-pane fade show active" id="miperfil-tab" role="tabpanel" aria-labelledby="miperfil-tab">
                       <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">

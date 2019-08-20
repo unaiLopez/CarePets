@@ -87,8 +87,8 @@
                 </ul>
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
-                <div style="height: 350px;" class="card-body">
-                  <div class="tab-content" id="myTabContent">
+                <div class="card-body">
+                  <div class="tab-content" id="myTabContent" style="margin-top: 5vh;margin-bottom:10vh;">
                     <div class="tab-pane fade show active" id="buscarservicios-tab" role="tabpanel" aria-labelledby="buscarservicios-tab">
                       <form action="buscarMapa.php" method="get" onsubmit="return validarMenuBusqueda($('#buscarTipo').val(), $('#elegirServicio').val(), $('#date1').val(), $('#date2').val(), $('#date3').val())">
                         <div class="row">
@@ -118,9 +118,7 @@
                           <div id="fecha1" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                             <div class="container">
                               <br>
-                              <div class="d-none d-sm-block">
-                                <h3>Desde</h3>
-                              </div>
+                              <h3>Desde</h3>
                               <div class="input-group dates">
                                 <div class="input-group-addon">
                                   <i class="far fa-calendar-alt"></i>
@@ -132,9 +130,7 @@
                           <div id="fecha2" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                             <div class="container">
                               <br>
-                              <div class="d-none d-sm-block">
-                                <h3>Hasta</h3>
-                              </div>
+                              <h3>Hasta</h3>
                               <div class="input-group dates">
                                 <div class="input-group-addon">
                                   <i class="far fa-calendar-alt"></i>
@@ -146,9 +142,7 @@
                           <div id="fecha3" class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
                             <div class="container">
                               <br>
-                              <div class="d-none d-sm-block">
-                                <h3>Día</h3>
-                              </div>
+                              <h3>Día</h3>
                               <div class="input-group dates">
                                 <div class="input-group-addon">
                                   <i class="far fa-calendar-alt"></i>

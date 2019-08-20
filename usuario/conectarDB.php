@@ -7,10 +7,10 @@
       $pass = "";
       $db = "carepets";
     }else{
-      $server ="localhost";
-      $user = "id9068130_unai";
-      $pass = "11111";
-      $db = "id9068130_carepets";
+      $server ="db5000152620.hosting-data.io";
+      $user = "dbu319775";
+      $pass = "Aixerrota1#";
+      $db = "dbs147722";
     }
     $conn = new PDO("mysql:host=$server;dbname=$db", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

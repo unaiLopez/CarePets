@@ -90,14 +90,14 @@ $conn = null;
                 </ul>
               </div>
               <div class="col-xs-12 col-lg-12 scroll">
-                <div style="height: 350px;" id="card-body-principal" class="card-body">
+                <div id="card-body-principal" class="card-body">
                   <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="miperfil" role="tabpanel" aria-labelledby="miperfil-tab">
+                    <div class="tab-pane fade show active" id="miperfil" role="tabpanel" aria-labelledby="miperfil-tab" style="margin-top: 5vh;margin-bottom:10vh;">
                       <?php
                         require_once 'mostrarPerfilProtectora.php';
                       ?>
                     </div>
-                    <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab">
+                    <div class="tab-pane fade" id="tablonadopciones" role="tabpanel" aria-labelledby="tablonadopciones-tab" style="margin-top: 5vh;margin-bottom:10vh;">
                       <?php
                         require_once 'mostrarTablonAdopciones.php';
                       ?>

@@ -36,9 +36,8 @@
 
       //Insertar en la tabla clinica
       $last_id = $conn->lastInsertId();
-      $sentencia = $conn->prepare("INSERT INTO clinica(user_id, mailusuario, telefonofijo) VALUES(:user_id, :mailusuario, :telefonofijo)");
+      $sentencia = $conn->prepare("INSERT INTO clinica(user_id, telefonofijo) VALUES(:user_id, :telefonofijo)");
       $sentencia->bindParam(':user_id', $last_id);
-      $sentencia->bindParam(':mailusuario', $mailusuario);
       $sentencia->bindParam(':telefonofijo', $telefonofijo);
       $sentencia->execute();
 

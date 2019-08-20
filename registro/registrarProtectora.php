@@ -36,9 +36,8 @@
 
       //Insertar en la tabla protectora
       $last_id = $conn->lastInsertId();
-      $sentencia = $conn->prepare("INSERT INTO protectora(user_id, mailusuario, telefonofijo) VALUES(:user_id, :mailusuario, :telefonofijo)");
+      $sentencia = $conn->prepare("INSERT INTO protectora(user_id, telefonofijo) VALUES(:user_id, :telefonofijo)");
       $sentencia->bindParam(':user_id', $last_id);
-      $sentencia->bindParam(':mailusuario', $mailusuario);
       $sentencia->bindParam(':telefonofijo', $telefonofijo);
       $sentencia->execute();
 

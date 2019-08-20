@@ -158,7 +158,7 @@
       <br>
       <br>
       <div id="body">
-        <div class="container-fluid padding">
+        <div class="container-fluid padding" style="margin-top: 10vh;margin-bottom:10vh;">
           <div class="row text-center padding">
             <div class="col-xs-12 col-sm-12 offset-md-2 col-md-4">
 

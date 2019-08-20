@@ -36,9 +36,8 @@
 
       //Insertar en la tabla dueñocuidador
       $last_id = $conn->lastInsertId();
-      $sentencia = $conn->prepare("INSERT INTO duenocuidador(user_id, mailusuario, escuidador) VALUES(:user_id, :mailusuario, :escuidador)");
+      $sentencia = $conn->prepare("INSERT INTO duenocuidador(user_id, escuidador) VALUES(:user_id, :escuidador)");
       $sentencia->bindParam(':user_id', $last_id);
-      $sentencia->bindParam(':mailusuario', $mailusuario);
       $sentencia->bindParam(':escuidador', $escuidador);
       $sentencia->execute();
 

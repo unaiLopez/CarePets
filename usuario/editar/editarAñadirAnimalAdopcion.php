@@ -98,11 +98,11 @@
                     <?php
                       if($tipoFuncion == 'Editar'){
                         echo '<li class="nav-item">
-                         <a class="nav-link active" id="editaranimal-tab" data-toggle="tab" href="#editaranimal" role="tab" aria-controls="editaranimal" aria-selected="true"><i class="fas fa-key"></i> Editar Animal</a>
+                         <a class="nav-link active" id="editaranimal-tab" data-toggle="tab" href="#editaranimal" role="tab" aria-controls="editaranimal" aria-selected="true"><i class="fas fa-paw"></i> Editar Animal</a>
                         </li>';
                       }else if($tipoFuncion == 'Añadir'){
                         echo '<li class="nav-item">
-                         <a class="nav-link active" id="añadiranimal-tab" data-toggle="tab" href="#añadiranimal" role="tab" aria-controls="añadiranimal" aria-selected="true"><i class="fas fa-key"></i> Añadir Animal</a>
+                         <a class="nav-link active" id="añadiranimal-tab" data-toggle="tab" href="#añadiranimal" role="tab" aria-controls="añadiranimal" aria-selected="true"><i class="fas fa-paw"></i> Añadir Animal</a>
                         </li>';
                       }
                     ?>

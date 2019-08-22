@@ -118,7 +118,7 @@
                   <?php } ?>
                 </ul>
               </div>
-              <div class="col-xs-12 col-lg-12 scroll">
+              <div class="col-xs-12 col-lg-12" style="max-height: 64.5vh;overflow-y: scroll;border-top: solid 1px #ffffff;width: 100%;">
                 <div id="card-body-principal" class="card-body">
                   <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="perfil" role="tabpanel" aria-labelledby="perfil-tab" style="margin-top: 5vh;margin-bottom:10vh;">
@@ -321,41 +321,41 @@
                     <?php } ?>
                   </div>
                 </div>
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" role="dialog">
-                  <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4>Mensaje para: <?php echo $row1['nombre'];?></h4><span><button type="button" class="close" data-dismiss="modal">&times;</button></span>
-                      </div>
-                      <div style="height:325px;" id="recuperarMailModal" class="modal-body">
-                        <div class="row">
+              </div>
+              <!-- Modal -->
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4>Mensaje para: <?php echo $row1['nombre'];?></h4><span><button type="button" class="close" data-dismiss="modal">&times;</button></span>
+                    </div>
+                    <div style="height:325px;" id="recuperarMailModal" class="modal-body">
+                      <div class="row">
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
+                          <div id="form-modal" class="form-group">
+                            <div class="form-group">
+                              <input class="form-control" id="asunto" name="asunto" placeholder="Asunto" required></input>
+                            </div>
+                            <div class="form-group">
+                              <textarea class="form-control" col="12" rows="6" id="mensaje" name="mensaje" placeholder="Contenido del mensaje" required></textarea>
+                            </div>
+                            <div class="form-group">
+                              <input type="hidden" id="idusuarioservicio" name="mailusuarioservicio" value="<?=$row1['user_id']; ?>">
+                            </div>
+                          </div>
                           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
                             <div id="form-modal" class="form-group">
-                              <div class="form-group">
-                                <input class="form-control" id="asunto" name="asunto" placeholder="Asunto" required></input>
-                              </div>
-                              <div class="form-group">
-                                <textarea class="form-control" col="12" rows="6" id="mensaje" name="mensaje" placeholder="Contenido del mensaje" required></textarea>
-                              </div>
-                              <div class="form-group">
-                                <input type="hidden" id="idusuarioservicio" name="mailusuarioservicio" value="<?=$row1['user_id']; ?>">
-                              </div>
-                            </div>
-                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 mx-auto">
-                              <div id="form-modal" class="form-group">
-                                <button onclick="enviarMensaje($('#idusuarioservicio').val(), $('#asunto').val(), $('#mensaje').val())" name="enviar" id="enviar" class="btn btn-default block"><i class="far fa-comments"></i> Enviar</button>
-                              </div>
+                              <button onclick="enviarMensaje($('#idusuarioservicio').val(), $('#asunto').val(), $('#mensaje').val())" name="enviar" id="enviar" class="btn btn-default block"><i class="far fa-comments"></i> Enviar</button>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div style="height:90px;" class="modal-footer">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
-                          <div id="form-modal" class="form-group">
-                            <button class="btn btn-default block" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar Mensaje</button>
-                          </div>
+                    </div>
+                    <div style="height:90px;" class="modal-footer">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
+                        <div id="form-modal" class="form-group">
+                          <button class="btn btn-default block" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar Mensaje</button>
                         </div>
                       </div>
                     </div>

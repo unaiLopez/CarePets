@@ -22,33 +22,50 @@
     $conn = conectarse();
 
     $nuevaContraseña = crearNuevaContraseña();
-
     $correo = $_POST['mailusuario'];
 
-    $address = $correo;
-    $subject = "Nueva Contraseña CarePets";
-    $message = "Esta es su nueva contraseña. Por favor, usela para iniciar sesión la próxima vez: ".$nuevaContraseña;
-    $mail = new PHPMailer(true);
-    $mail->SMTPDebug = 2;
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com'; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
-    $mail->SMTPAuth = true;
-    $mail->Username = "cuidacarepets@gmail.com";
-    $mail->Password = "Aixerrota1";
-    $mail->SMTPSecure = 'tls'; // ssl is depracated
-    $mail->Port = '587'; // TLS only
-    $mail->isHTML();
-    $mail->setFrom('cuidacarepets@gmail.com');
-    $mail->addAddress($correo);
+    //Tomar los datos de la clinica
+    $sentencia = $conn->prepare("SELECT tipo FROM usuario WHERE mailusuario=:mailusuario");
+    $sentencia->bindParam(':mailusuario', $correo);
+    $sentencia->execute();
+    $miUsuario = $sentencia->fetch(PDO::FETCH_BOTH);
 
-    $mail->isHTML(true);
-    $mail->Subject = $subject;
-    $mail->Body = $message;
+    if($miUsuario){
 
-    if($mail->send()){
-      echo true;
-    }else{
-      echo false;
+      $hash = crypt($nuevaContraseña, $miUsuario[0]);
+
+      $sql = "UPDATE usuario SET contrasena=? WHERE mailusuario=?";
+      $sentencia= $conn->prepare($sql);
+      $sentencia->execute([$hash, $correo]);
+
+      if($sentencia){
+
+        $address = $correo;
+        $subject = "Nueva Contraseña CarePets";
+        $message = "Esta es su nueva contraseña. Por favor, usela para iniciar sesión la próxima vez: ".$nuevaContraseña;
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'smtp.ionos.es'; // use $mail->Host = gethostbyname('smtp.gmail.com'); // if your network does not support SMTP over IPv6
+        $mail->SMTPAuth = true;
+        $mail->Username = "cuidacarepets@carepets.es";
+        $mail->Password = "Aixerrota1#";
+        $mail->SMTPSecure = 'tls'; // ssl is depracated
+        $mail->Port = '587'; // TLS only
+        $mail->isHTML();
+        $mail->setFrom('cuidacarepets@carepets.es');
+        $mail->addAddress($correo);
+
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+
+        if($mail->send()){
+          echo true;
+        }else{
+          echo false;
+        }
+
+      }
     }
 
   }catch(PDOException $e){
